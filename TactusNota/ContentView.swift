@@ -10,6 +10,8 @@ import SwiftUI
 // ghp_mcWpwlDSR8Qp4qPx0nyFOYASaXqErtrRS2crtrttnrrtrZ
 
 struct ContentView: View {
+    
+    @StateObject var model = AnnotationViewModel()
     var body: some View {
         ZStack{
         NavigationView{
@@ -90,9 +92,21 @@ struct ContentView: View {
                     
                 }
                 
+                if let ImageFile = UIImage(data: model.imageData){
+                    
+                }
+                else{
+                    Button(action: {model.showImagePicker.toggle()},
+                           label: {
+                        Image(systemName: "plus")
+                            .font(.title)
+                        
+                    })
+                }
                 Image("test1")
                     .resizable()
-            }
+            } // end of vstack
+            .sheet(isPresented: model.showImagePicker, content: {ImagePicker(showPicker: $model.showImagePicker, imageData: model.imageData)})
             
            
 
@@ -101,6 +115,7 @@ struct ContentView: View {
         } // end of zstack
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
