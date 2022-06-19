@@ -58,9 +58,9 @@
 				B631C4752787A25A00A5216A /* TactusNotaApp.swift */,
 				B631C4772787A25A00A5216A /* ContentView.swift */,
 				B6DE7B6F285FC93C003A2191 /* ImagePicker.swift */,
+				B6DE7B71285FCEB4003A2191 /* AnnotationViewModel.swift */,
 				B631C4792787A25B00A5216A /* Assets.xcassets */,
 				B631C47B2787A25B00A5216A /* Preview Content */,
-				B6DE7B71285FCEB4003A2191 /* AnnotationViewModel.swift */,
 			);
 			path = TactusNota;
 			sourceTree = "<group>";

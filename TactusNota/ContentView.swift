@@ -103,8 +103,8 @@ struct ContentView: View {
                         
                     })
                 }
-                Image("test1")
-                    .resizable()
+//                Image("test1")
+//                    .resizable()
             } // end of vstack
             .sheet(isPresented: $model.showImagePicker, content: {ImagePicker(showPicker: $model.showImagePicker, imageData: $model.imageData)})
             
