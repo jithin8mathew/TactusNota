@@ -11,6 +11,9 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var viewState = CGSize.zero
+    @State private var isActive : Bool = false
+    
     @StateObject var model = AnnotationViewModel()
     var body: some View {
         
@@ -22,8 +25,11 @@ struct ContentView: View {
             VStack{
             
                 HStack{
-                    Button(action: {
-                                        }, label: {
+                    NavigationLink(destination: annotationGestureTN(), isActive: self.$isActive) {
+                        Image(systemName: "plus")
+                    }
+                                        
+                    Button(action: {}, label: {
                                             Text("Images")
                                             .font(.system(.title2))
                                             .frame(width: 97, height: 40)
@@ -99,6 +105,22 @@ struct ContentView: View {
                     
                     AnnotationScreen()
                         .environmentObject(model)
+                    
+//                    RoundedRectangle(cornerRadius: 30)
+//                        .fill(Color.blue)
+//                        .frame(width: 300, height: 400)
+//                        .offset(x: viewState.width, y: viewState.height)
+//                        .gesture(
+//                            DragGesture().onChanged { value in
+//                                viewState = value.translation
+//                            }
+//                            .onEnded { value in
+//                                withAnimation(.spring()) {
+//                                    viewState = .zero
+//                                }
+//                            }
+//                        )
+                    
 //                    Image(uiImage: ImageFile)
 //                        .resizable()
 //                        .cornerRadius(20)
@@ -115,6 +137,7 @@ struct ContentView: View {
                             .cornerRadius(20)
                             .font(.title)
                             .padding(.all, 5)
+                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
                         
                             
                          
