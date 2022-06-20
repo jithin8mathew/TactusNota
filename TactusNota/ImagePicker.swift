@@ -14,49 +14,52 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var showPicker: Bool
     @Binding var imageData: Data
+    @EnvironmentObject private var model : AnnotationViewModel
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
-    func makeCoordinator() -> Coordinator {
-        ImagePicker.Coordinator(parent.self)
-    }
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let controller = UIImagePickerController()
         controller.allowsEditing = false
         controller.sourceType = sourceType
+//        unowned(unsafe) var delegate: (UIImagePickerControllerDelegate & UINavigationControllerDelegate)?
         controller.delegate = context.coordinator
         
         return controller
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
         
+    }
+    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//
+//        }
+    
+    func makeCoordinator() -> Coordinator {
+        return ImagePicker.Coordinator(parent: self)
+    }
+
+}
+
+class coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    var parent: ImagePicker
+    
+    init(parent: ImagePicker) {
+        self.parent = parent
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    
-        }
-    
-    class coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-        var parent: ImagePicker
-        
-        init(parent: ImagePicker) {
-            self.parent = parent
-        }
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let imageData = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)?.pngData() {
-                parent.imageData = imageData
-                parent.showPicker.toggle()
-            }
-        }
-        
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        if let imageData = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)?.pngData() {
+            parent.imageData = imageData
             parent.showPicker.toggle()
         }
     }
-
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        parent.showPicker.toggle()
+    }
 }
 
 //struct ImagePicker: UIViewControllerRepresentable {

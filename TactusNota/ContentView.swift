@@ -93,6 +93,9 @@ struct ContentView: View {
                 }
                 
                 if let ImageFile = UIImage(data: model.imageData){
+                    Image(uiImage: ImageFile)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                     
                 }
                 else{
@@ -114,6 +117,7 @@ struct ContentView: View {
         .padding(.all, 0)
         } // end of zstack
     }
+    
 }
 
 
