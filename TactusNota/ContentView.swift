@@ -13,8 +13,11 @@ struct ContentView: View {
     
     @StateObject var model = AnnotationViewModel()
     var body: some View {
-        ZStack{
+        
         NavigationView{
+            ZStack{
+                Color(red: 0.26, green: 0.26, blue: 0.26)
+                    .ignoresSafeArea()
             
             VStack{
             
@@ -95,16 +98,24 @@ struct ContentView: View {
                 if let ImageFile = UIImage(data: model.imageData){
                     Image(uiImage: ImageFile)
                         .resizable()
+                        .cornerRadius(20)
                         .aspectRatio(contentMode: .fit)
+                        .padding(.all, 10)
+                       
                     
                 }
                 else{
                     Button(action: {model.showImagePicker.toggle()},
                            label: {
-                        Image(systemName: "plus")
+                        Image("test1")
+                            .resizable()
+                            .cornerRadius(20)
                             .font(.title)
+                            .padding(.all, 5)
                         
-                    })
+                            
+                         
+                    }).padding(.all, 25)
                 }
 //                Image("test1")
 //                    .resizable()
@@ -113,9 +124,10 @@ struct ContentView: View {
             
            
 
-        }.navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
-        .padding(.all, 0)
+        }
         } // end of zstack
+        .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
+        .padding(.all, 0)
     }
     
 }
