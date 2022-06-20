@@ -96,11 +96,14 @@ struct ContentView: View {
                 }
                 
                 if let ImageFile = UIImage(data: model.imageData){
-                    Image(uiImage: ImageFile)
-                        .resizable()
-                        .cornerRadius(20)
-                        .aspectRatio(contentMode: .fit)
-                        .padding(.all, 10)
+                    
+                    AnnotationScreen()
+                        .environmentObject(model)
+//                    Image(uiImage: ImageFile)
+//                        .resizable()
+//                        .cornerRadius(20)
+//                        .aspectRatio(contentMode: .fit)
+//                        .padding(.all, 10)
                        
                     
                 }

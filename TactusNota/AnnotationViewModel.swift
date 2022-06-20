@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import PencilKit
 
 class AnnotationViewModel: ObservableObject {
     @Published var showImagePicker = false
     @Published var imageData: Data = Data(count: 0)
+    
+    
+    @Published var canvas = PKCanvasView()
+    
+    
 }
 
