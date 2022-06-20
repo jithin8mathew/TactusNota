@@ -15,7 +15,7 @@ struct AnnotationScreen: View {
     var body: some View {
         ZStack{
             
-            CanvasView(canvas: $model.canvas, imageData: $model.imageData)
+            CanvasView(canvas: $model.canvas, imageData: $model.imageData, toolPicker: $model.toolPicker)
         }
     }
 }
@@ -30,7 +30,7 @@ struct CanvasView: UIViewRepresentable{
     
     @Binding var canvas: PKCanvasView
     @Binding var imageData: Data
-    
+    @Binding var toolPicker: PKToolPicker
     func makeUIView(context: Context) -> PKCanvasView {
 
         canvas.isOpaque = true
@@ -49,6 +49,10 @@ struct CanvasView: UIViewRepresentable{
             let subView = canvas.subviews[0]
             subView.addSubview(imageView)
             subView.sendSubviewToBack(imageView)
+            
+            toolPicker.setVisible(true, forFirstResponder: canvas)
+            toolPicker.addObserver(canvas)
+            canvas.becomeFirstResponder()
         }
     }
 }

@@ -14,6 +14,7 @@ class AnnotationViewModel: ObservableObject {
     
     
     @Published var canvas = PKCanvasView()
+    @Published  var toolPicker = PKToolPicker()
     
     
 }
