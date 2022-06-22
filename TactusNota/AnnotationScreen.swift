@@ -45,6 +45,7 @@ struct CanvasView: UIViewRepresentable{
             let imageView = UIImageView(image: image)
 //            imageView.contentMode = .scaleAspectFit
             imageView.clipsToBounds = true
+            imageView.contentMode = .scaleAspectFit
             
             let subView = canvas.subviews[0]
             subView.addSubview(imageView)
