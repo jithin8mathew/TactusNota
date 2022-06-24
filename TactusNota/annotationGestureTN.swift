@@ -68,11 +68,7 @@ struct CreateCircle: View {
     var body: some View {
 //        131.3229762017727, 1399.1275438666344, 62.341757118701935, 56.02074463367444
         return Path(CGRect(x: 131.3229762017727, y: 399.1275438666344, width: 62.341757118701935, height: 56.02074463367444))
-        // need to try something more
-        
-//        return Rectangle().fill(Color.red)
-//            .frame(width: 50, height: 50)
-//            .position(currentLocation)
+
     }
 }
 
