@@ -15,6 +15,7 @@ struct ContentView: View {
     
     @State var viewState = CGSize.zero
     @State private var isActive : Bool = false
+    @State var points:[CGPoint] = [CGPoint(x:0,y:0), CGPoint(x:50,y:50)]
     
     @StateObject var model = AnnotationViewModel()
     var body: some View {
@@ -23,6 +24,21 @@ struct ContentView: View {
             ZStack{
                 Color(red: 0.26, green: 0.26, blue: 0.26)
                     .ignoresSafeArea()
+                
+                return ZStack(alignment: .topLeading) {
+                            Background {
+                                   // tappedCallback
+                                   location in
+                                    self.points.append(location)
+                                }
+                                .background(Color.white)
+                            ForEach(self.points.identified(by: \.debugDescription)) {
+                                point in
+                                Color.red
+                                    .frame(width:50, height:50, alignment: .center)
+                                    .offset(CGSize(width: point.x, height: point.y))
+                            }
+                }
             
             VStack{
             
@@ -160,6 +176,37 @@ struct ContentView: View {
     
 }
 
+struct Background:UIViewRepresentable {
+    var tappedCallback: ((CGPoint) -> Void)
+
+    func makeUIView(context: UIViewRepresentableContext<Background>) -> UIView {
+        let v = UIView(frame: .zero)
+        let gesture = UITapGestureRecognizer(target: context.coordinator,
+                                             action: #selector(Coordinator.tapped))
+        v.addGestureRecognizer(gesture)
+        return v
+    }
+
+    class Coordinator: NSObject {
+        var tappedCallback: ((CGPoint) -> Void)
+        init(tappedCallback: @escaping ((CGPoint) -> Void)) {
+            self.tappedCallback = tappedCallback
+        }
+        @objc func tapped(gesture:UITapGestureRecognizer) {
+            let point = gesture.location(in: gesture.view)
+            self.tappedCallback(point)
+        }
+    }
+
+    func makeCoordinator() -> Background.Coordinator {
+        return Coordinator(tappedCallback:self.tappedCallback)
+    }
+
+    func updateUIView(_ uiView: UIView,
+                       context: UIViewRepresentableContext<Background>) {
+    }
+
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
