@@ -20,6 +20,16 @@ struct ContentView: View {
     @State var position:CGPoint = CGPoint(x:0,y:0)
     
     @StateObject var model = AnnotationViewModel()
+    
+    @State var isDragging = false
+    
+    
+    var drag: some Gesture {
+            DragGesture()
+                .onChanged { _ in self.isDragging = true }
+                .onEnded { _ in self.isDragging = false }
+        }
+    
     var body: some View {
         
         NavigationView{
@@ -158,17 +168,21 @@ struct ContentView: View {
                             .font(.title)
                             .padding(.all, 5)
                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                            .gesture(
-                                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                                            .onChanged { value in
-                                              self.position = value.location
-                                                print(self.position)
-                                            }
-                                            .onEnded { _ in
-                                              self.position = .zero
-                                                print(self.position)
-                                            }
-                                    )
+                            Circle()
+                                    .fill(self.isDragging ? Color.red : Color.blue)
+                                    .frame(width: 100, height: 100, alignment: .center)
+                                    .gesture(drag)
+//                            .gesture(
+//                                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+//                                            .onChanged { value in
+//                                              self.position = value.location
+//                                                print(self.position)
+//                                            }
+//                                            .onEnded { _ in
+//                                              self.position = .zero
+//                                                print(self.position)
+//                                            }
+//                                    )
                         
                             
                          
