@@ -17,6 +17,8 @@ struct ContentView: View {
     @State private var isActive : Bool = false
     @State var points:[CGPoint] = [CGPoint(x:0,y:0), CGPoint(x:50,y:50)]
     
+    @State var position:CGPoint = CGPoint(x:0,y:0)
+    
     @StateObject var model = AnnotationViewModel()
     var body: some View {
         
@@ -25,20 +27,20 @@ struct ContentView: View {
                 Color(red: 0.26, green: 0.26, blue: 0.26)
                     .ignoresSafeArea()
                 
-                return ZStack(alignment: .topLeading) {
-                            Background {
-                                   // tappedCallback
-                                   location in
-                                    self.points.append(location)
-                                }
-                                .background(Color.white)
-                            ForEach(self.points.identified(by: \.debugDescription)) {
-                                point in
-                                Color.red
-                                    .frame(width:50, height:50, alignment: .center)
-                                    .offset(CGSize(width: point.x, height: point.y))
-                            }
-                }
+//                return ZStack(alignment: .topLeading) {
+//                            Background {
+//                                   // tappedCallback
+//                                   location in
+//                                    self.points.append(location)
+//                                }
+//                                .background(Color.white)
+//                            ForEach(self.points.identified(by: \.debugDescription)) {
+//                                point in
+//                                Color.red
+//                                    .frame(width:50, height:50, alignment: .center)
+//                                    .offset(CGSize(width: point.x, height: point.y))
+//                            }
+//                }
             
             VStack{
             
@@ -156,6 +158,17 @@ struct ContentView: View {
                             .font(.title)
                             .padding(.all, 5)
                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                            .gesture(
+                                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                            .onChanged { value in
+                                              self.position = value.location
+                                                print(self.position)
+                                            }
+                                            .onEnded { _ in
+                                              self.position = .zero
+                                                print(self.position)
+                                            }
+                                    )
                         
                             
                          
