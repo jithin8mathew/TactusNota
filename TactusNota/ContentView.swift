@@ -9,8 +9,6 @@ import SwiftUI
 
 // ghp_mcWpwlDSR8Qp4qPx0nyFOYAS_jackD_aXqErtrRS2crtrttnrrtrZ
 
-// reflecting the hardwork
-
 struct ContentView: View {
     
     @State var viewState = CGSize.zero
