@@ -160,29 +160,31 @@ struct ContentView: View {
                 else{
                     Button(action: {model.showImagePicker.toggle()},
                            label: {
-                        Image("test1")
-                            .resizable()
-                            .cornerRadius(20)
-                            .font(.title)
-                            .padding(.all, 5)
-                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                            Circle()
-                                    .fill(self.isDragging ? Color.red : Color.blue)
-                                    .frame(width: 100, height: 100, alignment: .center)
-                                    .gesture(drag)
-//                            .gesture(
-//                                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-//                                            .onChanged { value in
-//                                              self.position = value.location
-//                                                print(self.position)
-//                                            }
-//                                            .onEnded { _ in
-//                                              self.position = .zero
-//                                                print(self.position)
-//                                            }
-//                                    )
-                        
+                        ZStack{
+                            Image("test1")
+                                .resizable()
+                                .cornerRadius(20)
+                                .font(.title)
+                                .padding(.all, 5)
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                                RoundedRectangle(cornerRadius: 5, style: .circular)
+                                        .fill(self.isDragging ? Color.red : Color.blue)
+                                        .frame(width: 100, height: 100, alignment: .center)
+                                        .gesture(drag)
+                                        .position(position)
+    //                            .gesture(
+    //                                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+    //                                            .onChanged { value in
+    //                                              self.position = value.location
+    //                                                print(self.position)
+    //                                            }
+    //                                            .onEnded { _ in
+    //                                              self.position = .zero
+    //                                                print(self.position)
+    //                                            }
+    //                                    )
                             
+                        }
                          
                     }).padding(.all, 25)
                 }
