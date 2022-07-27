@@ -25,12 +25,16 @@ struct ContentView: View {
     var drag: some Gesture {
             DragGesture()
                 .onChanged {
-                    value in self.isDragging = true
-//                    self.position.x = value.translation.width
-//                    self.position.y = value.translation.height
-                    
+                    value in //self.isDragging = true
+                    self.position.x = value.translation.width
+                    self.position.y = value.translation.height
+                    print(self.position)
                 }
-                .onEnded { _ in self.isDragging = false }
+                .onEnded {
+                    value in self.isDragging = false
+//                    self.position.x = .zero
+//                    self.position.y = .zero
+                }
         }
     
     var body: some View {
@@ -176,7 +180,8 @@ struct ContentView: View {
                                         .fill(self.isDragging ? Color.red : Color.blue)
                                         .frame(width: 100, height: 100, alignment: .center)
                                         .gesture(drag)
-                                        .position(position)
+                                        .position(self.position)
+//                            print(self.position)
 //                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                         }
                     }).padding(.all, 25)
@@ -184,7 +189,14 @@ struct ContentView: View {
 //                Image("test1")
 //                    .resizable()
             } // end of vstack
-            .sheet(isPresented: $model.showImagePicker, content: {ImagePicker(showPicker: $model.showImagePicker, imageData: $model.imageData)})
+//            .sheet(isPresented: $model.showImagePicker, content: {ImagePicker(showPicker: $model.showImagePicker, imageData: $model.imageData)})
+                
+                RoundedRectangle(cornerRadius: 5, style: .circular)
+                        .fill(Color.blue)
+                        .frame(width: 100, height: 100, alignment: .center)
+                        .offset(x: position.x, y: position.y)
+                        .gesture(drag)
+                        .position(self.position)
             
            
 
