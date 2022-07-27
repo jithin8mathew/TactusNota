@@ -172,20 +172,8 @@ struct ContentView: View {
                                         .frame(width: 100, height: 100, alignment: .center)
                                         .gesture(drag)
                                         .position(position)
-    //                            .gesture(
-    //                                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-    //                                            .onChanged { value in
-    //                                              self.position = value.location
-    //                                                print(self.position)
-    //                                            }
-    //                                            .onEnded { _ in
-    //                                              self.position = .zero
-    //                                                print(self.position)
-    //                                            }
-    //                                    )
-                            
+//                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                         }
-                         
                     }).padding(.all, 25)
                 }
 //                Image("test1")
