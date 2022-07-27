@@ -15,24 +15,27 @@ import SwiftUI
 
 struct testView: View {
     @State var viewState = CGSize.zero
+    @State var location = CGPoint.zero
 
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-            .frame(width: 300, height: 400)
-            .offset(x: viewState.width, y: viewState.height)
+            .frame(width: viewState.width + 100, height: viewState.height + 100)
+//            .offset(x: viewState.width, y: viewState.height)
+            .position(x: location.x , y: location.y )
             .gesture(
                 DragGesture().onChanged { value in
                     viewState = value.translation
-                    
+                    self.location = value.location
                 }
                 .onEnded { value in
                     withAnimation(.spring()) {
-                        viewState = .zero
+                        viewState = value.translation
                     }
                 }
             )
-            .position(x: viewState.height + 200, y: viewState.width + 200)
+            
+        Text("Location: (\(location.x), \(location.y))")
     }
 }
 
