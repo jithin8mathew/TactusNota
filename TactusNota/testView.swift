@@ -20,7 +20,7 @@ struct testView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-            .frame(width: viewState.width + 100, height: viewState.height + 100)
+            .frame(width: viewState.width + 10, height: viewState.height + 10)
 //            .offset(x: viewState.width, y: viewState.height)
             .position(x: location.x , y: location.y )
             .gesture(
