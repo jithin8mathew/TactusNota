@@ -26,8 +26,8 @@ struct ContentView: View {
             DragGesture()
                 .onChanged {
                     value in self.isDragging = true
-                    self.position.x = value.translation.width
-                    self.position.y = value.translation.height
+//                    self.position.x = value.translation.width
+//                    self.position.y = value.translation.height
                     
                 }
                 .onEnded { _ in self.isDragging = false }
