@@ -9,6 +9,16 @@ import SwiftUI
 
 // ghp_mcWpwlDSR8Qp4qPx0nyFOYAS_jackD_aXqErtrRS2crtrttnrrtrZ
 
+// add stats button to view how much the use has annotated
+// add number of annotations per image as the user annotates
+
+struct RectData  {
+    let x: Double
+    let y: Double
+    let width: Double
+    let height: Double
+}
+
 struct ContentView: View {
     
 //    @State var viewState = CGSize.zero
@@ -26,6 +36,8 @@ struct ContentView: View {
     @State var startLoc = CGPoint.zero
     @State var contWidth = CGFloat.zero
     @State var contHeight = CGFloat.zero
+    
+    @State var rectData: [[CGFloat]] = []
     
     
     var drag: some Gesture {
@@ -191,20 +203,17 @@ struct ContentView: View {
                                         startLoc = value.startLocation
                                         contWidth = value.location.x - startLoc.x
                                         contHeight = value.location.y - startLoc.y
-//                                        print(value.location)
-//                                        print("contWidth",contWidth)
-//                                        print("contHeight",contHeight)
-//                                            .overlay( VStack{
-//
-//                                            })
-                                        RoundedRectangle(cornerRadius: 5, style: .circular)
-                                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                                            .frame(width: contWidth, height: contHeight)
-                                            .position(value.location)
+//                                        RoundedRectangle(cornerRadius: 5, style: .circular)
+//                                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                                            .frame(width: contWidth, height: contHeight)
+//                                            .position(value.location)
                                     }
                                     .onEnded({
                                         (value) in
                                             print(value.location)
+                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
+                                        rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                                        print(rectData)
                                         })
                                 )
                                 .overlay( VStack{
@@ -218,29 +227,23 @@ struct ContentView: View {
                                         )
                                         .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                                 })
-//                                RoundedRectangle(cornerRadius: 5, style: .circular)
-//                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-//                                    .frame(width: viewState.width + 100, height: viewState.height + 100)
-//                                    .position(x: location.x , y: location.y )
-//                                    .gesture(drag)
-//                            print(self.position)
-//                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                            
+                                ForEach(self.rectData, id:\.self) {cords in
+                                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                                        .path(in: CGRect(
+                                            x: cords[0],
+                                            y: cords[1],
+                                            width: cords[2],
+                                            height: cords[3]
+                                            )
+                                        )
+                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                } // end of ForEach
                         }
                     }).padding(.all, 25)
                 }
-//                Image("test1")
-//                    .resizable()
-            } // end of vstack
-//            .sheet(isPresented: $model.showImagePicker, content: {ImagePicker(showPicker: $model.showImagePicker, imageData: $model.imageData)})
-                
-//                RoundedRectangle(cornerRadius: 5, style: .circular)
-//                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-//                    .frame(width: viewState.width + 100, height: viewState.height + 100)
-//                    .position(x: location.x , y: location.y )
-//                    .gesture(drag)
-            
-           
 
+            } // end of vstack
         }
         } // end of zstack
         .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
