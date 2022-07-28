@@ -23,9 +23,9 @@ struct ContentView: View {
     
 //    @State var viewState = CGSize.zero
     @State private var isActive : Bool = false
-    @State var points:[CGPoint] = [CGPoint(x:0,y:0), CGPoint(x:50,y:50)]
-    
-    @State var position:CGPoint = CGPoint(x:0,y:0)
+//    @State var points:[CGPoint] = [CGPoint(x:0,y:0), CGPoint(x:50,y:50)]
+//
+//    @State var position:CGPoint = CGPoint(x:0,y:0)
     
     @StateObject var model = AnnotationViewModel()
     
