@@ -23,6 +23,10 @@ struct ContentView: View {
     @State var viewState = CGSize.zero
     @State var location = CGPoint.zero
     
+    @State var startLoc = CGPoint.zero
+    @State var contWidth = CGFloat.zero
+    @State var contHeight = CGFloat.zero
+    
     
     var drag: some Gesture {
             DragGesture()
@@ -184,14 +188,14 @@ struct ContentView: View {
                                 .gesture(DragGesture(minimumDistance: 0)
                                     .onChanged {
                                         (value) in //print(value.location)
-                                        let startLoc = value.startLocation
-                                        let contWidth = value.location.x - startLoc.x
-                                        let contHeight = value.location.y - startLoc.y
+                                        startLoc = value.startLocation
+                                        contWidth = value.location.x - startLoc.x
+                                        contHeight = value.location.y - startLoc.y
 //                                        print(value.location)
 //                                        print("contWidth",contWidth)
 //                                        print("contHeight",contHeight)
 //                                            .overlay( VStack{
-//                                                
+//
 //                                            })
                                         RoundedRectangle(cornerRadius: 5, style: .circular)
                                             .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
@@ -203,11 +207,22 @@ struct ContentView: View {
                                             print(value.location)
                                         })
                                 )
-                                RoundedRectangle(cornerRadius: 5, style: .circular)
-                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                                    .frame(width: viewState.width + 100, height: viewState.height + 100)
-                                    .position(x: location.x , y: location.y )
-                                    .gesture(drag)
+                                .overlay( VStack{
+                                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                                        .path(in: CGRect(
+                                            x: (startLoc.x),
+                                            y: (startLoc.y), //(3.12 * 2),
+                                            width: contWidth, //(4.68 * 2),
+                                            height: contHeight
+                                            )
+                                        )
+                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                })
+//                                RoundedRectangle(cornerRadius: 5, style: .circular)
+//                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                                    .frame(width: viewState.width + 100, height: viewState.height + 100)
+//                                    .position(x: location.x , y: location.y )
+//                                    .gesture(drag)
 //                            print(self.position)
 //                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                         }
