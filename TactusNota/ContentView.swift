@@ -29,7 +29,7 @@ struct ContentView: View {
     
     @StateObject var model = AnnotationViewModel()
     
-    @State var isDragging = false
+//    @State var isDragging = false
     @State var viewState = CGSize.zero
     @State var location = CGPoint.zero
     
@@ -46,15 +46,10 @@ struct ContentView: View {
                     value in //self.isDragging = true
                     viewState = value.translation
                     self.location = value.location
-//                    self.position.x = value.translation.width
-//                    self.position.y = value.translation.height
-//                    print(self.position)
                 }
                 .onEnded {
                     value in //self.isDragging = false
                     viewState = value.translation
-//                    self.position.x = .zero
-//                    self.position.y = .zero
                 }
         }
     
@@ -64,24 +59,8 @@ struct ContentView: View {
             ZStack{
                 Color(red: 0.26, green: 0.26, blue: 0.26)
                     .ignoresSafeArea()
-                
-//                return ZStack(alignment: .topLeading) {
-//                            Background {
-//                                   // tappedCallback
-//                                   location in
-//                                    self.points.append(location)
-//                                }
-//                                .background(Color.white)
-//                            ForEach(self.points.identified(by: \.debugDescription)) {
-//                                point in
-//                                Color.red
-//                                    .frame(width:50, height:50, alignment: .center)
-//                                    .offset(CGSize(width: point.x, height: point.y))
-//                            }
-//                }
             
             VStack{
-            
                 HStack{
                     NavigationLink(destination: annotationGestureTN(), isActive: self.$isActive) {
                         Image(systemName: "plus")
@@ -163,22 +142,7 @@ struct ContentView: View {
                     
                     AnnotationScreen()
                         .environmentObject(model)
-                    
-//                    RoundedRectangle(cornerRadius: 30)
-//                        .fill(Color.blue)
-//                        .frame(width: 300, height: 400)
-//                        .offset(x: viewState.width, y: viewState.height)
-//                        .gesture(
-//                            DragGesture().onChanged { value in
-//                                viewState = value.translation
-//                            }
-//                            .onEnded { value in
-//                                withAnimation(.spring()) {
-//                                    viewState = .zero
-//                                }
-//                            }
-//                        )
-                    
+                
 //                    Image(uiImage: ImageFile)
 //                        .resizable()
 //                        .cornerRadius(20)
@@ -203,10 +167,6 @@ struct ContentView: View {
                                         startLoc = value.startLocation
                                         contWidth = value.location.x - startLoc.x
                                         contHeight = value.location.y - startLoc.y
-//                                        RoundedRectangle(cornerRadius: 5, style: .circular)
-//                                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-//                                            .frame(width: contWidth, height: contHeight)
-//                                            .position(value.location)
                                     }
                                     .onEnded({
                                         (value) in
@@ -242,7 +202,6 @@ struct ContentView: View {
                         }
                     }).padding(.all, 25)
                 }
-
             } // end of vstack
         }
         } // end of zstack
