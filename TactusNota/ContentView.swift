@@ -181,9 +181,28 @@ struct ContentView: View {
                                 .font(.title)
                                 .padding(.all, 5)
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                                .onTapGesture {
-                                        print("tap")
+                                .gesture(DragGesture(minimumDistance: 0)
+                                    .onChanged {
+                                        (value) in //print(value.location)
+                                        let startLoc = value.startLocation
+                                        let contWidth = value.location.x - startLoc.x
+                                        let contHeight = value.location.y - startLoc.y
+//                                        print(value.location)
+//                                        print("contWidth",contWidth)
+//                                        print("contHeight",contHeight)
+//                                            .overlay( VStack{
+//                                                
+//                                            })
+                                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                            .frame(width: contWidth, height: contHeight)
+                                            .position(value.location)
                                     }
+                                    .onEnded({
+                                        (value) in
+                                            print(value.location)
+                                        })
+                                )
                                 RoundedRectangle(cornerRadius: 5, style: .circular)
                                     .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                                     .frame(width: viewState.width + 100, height: viewState.height + 100)
