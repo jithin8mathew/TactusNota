@@ -173,7 +173,7 @@ struct ContentView: View {
                                             print(value.location)
                                         let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
                                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
-                                        print(rectData)
+//                                        print(rectData)
                                         })
                                 )
                                 .overlay( VStack{
