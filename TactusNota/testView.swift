@@ -35,7 +35,7 @@ struct testView: View {
                 }
             )
             
-        Text("Location: (\(location.x), \(location.y))")
+//        Text("Location: (\(location.x), \(location.y))")
     }
 }
 

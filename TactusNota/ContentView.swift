@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var viewState = CGSize.zero
+//    @State var viewState = CGSize.zero
     @State private var isActive : Bool = false
     @State var points:[CGPoint] = [CGPoint(x:0,y:0), CGPoint(x:50,y:50)]
     
@@ -20,18 +20,23 @@ struct ContentView: View {
     @StateObject var model = AnnotationViewModel()
     
     @State var isDragging = false
+    @State var viewState = CGSize.zero
+    @State var location = CGPoint.zero
     
     
     var drag: some Gesture {
             DragGesture()
                 .onChanged {
                     value in //self.isDragging = true
-                    self.position.x = value.translation.width
-                    self.position.y = value.translation.height
-                    print(self.position)
+                    viewState = value.translation
+                    self.location = value.location
+//                    self.position.x = value.translation.width
+//                    self.position.y = value.translation.height
+//                    print(self.position)
                 }
                 .onEnded {
-                    value in self.isDragging = false
+                    value in //self.isDragging = false
+                    viewState = value.translation
 //                    self.position.x = .zero
 //                    self.position.y = .zero
                 }
@@ -176,11 +181,14 @@ struct ContentView: View {
                                 .font(.title)
                                 .padding(.all, 5)
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                                .onTapGesture {
+                                        print("tap")
+                                    }
                                 RoundedRectangle(cornerRadius: 5, style: .circular)
-                                        .fill(self.isDragging ? Color.red : Color.blue)
-                                        .frame(width: 100, height: 100, alignment: .center)
-                                        .gesture(drag)
-                                        .position(self.position)
+                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                    .frame(width: viewState.width + 100, height: viewState.height + 100)
+                                    .position(x: location.x , y: location.y )
+                                    .gesture(drag)
 //                            print(self.position)
 //                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                         }
@@ -191,12 +199,11 @@ struct ContentView: View {
             } // end of vstack
 //            .sheet(isPresented: $model.showImagePicker, content: {ImagePicker(showPicker: $model.showImagePicker, imageData: $model.imageData)})
                 
-                RoundedRectangle(cornerRadius: 5, style: .circular)
-                        .fill(Color.blue)
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .offset(x: position.x, y: position.y)
-                        .gesture(drag)
-                        .position(self.position)
+//                RoundedRectangle(cornerRadius: 5, style: .circular)
+//                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                    .frame(width: viewState.width + 100, height: viewState.height + 100)
+//                    .position(x: location.x , y: location.y )
+//                    .gesture(drag)
             
            
 
