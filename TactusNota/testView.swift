@@ -52,7 +52,32 @@ struct testView: View {
     var body: some View {
         HStack(alignment: .center) {
             Spacer()
+            ZStack{
+                
+            }
             RedRectangle(width: width ?? minWidth, height: height ?? minHeight)
+            ZStack{
+            Circle()
+                .fill(.yellow)
+                .frame(width: 20, height: 20)
+                .offset(x: -20, y: -50)
+            
+            Circle()
+                .fill(.yellow)
+                .frame(width: 20, height: 20)
+                .offset(x: -20, y: 50)
+            
+            
+            Circle()
+                .fill(.yellow)
+                .frame(width: 20, height: 20)
+                .offset(x: -120, y: -50)
+            
+            Circle()
+                .fill(.yellow)
+                .frame(width: 20, height: 20)
+                .offset(x: -120, y: 50)
+            }
             Resizer()
                 .gesture(
                     DragGesture()
