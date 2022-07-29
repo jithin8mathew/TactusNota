@@ -13,28 +13,80 @@ import SwiftUI
 //    }
 //}
 
+//struct testView: View {
+//    @State var viewState = CGSize.zero
+//    @State var location = CGPoint.zero
+//
+//    var body: some View {
+//        RoundedRectangle(cornerRadius: 10)
+//            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//            .frame(width: viewState.width + 200, height: viewState.height + 200)
+//            .offset(x: viewState.width , y: viewState.height )
+//            .position(x: location.x , y: location.y)
+//            .gesture(
+//                DragGesture().onChanged { value in
+//                    viewState = value.translation
+//                    self.location = value.location
+//                }
+//                .onEnded { value in
+//                    withAnimation(.spring()) {
+//                        viewState = value.translation
+//                    }
+//                }
+//            )
+////        Text("Location: (\(location.x), \(location.y))")
+//    }
+//}
+//
+
+
+
+import SwiftUI
+
 struct testView: View {
-    @State var viewState = CGSize.zero
-    @State var location = CGPoint.zero
+    let minWidth: CGFloat = 100
+    let minHeight: CGFloat = 100
+    @State var width: CGFloat?
+    @State var height: CGFloat?
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 10)
-            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-            .frame(width: viewState.width + 200, height: viewState.height + 200)
-            .offset(x: viewState.width , y: viewState.height )
-            .position(x: location.x , y: location.y)
-            .gesture(
-                DragGesture().onChanged { value in
-                    viewState = value.translation
-                    self.location = value.location
-                }
-                .onEnded { value in
-                    withAnimation(.spring()) {
-                        viewState = value.translation
-                    }
-                }
-            )
-//        Text("Location: (\(location.x), \(location.y))")
+        HStack(alignment: .center) {
+            Spacer()
+            RedRectangle(width: width ?? minWidth, height: height ?? minHeight)
+            Resizer()
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            width = max(minWidth, width! + value.translation.width)
+                            height = max(minHeight, height! + value.translation.height)
+                        }
+                )
+            Spacer()
+        }
+        .onAppear {
+            width = minWidth
+            height = minHeight
+        }
+    }
+}
+
+struct RedRectangle: View {
+    let width: CGFloat
+    let height: CGFloat
+
+    var body: some View {
+        Rectangle()
+            .fill(Color.red)
+            .frame(width: width, height: height)
+    }
+}
+
+struct Resizer: View {
+    var body: some View {
+        Rectangle()
+            .fill(Color.blue)
+            .frame(width: 8, height: 75)
+            .cornerRadius(10)
     }
 }
 
