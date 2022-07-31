@@ -59,7 +59,7 @@ struct testView: View {
             ZStack{
             Circle()
                 .fill(.yellow)
-                .frame(width: 20, height: 20)
+                .frame(width: 15, height: 15)
                 .offset(x: -20, y: -50)
             
             Circle()
