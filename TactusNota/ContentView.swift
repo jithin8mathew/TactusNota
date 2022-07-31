@@ -176,7 +176,7 @@ struct ContentView: View {
 //                                        print(rectData)
                                         })
                                 )
-                                .overlay( VStack{
+                                .overlay( ZStack{
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
                                         .path(in: CGRect(
                                             x: (startLoc.x),
@@ -186,6 +186,22 @@ struct ContentView: View {
                                             )
                                         )
                                         .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                    Circle()
+                                        .fill(.yellow)
+                                        .frame(width: 15, height: 15)
+                                        .position(x: startLoc.x, y: startLoc.y)
+                                    Circle()
+                                        .fill(.yellow)
+                                        .frame(width: 15, height: 15)
+                                        .position(x: startLoc.x + contWidth, y: startLoc.y)
+                                    Circle()
+                                        .fill(.yellow)
+                                        .frame(width: 15, height: 15)
+                                        .position(x: startLoc.x, y: startLoc.y + contHeight)
+                                    Circle()
+                                        .fill(.yellow)
+                                        .frame(width: 15, height: 15)
+                                        .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
                                 })
                             
                                 ForEach(self.rectData, id:\.self) {cords in
