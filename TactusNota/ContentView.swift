@@ -219,6 +219,17 @@ struct ContentView: View {
                                         .fill(.yellow)
                                         .frame(width: 15, height: 15)
                                         .position(x: cords[0], y: cords[1])
+                                        .gesture(DragGesture(minimumDistance: 0)
+                                            .onChanged {
+                                                (value) in //print(value.location)
+//                                                startLoc = value.startLocation
+                                                print(value.location)
+                                            }
+                                            .onEnded({
+                                                (value) in
+                                                print(value.location)
+                                            })
+                                        )
                                     Circle()
                                         .fill(.yellow)
                                         .frame(width: 15, height: 15)
