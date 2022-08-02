@@ -222,8 +222,11 @@ struct ContentView: View {
                                         .gesture(DragGesture(minimumDistance: 0)
                                             .onChanged {
                                                 (value) in //print(value.location)
-//                                                startLoc = value.startLocation
-                                                print(value.location)
+//                                                var tempStrtLoc = value.startLocation
+//                                                startLoc = (tempStrtLoc.x - startLoc.x , tempStrtLoc.y - startLoc.y)
+                                                contWidth = value.location.x - startLoc.x
+                                                contHeight = value.location.y - startLoc.y
+//                                                print(value.location)
                                             }
                                             .onEnded({
                                                 (value) in
