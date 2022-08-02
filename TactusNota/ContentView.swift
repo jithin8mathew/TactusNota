@@ -171,7 +171,7 @@ struct ContentView: View {
                                     .onEnded({
                                         (value) in
                                             print(value.location)
-                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
+//                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
                                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
 //                                        print(rectData)
                                         })
@@ -214,6 +214,23 @@ struct ContentView: View {
                                             )
                                         )
                                         .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                    
+                                    Circle()
+                                        .fill(.yellow)
+                                        .frame(width: 15, height: 15)
+                                        .position(x: cords[0], y: cords[1])
+                                    Circle()
+                                        .fill(.yellow)
+                                        .frame(width: 15, height: 15)
+                                        .position(x: cords[0] + cords[2], y: cords[1])
+                                    Circle()
+                                        .fill(.yellow)
+                                        .frame(width: 15, height: 15)
+                                        .position(x: cords[0], y: cords[1] + cords[3])
+                                    Circle()
+                                        .fill(.yellow)
+                                        .frame(width: 15, height: 15)
+                                        .position(x: cords[0] + cords[2], y: cords[1] + cords[3])
                                 } // end of ForEach
                         }
                     }).padding(.all, 25)
