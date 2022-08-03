@@ -57,26 +57,26 @@ struct testView: View {
             }
             RedRectangle(width: width ?? minWidth, height: height ?? minHeight)
             ZStack{
-            Circle()
-                .fill(.yellow)
-                .frame(width: 15, height: 15)
-                .offset(x: -20, y: -50)
-            
-            Circle()
-                .fill(.yellow)
-                .frame(width: 20, height: 20)
-                .offset(x: -20, y: 50)
-            
-            
-            Circle()
-                .fill(.yellow)
-                .frame(width: 20, height: 20)
-                .offset(x: -120, y: -50)
-            
-            Circle()
-                .fill(.yellow)
-                .frame(width: 20, height: 20)
-                .offset(x: -120, y: 50)
+//            Circle()
+//                .fill(.yellow)
+//                .frame(width: 15, height: 15)
+//                .offset(x: -20, y: -50)
+//
+//            Circle()
+//                .fill(.yellow)
+//                .frame(width: 20, height: 20)
+//                .offset(x: -20, y: 50)
+//
+//
+//            Circle()
+//                .fill(.yellow)
+//                .frame(width: 20, height: 20)
+//                .offset(x: -120, y: -50)
+//
+//            Circle()
+//                .fill(.yellow)
+//                .frame(width: 20, height: 20)
+//                .offset(x: -120, y: 50)
             }
             Resizer()
                 .gesture(
@@ -108,10 +108,10 @@ struct RedRectangle: View {
 
 struct Resizer: View {
     var body: some View {
-        Rectangle()
-            .fill(Color.blue)
-            .frame(width: 8, height: 75)
-            .cornerRadius(10)
+        Circle()
+            .fill(.yellow)
+            .frame(width: 20, height: 20)
+            .offset(x: -25, y: 50)
     }
 }
 
