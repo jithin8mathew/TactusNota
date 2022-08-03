@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// ghp_mcWpwlDSR8Qp4qPx0nyFOYAS_jackD_aXqErtrRS2crtrttnrrtrZ
-
 // add stats button to view how much the use has annotated
 // add number of annotations per image as the user annotates
 
