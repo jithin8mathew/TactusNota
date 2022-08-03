@@ -17,6 +17,11 @@ struct RectData  {
     let height: Double
 }
 
+struct RectDataDict{
+    let ID: Int
+    let rectCords: [CGFloat]
+}
+
 var bboxID = 0
 
 struct ContentView: View {
@@ -39,7 +44,7 @@ struct ContentView: View {
     
     @State var rectData: [[CGFloat]] = []
     
-    @State var annotationDictionary: [Int:[CGFloat]] = [:] // create a dictionary to ID the bounding box and store its coordinates
+//    @State var annotationDictionary: RectDataDict = [:] // create a dictionary to ID the bounding box and store its coordinates
     
     
     var drag: some Gesture {
@@ -159,11 +164,11 @@ struct ContentView: View {
                     AnnotationScreen()
                         .environmentObject(model)
                 
-//                    Image(uiImage: ImageFile)
-//                        .resizable()
-//                        .cornerRadius(20)
-//                        .aspectRatio(contentMode: .fit)
-//                        .padding(.all, 10)
+                    Image(uiImage: ImageFile)
+                        .resizable()
+                        .cornerRadius(20)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.all, 10)
                        
                     
                 }
@@ -190,7 +195,7 @@ struct ContentView: View {
 //                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
                                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                                         bboxID += 1
-                                        annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
+//                                        annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
 //                                        print(annotationDictionary)
                                         })
                                 )
@@ -222,7 +227,7 @@ struct ContentView: View {
                                         .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
                                 })
                             
-                                ForEach(self.annotationDictionary, id:\.self) {id, cords in
+                                ForEach(self.rectData, id:\.self) { cords in
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
                                         .path(in: CGRect(
                                             x: cords[0],
