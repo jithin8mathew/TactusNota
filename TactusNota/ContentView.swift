@@ -17,6 +17,8 @@ struct RectData  {
     let height: Double
 }
 
+var bboxID = 0
+
 struct ContentView: View {
     
 //    @State var viewState = CGSize.zero
@@ -36,6 +38,8 @@ struct ContentView: View {
     @State var contHeight = CGFloat.zero
     
     @State var rectData: [[CGFloat]] = []
+    
+    @State var annotationDictionary: [Int:[CGFloat]] = [:] // create a dictionary to ID the bounding box and store its coordinates
     
     
     var drag: some Gesture {
@@ -134,6 +138,20 @@ struct ContentView: View {
                                                 x: 3,
                                                 y: 3)
                     
+                    Button(action: {
+                                        }, label: {
+                                            Text("\(bboxID)")
+                                            .font(.system(.title2))
+                                            .frame(width: 97, height: 97)
+                                            .foregroundColor(Color.white)
+                                            
+                                        })
+                                        .background(Color.purple)
+                                        .cornerRadius(73.5)
+                                        .shadow(color: Color.black.opacity(0.3),
+                                                radius: 3,
+                                                x: 3,
+                                                y: 3)
                 }
                 
                 if let ImageFile = UIImage(data: model.imageData){
@@ -171,6 +189,7 @@ struct ContentView: View {
                                             print(value.location)
 //                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
                                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                                        bboxID += 1
 //                                        print(rectData)
                                         })
                                 )
