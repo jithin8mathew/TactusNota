@@ -190,7 +190,8 @@ struct ContentView: View {
 //                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
                                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                                         bboxID += 1
-//                                        print(rectData)
+                                        annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
+//                                        print(annotationDictionary)
                                         })
                                 )
                                 .overlay( ZStack{
@@ -221,7 +222,7 @@ struct ContentView: View {
                                         .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
                                 })
                             
-                                ForEach(self.rectData, id:\.self) {cords in
+                                ForEach(self.annotationDictionary, id:\.self) {id, cords in
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
                                         .path(in: CGRect(
                                             x: cords[0],
