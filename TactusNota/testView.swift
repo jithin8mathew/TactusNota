@@ -55,8 +55,9 @@ struct testView: View {
             ZStack{
                 
             }
-            RedRectangle(width: width ?? minWidth, height: height ?? minHeight)
+            
             ZStack{
+                RedRectangle(width: width ?? minWidth, height: height ?? minHeight)
 //            Circle()
 //                .fill(.yellow)
 //                .frame(width: 15, height: 15)
@@ -77,15 +78,16 @@ struct testView: View {
 //                .fill(.yellow)
 //                .frame(width: 20, height: 20)
 //                .offset(x: -120, y: 50)
+                Resizer(width: width ?? minWidth, height: height ?? minHeight)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                width = width! + value.translation.width
+                                height = height! + value.translation.width
+                            }
+                    )
             }
-            Resizer()
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            width = max(minWidth, width! + value.translation.width)
-                            height = max(minHeight, height! + value.translation.height)
-                        }
-                )
+
             Spacer()
         }
         .onAppear {
@@ -107,11 +109,15 @@ struct RedRectangle: View {
 }
 
 struct Resizer: View {
+    let width: CGFloat
+    let height: CGFloat
+    
     var body: some View {
         Circle()
             .fill(.yellow)
             .frame(width: 20, height: 20)
-            .offset(x: -25, y: 50)
+            .offset(x: width + (-width/2) , y: height + (-height/2))
+//            .position(x: width + width , y: height + (-height/2))
     }
 }
 
