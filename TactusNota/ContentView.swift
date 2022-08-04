@@ -226,7 +226,7 @@ struct ContentView: View {
                                         .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
                                 })
                             
-                            ForEach(self.annotationDictionary.sorted(by: >), id:\.key) { idNO, cords in
+                            ForEach(self.rectData, id:\.self) {cords in
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
                                         .path(in: CGRect(
                                             x: cords[0],
