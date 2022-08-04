@@ -44,7 +44,7 @@ struct ContentView: View {
     
     @State var rectData: [[CGFloat]] = []
     
-//    @State var annotationDictionary: RectDataDict = [:] // create a dictionary to ID the bounding box and store its coordinates
+    @State var annotationDictionary = [Int:[CGFloat]]() // create a dictionary to ID the bounding box and store its coordinates
     
     
     var drag: some Gesture {
@@ -74,14 +74,13 @@ struct ContentView: View {
                     }
                                         
                     Button(action: {}, label: {
-                                            Text("Images")
-                                            .font(.system(.title2))
-                                            .frame(width: 97, height: 40)
+                                        Image(systemName: "folder")
+//                                            Text("Images")
+//                                            .font(.system(.title2))
+                            .frame(width: 97, height: 97, alignment: .center)
                                             .foregroundColor(Color.white)
                                             .padding(.bottom, 7)
                                         })
-                                        .background(Color.blue)
-                                        .cornerRadius(38.5)
                                         .shadow(color: Color.black.opacity(0.3),
                                                 radius: 3,
                                                 x: 3,
@@ -195,7 +194,7 @@ struct ContentView: View {
 //                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
                                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                                         bboxID += 1
-//                                        annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
+                                        annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
 //                                        print(annotationDictionary)
                                         })
                                 )
@@ -227,7 +226,7 @@ struct ContentView: View {
                                         .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
                                 })
                             
-                                ForEach(self.rectData, id:\.self) { cords in
+                            ForEach(self.annotationDictionary.sorted(by: >), id:\.key) { idNO, cords in
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
                                         .path(in: CGRect(
                                             x: cords[0],
@@ -270,7 +269,7 @@ struct ContentView: View {
                                         .position(x: cords[0] + cords[2], y: cords[1] + cords[3])
                                 } // end of ForEach
                         }
-                    }).padding(.all, 25)
+                    }).padding(.all, 15)
                 }
             } // end of vstack
         }
