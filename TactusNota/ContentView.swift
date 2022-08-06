@@ -8,7 +8,6 @@
 import SwiftUI
 
 // add stats button to view how much the use has annotated
-// add number of annotations per image as the user annotates
 
 struct RectData  {
     let x: Double
@@ -75,11 +74,10 @@ struct ContentView: View {
                                         
                     Button(action: {}, label: {
                                         Image(systemName: "folder")
-//                                            Text("Images")
-//                                            .font(.system(.title2))
-                            .frame(width: 97, height: 97, alignment: .center)
+                            .resizable()
+                                            .frame(width: 57, height: 57, alignment: .center)
                                             .foregroundColor(Color.white)
-                                            .padding(.bottom, 7)
+                                            
                                         })
                                         .shadow(color: Color.black.opacity(0.3),
                                                 radius: 3,
