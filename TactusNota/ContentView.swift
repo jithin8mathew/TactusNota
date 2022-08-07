@@ -182,9 +182,9 @@ struct ContentView: View {
                                 .gesture(DragGesture(minimumDistance: 0)
                                     .onChanged {
                                         (value) in //print(value.location)
-                                        startLoc = value.startLocation
-                                        contWidth = value.location.x - startLoc.x
-                                        contHeight = value.location.y - startLoc.y
+                                        startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
+                                        contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
+                                        contHeight = value.location.y - startLoc.y // Height of the bounding box
                                     }
                                     .onEnded({
                                         (value) in
@@ -223,6 +223,9 @@ struct ContentView: View {
                                         .frame(width: 15, height: 15)
                                         .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
                                 })
+                                .onLongPressGesture {
+                                    print("Long Pressed")
+                                }
                             
                             ForEach(self.rectData, id:\.self) {cords in
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -267,13 +270,16 @@ struct ContentView: View {
                                         .position(x: cords[0] + cords[2], y: cords[1] + cords[3])
                                 } // end of ForEach
                         }
-                    }).padding(.all, 15)
+                    })
+                    .padding(.all, 15)
+                    
                 }
             } // end of vstack
         }
         } // end of zstack
         .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
         .padding(.all, 0)
+        
     }
     
 }
