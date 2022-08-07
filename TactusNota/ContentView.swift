@@ -188,11 +188,23 @@ struct ContentView: View {
                                     }
                                     .onEnded({
                                         (value) in
-                                            print(value.location)
 //                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
-                                        rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
-                                        bboxID += 1
-                                        annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
+                                        if (value.location.x - startLoc.x > 20){
+                                            rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                                            bboxID += 1
+                                            annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
+                                        }
+                                        else{
+                                            print("start location: ", value.startLocation)
+//                                            if rectData.count != 0{
+//                                                ForEach(self.rectData, id:\.self) {cords in
+//                                                    if value.startLocation.x < cords[0] && value.startLocation.x > cords[3] && value.startLocation.y < cords[1] && value.startLocation.y > cords[4]
+//                                                        {
+//                                                            print("value within previous bbox")
+//                                                    }
+//                                                }
+//                                            }
+                                        }
 //                                        print(annotationDictionary)
                                         })
                                 )
@@ -223,9 +235,9 @@ struct ContentView: View {
                                         .frame(width: 15, height: 15)
                                         .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
                                 })
-                                .onLongPressGesture {
-                                    print("Long Pressed")
-                                }
+//                                .onLongPressGesture {
+//                                    print("Long Pressed")
+//                                }
                             
                             ForEach(self.rectData, id:\.self) {cords in
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -253,7 +265,7 @@ struct ContentView: View {
                                             }
                                             .onEnded({
                                                 (value) in
-                                                print(value.location)
+//                                                print(value.location)
                                             })
                                         )
                                     Circle()
