@@ -8,7 +8,6 @@
 import SwiftUI
 
 // add stats button to view how much the use has annotated
-// add number of annotations per image as the user annotates
 
 struct RectData  {
     let x: Double
@@ -75,11 +74,10 @@ struct ContentView: View {
                                         
                     Button(action: {}, label: {
                                         Image(systemName: "folder")
-//                                            Text("Images")
-//                                            .font(.system(.title2))
-                            .frame(width: 97, height: 97, alignment: .center)
+                            .resizable()
+                                            .frame(width: 57, height: 57, alignment: .center)
                                             .foregroundColor(Color.white)
-                                            .padding(.bottom, 7)
+                                            
                                         })
                                         .shadow(color: Color.black.opacity(0.3),
                                                 radius: 3,
@@ -184,18 +182,32 @@ struct ContentView: View {
                                 .gesture(DragGesture(minimumDistance: 0)
                                     .onChanged {
                                         (value) in //print(value.location)
-                                        startLoc = value.startLocation
-                                        contWidth = value.location.x - startLoc.x
-                                        contHeight = value.location.y - startLoc.y
+                                        startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
+                                        contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
+                                        contHeight = value.location.y - startLoc.y // Height of the bounding box
                                     }
                                     .onEnded({
                                         (value) in
-                                            print(value.location)
 //                                        let tempRectData = [startLoc.x, startLoc.y, contWidth, contHeight]
-                                        rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
-                                        bboxID += 1
-                                        annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
-//                                        print(annotationDictionary)
+                                        if (value.location.x - startLoc.x > 20){
+                                            rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                                            bboxID += 1
+                                            annotationDictionary[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
+                                        }
+                                        else{
+                                            print("start location: ", value.startLocation)
+//                                            if rectData.count != 0{
+                                                for cords in rectData{
+                                                    // This section will check if the user taps within an already drawn bounding box
+//                                                    print(value.startLocation.x, "start x", cords[0], "cords 0", cords[3],"cords 3")
+                                                    if value.startLocation.x >= cords[0] && value.startLocation.x <= (cords[0] + cords[2])  && value.startLocation.y >= cords[1] && value.startLocation.y <= (cords[1] + cords[3]){
+                                                        print("value within selected bbox")
+                                                    }
+                                                    else{
+                                                        continue
+                                                    }
+                                                }
+                                        }
                                         })
                                 )
                                 .overlay( ZStack{
@@ -225,6 +237,9 @@ struct ContentView: View {
                                         .frame(width: 15, height: 15)
                                         .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
                                 })
+//                                .onLongPressGesture {
+//                                    print("Long Pressed")
+//                                }
                             
                             ForEach(self.rectData, id:\.self) {cords in
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -252,7 +267,7 @@ struct ContentView: View {
                                             }
                                             .onEnded({
                                                 (value) in
-                                                print(value.location)
+//                                                print(value.location)
                                             })
                                         )
                                     Circle()
@@ -269,13 +284,16 @@ struct ContentView: View {
                                         .position(x: cords[0] + cords[2], y: cords[1] + cords[3])
                                 } // end of ForEach
                         }
-                    }).padding(.all, 15)
+                    })
+                    .padding(.all, 15)
+                    
                 }
             } // end of vstack
         }
         } // end of zstack
         .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
         .padding(.all, 0)
+        
     }
     
 }

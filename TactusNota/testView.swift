@@ -58,26 +58,7 @@ struct testView: View {
             
             ZStack{
                 RedRectangle(width: width ?? minWidth, height: height ?? minHeight)
-//            Circle()
-//                .fill(.yellow)
-//                .frame(width: 15, height: 15)
-//                .offset(x: -20, y: -50)
-//
-//            Circle()
-//                .fill(.yellow)
-//                .frame(width: 20, height: 20)
-//                .offset(x: -20, y: 50)
-//
-//
-//            Circle()
-//                .fill(.yellow)
-//                .frame(width: 20, height: 20)
-//                .offset(x: -120, y: -50)
-//
-//            Circle()
-//                .fill(.yellow)
-//                .frame(width: 20, height: 20)
-//                .offset(x: -120, y: 50)
+
                 Resizer(width: width ?? minWidth, height: height ?? minHeight)
                     .gesture(
                         DragGesture(minimumDistance: 0)
