@@ -199,7 +199,7 @@ struct ContentView: View {
                                             if rectData.count != 0{
                                                 for cords in rectData{
                                                     // This section will check if the user taps within an already drawn bounding box 
-                                                    if value.startLocation.x < cords[0] && value.startLocation.x > cords[2] && value.startLocation.y < cords[1] && value.startLocation.y > cords[3]{
+                                                    if value.startLocation.x > cords[0] && value.startLocation.x < cords[2] && value.startLocation.y > cords[1] && value.startLocation.y < cords[3]{
                                                         print("value within selected bbox")
                                                     }
                                                 }
