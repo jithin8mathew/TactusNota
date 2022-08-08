@@ -197,11 +197,14 @@ struct ContentView: View {
                                         else{
                                             print("start location: ", value.startLocation)
 //                                            if rectData.count != 0{
+                                            var count_annotation_cords = 0
                                                 for cords in rectData{
+                                                    count_annotation_cords += 1
                                                     // This section will check if the user taps within an already drawn bounding box
 //                                                    print(value.startLocation.x, "start x", cords[0], "cords 0", cords[3],"cords 3")
                                                     if value.startLocation.x >= cords[0] && value.startLocation.x <= (cords[0] + cords[2])  && value.startLocation.y >= cords[1] && value.startLocation.y <= (cords[1] + cords[3]){
                                                         print("value within selected bbox")
+                                                        print(count_annotation_cords)
                                                     }
                                                     else{
                                                         continue
