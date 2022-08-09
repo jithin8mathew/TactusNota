@@ -262,7 +262,7 @@ struct ContentView: View {
                                         .position(x: cords[0], y: cords[1])
                                         .gesture(DragGesture(minimumDistance: 0) // add drag gesture to one of the corners of the active rectangle
                                             .onChanged {
-                                                (value) in //print(value.location)
+                                                (value) in 
 //                                                var tempStrtLoc = value.startLocation
 //                                                startLoc = (tempStrtLoc.x - startLoc.x , tempStrtLoc.y - startLoc.y)
                                                 contWidth = value.location.x - startLoc.x
