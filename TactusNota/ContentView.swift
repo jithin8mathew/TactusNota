@@ -205,6 +205,7 @@ struct ContentView: View {
                                                     if value.startLocation.x >= cords[0] && value.startLocation.x <= (cords[0] + cords[2])  && value.startLocation.y >= cords[1] && value.startLocation.y <= (cords[1] + cords[3]){
                                                         print("value within selected bbox")
                                                         print(count_annotation_cords)
+                                                        makeActive(dataList: rectData, pickedAnnotation: count_annotation_cords)
                                                     }
                                                     else{
                                                         continue
@@ -259,7 +260,7 @@ struct ContentView: View {
                                         .fill(.yellow)
                                         .frame(width: 15, height: 15)
                                         .position(x: cords[0], y: cords[1])
-                                        .gesture(DragGesture(minimumDistance: 0)
+                                        .gesture(DragGesture(minimumDistance: 0) // add drag gesture to one of the corners of the active rectangle
                                             .onChanged {
                                                 (value) in //print(value.location)
 //                                                var tempStrtLoc = value.startLocation
@@ -333,7 +334,7 @@ struct Background:UIViewRepresentable {
 
 }
 
-func makeActive() -> Void{
+func makeActive(dataList: [[CGFloat]], pickedAnnotation: Int) -> Void{
     
 }
 
