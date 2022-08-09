@@ -205,7 +205,17 @@ struct ContentView: View {
                                                     if value.startLocation.x >= cords[0] && value.startLocation.x <= (cords[0] + cords[2])  && value.startLocation.y >= cords[1] && value.startLocation.y <= (cords[1] + cords[3]){
                                                         print("value within selected bbox")
                                                         print(count_annotation_cords)
-                                                        makeActive(dataList: rectData, pickedAnnotation: count_annotation_cords)
+//                                                            .overlay( ZStack{
+//                                                                    RoundedRectangle(cornerRadius: 5, style: .circular)
+//                                                                        .path(in: CGRect(
+//                                                                            x: (rectData[count_annotation_cords][0]),
+//                                                                            y: (rectData[count_annotation_cords][1]),
+//                                                                            width: rectData[count_annotation_cords][2],
+//                                                                            height: rectData[count_annotation_cords][3]
+//                                                                            )
+//                                                                        )
+//                                                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                                                                })
                                                     }
                                                     else{
                                                         continue
@@ -336,7 +346,17 @@ struct Background:UIViewRepresentable {
 }
 
 func makeActive(dataList: [[CGFloat]], pickedAnnotation: Int) -> Void{
-    
+//    .overlay( ZStack{
+//        RoundedRectangle(cornerRadius: 5, style: .circular)
+//            .path(in: CGRect(
+//                x: (dataList[pickedAnnotation][0]),
+//                y: (dataList[pickedAnnotation][1]),
+//                width: dataList[pickedAnnotation][2],
+//                height: dataList[pickedAnnotation][3]
+//                )
+//            )
+//            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//    })
 }
 
 struct ContentView_Previews: PreviewProvider {
