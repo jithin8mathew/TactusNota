@@ -225,6 +225,8 @@ struct ContentView: View {
                                         })
                                 )
                                 .overlay( ZStack{
+                                    
+                                    // move this section below to a function and call this during plotting, resizing and moving
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
                                         .path(in: CGRect(
                                             x: (startLoc.x),
@@ -255,6 +257,7 @@ struct ContentView: View {
 //                                    print("Long Pressed")
 //                                }
                             
+                            // This section of the loop is indipendent of the image and the bounding boxex are plotted from the list
                             ForEach(self.rectData, id:\.self) {cords in
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
                                         .path(in: CGRect(
