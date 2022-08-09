@@ -227,6 +227,7 @@ struct ContentView: View {
                                 .overlay( ZStack{
                                     
                                     // move this section below to a function and call this during plotting, resizing and moving
+//                                    drawAnnotation(X:startLoc.x, Y:startLoc.y, Width:contWidth, Height:contHeight)
                                     RoundedRectangle(cornerRadius: 5, style: .circular)
                                         .path(in: CGRect(
                                             x: (startLoc.x),
@@ -348,18 +349,33 @@ struct Background:UIViewRepresentable {
 
 }
 
-func makeActive(dataList: [[CGFloat]], pickedAnnotation: Int) -> Void{
-//    .overlay( ZStack{
-//        RoundedRectangle(cornerRadius: 5, style: .circular)
-//            .path(in: CGRect(
-//                x: (dataList[pickedAnnotation][0]),
-//                y: (dataList[pickedAnnotation][1]),
-//                width: dataList[pickedAnnotation][2],
-//                height: dataList[pickedAnnotation][3]
-//                )
-//            )
-//            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-//    })
+func drawAnnotation(X: CGFloat, Y: CGFloat, Width: CGFloat, Height: CGFloat) -> Void{
+    RoundedRectangle(cornerRadius: 5, style: .circular)
+        .path(in: CGRect(
+            x: X,
+            y: Y, //(3.12 * 2),
+            width: Width, //(4.68 * 2),
+            height: Height
+            )
+        )
+        .stroke(Color(red: 6.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+    Circle()
+        .fill(.yellow)
+        .frame(width: 15, height: 15)
+        .position(x: X, y: Y)
+    Circle()
+        .fill(.yellow)
+        .frame(width: 15, height: 15)
+        .position(x: X + Width, y: Y)
+    Circle()
+        .fill(.yellow)
+        .frame(width: 15, height: 15)
+        .position(x: X, y: Y + Height)
+    Circle()
+        .fill(.yellow)
+        .frame(width: 15, height: 15)
+        .position(x: X + Width, y: Y + Height)
+
 }
 
 struct ContentView_Previews: PreviewProvider {
