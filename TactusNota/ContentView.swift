@@ -179,6 +179,7 @@ struct ContentView: View {
                                 .font(.title)
                                 .padding(.all, 5)
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                                .simultaneousGesture(LongPressGesture(minimumDuration: 0.2))
                                 .gesture(DragGesture(minimumDistance: 0)
                                     .onChanged {
                                         (value) in //print(value.location)
