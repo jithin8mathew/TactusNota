@@ -26,7 +26,16 @@ struct testViewNew: View {
                     .font(.title)
                     .padding(.all, 5)
                     .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                    .gesture(DragGesture(minimumDistance: 0)
+                    .gesture(
+//                        if LongPressGesture(minimumDuration: 0.2)
+//                        {
+//                            print("long press gesture tapped")
+//                        }
+//                        if DragGesture(minimumDistance: 0)
+//                            .onChanged {
+//
+//                        }
+                        DragGesture(minimumDistance: 0)
                         .onChanged {
                             (value) in //print(value.location)
                             startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
