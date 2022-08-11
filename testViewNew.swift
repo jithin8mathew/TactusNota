@@ -49,6 +49,7 @@ struct testViewNew: View {
                                 rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                                 rectCircleData[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
                                 bboxID += 1
+                                print(rectCircleData)
                             }
                             else{
                                 print("start location: ", value.startLocation)

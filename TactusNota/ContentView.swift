@@ -71,18 +71,20 @@ struct ContentView: View {
                     NavigationLink(destination: annotationGestureTN(), isActive: self.$isActive) {
                         Image(systemName: "plus")
                     }
-                                        
-                    Button(action: {}, label: {
-                                        Image(systemName: "folder")
-                            .resizable()
-                                            .frame(width: 57, height: 57, alignment: .center)
-                                            .foregroundColor(Color.white)
-                                            
-                                        })
-                                        .shadow(color: Color.black.opacity(0.3),
-                                                radius: 3,
-                                                x: 3,
-                                                y: 3)
+                    
+                    NavigationLink(destination: testViewNew(), isActive: self.$isActive) {
+                        Button(action: {}, label: {
+                                            Image(systemName: "folder")
+                                .resizable()
+                                                .frame(width: 57, height: 57, alignment: .center)
+                                                .foregroundColor(Color.white)
+                                                
+                                            })
+                                            .shadow(color: Color.black.opacity(0.3),
+                                                    radius: 3,
+                                                    x: 3,
+                                                    y: 3)
+                    }
                     Button(action: {
                                         }, label: {
                                             Text("Save directory")
@@ -111,7 +113,7 @@ struct ContentView: View {
                                                 radius: 3,
                                                 x: 3,
                                                 y: 3)
-                    Button(action: {
+                    Button(action: {testViewNew()
                                         }, label: {
                                             Text("Next")
                                             .font(.system(.title2))
