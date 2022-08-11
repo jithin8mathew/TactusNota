@@ -54,17 +54,29 @@ struct testViewNew: View {
                             else{
                                 print("start location: ", value.startLocation)
                                 var count_annotation_cords = 0
-                                    for cords in rectData{
-                                        count_annotation_cords += 1
-                                    
-                                        if value.startLocation.x >= cords[0] && value.startLocation.x <= (cords[0] + cords[2])  && value.startLocation.y >= cords[1] && value.startLocation.y <= (cords[1] + cords[3]){
-                                            print("value within selected bbox")
-                                            print(count_annotation_cords)
-                                        }
-                                        else{
-                                            continue
-                                        }
+                                for (boundingBoxID, bboxCoordinates) in rectCircleData{
+//                                    print("(\(key),\(value))")
+                                    count_annotation_cords += 1
+                                
+                                    if value.startLocation.x >=  bboxCoordinates[0] && value.startLocation.x <= ( bboxCoordinates[0] +  bboxCoordinates[2])  && value.startLocation.y >=  bboxCoordinates[1] && value.startLocation.y <= ( bboxCoordinates[1] +  bboxCoordinates[3]){
+                                        print("value within selected bbox")
+                                        print(count_annotation_cords, boundingBoxID)
                                     }
+                                    else{
+                                        continue
+                                    }
+                                }
+//                                    for cords in rectData{
+//                                        count_annotation_cords += 1
+//
+//                                        if value.startLocation.x >= cords[0] && value.startLocation.x <= (cords[0] + cords[2])  && value.startLocation.y >= cords[1] && value.startLocation.y <= (cords[1] + cords[3]){
+//                                            print("value within selected bbox")
+//                                            print(count_annotation_cords)
+//                                        }
+//                                        else{
+//                                            continue
+//                                        }
+//                                    }
                             }
                         })
                     )
