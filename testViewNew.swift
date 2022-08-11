@@ -14,6 +14,7 @@ struct testViewNew: View {
     @State var contHeight = CGFloat.zero
     
     @State var rectData: [[CGFloat]] = []
+    @State var rectCircleData: [Int:[CGFloat]] = [:]
     
     var body: some View {
             ZStack{
@@ -46,6 +47,7 @@ struct testViewNew: View {
                             (value) in
                             if (value.location.x - startLoc.x > 20){
                                 rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                                rectCircleData[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
                                 bboxID += 1
                             }
                             else{
@@ -91,6 +93,35 @@ struct testViewNew: View {
                             .fill(.yellow)
                             .frame(width: 15, height: 15)
                             .position(x: startLoc.x + contWidth, y: startLoc.y + contHeight)
+                        
+                        ForEach(self.rectData, id:\.self) {cords in
+                                RoundedRectangle(cornerRadius: 5, style: .circular)
+                                    .path(in: CGRect(
+                                        x: cords[0],
+                                        y: cords[1],
+                                        width: cords[2],
+                                        height: cords[3]
+                                        )
+                                    )
+                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                
+                                Circle()
+                                    .fill(.yellow)
+                                    .frame(width: 15, height: 15)
+                                    .position(x: cords[0], y: cords[1])
+                                Circle()
+                                    .fill(.yellow)
+                                    .frame(width: 15, height: 15)
+                                    .position(x: cords[0] + cords[2], y: cords[1])
+                                Circle()
+                                    .fill(.yellow)
+                                    .frame(width: 15, height: 15)
+                                    .position(x: cords[0], y: cords[1] + cords[3])
+                                Circle()
+                                    .fill(.yellow)
+                                    .frame(width: 15, height: 15)
+                                    .position(x: cords[0] + cords[2], y: cords[1] + cords[3])
+                            } // end of ForEach
                     })
             }
         }
