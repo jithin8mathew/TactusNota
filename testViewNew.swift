@@ -65,7 +65,6 @@ struct testViewNew: View {
                                     else{
                                         continue
                                     }
-                                
                                     if value.startLocation.x >=  bboxCoordinates[0] && value.startLocation.x <= ( bboxCoordinates[0] +  bboxCoordinates[2])  && value.startLocation.y >=  bboxCoordinates[1] && value.startLocation.y <= ( bboxCoordinates[1] +  bboxCoordinates[3]){
                                         print("value within selected bbox")
                                         print(count_annotation_cords, boundingBoxID)
