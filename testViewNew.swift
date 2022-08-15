@@ -59,7 +59,7 @@ struct testViewNew: View {
                                     count_annotation_cords += 1
                                     
                                     // this section is not working yet
-                                    if startLoc.x <= bboxCoordinates[0]+15 || startLoc.x >= bboxCoordinates[0]-15 {
+                                    if value.startLocation.x >= bboxCoordinates[0]+15 || value.startLocation.x <= bboxCoordinates[0]-15 {
                                         print("Coordinate C1 clicked", startLoc.x, bboxCoordinates[0]+35 , bboxCoordinates[0]-15)
                                     }
                                     else{
