@@ -63,6 +63,9 @@ struct testViewNew: View {
                                     if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
                                         print("Coordinate C1 clicked", startLoc.x, bboxCoordinates[0])
                                     }
+                                    else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( (bboxCoordinates[1] +  15) + bboxCoordinates[3]){
+                                        print("Coordinate C2 clicked", startLoc.x, bboxCoordinates[0])
+                                    }
                                     else{
                                         continue
                                     }
