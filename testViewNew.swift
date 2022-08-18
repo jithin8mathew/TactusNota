@@ -45,7 +45,7 @@ struct testViewNew: View {
                         }
                         .onEnded({
                             (value) in
-                            if (value.location.x - startLoc.x > 40){
+                            if (value.location.x - startLoc.x > 20){
                                 rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                                 rectCircleData[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
                                 bboxID += 1
@@ -61,7 +61,7 @@ struct testViewNew: View {
                                     // this section is not working yet
 //                                    if value.startLocation.x >= bboxCoordinates[0]+15 || value.startLocation.x <= bboxCoordinates[0]-15 {
                                     if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
-                                        rectCircleData[boundingBoxID] = [startLoc.x, startLoc.y, bboxCoordinates[2], bboxCoordinates[3]]
+                                        rectCircleData[boundingBoxID] = [startLoc.x - contWidth, startLoc.y - contHeight, bboxCoordinates[2], bboxCoordinates[3]]
                                         print(rectCircleData[boundingBoxID])
                                         print("Coordinate C1 clicked", startLoc.x, bboxCoordinates[0])
                                     }
