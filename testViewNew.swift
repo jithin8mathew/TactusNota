@@ -61,6 +61,7 @@ struct testViewNew: View {
                                     // this section is not working yet
 //                                    if value.startLocation.x >= bboxCoordinates[0]+15 || value.startLocation.x <= bboxCoordinates[0]-15 {
                                     if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
+//                                        rectCircleData[]
                                         print("Coordinate C1 clicked", startLoc.x, bboxCoordinates[0])
                                     }
                                     else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <=  (bboxCoordinates[1] +  15){
@@ -77,7 +78,7 @@ struct testViewNew: View {
                                     }
                                     if value.startLocation.x >=  bboxCoordinates[0] && value.startLocation.x <= ( bboxCoordinates[0] +  bboxCoordinates[2])  && value.startLocation.y >=  bboxCoordinates[1] && value.startLocation.y <= ( bboxCoordinates[1] +  bboxCoordinates[3]){
                                         print("value within selected bbox")
-                                        print(count_annotation_cords, boundingBoxID)
+                                        print(count_annotation_cords, boundingBoxID) // this is where we check if the clicked coordinates are within an existing bounding box
                                     }
                                     else{
                                         continue
