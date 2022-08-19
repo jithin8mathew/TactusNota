@@ -11,6 +11,18 @@ struct testview2: View {
     @State private var location: CGPoint = CGPoint(x: 50, y: 50)
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil // 1
+    
+    @GestureState private var pressing = false
+    
+    var longpressGesture: some Gesture{
+        LongPressGesture(minimumDuration: 0.2, maximumDistance: 20)
+            .updating($pressing) { currentState, gestureState, transaction in
+                gestureState = currentState
+                        }
+            .onEnded { value in
+                print("long pressed")
+                }
+    }
         
         var simpleDrag: some Gesture {
             DragGesture()
@@ -46,6 +58,15 @@ struct testview2: View {
                         .frame(width: 44, height: 44)
                         .position(fingerLocation)
                 }
+                Circle()
+                    .stroke(Color.green, lineWidth: 2)
+                    .frame(width: 44, height: 44)
+                    .scaleEffect(pressing ? 2 : 1)
+                    .position(x:250 , y: 250)
+                    .gesture(
+                        longpressGesture
+                    )
+                
             }
         }
 }
