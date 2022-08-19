@@ -9,8 +9,8 @@ import SwiftUI
 
 struct testview2: View {
     @State private var location: CGPoint = CGPoint(x: 50, y: 50)
-        @GestureState private var fingerLocation: CGPoint? = nil
-        @GestureState private var startLocation: CGPoint? = nil // 1
+    @GestureState private var fingerLocation: CGPoint? = nil
+    @GestureState private var startLocation: CGPoint? = nil // 1
         
         var simpleDrag: some Gesture {
             DragGesture()
