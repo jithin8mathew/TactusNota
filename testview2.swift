@@ -15,7 +15,7 @@ struct testview2: View {
     @GestureState private var pressing = false
     
     var longpressGesture: some Gesture{
-        LongPressGesture(minimumDuration: 0.2, maximumDistance: 20)
+        LongPressGesture(minimumDuration: 0.9)
             .updating($pressing) { currentState, gestureState, transaction in
                 gestureState = currentState
                         }
@@ -62,11 +62,11 @@ struct testview2: View {
                     .stroke(Color.green, lineWidth: 2)
                     .frame(width: 44, height: 44)
                     .scaleEffect(pressing ? 2 : 1)
+                    .background(pressing ? Color.black : Color.white)
                     .position(x:250 , y: 250)
                     .gesture(
                         longpressGesture
                     )
-                
             }
         }
 }
