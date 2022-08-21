@@ -5,6 +5,10 @@
 //  Created by Jithin Mathew on 1/6/22.
 //
 
+// Rule 1: click and drag (dragGesture) to draw the bounding box
+// Rule 2: if licked on the corners of a drawn bounding box the rezie the bounding box
+// Rule 3: If long pressed, then select the bounding box and then be allowed to moe it.
+
 import SwiftUI
 
 // add stats button to view how much the use has annotated
