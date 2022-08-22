@@ -46,7 +46,7 @@ struct testView3: View {
     @State var viewState = CGSize.zero
     
     var body: some View {
-            let minimumLongPressDuration = 0.5
+            let minimumLongPressDuration = 0.2
             let longPressDrag = LongPressGesture(minimumDuration: minimumLongPressDuration)
                 .sequenced(before: DragGesture())
                 .updating($dragState) { value, state, transaction in
