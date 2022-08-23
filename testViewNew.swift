@@ -15,12 +15,12 @@ struct testViewNew: View {
         case dragging(translation: CGSize)
     }
     
-    @State var startLoc = CGPoint.zero
-    @State var contWidth = CGFloat.zero
-    @State var contHeight = CGFloat.zero
+    @State var startLoc = CGPoint.zero // start location of the coordinate the user clicks
+    @State var contWidth = CGFloat.zero // holds the width of the bounding box based on users drag
+    @State var contHeight = CGFloat.zero // holds the height of the bbox based on users vertical drag
     
     @State var rectData: [[CGFloat]] = []
-    @State var rectCircleData: [Int:[CGFloat]] = [:]
+    @State var rectCircleData: [Int:[CGFloat]] = [:] // holds the bbox ID and the four coordinates of the bbox corners
     
     // This section will move the bounding box to desired location after being drawn
     @GestureState var dragState = DragState.inactive
