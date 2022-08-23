@@ -9,12 +9,21 @@ import SwiftUI
 
 struct testViewNew: View {
     
+    enum DragState {
+        case inactive
+        case pressing
+        case dragging(translation: CGSize)
+    }
+    
     @State var startLoc = CGPoint.zero
     @State var contWidth = CGFloat.zero
     @State var contHeight = CGFloat.zero
     
     @State var rectData: [[CGFloat]] = []
     @State var rectCircleData: [Int:[CGFloat]] = [:]
+    
+    // This section will move the bounding box to desired location after being drawn
+    @GestureState var dragState = DragState.inactive
     
     var body: some View {
             ZStack{
