@@ -119,6 +119,7 @@ struct testViewNew: View {
 //                                    if value.startLocation.x >= bboxCoordinates[0]+15 || value.startLocation.x <= bboxCoordinates[0]-15 {
                                     if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
                                         rectCircleData[boundingBoxID] = nil
+                                        rectData[boundingBoxID] = [value.startLocation.x, value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3]]
                                         print(rectCircleData[boundingBoxID])
                                         rectCircleData[boundingBoxID] = [value.startLocation.x, value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3]]
                                         print(rectCircleData[boundingBoxID])
