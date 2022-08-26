@@ -10,8 +10,8 @@ import SwiftUI
 struct testView3: View {
 
     enum DragState {
-        case inactive
-        case pressing
+        case inactive // boolean variable
+        case pressing // boolean variable
         case dragging(translation: CGSize)
         
         var translation: CGSize {

@@ -52,10 +52,31 @@ struct testViewNew: View {
     // This section will move the bounding box to desired location after being drawn
     @GestureState var dragState = DragState.inactive
     
+    // testing tapgesture
+    @GestureState var isTapped = false
+    
+//    var tap: some Gesture {
+//            TapGesture(count: 1)
+//                .onEnded { _ in self.tapped = !self.tapped }
+//        }
+    
     var body: some View {
             ZStack{
                 Color(red: 0.26, green: 0.26, blue: 0.26)
                 .ignoresSafeArea()
+                
+                
+                let tapGesture = DragGesture(minimumDistance: 0)
+                    .updating($isTapped) {_, isTapped, _ in
+                        isTapped = true
+                    }
+
+                
+//                Circle()
+//                            .fill(self.tapped ? Color.blue : Color.red)
+//                            .frame(width: 100, height: 100, alignment: .center)
+//                            .position(x: 50, y: 50)
+//                            .gesture(tap)
                 
                 Image("test1")
                     .resizable()
@@ -88,7 +109,7 @@ struct testViewNew: View {
                                 print(rectCircleData)
                             }
                             else{
-                                print("start location: ", value.startLocation)
+//                                print("start location: ", value.startLocation)
                                 var count_annotation_cords = 0
                                 for (boundingBoxID, bboxCoordinates) in rectCircleData{
 //                                    print("(\(key),\(value))")
@@ -97,6 +118,7 @@ struct testViewNew: View {
                                     // this section is not working yet
 //                                    if value.startLocation.x >= bboxCoordinates[0]+15 || value.startLocation.x <= bboxCoordinates[0]-15 {
                                     if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
+                                        rectCircleData[boundingBoxID] = nil
                                         print(rectCircleData[boundingBoxID])
                                         rectCircleData[boundingBoxID] = [value.startLocation.x, value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3]]
                                         print(rectCircleData[boundingBoxID])
