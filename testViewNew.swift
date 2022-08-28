@@ -99,6 +99,16 @@ struct testViewNew: View {
                             startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
                             contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                             contHeight = value.location.y - startLoc.y // Height of the bounding box
+                            
+                            for (boundingBoxID, bboxCoordinates) in rectCircleData{
+                                if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
+                                        rectData[boundingBoxID] = [bboxCoordinates[0] - abs(value.location.x - startLoc.x), bboxCoordinates[1] - abs(value.location.y - startLoc.y), bboxCoordinates[2] + abs(value.location.x - startLoc.x), bboxCoordinates[3] + abs(value.location.y - startLoc.y)]
+                                        startLoc.x = bboxCoordinates[0] - abs(value.location.x - startLoc.x)
+                                        startLoc.y = bboxCoordinates[1] - abs(value.location.y - startLoc.y)
+                                        contWidth = bboxCoordinates[2] + abs(value.location.x - startLoc.x)
+                                        contHeight = bboxCoordinates[3] + abs(value.location.y - startLoc.y)
+                                }
+                            }
                         }
                         .onEnded({
                             (value) in
@@ -117,20 +127,20 @@ struct testViewNew: View {
                                     
                                     // this section is not working yet
 //                                    if value.startLocation.x >= bboxCoordinates[0]+15 || value.startLocation.x <= bboxCoordinates[0]-15 {
-                                    if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
-                                        rectCircleData[boundingBoxID] = nil
-                                        rectData[boundingBoxID] = [bboxCoordinates[0] - abs(value.location.x - startLoc.x), bboxCoordinates[1] - abs(value.location.y - startLoc.y), bboxCoordinates[2] + abs(value.location.x - startLoc.x), bboxCoordinates[3] + abs(value.location.y - startLoc.y)]
-                                        
-//                                        startLoc.x = bboxCoordinates[0] - abs(value.location.x - startLoc.x)
-//                                        startLoc.y = bboxCoordinates[1] - abs(value.location.y - startLoc.y)
-//                                        contWidth = bboxCoordinates[2] + abs(value.location.x - startLoc.x)
-//                                        contHeight = bboxCoordinates[3] + abs(value.location.y - startLoc.y)
-//                                        print(bboxCoordinates[0] + value.startLocation.x, bboxCoordinates[1] + value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3])
-                                        rectCircleData[boundingBoxID] = [value.startLocation.x, value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3]]
-                                        print(rectCircleData[boundingBoxID])
-                                        print("Coordinate C1 clicked", startLoc.x, bboxCoordinates[0])
-                                    }
-                                    else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <=  (bboxCoordinates[1] +  15){
+//                                    if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
+//                                        rectCircleData[boundingBoxID] = nil
+//                                        rectData[boundingBoxID] = [bboxCoordinates[0] - abs(value.location.x - startLoc.x), bboxCoordinates[1] - abs(value.location.y - startLoc.y), bboxCoordinates[2] + abs(value.location.x - startLoc.x), bboxCoordinates[3] + abs(value.location.y - startLoc.y)]
+//
+////                                        startLoc.x = bboxCoordinates[0] - abs(value.location.x - startLoc.x)
+////                                        startLoc.y = bboxCoordinates[1] - abs(value.location.y - startLoc.y)
+////                                        contWidth = bboxCoordinates[2] + abs(value.location.x - startLoc.x)
+////                                        contHeight = bboxCoordinates[3] + abs(value.location.y - startLoc.y)
+////                                        print(bboxCoordinates[0] + value.startLocation.x, bboxCoordinates[1] + value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3])
+//                                        rectCircleData[boundingBoxID] = [value.startLocation.x, value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3]]
+//                                        print(rectCircleData[boundingBoxID])
+//                                        print("Coordinate C1 clicked", startLoc.x, bboxCoordinates[0])
+//                                    }
+                                    if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <=  (bboxCoordinates[1] +  15){
                                         print("Coordinate C2 clicked", startLoc.x, bboxCoordinates[0] + bboxCoordinates[2])
                                     }
                                     else if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= (bboxCoordinates[0] + 15)   && value.startLocation.y >=  ((bboxCoordinates[1] - 15) + bboxCoordinates[3]) && value.startLocation.y <=  ((bboxCoordinates[1] +  15) + bboxCoordinates[3]){
