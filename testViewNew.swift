@@ -55,6 +55,9 @@ struct testViewNew: View {
     // testing tapgesture
     @GestureState var isTapped = false
     
+    // testing longPress Drag gesture
+    @State var isDragging = false
+    
 //    var tap: some Gesture {
 //            TapGesture(count: 1)
 //                .onEnded { _ in self.tapped = !self.tapped }
@@ -65,6 +68,12 @@ struct testViewNew: View {
                 Color(red: 0.26, green: 0.26, blue: 0.26)
                 .ignoresSafeArea()
                 
+                let pressGesture = LongPressGesture(minimumDuration: 0.4)
+                    .onEnded { value in
+                        withAnimation {
+                            isDragging = true
+                        }
+                    }
                 
                 let tapGesture = DragGesture(minimumDistance: 0)
                     .updating($isTapped) {_, isTapped, _ in
@@ -110,12 +119,13 @@ struct testViewNew: View {
 //                                        contWidth = bboxCoordinates[2] + (-1 * (value.location.x - startLoc.x))
 //                                        contHeight = bboxCoordinates[3] + (-1 * (value.location.y - startLoc.y))
                                 }
-                                else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <=  (bboxCoordinates[1] +  15){
-                                    rectData[boundingBoxID] = [bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y)), bboxCoordinates[2] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[3]]
-                                }
-                                else if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= (bboxCoordinates[0] + 15)   && value.startLocation.y >=  ((bboxCoordinates[1] - 15) + bboxCoordinates[3]) && value.startLocation.y <=  ((bboxCoordinates[1] +  15) + bboxCoordinates[3]){
-                                    print("Coordinate C3 clicked", startLoc.x, bboxCoordinates[0] + bboxCoordinates[2])
-                                }
+//                                else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <=  (bboxCoordinates[1] +  15){
+//
+//                                    rectData[boundingBoxID] = [bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[1] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[2] , bboxCoordinates[3]]
+//                                }
+//                                else if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= (bboxCoordinates[0] + 15)   && value.startLocation.y >=  ((bboxCoordinates[1] - 15) + bboxCoordinates[3]) && value.startLocation.y <=  ((bboxCoordinates[1] +  15) + bboxCoordinates[3]){
+//                                    rectData[boundingBoxID] = [bboxCoordinates[0] , bboxCoordinates[1] , bboxCoordinates[2] + (value.location.x - startLoc.x), bboxCoordinates[3] + (value.location.y - startLoc.y)]
+//                                }
                                 // works
                                 else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  ((bboxCoordinates[1] - 15) + bboxCoordinates[3]) && value.startLocation.y <=  ((bboxCoordinates[1] +  15) + bboxCoordinates[3]){
                                     rectData[boundingBoxID] = [bboxCoordinates[0] , bboxCoordinates[1] , bboxCoordinates[2] + (value.location.x - startLoc.x), bboxCoordinates[3] + (value.location.y - startLoc.y)]
