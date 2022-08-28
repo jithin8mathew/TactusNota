@@ -119,8 +119,8 @@ struct testViewNew: View {
 //                                    if value.startLocation.x >= bboxCoordinates[0]+15 || value.startLocation.x <= bboxCoordinates[0]-15 {
                                     if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
                                         rectCircleData[boundingBoxID] = nil
-                                        rectData[boundingBoxID] = [bboxCoordinates[0] + value.startLocation.x, bboxCoordinates[1] + value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3]]
-                                        print(rectCircleData[boundingBoxID])
+                                        rectData[boundingBoxID] = [bboxCoordinates[0] - abs(value.location.x - startLoc.x), bboxCoordinates[1] - abs(value.location.y - startLoc.y), bboxCoordinates[2] + abs(value.location.x - startLoc.x), bboxCoordinates[3] + abs(value.location.y - startLoc.y)]
+//                                        print(bboxCoordinates[0] + value.startLocation.x, bboxCoordinates[1] + value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3])
                                         rectCircleData[boundingBoxID] = [value.startLocation.x, value.startLocation.y, bboxCoordinates[2], bboxCoordinates[3]]
                                         print(rectCircleData[boundingBoxID])
                                         print("Coordinate C1 clicked", startLoc.x, bboxCoordinates[0])
