@@ -101,6 +101,8 @@ struct testViewNew: View {
                         if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
                             
                             rectData[boundingBoxID] = [bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y)), bboxCoordinates[2] + (-1 * (value.location.x - startLoc.x)), bboxCoordinates[3] + (-1 * (value.location.y - startLoc.y))]
+                            
+//                            rectCircleData[boundingBoxID]=[bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y)), bboxCoordinates[2] + (-1 * (value.location.x - startLoc.x)), bboxCoordinates[3] + (-1 * (value.location.y - startLoc.y))]
                             //                                        startLoc.x = bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x))
                             //                                        startLoc.y = bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y))
                             //                                        contWidth = bboxCoordinates[2] + (-1 * (value.location.x - startLoc.x))
@@ -116,6 +118,7 @@ struct testViewNew: View {
                         // works
                         else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  ((bboxCoordinates[1] - 15) + bboxCoordinates[3]) && value.startLocation.y <=  ((bboxCoordinates[1] +  15) + bboxCoordinates[3]){
                             rectData[boundingBoxID] = [bboxCoordinates[0] , bboxCoordinates[1] , bboxCoordinates[2] + (value.location.x - startLoc.x), bboxCoordinates[3] + (value.location.y - startLoc.y)]
+//                            rectCircleData[boundingBoxID] = [bboxCoordinates[0] , bboxCoordinates[1] , bboxCoordinates[2] + (value.location.x - startLoc.x), bboxCoordinates[3] + (value.location.y - startLoc.y)]
                         }
                         else{
                             continue
