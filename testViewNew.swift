@@ -101,6 +101,7 @@ struct testViewNew: View {
                             contHeight = value.location.y - startLoc.y // Height of the bounding box
                             
                             for (boundingBoxID, bboxCoordinates) in rectCircleData{
+                                // works
                                 if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
                                     
                                         rectData[boundingBoxID] = [bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y)), bboxCoordinates[2] + (-1 * (value.location.x - startLoc.x)), bboxCoordinates[3] + (-1 * (value.location.y - startLoc.y))]
@@ -108,6 +109,19 @@ struct testViewNew: View {
 //                                        startLoc.y = bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y))
 //                                        contWidth = bboxCoordinates[2] + (-1 * (value.location.x - startLoc.x))
 //                                        contHeight = bboxCoordinates[3] + (-1 * (value.location.y - startLoc.y))
+                                }
+                                else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <=  (bboxCoordinates[1] +  15){
+                                    rectData[boundingBoxID] = [bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y)), bboxCoordinates[2] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[3]]
+                                }
+                                else if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= (bboxCoordinates[0] + 15)   && value.startLocation.y >=  ((bboxCoordinates[1] - 15) + bboxCoordinates[3]) && value.startLocation.y <=  ((bboxCoordinates[1] +  15) + bboxCoordinates[3]){
+                                    print("Coordinate C3 clicked", startLoc.x, bboxCoordinates[0] + bboxCoordinates[2])
+                                }
+                                // works
+                                else if value.startLocation.x >=  ((bboxCoordinates[0]-15) + bboxCoordinates[2]) && value.startLocation.x <= ((bboxCoordinates[0] + 15) + bboxCoordinates[2])  && value.startLocation.y >=  ((bboxCoordinates[1] - 15) + bboxCoordinates[3]) && value.startLocation.y <=  ((bboxCoordinates[1] +  15) + bboxCoordinates[3]){
+                                    rectData[boundingBoxID] = [bboxCoordinates[0] , bboxCoordinates[1] , bboxCoordinates[2] + (value.location.x - startLoc.x), bboxCoordinates[3] + (value.location.y - startLoc.y)]
+                                }
+                                else{
+                                    continue
                                 }
                             }
                         }
