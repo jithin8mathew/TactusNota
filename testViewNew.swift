@@ -103,11 +103,11 @@ struct testViewNew: View {
                             for (boundingBoxID, bboxCoordinates) in rectCircleData{
                                 if value.startLocation.x >=  (bboxCoordinates[0]-15) && value.startLocation.x <= ( bboxCoordinates[0] +  15)  && value.startLocation.y >=  (bboxCoordinates[1] - 15) && value.startLocation.y <= ( bboxCoordinates[1] +  15){
                                     
-                                        rectData[boundingBoxID] = [bboxCoordinates[0] - abs(value.location.x - startLoc.x), bboxCoordinates[1] - abs(value.location.y - startLoc.y), bboxCoordinates[2] + abs(value.location.x - startLoc.x), bboxCoordinates[3] + abs(value.location.y - startLoc.y)]
-                                        startLoc.x = bboxCoordinates[0] - abs(value.location.x - startLoc.x)
-                                        startLoc.y = bboxCoordinates[1] - abs(value.location.y - startLoc.y)
-                                        contWidth = bboxCoordinates[2] + abs(value.location.x - startLoc.x)
-                                        contHeight = bboxCoordinates[3] + abs(value.location.y - startLoc.y)
+                                        rectData[boundingBoxID] = [bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x)), bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y)), bboxCoordinates[2] + (-1 * (value.location.x - startLoc.x)), bboxCoordinates[3] + (-1 * (value.location.y - startLoc.y))]
+                                        startLoc.x = bboxCoordinates[0] - (-1 * (value.location.x - startLoc.x))
+                                        startLoc.y = bboxCoordinates[1] - (-1 * (value.location.y - startLoc.y))
+                                        contWidth = bboxCoordinates[2] + (-1 * (value.location.x - startLoc.x))
+                                        contHeight = bboxCoordinates[3] + (-1 * (value.location.y - startLoc.y))
                                 }
                             }
                         }
@@ -184,7 +184,7 @@ struct testViewNew: View {
                                 height: contHeight
                                 )
                             )
-                            .fill(Color(red: 0.7, green: 0, blue: 1.0, opacity: 0.2))
+                            .fill(Color(red: 0.0, green: 0, blue: 1.0, opacity: 0.2))
                         
                         RoundedRectangle(cornerRadius: 5, style: .circular)
                             .path(in: CGRect(
