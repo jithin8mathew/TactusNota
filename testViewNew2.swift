@@ -47,6 +47,7 @@ struct testViewNew2: View {
     @State var contHeight = CGFloat.zero // holds the height of the bbox based on users vertical drag
     
     @State var boxID = 1
+    @State var boxID2 = 1
     
     @State var rectData: [[CGFloat]] = []
     @State var rectCircleData: [Int:[CGFloat]] = [:] // holds the bbox ID and the four coordinates of the bbox corners
@@ -103,28 +104,26 @@ struct testViewNew2: View {
                         boxID = 1
                         if value.startLocation.x >=  (bCords[0]-15) && value.startLocation.x <= ( bCords[0] +  15)  && value.startLocation.y >=  (bCords[1] - 15) && value.startLocation.y <= ( bCords[1] +  15){
                             
-                            rectData[boxID] = [bCords[0] - (-1 * (value.location.x - startLoc.x)), bCords[1] - (-1 * (value.location.y - startLoc.y)), bCords[2] + (-1 * (value.location.x - startLoc.x)), bCords[3] + (-1 * (value.location.y - startLoc.y))]
-                            
                             //                            rectCircleData[boxID]=[bCords[0] - (-1 * (value.location.x - startLoc.x)), bCords[1] - (-1 * (value.location.y - startLoc.y)), bCords[2] + (-1 * (value.location.x - startLoc.x)), bCords[3] + (-1 * (value.location.y - startLoc.y))]
-//                            startLoc.x = bCords[0] - (-1 * (value.location.x - startLoc.x))
-//                            startLoc.y = bCords[1] - (-1 * (value.location.y - startLoc.y))
-//                            contWidth = bCords[2] + (-1 * (value.location.x - startLoc.x))
-//                            contHeight = bCords[3] + (-1 * (value.location.y - startLoc.y))
+                            startLoc.x = bCords[0] - (-1 * (value.location.x - startLoc.x))
+                            startLoc.y = bCords[1] - (-1 * (value.location.y - startLoc.y))
+                            contWidth = bCords[2] + (-1 * (value.location.x - startLoc.x))
+                            contHeight = bCords[3] + (-1 * (value.location.y - startLoc.y))
                         }
                     
                         else if value.startLocation.x >=  ((bCords[0]-15) + bCords[2]) && value.startLocation.x <= ((bCords[0] + 15) + bCords[2])  && value.startLocation.y >=  ((bCords[1] - 15) + bCords[3]) && value.startLocation.y <=  ((bCords[1] +  15) + bCords[3]){
-                            rectData[boxID] = [bCords[0] , bCords[1] , bCords[2] + (value.location.x - startLoc.x), bCords[3] + (value.location.y - startLoc.y)]
                             
-//                            startLoc.x = bCords[0]
-//                            startLoc.y = bCords[1]
-//                            contWidth = bCords[2] + (value.location.x - startLoc.x)
-//                            contHeight = bCords[3] + (value.location.y - startLoc.y)
+                            startLoc.x = bCords[0]
+                            startLoc.y = bCords[1]
+                            contWidth = bCords[2] + (value.location.x - startLoc.x)
+                            contHeight = bCords[3] + (value.location.y - startLoc.y)
                         }
                         else{
                             continue
                         }
+                        boxID = boxID + 1
                     }
-                    boxID = boxID + 1
+                    
                 }
                 .onEnded({
                     (value) in
@@ -133,6 +132,21 @@ struct testViewNew2: View {
                         rectCircleData[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
                         bboxID += 1
                         print(rectCircleData)
+                        
+                        for bCords in rectData{
+                            // works
+                            boxID2 = 1
+                        if value.startLocation.x >=  (bCords[0]-15) && value.startLocation.x <= ( bCords[0] +  15)  && value.startLocation.y >=  (bCords[1] - 15) && value.startLocation.y <= ( bCords[1] +  15){
+                            
+                            rectData[boxID2] = [bCords[0] - (-1 * (value.location.x - startLoc.x)), bCords[1] - (-1 * (value.location.y - startLoc.y)), bCords[2] + (-1 * (value.location.x - startLoc.x)), bCords[3] + (-1 * (value.location.y - startLoc.y))]
+                        }
+                        
+                        else if value.startLocation.x >=  ((bCords[0]-15) + bCords[2]) && value.startLocation.x <= ((bCords[0] + 15) + bCords[2])  && value.startLocation.y >=  ((bCords[1] - 15) + bCords[3]) && value.startLocation.y <=  ((bCords[1] +  15) + bCords[3]){
+                            
+                            rectData[boxID2] = [bCords[0] , bCords[1] , bCords[2] + (value.location.x - startLoc.x), bCords[3] + (value.location.y - startLoc.y)]
+                        }
+                            boxID2 = boxID2 + 1
+                        }
                     }
 //                    else{
 //                        //                                print("start location: ", value.startLocation)
