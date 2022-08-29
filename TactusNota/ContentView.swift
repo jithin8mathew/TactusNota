@@ -31,6 +31,7 @@ struct ContentView: View {
     
 //    @State var viewState = CGSize.zero
     @State private var isActive : Bool = false
+    @State private var isActiveTestView : Bool = false
 //    @State var points:[CGPoint] = [CGPoint(x:0,y:0), CGPoint(x:50,y:50)]
 //
 //    @State var position:CGPoint = CGPoint(x:0,y:0)
@@ -89,7 +90,8 @@ struct ContentView: View {
                                                     x: 3,
                                                     y: 3)
                     }
-                    Button(action: {
+                    NavigationLink(destination: testViewNew2(), isActive: self.$isActiveTestView) {
+                        Button(action: {self.isActiveTestView = true
                                         }, label: {
                                             Text("Save directory")
                                             .font(.system(.title2))
@@ -103,6 +105,7 @@ struct ContentView: View {
                                                 radius: 3,
                                                 x: 3,
                                                 y: 3)
+                    }
                     Button(action: {
                                         }, label: {
                                             Text("Previous")
