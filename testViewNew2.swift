@@ -130,12 +130,12 @@ struct testViewNew2: View {
                     if (value.location.x - startLoc.x > 20){
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         rectCircleData[bboxID]=[startLoc.x, startLoc.y, contWidth, contHeight]
-                        bboxID += 1
+                        bboxID += 0
                         print(rectCircleData)
                         
                         for bCords in rectData{
                             // works
-                            boxID2 = 1
+                            boxID2 = 0
                         if value.startLocation.x >=  (bCords[0]-15) && value.startLocation.x <= ( bCords[0] +  15)  && value.startLocation.y >=  (bCords[1] - 15) && value.startLocation.y <= ( bCords[1] +  15){
                             
                             rectData[boxID2] = [bCords[0] - (-1 * (value.location.x - startLoc.x)), bCords[1] - (-1 * (value.location.y - startLoc.y)), bCords[2] + (-1 * (value.location.x - startLoc.x)), bCords[3] + (-1 * (value.location.y - startLoc.y))]
