@@ -20,10 +20,6 @@ struct finalView: View {
                 return .zero
             case .dragging(let translation):
                 return translation
-                //            case .withinBbox:
-                //                return true
-                //            case .isCorner:
-                //                return true
             }
         }
         
@@ -58,7 +54,7 @@ struct finalView: View {
                 return true
 
             }
-        }        
+        }
     }
     
     var body: some View {
