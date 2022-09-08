@@ -58,6 +58,7 @@ struct finalView: View {
     }
     
     @GestureState var dragState = AnnotationState.inactive
+    @State var viewState = CGSize.zero
     
     var body: some View {
         let minimumLongPressDuration = 0.2
@@ -78,9 +79,21 @@ struct finalView: View {
             }
             .onEnded { value in
                 guard case .second(true, let drag?) = value else { return }
-//                self.viewState.width += drag.translation.width
-//                self.viewState.height += drag.translation.height
+                self.viewState.width += drag.translation.width
+                self.viewState.height += drag.translation.height
             }
+        
+        return  RoundedRectangle(cornerRadius: 5, style: .circular)
+            .path(in: CGRect(
+                x: 100,
+                y: 100,
+                width: self.viewState.width,
+                height: self.viewState.height
+            )
+            )
+            .shadow(radius: dragState.isActive ? 8 : 0)
+            .animation(.linear(duration: minimumLongPressDuration))
+            .gesture(longPressDrag)
     }
 }
 
