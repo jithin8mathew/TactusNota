@@ -57,8 +57,30 @@ struct finalView: View {
         }
     }
     
+    @GestureState var dragState = AnnotationState.inactive
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        let minimumLongPressDuration = 0.2
+        let longPressDrag = LongPressGesture(minimumDuration: minimumLongPressDuration)
+            .sequenced(before: DragGesture())
+            .updating($dragState) { value, state, transaction in
+                switch value {
+                // Long press begins.
+                case .first(true):
+                    state = .longPressing
+                // Long press confirmed, dragging may begin.
+                case .second(true, let drag):
+                    state = .dragging(translation: drag?.translation ?? .zero)
+                // Dragging ended or the long press cancelled.
+                default:
+                    state = .inactive
+                }
+            }
+            .onEnded { value in
+                guard case .second(true, let drag?) = value else { return }
+//                self.viewState.width += drag.translation.width
+//                self.viewState.height += drag.translation.height
+            }
     }
 }
 
