@@ -57,8 +57,8 @@ struct finalView: View {
         }
     }
     
-    @GestureState var dragState = AnnotationState.inactive
-    @State var viewState = CGSize.zero
+    @GestureState var dragState = AnnotationState.inactive // represents the state of the object being drageed 
+    @State var viewState = CGSize.zero // updates the location of the object being dragged
     
     @State var startLoc = CGPoint.zero // start location of the coordinate the user clicks
     @State var contWidth = CGFloat.zero // holds the width of the bounding box based on users drag
