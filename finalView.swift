@@ -60,6 +60,10 @@ struct finalView: View {
     @GestureState var dragState = AnnotationState.inactive
     @State var viewState = CGSize.zero
     
+    @State var startLoc = CGPoint.zero // start location of the coordinate the user clicks
+    @State var contWidth = CGFloat.zero // holds the width of the bounding box based on users drag
+    @State var contHeight = CGFloat.zero // holds the height of the bbox based on users vertical drag
+    
     var body: some View {
         let minimumLongPressDuration = 0.2
         let longPressDrag = LongPressGesture(minimumDuration: minimumLongPressDuration)
@@ -83,17 +87,29 @@ struct finalView: View {
                 self.viewState.height += drag.translation.height
             }
         
-        return  RoundedRectangle(cornerRadius: 5, style: .circular)
-            .path(in: CGRect(
-                x: 100,
-                y: 100,
-                width: self.viewState.width,
-                height: self.viewState.height
-            )
-            )
-            .shadow(radius: dragState.isActive ? 8 : 0)
-            .animation(.linear(duration: minimumLongPressDuration))
-            .gesture(longPressDrag)
+        return Rectangle()
+                    .fill(Color.blue)
+                    .overlay(dragState.isDragging ? Rectangle().stroke(Color.white, lineWidth: 2) : nil)
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .offset(
+                        x: viewState.width + dragState.translation.width,
+                        y: viewState.height + dragState.translation.height
+                    )
+                    .animation(nil)
+                    .shadow(radius: dragState.isActive ? 8 : 0)
+                    .animation(.linear(duration: minimumLongPressDuration))
+                    .gesture(longPressDrag)
+//        return  RoundedRectangle(cornerRadius: 5, style: .circular)
+//            .path(in: CGRect(
+//                x: 100,
+//                y: 100,
+//                width: self.viewState.width,
+//                height: self.viewState.height
+//            )
+//            )
+//            .shadow(radius: dragState.isActive ? 8 : 0)
+//            .animation(.linear(duration: minimumLongPressDuration))
+//            .gesture(longPressDrag)
     }
 }
 
