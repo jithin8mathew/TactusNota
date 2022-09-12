@@ -22,14 +22,14 @@ struct AnnotationView: View {
     @GestureState var isTapped = false
     
     var body: some View {
-        ZStack{
-            Color(red: 0.26, green: 0.26, blue: 0.26)
-                .ignoresSafeArea()
+//        ZStack{
+//            Color(red: 0.26, green: 0.26, blue: 0.26)
+//                .ignoresSafeArea()
             
-            let tapGesture = DragGesture(minimumDistance: 0)
-                .updating($isTapped) {_, isTapped, _ in
-                    isTapped = true
-                }
+//            let tapGesture = DragGesture(minimumDistance: 0)
+//                .updating($isTapped) {_, isTapped, _ in
+//                    isTapped = true
+//                }
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             
             let mainGesture = DragGesture(minimumDistance: 0)
@@ -44,10 +44,17 @@ struct AnnotationView: View {
                     (value) in
                     if (value.location.x - startLoc.x > 20){
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                        print("drage gesture activated")
                     }
                 }) // onEnded
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        } // end of zstack
+            
+//        } // end of zstack
+        print(rectData)
+        return Circle()
+            .fill(Color.blue)
+            .gesture(mainGesture)
+            .frame(width: 100, height: 100, alignment: .center)
     } // end of main body
 }
 
