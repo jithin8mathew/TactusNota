@@ -73,7 +73,9 @@ struct AnnotationView: View {
             .font(.title)
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-            .gesture(mainGesture)
+//            .onTapGesture {
+//                print("Tapped")
+//            }
             .overlay( ZStack{
                 RoundedRectangle(cornerRadius: 5, style: .circular)
                     .path(in: CGRect(
@@ -85,9 +87,9 @@ struct AnnotationView: View {
                     )
                     .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
             })
-            .onLongPressGesture(minimumDuration: 0.3){
-                print("long press action performed")
-            }
+//            .onLongPressGesture(minimumDuration: 0.3){
+//                print("long press action performed")
+//            }
             .gesture(simultaneously)
     } // end of main body
 }
