@@ -35,7 +35,8 @@ struct AnnotationView: View {
         //                    isTapped = true
         //                }
         
-        let longPressGesture = LongPressGesture(minimumDuration: 0.2)
+        let longPressGesture = LongPressGesture(minimumDuration: 0.5)
+//            .sequenced(before: DragGesture())
             .updating($press) { currentState, gestureState, transaction in
                 gestureState = currentState
             }
