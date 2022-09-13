@@ -24,6 +24,11 @@ struct AnnotationView: View {
     // long press Geusture vars
     @GestureState var press = false
     @State var show = false
+    @GestureState var location = CGPoint(x:0, y:0)
+    
+    // drag gesture
+    @State var isDraggable = false
+    @State var translation = CGSize.zero
     
     var body: some View {
         //        ZStack{
@@ -35,11 +40,20 @@ struct AnnotationView: View {
         //                    isTapped = true
         //                }
         
+        let dragAnnotation = DragGesture().onChanged { value in
+            translation = value.translation
+            isDraggable = true
+        }
+        
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
-//            .sequenced(before: DragGesture())
-            .updating($press) { currentState, gestureState, transaction in
-                gestureState = currentState
+            .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
+            .updating($location) { value, gestureState, transaction in
+//                gestureState = value
+                print(value)
             }
+//            .updating($press) { currentState, gestureState, transaction in
+//                gestureState = currentState
+//            }
             .onEnded { value in
 //                show.toggle()
                 print("long press in progress")
