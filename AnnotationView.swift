@@ -30,6 +30,9 @@ struct AnnotationView: View {
     @State var isDraggable = false
     @State var translation = CGSize.zero
     
+    // switch case state value holder
+//    @State var viewState = CGSize.zero
+    
     var body: some View {
         //        ZStack{
         //            Color(red: 0.26, green: 0.26, blue: 0.26)
@@ -48,8 +51,14 @@ struct AnnotationView: View {
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
             .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
             .updating($location) { value, gestureState, transaction in
-//                gestureState = value
-                print(value)
+                switch value{
+                case .first(true):
+                    gestureState = true
+                case .second(true, let drag):
+                    gestureState = .dragging(translation: drag?.translation ?? .zero)
+                default:
+                    gestureState = .inactive
+                }
             }
 //            .updating($press) { currentState, gestureState, transaction in
 //                gestureState = currentState
