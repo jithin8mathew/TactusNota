@@ -58,16 +58,17 @@ struct AnnotationView: View {
     // long press Geusture vars
     @GestureState var press = false
     @State var show = false
-//    @GestureState var location = CGPoint(x:0, y:0)
+    //    @GestureState var location = CGPoint(x:0, y:0)
     
     // drag gesture
     @State var isDraggable = false
     @State var translation = CGSize.zero
     
     @GestureState var dragState = DragState.inactive
+    @State var boxID = 0
     
     // switch case state value holder
-//    @State var viewState = CGSize.zero
+    //    @State var viewState = CGSize.zero
     
     var body: some View {
         //        ZStack{
@@ -80,6 +81,13 @@ struct AnnotationView: View {
                 switch value{
                 case .first(true):
                     gestureState = .inactive
+                    for bCords in rectData{
+                        boxID = 0
+                        
+                        // write a function to check if the values are withing the drawn bbox
+                        
+                        boxID = boxID + 1
+                    }
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
                     print("Moving annotation box")
