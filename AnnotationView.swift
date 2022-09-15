@@ -143,10 +143,10 @@ struct AnnotationView: View {
             .overlay( ZStack{
                 RoundedRectangle(cornerRadius: 5, style: .circular)
                     .path(in: CGRect(
-                        x: (startLoc.x) + (viewState.width + dragState.translation.width),
-                        y: (startLoc.y) + (viewState.height + dragState.translation.height),
-                        width: contWidth + (viewState.width + dragState.translation.width),
-                        height: contHeight + (viewState.height + dragState.translation.height)
+                        x: (startLoc.x), //+ (viewState.width + dragState.translation.width),
+                        y: (startLoc.y), //+ (viewState.height + dragState.translation.height),
+                        width: contWidth, //+ (viewState.width + dragState.translation.width),
+                        height: contHeight //+ (viewState.height + dragState.translation.height)
                     )
                     )
                     .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
