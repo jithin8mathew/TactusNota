@@ -9,6 +9,39 @@ import SwiftUI
 
 struct AnnotationView: View {
     
+    enum DragState {
+        case inactive // boolean variable
+        case pressing // boolean variable
+        case dragging(translation: CGSize)
+        
+        var translation: CGSize {
+            switch self {
+            case .inactive, .pressing:
+                return .zero
+            case .dragging(let translation):
+                return translation
+            }
+        }
+        
+        var isActive: Bool {
+            switch self {
+            case .inactive:
+                return false
+            case .pressing, .dragging:
+                return true
+            }
+        }
+        
+        var isDragging: Bool {
+            switch self {
+            case .inactive, .pressing:
+                return false
+            case .dragging:
+                return true
+            }
+        }
+    }
+    
     @State var rectData: [[CGFloat]] = [] // global var to hold annotation coordinates
     @State var startLoc = CGPoint.zero // start location of the coordinate the user clicks
     @State var contWidth = CGFloat.zero // holds the width of the bounding box based on users drag
@@ -17,6 +50,7 @@ struct AnnotationView: View {
     // testing longPress Drag gesture
     @State var isDragging = false
     @State private var offset = CGSize.zero
+    @State var viewState = CGSize.zero
     
     //     tap gesture vars
     //    @GestureState var isTapped = false
@@ -24,11 +58,13 @@ struct AnnotationView: View {
     // long press Geusture vars
     @GestureState var press = false
     @State var show = false
-    @GestureState var location = CGPoint(x:0, y:0)
+//    @GestureState var location = CGPoint(x:0, y:0)
     
     // drag gesture
     @State var isDraggable = false
     @State var translation = CGSize.zero
+    
+    @GestureState var dragState = DragState.inactive
     
     // switch case state value holder
 //    @State var viewState = CGSize.zero
@@ -43,19 +79,20 @@ struct AnnotationView: View {
         //                    isTapped = true
         //                }
         
-        let dragAnnotation = DragGesture().onChanged { value in
-            translation = value.translation
-            isDraggable = true
-        }
+//        let dragAnnotation = DragGesture().onChanged { value in
+//            translation = value.translation
+//            isDraggable = true
+//        }
         
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
             .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
-            .updating($location) { value, gestureState, transaction in
+            .updating($dragState) { value, gestureState, transaction in
                 switch value{
                 case .first(true):
-                    gestureState = true
+                    gestureState = .inactive
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
+                    print("Moving annotation box")
                 default:
                     gestureState = .inactive
                 }
@@ -65,7 +102,10 @@ struct AnnotationView: View {
 //            }
             .onEnded { value in
 //                show.toggle()
-                print("long press in progress")
+                print("long press ended")
+                guard case .second(true, let drag?) = value else { return }
+                self.viewState.width += drag.translation.width
+                self.viewState.height += drag.translation.height
             }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -81,7 +121,7 @@ struct AnnotationView: View {
                 (value) in
                 if (value.location.x - startLoc.x > 20){
                     rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
-                    print("drage gesture activated")
+                    print("Bbox drawn")
                 }
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,10 +143,10 @@ struct AnnotationView: View {
             .overlay( ZStack{
                 RoundedRectangle(cornerRadius: 5, style: .circular)
                     .path(in: CGRect(
-                        x: (startLoc.x),
-                        y: (startLoc.y),
-                        width: contWidth,
-                        height: contHeight
+                        x: (startLoc.x) + (viewState.width + dragState.translation.width),
+                        y: (startLoc.y) + (viewState.height + dragState.translation.height),
+                        width: contWidth + (viewState.width + dragState.translation.width),
+                        height: contHeight + (viewState.height + dragState.translation.height)
                     )
                     )
                     .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
