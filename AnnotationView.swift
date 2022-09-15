@@ -74,16 +74,6 @@ struct AnnotationView: View {
         //            Color(red: 0.26, green: 0.26, blue: 0.26)
         //                .ignoresSafeArea()
         
-        //            let tapGesture = DragGesture(minimumDistance: 0)
-        //                .updating($isTapped) {_, isTapped, _ in
-        //                    isTapped = true
-        //                }
-        
-//        let dragAnnotation = DragGesture().onChanged { value in
-//            translation = value.translation
-//            isDraggable = true
-//        }
-        
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
             .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
             .updating($dragState) { value, gestureState, transaction in
@@ -97,11 +87,7 @@ struct AnnotationView: View {
                     gestureState = .inactive
                 }
             }
-//            .updating($press) { currentState, gestureState, transaction in
-//                gestureState = currentState
-//            }
             .onEnded { value in
-//                show.toggle()
                 print("long press ended")
                 guard case .second(true, let drag?) = value else { return }
                 self.viewState.width += drag.translation.width
@@ -137,9 +123,6 @@ struct AnnotationView: View {
             .font(.title)
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-//            .onTapGesture {
-//                print("Tapped")
-//            }
             .overlay( ZStack{
                 RoundedRectangle(cornerRadius: 5, style: .circular)
                     .path(in: CGRect(
@@ -150,10 +133,19 @@ struct AnnotationView: View {
                     )
                     )
                     .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-            })
-//            .onLongPressGesture(minimumDuration: 0.3){
-//                print("long press action performed")
-//            }
+                
+                ForEach(self.rectData, id:\.self) {cords in
+                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                        .path(in: CGRect(
+                            x: cords[0],
+                            y: cords[1],
+                            width: cords[2],
+                            height: cords[3]
+                        )
+                        )
+                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                } // end of for each loop
+            }) // end of image overlay and zstack inside it
             .gesture(simultaneously)
     } // end of main body
 }
