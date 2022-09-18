@@ -83,8 +83,6 @@ struct AnnotationView: View {
                     gestureState = .inactive
 //                    for bCords in rectData{
 //                        boxID = 0
-                        
-                    checkCoordinates(coordinates: rectData)
                         // write a function to check if the values are withing the drawn bbox
                         
 //                        boxID = boxID + 1
@@ -111,6 +109,7 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation
+                checkCoordinates(coordinates: startLoc, coordinateList: rectData)
             }
             .onEnded({
                 (value) in
@@ -159,9 +158,13 @@ struct AnnotationView: View {
     } // end of main body
 }
 
-func checkCoordinates(coordinates: [[CGFloat]]){
+func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]]){
     print("function checkCoordinates called")
-    print(coordinates)
+    for bCord in coordinateList{
+        if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+            print("within C1 edge...")
+        }
+    }
 }
 
 struct AnnotationView_Previews: PreviewProvider {
