@@ -81,13 +81,14 @@ struct AnnotationView: View {
                 switch value{
                 case .first(true):
                     gestureState = .inactive
-                    for bCords in rectData{
-                        boxID = 0
+//                    for bCords in rectData{
+//                        boxID = 0
                         
+                    checkCoordinates(coordinates: rectData)
                         // write a function to check if the values are withing the drawn bbox
                         
-                        boxID = boxID + 1
-                    }
+//                        boxID = boxID + 1
+//                    }
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
                     print("Moving annotation box")
@@ -156,6 +157,11 @@ struct AnnotationView: View {
             }) // end of image overlay and zstack inside it
             .gesture(simultaneously)
     } // end of main body
+}
+
+func checkCoordinates(coordinates: [[CGFloat]]){
+    print("function checkCoordinates called")
+    print(coordinates)
 }
 
 struct AnnotationView_Previews: PreviewProvider {
