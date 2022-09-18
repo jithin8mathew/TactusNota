@@ -161,6 +161,10 @@ struct AnnotationView: View {
 func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]]){
     print("function checkCoordinates called")
     for bCord in coordinateList{
+        if bCord[0] <= coordinates.x && (bCord[0]+bCord[2]) >= coordinates.x && (bCord[0]+bCord[3]) <= coordinates.y && bCord[1]+(bCord[2]+bCord[3]) >= coordinates.y{
+            print("withing bbox")
+        }
+            
         if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             print("within C1 edge...")
         }
