@@ -163,15 +163,35 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]]){
     bboxID = 0
     for bCord in coordinateList{
         bboxID = bboxID + 1
+        
+        // This section checks if the tap on the screen is withing an already drawn bouding box
         if coordinates.x >= bCord[0]  && coordinates.x <= (bCord[0]+bCord[2])  && coordinates.y >= bCord[1] && coordinates.y <= (bCord[1]+bCord[3]) { // && bCord[1]+(bCord[2]+bCord[3]) >= coordinates.y
             print("actual coordinates:", coordinates.x, coordinates.y)
             print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
             print(bboxID)
         }
-            
+        
+        // Check if the tap is at the top left corner 
         if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             print("within C1 edge...")
         }
+        
+        // Check if the tap is at the top right corner
+        if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+            print("within C2 edge...")
+        }
+        
+        // Check if the tap is at the bottom left corner
+        if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+            print("within C3 edge...")
+        }
+        
+        // Check if the tap is at the bottom right corner
+        if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+            print("within C4 edge...")
+        }
+
+        
     }
 }
 
