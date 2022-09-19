@@ -159,10 +159,14 @@ struct AnnotationView: View {
 }
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]]){
-    print("function checkCoordinates called")
+//    print("function checkCoordinates called")
+    bboxID = 0
     for bCord in coordinateList{
-        if bCord[0] <= coordinates.x && (bCord[0]+bCord[2]) >= coordinates.x && (bCord[0]+bCord[3]) >= coordinates.y && bCord[1]+(bCord[2]+bCord[3]) >= coordinates.y{
-            print("withing bbox")
+        bboxID = bboxID + 1
+        if coordinates.x >= bCord[0]  && coordinates.x <= (bCord[0]+bCord[2])  && coordinates.y >= bCord[1] && coordinates.y <= (bCord[1]+bCord[3]) { // && bCord[1]+(bCord[2]+bCord[3]) >= coordinates.y
+            print("actual coordinates:", coordinates.x, coordinates.y)
+            print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
+            print(bboxID)
         }
             
         if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
