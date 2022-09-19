@@ -67,6 +67,8 @@ struct AnnotationView: View {
     @GestureState var dragState = DragState.inactive
     @State var boxID = 0
     
+    @State var withingBBox = false
+    
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -103,7 +105,7 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation
-                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, contWIDTH: contWidth, contHEIGHT: contHeight)
+                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox)
             }
             .onEnded({
                 (value) in
@@ -152,7 +154,7 @@ struct AnnotationView: View {
     } // end of main body
 }
 
-func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, contWIDTH:CGFloat, contHEIGHT: CGFloat){
+func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout  Bool){
 //    print("function checkCoordinates called")
     bboxID = 0
     
@@ -167,31 +169,38 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
             print(bboxID)
             
-            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
+            // if withing coordinates then return the bbox ID and set a boolean var to true.
+            withinBBOX = true
+            
+//            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
         
         // Check if the tap is at the top left corner 
-        if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             print("within C1 edge...")
         }
         
         // Check if the tap is at the top right corner
-        if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             print("within C2 edge...")
         }
         
         // Check if the tap is at the bottom left corner
-        if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
             print("within C3 edge...")
         }
         
         // Check if the tap is at the bottom right corner
-        if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
             print("within C4 edge...")
+        }
+        else{
+            withinBBOX = false
         }
 
         
     }
+    print(withinBBOX)
 }
 
 struct AnnotationView_Previews: PreviewProvider {
