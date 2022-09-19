@@ -81,12 +81,6 @@ struct AnnotationView: View {
                 switch value{
                 case .first(true):
                     gestureState = .inactive
-//                    for bCords in rectData{
-//                        boxID = 0
-                        // write a function to check if the values are withing the drawn bbox
-                        
-//                        boxID = boxID + 1
-//                    }
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
                     print("Moving annotation box")
@@ -109,7 +103,7 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation
-                checkCoordinates(coordinates: startLoc, coordinateList: rectData)
+                checkCoordinates(coordinates: startLoc, coordinateList: rectData, viewStateVal: viewState, contWIDTH: contWidth, contHEIGHT: contHeight)
             }
             .onEnded({
                 (value) in
@@ -158,9 +152,12 @@ struct AnnotationView: View {
     } // end of main body
 }
 
-func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]]){
+func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]], viewStateVal: CGSize, contWIDTH:CGFloat, contHEIGHT: CGFloat){
 //    print("function checkCoordinates called")
     bboxID = 0
+    
+//    ForEach(coordinateList, id:\.self)
+//    { bCord in
     for bCord in coordinateList{
         bboxID = bboxID + 1
         
@@ -169,6 +166,8 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]]){
             print("actual coordinates:", coordinates.x, coordinates.y)
             print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
             print(bboxID)
+            
+//            coordinateList[bboxID] = [[coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, contWIDTH, contHEIGHT]]
         }
         
         // Check if the tap is at the top left corner 
