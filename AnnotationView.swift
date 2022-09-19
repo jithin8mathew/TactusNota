@@ -154,9 +154,10 @@ struct AnnotationView: View {
     } // end of main body
 }
 
-func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout  Bool){
+func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
 //    print("function checkCoordinates called")
     bboxID = 0
+    var withinBBoxArea = false
     
 //    ForEach(coordinateList, id:\.self)
 //    { bCord in
@@ -170,7 +171,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             print(bboxID)
             
             // if withing coordinates then return the bbox ID and set a boolean var to true.
-            withinBBOX = true
+            withinBBoxArea = true
             
 //            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
@@ -195,12 +196,13 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             print("within C4 edge...")
         }
         else{
-            withinBBOX = false
+//            withinBBoxArea = false
+            continue
         }
 
         
     }
-    print(withinBBOX)
+    print(withinBBoxArea)
 }
 
 struct AnnotationView_Previews: PreviewProvider {
