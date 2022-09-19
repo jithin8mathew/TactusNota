@@ -103,7 +103,7 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation
-                checkCoordinates(coordinates: startLoc, coordinateList: rectData, viewStateVal: viewState, contWIDTH: contWidth, contHEIGHT: contHeight)
+                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, contWIDTH: contWidth, contHEIGHT: contHeight)
             }
             .onEnded({
                 (value) in
@@ -152,7 +152,7 @@ struct AnnotationView: View {
     } // end of main body
 }
 
-func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]], viewStateVal: CGSize, contWIDTH:CGFloat, contHEIGHT: CGFloat){
+func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, contWIDTH:CGFloat, contHEIGHT: CGFloat){
 //    print("function checkCoordinates called")
     bboxID = 0
     
@@ -167,7 +167,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: [[CGFloat]], viewSta
             print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
             print(bboxID)
             
-//            coordinateList[bboxID] = [[coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, contWIDTH, contHEIGHT]]
+            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
         
         // Check if the tap is at the top left corner 
