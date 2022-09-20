@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+// create a @Published to receive current bbox that user is working with for moving and resizing etc
+class GlobalString: ObservableObject{
+    @Published var currentBoxID = Int()
+}
+
 struct AnnotationView: View {
     
     enum DragState {
@@ -85,7 +90,7 @@ struct AnnotationView: View {
                     gestureState = .inactive
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
-                    print("Moving annotation box")
+                    print("Moving annotation box", drag?.translation)
                 default:
                     gestureState = .inactive
                 }
@@ -104,7 +109,8 @@ struct AnnotationView: View {
                 startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
-                offset = value.translation
+                offset = value.translation // offset is the distance of drag by the user
+//                print("offset : ",offset)
                 checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox)
             }
             .onEnded({
@@ -112,6 +118,7 @@ struct AnnotationView: View {
                 if (value.location.x - startLoc.x > 20){
                     rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                     print("Bbox drawn")
+                    // set the withingBBox boolean to false after drage is complete
                 }
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,6 +162,8 @@ struct AnnotationView: View {
 }
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
+    
+    @StateObject var globalString = GlobalString() // call the global class to update the current bbox ID
 //    print("function checkCoordinates called")
     bboxID = 0
     var withinBBoxArea = false
@@ -172,6 +181,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
+            globalString.currentBoxID = bboxID
             
 //            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
