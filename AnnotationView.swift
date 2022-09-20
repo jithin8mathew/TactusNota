@@ -14,6 +14,8 @@ class GlobalString: ObservableObject{
 
 struct AnnotationView: View {
     
+    @StateObject var globalString = GlobalString()
+    
     enum DragState {
         case inactive // boolean variable
         case pressing // boolean variable
@@ -72,7 +74,10 @@ struct AnnotationView: View {
     @GestureState var dragState = DragState.inactive
     @State var boxID = 0
     
+    // becomes ture if the user raps or drags within the bounding box 
     @State var withingBBox = false
+    // Trun this update on or off to prevent bounding box from being drawn when the user is dragging an existing bbox
+    @State var RTdrawState = true
     
     // switch case state value holder
     //    @State var viewState = CGSize.zero
@@ -91,6 +96,8 @@ struct AnnotationView: View {
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
                     print("Moving annotation box", drag?.translation)
+//                    rectData[globalString.currentBoxID] = [startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight]
+                    print("long press update values :", startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight)
                 default:
                     gestureState = .inactive
                 }
@@ -100,6 +107,7 @@ struct AnnotationView: View {
                 guard case .second(true, let drag?) = value else { return }
                 self.viewState.width += drag.translation.width
                 self.viewState.height += drag.translation.height
+                rectData[globalString.currentBoxID] = [startLoc.x + (drag.translation.width ), startLoc.y + (drag.translation.height ), rectData[globalString.currentBoxID][2], rectData[globalString.currentBoxID][3]]
             }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -135,16 +143,17 @@ struct AnnotationView: View {
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
             .overlay( ZStack{
-                RoundedRectangle(cornerRadius: 5, style: .circular)
-                    .path(in: CGRect(
-                        x: (startLoc.x), //+ (viewState.width + dragState.translation.width),
-                        y: (startLoc.y), //+ (viewState.height + dragState.translation.height),
-                        width: contWidth, //+ (viewState.width + dragState.translation.width),
-                        height: contHeight //+ (viewState.height + dragState.translation.height)
-                    )
-                    )
-                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                
+                if RTdrawState{
+                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                        .path(in: CGRect(
+                            x: (startLoc.x), //+ (viewState.width + dragState.translation.width),
+                            y: (startLoc.y), //+ (viewState.height + dragState.translation.height),
+                            width: contWidth, //+ (viewState.width + dragState.translation.width),
+                            height: contHeight //+ (viewState.height + dragState.translation.height)
+                        )
+                        )
+                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
@@ -182,7 +191,6 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
             globalString.currentBoxID = bboxID
-            
 //            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
         
