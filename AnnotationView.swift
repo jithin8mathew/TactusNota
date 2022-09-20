@@ -74,7 +74,7 @@ struct AnnotationView: View {
     @GestureState var dragState = DragState.inactive
     @State var boxID = 0
     
-    // becomes ture if the user raps or drags within the bounding box 
+    // becomes ture if the user raps or drags within the bounding box
     @State var withingBBox = false
     // Trun this update on or off to prevent bounding box from being drawn when the user is dragging an existing bbox
     @State var RTdrawState = true
@@ -95,7 +95,6 @@ struct AnnotationView: View {
                     gestureState = .inactive
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
-                    print("Moving annotation box", drag?.translation)
 //                    rectData[globalString.currentBoxID] = [startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight]
                     print("long press update values :", startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight)
                 default:
@@ -107,6 +106,7 @@ struct AnnotationView: View {
                 guard case .second(true, let drag?) = value else { return }
                 self.viewState.width += drag.translation.width
                 self.viewState.height += drag.translation.height
+//                RTdrawState = true
                 rectData[globalString.currentBoxID] = [startLoc.x + (drag.translation.width ), startLoc.y + (drag.translation.height ), rectData[globalString.currentBoxID][2], rectData[globalString.currentBoxID][3]]
             }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,17 +143,17 @@ struct AnnotationView: View {
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
             .overlay( ZStack{
-                if RTdrawState{
+//                    dragState.isDragging ?
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
-                            x: (startLoc.x), //+ (viewState.width + dragState.translation.width),
-                            y: (startLoc.y), //+ (viewState.height + dragState.translation.height),
-                            width: contWidth, //+ (viewState.width + dragState.translation.width),
-                            height: contHeight //+ (viewState.height + dragState.translation.height)
+                            x: (startLoc.x) +  dragState.translation.width,
+                            y: (startLoc.y) + dragState.translation.height,
+                            width: contWidth,
+                            height: contHeight
                         )
                         )
                         .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                }
+//                : nil
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
