@@ -68,18 +68,33 @@ struct testView3: View {
                     self.viewState.height += drag.translation.height
                 }
         
-        return Circle()
-                    .fill(Color.blue)
-                    .overlay(dragState.isDragging ? Circle().stroke(Color.white, lineWidth: 2) : nil)
-                    .frame(width: 100, height: 100, alignment: .center)
-                    .offset(
-                        x: viewState.width + dragState.translation.width,
-                        y: viewState.height + dragState.translation.height
-                    )
-                    .animation(nil)
-                    .shadow(radius: dragState.isActive ? 8 : 0)
-                    .animation(.linear(duration: minimumLongPressDuration))
-                    .gesture(longPressDrag)
+        return RoundedRectangle(cornerRadius: 5, style: .circular)
+            .path(in: CGRect(
+                x: viewState.width + dragState.translation.width,
+                y: viewState.height + dragState.translation.height,
+                width: 100,
+                height: 100
+            )
+            )
+            .fill(Color.blue)
+            .animation(nil)
+            .shadow(radius: dragState.isActive ? 8 : 0)
+            .animation(.linear(duration: minimumLongPressDuration))
+            .gesture(longPressDrag)
+            
+        
+//        return Rectangle()
+//                    .fill(Color.blue)
+//                    .overlay(dragState.isDragging ? Rectangle().stroke(Color.white, lineWidth: 2) : nil)
+//                    .frame(width: 100, height: 100, alignment: .center)
+//                    .offset(
+//                        x: viewState.width + dragState.translation.width,
+//                        y: viewState.height + dragState.translation.height
+//                    )
+//                    .animation(nil)
+//                    .shadow(radius: dragState.isActive ? 8 : 0)
+//                    .animation(.linear(duration: minimumLongPressDuration))
+//                    .gesture(longPressDrag)
             }
 }
 
