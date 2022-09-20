@@ -45,7 +45,29 @@ struct testView3: View {
     @GestureState var dragState = DragState.inactive
     @State var viewState = CGSize.zero
     
+    @State var rectData: [[CGFloat]] = [] // global var to hold annotation coordinates
+    @State var startLoc = CGPoint.zero // start location of the coordinate the user clicks
+    @State var contWidth = CGFloat.zero // holds the width of the bounding box based on users drag
+    @State var contHeight = CGFloat.zero // holds the height of the bbox based on users vertical drag
+    
     var body: some View {
+        
+        let mainGesture = DragGesture(minimumDistance: 0)
+            .onChanged {
+                (value) in //print(value.location)
+                startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
+                contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
+                contHeight = value.location.y - startLoc.y // Height of the bounding box
+            }
+            .onEnded({
+                (value) in
+                if (value.location.x - startLoc.x > 20){
+                    rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                    print("Bbox drawn")
+                    // set the withingBBox boolean to false after drage is complete
+                }
+            }) // onEnded
+        
             let minimumLongPressDuration = 0.2
             let longPressDrag = LongPressGesture(minimumDuration: minimumLongPressDuration)
                 .sequenced(before: DragGesture())

@@ -106,8 +106,10 @@ struct AnnotationView: View {
                 guard case .second(true, let drag?) = value else { return }
                 self.viewState.width += drag.translation.width
                 self.viewState.height += drag.translation.height
+                rectData[globalString.currentBoxID][0] += drag.translation.width
+                rectData[globalString.currentBoxID][1] += drag.translation.height
 //                RTdrawState = true
-                rectData[globalString.currentBoxID] = [startLoc.x + (drag.translation.width ), startLoc.y + (drag.translation.height ), rectData[globalString.currentBoxID][2], rectData[globalString.currentBoxID][3]]
+//                rectData[globalString.currentBoxID] = [startLoc.x + (drag.translation.width ), startLoc.y + (drag.translation.height ), rectData[globalString.currentBoxID][2], rectData[globalString.currentBoxID][3]]
             }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -146,13 +148,16 @@ struct AnnotationView: View {
 //                    dragState.isDragging ?
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
-                            x: (startLoc.x) +  dragState.translation.width,
-                            y: (startLoc.y) + dragState.translation.height,
+                            x: (startLoc.x), // +  dragState.translation.width,
+                            y: (startLoc.y), // + dragState.translation.height,
                             width: contWidth,
                             height: contHeight
                         )
                         )
-                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                        .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
+//                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                        .offset(x: viewState.width + dragState.translation.width,
+//                                y: viewState.height + dragState.translation.height)
 //                : nil
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -163,7 +168,8 @@ struct AnnotationView: View {
                             height: cords[3]
                         )
                         )
-                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                        .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
+//                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                 } // end of for each loop
             }) // end of image overlay and zstack inside it
             .gesture(simultaneously)
