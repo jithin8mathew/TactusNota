@@ -106,8 +106,12 @@ struct AnnotationView: View {
                 guard case .second(true, let drag?) = value else { return }
                 self.viewState.width += drag.translation.width
                 self.viewState.height += drag.translation.height
+                print("currentString ID ",globalString.currentBoxID) // this shows that current string ID is not updating
+                print("rectData before change : ",rectData[globalString.currentBoxID])
                 rectData[globalString.currentBoxID][0] += drag.translation.width
                 rectData[globalString.currentBoxID][1] += drag.translation.height
+                print(drag.translation.width, drag.translation.height)
+                print("rectData x and y after ", rectData[globalString.currentBoxID])
 //                RTdrawState = true
 //                rectData[globalString.currentBoxID] = [startLoc.x + (drag.translation.width ), startLoc.y + (drag.translation.height ), rectData[globalString.currentBoxID][2], rectData[globalString.currentBoxID][3]]
             }
@@ -126,8 +130,12 @@ struct AnnotationView: View {
             .onEnded({
                 (value) in
                 if (value.location.x - startLoc.x > 20){
-                    rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
-                    print("Bbox drawn")
+                    if withingBBox != true{
+                        print("checking within bbox",withingBBox)
+                        rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                        print("Bbox drawn")
+                    }
+
                     // set the withingBBox boolean to false after drage is complete
                 }
             }) // onEnded
@@ -196,6 +204,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
+//            withinBBOX = true
             globalString.currentBoxID = bboxID
 //            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
@@ -222,6 +231,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         else{
 //            withinBBoxArea = false
             continue
+//            withinBBOX = false
         }
 
         
