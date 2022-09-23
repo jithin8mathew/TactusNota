@@ -107,11 +107,13 @@ struct AnnotationView: View {
                 self.viewState.width += drag.translation.width
                 self.viewState.height += drag.translation.height
                 print("currentString ID ",bboxID) // this shows that current string ID is not updating
-                print("rectData before change : ",rectData[globalString.currentBoxID])
-                rectData[globalString.currentBoxID][0] += drag.translation.width
-                rectData[globalString.currentBoxID][1] += drag.translation.height
+                print("rectData before change : ",rectData[bboxID])
+//                rectData[globalString.currentBoxID][0] += drag.translation.width
+//                rectData[globalString.currentBoxID][1] += drag.translation.height
+                rectData[bboxID][0] += drag.translation.width
+                rectData[bboxID][1] += drag.translation.height
                 print(drag.translation.width, drag.translation.height)
-                print("rectData x and y after ", rectData[globalString.currentBoxID])
+                print("rectData x and y after ", rectData[bboxID])
 //                RTdrawState = true
 //                rectData[globalString.currentBoxID] = [startLoc.x + (drag.translation.width ), startLoc.y + (drag.translation.height ), rectData[globalString.currentBoxID][2], rectData[globalString.currentBoxID][3]]
             }
@@ -125,7 +127,7 @@ struct AnnotationView: View {
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
 //                print("offset : ",offset)
-                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox, BoxID: &bboxID)
+                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox)
             }
             .onEnded({
                 (value) in
@@ -184,11 +186,11 @@ struct AnnotationView: View {
     } // end of main body
 }
 
-func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool, BoxID: inout Int ){
+func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
     
     @StateObject var globalString = GlobalString() // call the global class to update the current bbox ID
 //    print("function checkCoordinates called")
-    bboxID = BoxID
+    bboxID = 0
     var withinBBoxArea = false
     
 //    ForEach(coordinateList, id:\.self)
@@ -200,7 +202,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         if coordinates.x >= bCord[0]  && coordinates.x <= (bCord[0]+bCord[2])  && coordinates.y >= bCord[1] && coordinates.y <= (bCord[1]+bCord[3]) { // && bCord[1]+(bCord[2]+bCord[3]) >= coordinates.y
             print("actual coordinates:", coordinates.x, coordinates.y)
             print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
-            print(bboxID)
+            print("working with bbox: ",bboxID)
             
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
