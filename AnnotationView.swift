@@ -8,13 +8,13 @@
 import SwiftUI
 
 // create a @Published to receive current bbox that user is working with for moving and resizing etc
-class GlobalString: ObservableObject{
-    @Published var currentBoxID = Int()
-}
+//class GlobalString: ObservableObject{
+//    @Published var currentBoxID = Int()
+//}
 
 struct AnnotationView: View {
     
-    @StateObject var globalString = GlobalString()
+//    @StateObject var globalString = GlobalString()
     
     enum DragState {
         case inactive // boolean variable
@@ -188,7 +188,7 @@ struct AnnotationView: View {
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
     
-    @StateObject var globalString = GlobalString() // call the global class to update the current bbox ID
+//    @StateObject var globalString = GlobalString() // call the global class to update the current bbox ID
 //    print("function checkCoordinates called")
     bboxID = 0
     var withinBBoxArea = false
