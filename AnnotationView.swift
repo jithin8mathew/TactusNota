@@ -106,7 +106,7 @@ struct AnnotationView: View {
                 guard case .second(true, let drag?) = value else { return }
                 self.viewState.width += drag.translation.width
                 self.viewState.height += drag.translation.height
-                print("currentString ID ",globalString.currentBoxID) // this shows that current string ID is not updating
+                print("currentString ID ",bboxID) // this shows that current string ID is not updating
                 print("rectData before change : ",rectData[globalString.currentBoxID])
                 rectData[globalString.currentBoxID][0] += drag.translation.width
                 rectData[globalString.currentBoxID][1] += drag.translation.height
@@ -125,7 +125,7 @@ struct AnnotationView: View {
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
 //                print("offset : ",offset)
-                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox)
+                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox, BoxID: &bboxID)
             }
             .onEnded({
                 (value) in
@@ -184,11 +184,11 @@ struct AnnotationView: View {
     } // end of main body
 }
 
-func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
+func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool, BoxID: inout Int ){
     
     @StateObject var globalString = GlobalString() // call the global class to update the current bbox ID
 //    print("function checkCoordinates called")
-    bboxID = 0
+    bboxID = BoxID
     var withinBBoxArea = false
     
 //    ForEach(coordinateList, id:\.self)
@@ -205,7 +205,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
 //            withinBBOX = true
-            globalString.currentBoxID = bboxID
+//            globalString.currentBoxID = bboxID
 //            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
         
