@@ -65,6 +65,7 @@ struct AnnotationView: View {
     // long press Geusture vars
     @GestureState var press = false
     @State var show = false
+//    @State var pressDrag = false
     //    @GestureState var location = CGPoint(x:0, y:0)
     
     // drag gesture
@@ -92,12 +93,15 @@ struct AnnotationView: View {
             .updating($dragState) { value, gestureState, transaction in
                 switch value{
                 case .first(true):
+//                    pressDrag = false // testing
                     gestureState = .inactive
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
+//                    pressDrag = true // testing
 //                    rectData[globalString.currentBoxID] = [startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight]
                     print("long press update values :", startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight)
                 default:
+//                    pressDrag = false // testing
                     gestureState = .inactive
                 }
             }
@@ -132,12 +136,11 @@ struct AnnotationView: View {
             .onEnded({
                 (value) in
                 if (value.location.x - startLoc.x > 20){
-                    if withingBBox != true{
+//                    if pressDrag == false{
                         print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         print("Bbox drawn")
-                    }
-
+//                    }
                     // set the withingBBox boolean to false after drage is complete
                 }
             }) // onEnded
@@ -156,6 +159,7 @@ struct AnnotationView: View {
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
             .overlay( ZStack{
 //                    dragState.isDragging ?
+//                pressDrag?
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
                             x: (startLoc.x), // +  dragState.translation.width,
@@ -192,6 +196,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
 //    print("function checkCoordinates called")
     bboxID = 0
     var withinBBoxArea = false
+    withinBBOX = false
     
 //    ForEach(coordinateList, id:\.self)
 //    { bCord in
@@ -206,7 +211,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
-//            withinBBOX = true
+            withinBBOX = true
 //            globalString.currentBoxID = bboxID
 //            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
