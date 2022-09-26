@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+class updateStatus: ObservableObject{
+    @Published var saveCurrentBbox = true
+}
+
 // create a @Published to receive current bbox that user is working with for moving and resizing etc
 //class GlobalString: ObservableObject{
 //    @Published var currentBoxID = Int()
