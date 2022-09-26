@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class updateStatus: ObservableObject{
+class handleBoxControl: ObservableObject{
     @Published var saveCurrentBbox = true
 }
 
@@ -19,7 +19,7 @@ class updateStatus: ObservableObject{
 struct AnnotationView: View {
     
 //    @StateObject var globalString = GlobalString()
-    @EnvironmentObject var statusUpdate: updateStatus
+    @EnvironmentObject var statusUpdate: handleBoxControl
     
     enum DragState {
         case inactive // boolean variable
@@ -136,7 +136,7 @@ struct AnnotationView: View {
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
 //                print("offset : ",offset)
-                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox)
+                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
             }
             .onEnded({
                 (value) in
@@ -165,6 +165,7 @@ struct AnnotationView: View {
             .overlay( ZStack{
 //                    dragState.isDragging ?
 //                pressDrag?
+                if statusUpdate.saveCurrentBbox == true{
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
                             x: (startLoc.x), // +  dragState.translation.width,
@@ -178,6 +179,7 @@ struct AnnotationView: View {
 //                        .offset(x: viewState.width + dragState.translation.width,
 //                                y: viewState.height + dragState.translation.height)
 //                : nil
+                }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
@@ -192,11 +194,12 @@ struct AnnotationView: View {
                 } // end of for each loop
             }) // end of image overlay and zstack inside it
             .gesture(simultaneously)
+            .environmentObject(statusUpdate)
     } // end of main body
 }
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
-    
+    // STAT_update: handleBoxControl
 //    @StateObject var globalString = GlobalString() // call the global class to update the current bbox ID
 //    print("function checkCoordinates called")
     bboxID = 0
@@ -217,6 +220,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
             withinBBOX = true
+//            STAT_update.saveCurrentBbox = false
 //            statusUpdate.saveCurrentBbox = false
 //            globalString.currentBoxID = bboxID
 //            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
@@ -244,6 +248,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         else{
 //            withinBBoxArea = false
             continue
+//            STAT_update.saveCurrentBbox = true
 //            withinBBOX = false
         }
 
