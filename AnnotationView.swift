@@ -19,6 +19,7 @@ class updateStatus: ObservableObject{
 struct AnnotationView: View {
     
 //    @StateObject var globalString = GlobalString()
+    @EnvironmentObject var statusUpdate: updateStatus
     
     enum DragState {
         case inactive // boolean variable
@@ -216,6 +217,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
             withinBBOX = true
+//            statusUpdate.saveCurrentBbox = false
 //            globalString.currentBoxID = bboxID
 //            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
