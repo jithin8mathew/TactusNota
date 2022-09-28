@@ -52,6 +52,15 @@ struct AnnotationView: View {
                 return true
             }
         }
+        
+        var isPressDragging: Bool{
+            switch self{
+            case .inactive:
+                return false
+            case .dragging, .pressing:
+                return true
+            }
+        }
     }
     
     @State var rectData: [[CGFloat]] = [] // global var to hold annotation coordinates
@@ -163,9 +172,9 @@ struct AnnotationView: View {
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
             .overlay( ZStack{
-//                    dragState.isDragging ?
+                    dragState.isPressDragging ?
 //                pressDrag?
-                if statusUpdate.saveCurrentBbox == true{
+//                if statusUpdate.saveCurrentBbox == true{
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
                             x: (startLoc.x), // +  dragState.translation.width,
@@ -178,8 +187,8 @@ struct AnnotationView: View {
 //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
 //                        .offset(x: viewState.width + dragState.translation.width,
 //                                y: viewState.height + dragState.translation.height)
-//                : nil
-                }
+                : nil
+//                }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
@@ -194,7 +203,7 @@ struct AnnotationView: View {
                 } // end of for each loop
             }) // end of image overlay and zstack inside it
             .gesture(simultaneously)
-            .environmentObject(statusUpdate)
+//            .environmentObject(statusUpdate)
     } // end of main body
 }
 
