@@ -53,14 +53,14 @@ struct AnnotationView: View {
             }
         }
         
-        var isPressDragging: Bool{
-            switch self{
-            case .inactive:
-                return false
-            case .dragging, .pressing:
-                return true
-            }
-        }
+//        var isPressDragging: Bool{
+//            switch self{
+//            case .inactive:
+//                return false
+//            case .dragging, .pressing:
+//                return true
+//            }
+//        }
     }
     
     @State var rectData: [[CGFloat]] = [] // global var to hold annotation coordinates
@@ -113,7 +113,7 @@ struct AnnotationView: View {
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
 //                    pressDrag = true // testing
 //                    rectData[globalString.currentBoxID] = [startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight]
-                    print("long press update values :", startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight)
+//                    print("long press update values :", startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight)
                 default:
 //                    pressDrag = false // testing
                     gestureState = .inactive
@@ -150,11 +150,11 @@ struct AnnotationView: View {
             .onEnded({
                 (value) in
                 if (value.location.x - startLoc.x > 20){
-//                    if pressDrag == false{
+                    if dragState.isDragging == false{
                         print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         print("Bbox drawn")
-//                    }
+                    }
                     // set the withingBBox boolean to false after drage is complete
                 }
             }) // onEnded
@@ -172,7 +172,7 @@ struct AnnotationView: View {
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
             .overlay( ZStack{
-                    dragState.isPressDragging ?
+//                    dragState.isPressDragging ?
 //                pressDrag?
 //                if statusUpdate.saveCurrentBbox == true{
                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -187,7 +187,7 @@ struct AnnotationView: View {
 //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
 //                        .offset(x: viewState.width + dragState.translation.width,
 //                                y: viewState.height + dragState.translation.height)
-                : nil
+//                : nil
 //                }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
