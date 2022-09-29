@@ -35,15 +35,24 @@ struct AnnotationView: View {
             }
         }
         
+//        var isActive: Bool {
+//            switch self {
+//            case .inactive:
+//                return false
+//            case .pressing, .dragging:
+//                return true
+//            }
+//        }
+
         var isActive: Bool {
             switch self {
-            case .inactive:
+            case .inactive, .dragging:
                 return false
-            case .pressing, .dragging:
+            case .pressing:
                 return true
             }
         }
-        
+
         var isDragging: Bool {
             switch self {
             case .inactive, .pressing:
@@ -94,6 +103,8 @@ struct AnnotationView: View {
     // Trun this update on or off to prevent bounding box from being drawn when the user is dragging an existing bbox
     @State var RTdrawState = true
     
+    @State var testButton = false
+    
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -107,11 +118,10 @@ struct AnnotationView: View {
             .updating($dragState) { value, gestureState, transaction in
                 switch value{
                 case .first(true):
-//                    pressDrag = false // testing
                     gestureState = .inactive
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
-//                    pressDrag = true // testing
+                    testButton = true
 //                    rectData[globalString.currentBoxID] = [startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight]
 //                    print("long press update values :", startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight)
                 default:
@@ -125,13 +135,14 @@ struct AnnotationView: View {
                 self.viewState.width += drag.translation.width
                 self.viewState.height += drag.translation.height
                 print("currentString ID ",bboxID) // this shows that current string ID is not updating
-                print("rectData before change : ",rectData[bboxID])
+                print("rectData before change : ",rectData[bboxID-1])
+            
 //                rectData[globalString.currentBoxID][0] += drag.translation.width
 //                rectData[globalString.currentBoxID][1] += drag.translation.height
                 rectData[bboxID][0] += drag.translation.width
                 rectData[bboxID][1] += drag.translation.height
                 print(drag.translation.width, drag.translation.height)
-                print("rectData x and y after ", rectData[bboxID])
+                print("rectData x and y after ", rectData[bboxID-1])
 //                RTdrawState = true
 //                rectData[globalString.currentBoxID] = [startLoc.x + (drag.translation.width ), startLoc.y + (drag.translation.height ), rectData[globalString.currentBoxID][2], rectData[globalString.currentBoxID][3]]
             }
@@ -150,13 +161,16 @@ struct AnnotationView: View {
             .onEnded({
                 (value) in
                 if (value.location.x - startLoc.x > 20){
-                    if dragState.isDragging == false{
+                    if testButton == false{
                         print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         print("Bbox drawn")
+                        testButton = false
                     }
+                    
                     // set the withingBBox boolean to false after drage is complete
                 }
+                testButton = false
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
