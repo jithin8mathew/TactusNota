@@ -121,7 +121,7 @@ struct AnnotationView: View {
                     gestureState = .inactive
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
-                    testButton = true
+//                    testButton = true // modifying state var here wont work
 //                    rectData[globalString.currentBoxID] = [startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight]
 //                    print("long press update values :", startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight)
                 default:
@@ -161,16 +161,13 @@ struct AnnotationView: View {
             .onEnded({
                 (value) in
                 if (value.location.x - startLoc.x > 20){
-                    if testButton == false{
+//                    if testButton == false{
                         print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         print("Bbox drawn")
-                        testButton = false
-                    }
-                    
+//                    }
                     // set the withingBBox boolean to false after drage is complete
                 }
-                testButton = false
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
