@@ -118,7 +118,7 @@ struct AnnotationView: View {
             .updating($dragState) { value, gestureState, transaction in
                 switch value{
                 case .first(true):
-                    gestureState = .inactive
+                    gestureState = .pressing
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
 //                    testButton = true // modifying state var here wont work
