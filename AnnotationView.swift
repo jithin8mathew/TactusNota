@@ -61,15 +61,6 @@ struct AnnotationView: View {
                 return true
             }
         }
-        
-//        var isPressDragging: Bool{
-//            switch self{
-//            case .inactive:
-//                return false
-//            case .dragging, .pressing:
-//                return true
-//            }
-//        }
     }
     
     @State var rectData: [[CGFloat]] = [] // global var to hold annotation coordinates
