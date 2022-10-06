@@ -52,6 +52,16 @@ struct AnnotationView: View {
                 return true
             }
         }
+        
+        // isPressing wont work because when drawing a new box we are still pressing and dragging. The only way to differentiate this is to differentiate between long press drag and tap drag
+//        var isPressing: Bool {
+//            switch self {
+//            case .inactive:
+//                return false
+//            case .pressing, .dragging:
+//                return true
+//            }
+//        }
 
         var isDragging: Bool {
             switch self {
@@ -169,7 +179,7 @@ struct AnnotationView: View {
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
             .overlay( ZStack{
-//                    dragState.isPressDragging ?
+                    dragState.isPressing ?
 //                pressDrag?
 //                if statusUpdate.saveCurrentBbox == true{
                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -184,7 +194,7 @@ struct AnnotationView: View {
 //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
 //                        .offset(x: viewState.width + dragState.translation.width,
 //                                y: viewState.height + dragState.translation.height)
-//                : nil
+                : nil
 //                }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
