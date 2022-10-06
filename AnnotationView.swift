@@ -112,11 +112,7 @@ struct AnnotationView: View {
                     gestureState = .pressing
                 case .second(true, let drag):
                     gestureState = .dragging(translation: drag?.translation ?? .zero)
-//                    testButton = true // modifying state var here wont work
-//                    rectData[globalString.currentBoxID] = [startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight]
-//                    print("long press update values :", startLoc.x + (drag?.translation.width ?? .zero), startLoc.y + (drag?.translation.height ?? .zero), contWidth, contHeight)
                 default:
-//                    pressDrag = false // testing
                     gestureState = .inactive
                 }
             }
@@ -146,7 +142,6 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
-//                print("offset : ",offset)
                 checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
             }
             .onEnded({
@@ -210,9 +205,7 @@ struct AnnotationView: View {
 }
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
-    // STAT_update: handleBoxControl
-//    @StateObject var globalString = GlobalString() // call the global class to update the current bbox ID
-//    print("function checkCoordinates called")
+
     bboxID = 0
     var withinBBoxArea = false
     withinBBOX = false
@@ -227,14 +220,10 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             print("actual coordinates:", coordinates.x, coordinates.y)
             print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
             print("working with bbox: ",bboxID)
-            
+        
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
             withinBBOX = true
-//            STAT_update.saveCurrentBbox = false
-//            statusUpdate.saveCurrentBbox = false
-//            globalString.currentBoxID = bboxID
-//            coordinateList[bboxID-1] = [coordinates.x + viewStateVal.width, coordinates.y + viewStateVal.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
         }
         
         // Check if the tap is at the top left corner 
@@ -257,13 +246,8 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             print("within C4 edge...")
         }
         else{
-//            withinBBoxArea = false
             continue
-//            STAT_update.saveCurrentBbox = true
-//            withinBBOX = false
         }
-
-        
     }
     print(withinBBoxArea)
 }
