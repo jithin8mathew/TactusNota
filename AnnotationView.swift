@@ -106,6 +106,7 @@ struct AnnotationView: View {
     
     @State var testButton = false
     
+    @State var didLongPress = false
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -128,6 +129,8 @@ struct AnnotationView: View {
             }
             .onEnded { value in
                 print("long press ended")
+                self.didLongPress = true
+                print(self.didLongPress,"Long press status")
                 guard case .second(true, let drag?) = value else { return }
                 self.viewState.width += drag.translation.width
                 self.viewState.height += drag.translation.height
@@ -177,7 +180,7 @@ struct AnnotationView: View {
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
             .overlay( ZStack{
-                    dragState.isPressing ?
+//                    dragState.isPressing ?
 //                pressDrag?
 //                if statusUpdate.saveCurrentBbox == true{
                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -192,7 +195,7 @@ struct AnnotationView: View {
 //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
 //                        .offset(x: viewState.width + dragState.translation.width,
 //                                y: viewState.height + dragState.translation.height)
-                : nil
+//                : nil
 //                }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
