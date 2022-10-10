@@ -140,8 +140,6 @@ struct AnnotationView: View {
                 rectData[bboxID][1] += drag.translation.height
                 print(drag.translation.width, drag.translation.height)
                 print("rectData x and y after ", rectData[bboxID-1])
-//                RTdrawState = true
-//                rectData[globalString.currentBoxID] = [startLoc.x + (drag.translation.width ), startLoc.y + (drag.translation.height ), rectData[globalString.currentBoxID][2], rectData[globalString.currentBoxID][3]]
             }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
