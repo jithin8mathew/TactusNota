@@ -166,7 +166,7 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
-                checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
+                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
             }
             .onEnded({
                 (value) in
@@ -176,6 +176,9 @@ struct AnnotationView: View {
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         print("Bbox drawn")
                     }
+//                    else if {
+//                        
+//                    }
                     // set the withingBBox boolean to false after drage is complete
                 }
 //                delayUpdate() // this dones not work because of "'async' call in a function that does not support concurrency"
@@ -235,7 +238,7 @@ struct AnnotationView: View {
 //        }
 }
 
-func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
+func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool) -> (Bool, Int){
     
     bboxID = 0
     var withinBBoxArea = false
@@ -283,6 +286,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         }
     }
     print(withinBBoxArea)
+    return (withinBBOX, bboxID)
 }
 
 struct AnnotationView_Previews: PreviewProvider {
