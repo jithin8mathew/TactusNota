@@ -171,6 +171,7 @@ struct AnnotationView: View {
 //                print("OFFSET",offset)
                 let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                 let boxIDVAL = coordinateManager.1
+                print("BoxIDVAL", boxIDVAL)
                 if self.completedLongPress == true{
                     previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
                     previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
