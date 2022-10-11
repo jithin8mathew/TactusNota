@@ -109,6 +109,8 @@ struct AnnotationView: View {
     @State var didLongPress = false
     @GestureState var isLongPressing = false
     @State var completedLongPress = false
+    @State var previous_offsetX = 0.0
+    @State var previous_offsetY = 0.0
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -166,14 +168,15 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
-                print("OFFSET",offset)
+//                print("OFFSET",offset)
                 let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                 let boxIDVAL = coordinateManager.1
                 if self.completedLongPress == true{
-                    let previous_offsetX = offset.width
-                    let previous_offsetY = offset.height
-                    rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] + (previous_offsetX - offset.width),rectData[boxIDVAL-1][1] + (previous_offsetY - offset.height), rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
-                    print("OFFSET CORRECTION:", rectData[boxIDVAL-1][0]+offset.width,rectData[boxIDVAL-1][1]+offset.height)
+                    previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
+                    previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
+                    rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
+//                    print("OFFSET CORRECTION:", rectData[boxIDVAL-1][0]+offset.width,rectData[boxIDVAL-1][1]+offset.height)
+//                    print("OFFSET CORRECTION TWO:", previous_offsetX,previous_offsetY)
                 }
             }
             .onEnded({
