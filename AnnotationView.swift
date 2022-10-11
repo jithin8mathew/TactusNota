@@ -122,7 +122,7 @@ struct AnnotationView: View {
             .updating($isLongPressing) { currentState, gestureState,
                 transaction in
                 gestureState = currentState
-                transaction.animation = Animation.easeIn(duration: 2.0)
+//                transaction.animation = Animation.easeIn(duration: 2.0)
             }
             .onEnded { finished in
                 self.completedLongPress = finished
@@ -171,13 +171,15 @@ struct AnnotationView: View {
             .onEnded({
                 (value) in
                 if (value.location.x - startLoc.x > 20){
-                    if self.isLongPressing == false{
+                    if self.completedLongPress == false{
                         print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         print("Bbox drawn")
                     }
                     // set the withingBBox boolean to false after drage is complete
                 }
+//                delayUpdate() // this dones not work because of "'async' call in a function that does not support concurrency"
+                self.completedLongPress = false
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -194,22 +196,22 @@ struct AnnotationView: View {
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
             .overlay(ZStack{
                 //                    dragState.isPressing ?
-                self.completedLongPress ?
-                //                if statusUpdate.saveCurrentBbox == true{
-                RoundedRectangle(cornerRadius: 5, style: .circular)
-                    .path(in: CGRect(
-                        x: (startLoc.x), // +  dragState.translation.width,
-                        y: (startLoc.y), // + dragState.translation.height,
-                        width: contWidth,
-                        height: contHeight
-                    )
-                    )
-                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
-                //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                //                        .offset(x: viewState.width + dragState.translation.width,
-                //                                y: viewState.height + dragState.translation.height)
-                                : nil
-                //                }
+                //                self.completedLongPress ?
+                if self.completedLongPress == false{
+                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                        .path(in: CGRect(
+                            x: (startLoc.x), // +  dragState.translation.width,
+                            y: (startLoc.y), // + dragState.translation.height,
+                            width: contWidth,
+                            height: contHeight
+                        )
+                        )
+                    //                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
+                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                    //                        .offset(x: viewState.width + dragState.translation.width,
+                    //                                y: viewState.height + dragState.translation.height)
+                    //                                : nil
+                }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
@@ -226,6 +228,11 @@ struct AnnotationView: View {
             .gesture(simultaneously)
         //            .environmentObject(statusUpdate)
     } // end of main body
+    
+//    private func delayUpdate() async {
+//        try? await Task.sleep(nanoseconds: 7_500_000_000)
+//        self.completedLongPress = false
+//        }
 }
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
