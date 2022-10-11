@@ -18,7 +18,7 @@ class handleBoxControl: ObservableObject{
 
 struct AnnotationView: View {
     
-//    @StateObject var globalString = GlobalString()
+    //    @StateObject var globalString = GlobalString()
     @EnvironmentObject var statusUpdate: handleBoxControl
     
     enum DragState {
@@ -35,15 +35,15 @@ struct AnnotationView: View {
             }
         }
         
-//        var isActive: Bool {
-//            switch self {
-//            case .inactive:
-//                return false
-//            case .pressing, .dragging:
-//                return true
-//            }
-//        }
-
+        //        var isActive: Bool {
+        //            switch self {
+        //            case .inactive:
+        //                return false
+        //            case .pressing, .dragging:
+        //                return true
+        //            }
+        //        }
+        
         var isActive: Bool {
             switch self {
             case .inactive, .dragging:
@@ -54,15 +54,15 @@ struct AnnotationView: View {
         }
         
         // isPressing wont work because when drawing a new box we are still pressing and dragging. The only way to differentiate this is to differentiate between long press drag and tap drag
-//        var isPressing: Bool {
-//            switch self {
-//            case .inactive:
-//                return false
-//            case .pressing, .dragging:
-//                return true
-//            }
-//        }
-
+        //        var isPressing: Bool {
+        //            switch self {
+        //            case .inactive:
+        //                return false
+        //            case .pressing, .dragging:
+        //                return true
+        //            }
+        //        }
+        
         var isDragging: Bool {
             switch self {
             case .inactive, .pressing:
@@ -89,7 +89,7 @@ struct AnnotationView: View {
     // long press Geusture vars
     @GestureState var press = false
     @State var show = false
-//    @State var pressDrag = false
+    //    @State var pressDrag = false
     //    @GestureState var location = CGPoint(x:0, y:0)
     
     // drag gesture
@@ -107,7 +107,8 @@ struct AnnotationView: View {
     @State var testButton = false
     
     @State var didLongPress = false
-    @State var isLongPressing = false
+    @GestureState var isLongPressing = false
+    @State var completedLongPress = false
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -116,35 +117,46 @@ struct AnnotationView: View {
         //            Color(red: 0.26, green: 0.26, blue: 0.26)
         //                .ignoresSafeArea()
         
-        let longPressGesture = LongPressGesture(minimumDuration: 0.5)
-            .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
-            .updating($dragState) { value, gestureState, transaction in // do not modify any variables within this 
-                switch value{
-                case .first(true):
-                    gestureState = .pressing
-                case .second(true, let drag):
-                    gestureState = .dragging(translation: drag?.translation ?? .zero)
-                default:
-                    gestureState = .inactive
-                }
+        let longPressGesture = LongPressGesture(minimumDuration: 0.3)
+        
+            .updating($isLongPressing) { currentState, gestureState,
+                transaction in
+                gestureState = currentState
+                transaction.animation = Animation.easeIn(duration: 2.0)
             }
-            .onEnded { value in
-                print("long press ended")
-                self.didLongPress = true
-                print(self.didLongPress,"Long press status")
-                guard case .second(true, let drag?) = value else { return }
-                self.viewState.width += drag.translation.width
-                self.viewState.height += drag.translation.height
-                print("currentString ID ",bboxID) // this shows that current string ID is not updating
-                print("rectData before change : ",rectData[bboxID-1])
-            
-//                rectData[globalString.currentBoxID][0] += drag.translation.width
-//                rectData[globalString.currentBoxID][1] += drag.translation.height
-                rectData[bboxID][0] += drag.translation.width
-                rectData[bboxID][1] += drag.translation.height
-                print(drag.translation.width, drag.translation.height)
-                print("rectData x and y after ", rectData[bboxID-1])
+            .onEnded { finished in
+                self.completedLongPress = finished
+                print("LONG PRESS STATUS:",self.completedLongPress)
             }
+        
+        //            .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
+        //            .updating($dragState) { value, gestureState, transaction in // do not modify any variables within this
+        //                switch value{
+        //                case .first(true):
+        //                    gestureState = .pressing
+        //                case .second(true, let drag):
+        //                    gestureState = .dragging(translation: drag?.translation ?? .zero)
+        //                default:
+        //                    gestureState = .inactive
+        //                }
+        //            }
+        //            .onEnded { value in
+        //                print("long press ended")
+        //                self.didLongPress = true
+        //                print(self.didLongPress,"Long press status")
+        //                guard case .second(true, let drag?) = value else { return }
+        //                self.viewState.width += drag.translation.width
+        //                self.viewState.height += drag.translation.height
+        //                print("currentString ID ",bboxID) // this shows that current string ID is not updating
+        //                print("rectData before change : ",rectData[bboxID-1])
+        //
+        ////                rectData[globalString.currentBoxID][0] += drag.translation.width
+        ////                rectData[globalString.currentBoxID][1] += drag.translation.height
+        //                rectData[bboxID][0] += drag.translation.width
+        //                rectData[bboxID][1] += drag.translation.height
+        //                print(drag.translation.width, drag.translation.height)
+        //                print("rectData x and y after ", rectData[bboxID-1])
+        //            }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         let mainGesture = DragGesture(minimumDistance: 0)
@@ -180,24 +192,24 @@ struct AnnotationView: View {
             .font(.title)
             .padding(.all, 5)
             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-            .overlay( ZStack{
-//                    dragState.isPressing ?
-//                pressDrag?
-//                if statusUpdate.saveCurrentBbox == true{
-                    RoundedRectangle(cornerRadius: 5, style: .circular)
-                        .path(in: CGRect(
-                            x: (startLoc.x), // +  dragState.translation.width,
-                            y: (startLoc.y), // + dragState.translation.height,
-                            width: contWidth,
-                            height: contHeight
-                        )
-                        )
-                        .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
-//                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-//                        .offset(x: viewState.width + dragState.translation.width,
-//                                y: viewState.height + dragState.translation.height)
-//                : nil
-//                }
+            .overlay(ZStack{
+                //                    dragState.isPressing ?
+                self.completedLongPress ?
+                //                if statusUpdate.saveCurrentBbox == true{
+                RoundedRectangle(cornerRadius: 5, style: .circular)
+                    .path(in: CGRect(
+                        x: (startLoc.x), // +  dragState.translation.width,
+                        y: (startLoc.y), // + dragState.translation.height,
+                        width: contWidth,
+                        height: contHeight
+                    )
+                    )
+                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
+                //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                //                        .offset(x: viewState.width + dragState.translation.width,
+                //                                y: viewState.height + dragState.translation.height)
+                                : nil
+                //                }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
@@ -208,22 +220,22 @@ struct AnnotationView: View {
                         )
                         )
                         .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
-//                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                    //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                 } // end of for each loop
             }) // end of image overlay and zstack inside it
             .gesture(simultaneously)
-//            .environmentObject(statusUpdate)
+        //            .environmentObject(statusUpdate)
     } // end of main body
 }
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool){
-
+    
     bboxID = 0
     var withinBBoxArea = false
     withinBBOX = false
     
-//    ForEach(coordinateList, id:\.self)
-//    { bCord in
+    //    ForEach(coordinateList, id:\.self)
+    //    { bCord in
     for bCord in coordinateList{
         bboxID = bboxID + 1
         
@@ -232,17 +244,17 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             print("actual coordinates:", coordinates.x, coordinates.y)
             print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
             print("working with bbox: ",bboxID)
-        
+            
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
             withinBBOX = true
         }
         
-        // Check if the tap is at the top left corner 
+        // Check if the tap is at the top left corner
         else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             print("within C1 edge...")
-//            coordinateList[bboxID][0] += coordinates.x
-//            coordinateList[bboxID][1] += coordinates.y
+            //            coordinateList[bboxID][0] += coordinates.x
+            //            coordinateList[bboxID][1] += coordinates.y
         }
         
         // Check if the tap is at the top right corner
