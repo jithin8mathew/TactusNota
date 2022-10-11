@@ -167,6 +167,11 @@ struct AnnotationView: View {
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
                 let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
+                let boxStatus = coordinateManager.0
+                let boxIDVAL = coordinateManager.1
+                if self.completedLongPress && coordinateManager.0 == true{
+                    rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0]+offset.width,rectData[boxIDVAL-1][1]+offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
+                }
             }
             .onEnded({
                 (value) in
@@ -177,7 +182,7 @@ struct AnnotationView: View {
                         print("Bbox drawn")
                     }
 //                    else if {
-//                        
+//
 //                    }
                     // set the withingBBox boolean to false after drage is complete
                 }
