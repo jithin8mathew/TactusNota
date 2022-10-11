@@ -166,11 +166,14 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
+                print("OFFSET",offset)
                 let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
-                let boxStatus = coordinateManager.0
                 let boxIDVAL = coordinateManager.1
-                if self.completedLongPress && coordinateManager.0 == true{
-                    rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0]+offset.width,rectData[boxIDVAL-1][1]+offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
+                if self.completedLongPress == true{
+                    let previous_offsetX = offset.width
+                    let previous_offsetY = offset.height
+                    rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] + (previous_offsetX - offset.width),rectData[boxIDVAL-1][1] + (previous_offsetY - offset.height), rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
+                    print("OFFSET CORRECTION:", rectData[boxIDVAL-1][0]+offset.width,rectData[boxIDVAL-1][1]+offset.height)
                 }
             }
             .onEnded({
@@ -229,7 +232,7 @@ struct AnnotationView: View {
                             height: cords[3]
                         )
                         )
-                        .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
+                        .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
                     //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                 } // end of for each loop
             }) // end of image overlay and zstack inside it
