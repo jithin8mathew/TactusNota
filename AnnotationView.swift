@@ -240,6 +240,8 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         // Check if the tap is at the top left corner 
         else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             print("within C1 edge...")
+//            coordinateList[bboxID][0] += coordinates.x
+//            coordinateList[bboxID][1] += coordinates.y
         }
         
         // Check if the tap is at the top right corner
