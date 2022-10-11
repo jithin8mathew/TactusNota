@@ -107,6 +107,7 @@ struct AnnotationView: View {
     @State var testButton = false
     
     @State var didLongPress = false
+    @State var isLongPressing = false
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -117,7 +118,7 @@ struct AnnotationView: View {
         
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
             .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
-            .updating($dragState) { value, gestureState, transaction in
+            .updating($dragState) { value, gestureState, transaction in // do not modify any variables within this 
                 switch value{
                 case .first(true):
                     gestureState = .pressing
@@ -158,11 +159,11 @@ struct AnnotationView: View {
             .onEnded({
                 (value) in
                 if (value.location.x - startLoc.x > 20){
-//                    if testButton == false{
+                    if self.isLongPressing == false{
                         print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         print("Bbox drawn")
-//                    }
+                    }
                     // set the withingBBox boolean to false after drage is complete
                 }
             }) // onEnded
