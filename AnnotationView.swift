@@ -111,6 +111,7 @@ struct AnnotationView: View {
     @State var completedLongPress = false
     @State var previous_offsetX = 0.0
     @State var previous_offsetY = 0.0
+    @State var boxIDVAL = 0
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -129,6 +130,8 @@ struct AnnotationView: View {
             .onEnded { finished in
                 self.completedLongPress = finished
                 print("LONG PRESS STATUS:",self.completedLongPress)
+                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
+                boxIDVAL = coordinateManager.1
             }
         
         //            .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
@@ -169,8 +172,8 @@ struct AnnotationView: View {
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
 //                print("OFFSET",offset)
-                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
-                let boxIDVAL = coordinateManager.1
+//                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
+//                boxIDVAL = coordinateManager.1
                 print("BoxIDVAL", boxIDVAL)
                 if self.completedLongPress == true{
                     previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
