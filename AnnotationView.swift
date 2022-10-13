@@ -177,7 +177,7 @@ struct AnnotationView: View {
 //                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
 //                boxIDVAL = coordinateManager.1
                 print("BoxIDVAL", boxIDVAL)
-                if self.completedLongPress == true{
+                if self.completedLongPress == true && boxIDVAL != 0{ // checking if boxIDVAL value is 0 is a clever way to handle long press guestures outside the bounding boxes
                     previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
                     previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
                     rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
@@ -303,6 +303,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
 //        }
         else{
             continue
+//            return (withinBBOX, 0)
         }
     }
     print(withinBBoxArea)
@@ -314,11 +315,11 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
     for bCord in coordinateList{
         bboxID = bboxID + 1
         
-        var C1_ = false
+//        var C1_ = false
         
         if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
-            C1_ = true
             coordinateList[bboxID-1] = [coordinateList[bboxID-1][0]+offset_value.width, coordinateList[bboxID-1][1]+offset_value.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
+
             print("within C1 edge...")
         }
         
