@@ -123,7 +123,7 @@ struct ContentView: View {
                                                 x: 3,
                                                 y: 3)
                     }
-                    Button(action: {testViewNew()
+                    Button(action: {//testViewNew()
                                         }, label: {
                                             Text("Next")
                                             .font(.system(.title2))
@@ -362,34 +362,34 @@ struct Background:UIViewRepresentable {
 
 }
 
-func drawAnnotation(X: CGFloat, Y: CGFloat, Width: CGFloat, Height: CGFloat) -> Void{
-    RoundedRectangle(cornerRadius: 5, style: .circular)
-        .path(in: CGRect(
-            x: X,
-            y: Y, //(3.12 * 2),
-            width: Width, //(4.68 * 2),
-            height: Height
-            )
-        )
-        .stroke(Color(red: 6.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-    Circle()
-        .fill(.yellow)
-        .frame(width: 15, height: 15)
-        .position(x: X, y: Y)
-    Circle()
-        .fill(.yellow)
-        .frame(width: 15, height: 15)
-        .position(x: X + Width, y: Y)
-    Circle()
-        .fill(.yellow)
-        .frame(width: 15, height: 15)
-        .position(x: X, y: Y + Height)
-    Circle()
-        .fill(.yellow)
-        .frame(width: 15, height: 15)
-        .position(x: X + Width, y: Y + Height)
-
-}
+//func drawAnnotation(X: CGFloat, Y: CGFloat, Width: CGFloat, Height: CGFloat) -> Void{
+//    RoundedRectangle(cornerRadius: 5, style: .circular)
+//        .path(in: CGRect(
+//            x: X,
+//            y: Y, //(3.12 * 2),
+//            width: Width, //(4.68 * 2),
+//            height: Height
+//            )
+//        )
+////        .stroke(Color(red: 6.0, green: 0.78, blue: 0.16))
+////    Circle()
+////        .fill(.yellow)
+////        .frame(width: 15, height: 15)
+//////        .position(x: X, y: Y)
+////    Circle()
+////        .fill(.yellow)
+////        .frame(width: 15, height: 15)
+//////        .position(x: X + Width, y: Y)
+////    Circle()
+////        .fill(.yellow)
+////        .frame(width: 15, height: 15)
+//////        .position(x: X, y: Y + Height)
+////    Circle()
+////        .fill(.yellow)
+////        .frame(width: 15, height: 15)
+////        .position(x: X + Width, y: Y + Height)
+//
+//}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
