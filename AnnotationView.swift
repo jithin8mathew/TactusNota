@@ -171,6 +171,8 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
+                
+                resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset)
 //                print("OFFSET",offset)
 //                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
 //                boxIDVAL = coordinateManager.1
@@ -279,10 +281,45 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         }
         
         // Check if the tap is at the top left corner
-        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+//        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+//            print("within C1 edge...")
+//            //            coordinateList[bboxID][0] += coordinates.x
+//            //            coordinateList[bboxID][1] += coordinates.y
+//        }
+//
+//        // Check if the tap is at the top right corner
+//        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+//            print("within C2 edge...")
+//        }
+//
+//        // Check if the tap is at the bottom left corner
+//        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+//            print("within C3 edge...")
+//        }
+//
+//        // Check if the tap is at the bottom right corner
+//        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+//            print("within C4 edge...")
+//        }
+        else{
+            continue
+        }
+    }
+    print(withinBBoxArea)
+    return (withinBBOX, temp_boxID)
+}
+
+func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], offset_value: CGSize){
+    bboxID = 0
+    for bCord in coordinateList{
+        bboxID = bboxID + 1
+        
+        var C1_ = false
+        
+        if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+            C1_ = true
+            coordinateList[bboxID-1] = [coordinateList[bboxID-1][0]+offset_value.width, coordinateList[bboxID-1][1]+offset_value.height, coordinateList[bboxID-1][2], coordinateList[bboxID-1][3]]
             print("within C1 edge...")
-            //            coordinateList[bboxID][0] += coordinates.x
-            //            coordinateList[bboxID][1] += coordinates.y
         }
         
         // Check if the tap is at the top right corner
@@ -299,12 +336,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
             print("within C4 edge...")
         }
-        else{
-            continue
-        }
     }
-    print(withinBBoxArea)
-    return (withinBBOX, temp_boxID)
 }
 
 struct AnnotationView_Previews: PreviewProvider {
