@@ -120,7 +120,7 @@ struct AnnotationView: View {
         //            Color(red: 0.26, green: 0.26, blue: 0.26)
         //                .ignoresSafeArea()
         
-        let longPressGesture = LongPressGesture(minimumDuration: 0.3)
+        let longPressGesture = LongPressGesture(minimumDuration: 0.5)
         
             .updating($isLongPressing) { currentState, gestureState,
                 transaction in
@@ -256,6 +256,7 @@ struct AnnotationView: View {
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool) -> (Bool, Int){
     
     bboxID = 0
+    var temp_boxID = 0
     var withinBBoxArea = false
     withinBBOX = false
     
@@ -273,6 +274,8 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
             withinBBOX = true
+            temp_boxID = bboxID
+            return (withinBBOX, bboxID)
         }
         
         // Check if the tap is at the top left corner
@@ -301,7 +304,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         }
     }
     print(withinBBoxArea)
-    return (withinBBOX, bboxID)
+    return (withinBBOX, temp_boxID)
 }
 
 struct AnnotationView_Previews: PreviewProvider {
