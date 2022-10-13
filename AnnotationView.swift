@@ -15,6 +15,12 @@ import SwiftUI
 //class GlobalString: ObservableObject{
 //    @Published var currentBoxID = Int()
 //}
+struct bboxCorner{
+    let C1: Bool
+    let C2: Bool
+    let C3: Bool
+    let C4: Bool
+}
 
 struct AnnotationView: View {
     
@@ -112,6 +118,7 @@ struct AnnotationView: View {
     @State var previous_offsetX = 0.0
     @State var previous_offsetY = 0.0
     @State var boxIDVAL = 0
+    @State var selectedCorner: [bboxCorner] = []
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -311,6 +318,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
 }
 
 func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], offset_value: CGSize){
+    // , selectedCorner_:bboxCorner
     bboxID = 0
     for bCord in coordinateList{
         bboxID = bboxID + 1
@@ -318,8 +326,8 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 //        var C1_ = false
         
         if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
-            coordinateList[bboxID-1] = [coordinateList[bboxID-1][0]+offset_value.width, coordinateList[bboxID-1][1]+offset_value.height, coordinateList[bboxID-1][2]+offset_value.width, coordinateList[bboxID-1][3]+offset_value.height]
-
+//            coordinateList[bboxID-1] = [coordinateList[bboxID-1][0]+offset_value.width, coordinateList[bboxID-1][1]+offset_value.height, coordinateList[bboxID-1][2]+offset_value.width, coordinateList[bboxID-1][3]+offset_value.height]
+//
             print("within C1 edge...")
         }
         
