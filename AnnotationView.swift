@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-class handleBoxControl: ObservableObject{
-    @Published var saveCurrentBbox = true
-}
+//class handleBoxControl: ObservableObject{
+//    @Published var saveCurrentBbox = true
+//}
 
 // create a @Published to receive current bbox that user is working with for moving and resizing etc
 //class GlobalString: ObservableObject{
@@ -19,59 +19,59 @@ class handleBoxControl: ObservableObject{
 struct AnnotationView: View {
     
     //    @StateObject var globalString = GlobalString()
-    @EnvironmentObject var statusUpdate: handleBoxControl
+//    @EnvironmentObject var statusUpdate: handleBoxControl
     
-    enum DragState {
-        case inactive // boolean variable
-        case pressing // boolean variable
-        case dragging(translation: CGSize)
-        
-        var translation: CGSize {
-            switch self {
-            case .inactive, .pressing:
-                return .zero
-            case .dragging(let translation):
-                return translation
-            }
-        }
-        
-        //        var isActive: Bool {
-        //            switch self {
-        //            case .inactive:
-        //                return false
-        //            case .pressing, .dragging:
-        //                return true
-        //            }
-        //        }
-        
-        var isActive: Bool {
-            switch self {
-            case .inactive, .dragging:
-                return false
-            case .pressing:
-                return true
-            }
-        }
-        
-        // isPressing wont work because when drawing a new box we are still pressing and dragging. The only way to differentiate this is to differentiate between long press drag and tap drag
-        //        var isPressing: Bool {
-        //            switch self {
-        //            case .inactive:
-        //                return false
-        //            case .pressing, .dragging:
-        //                return true
-        //            }
-        //        }
-        
-        var isDragging: Bool {
-            switch self {
-            case .inactive, .pressing:
-                return false
-            case .dragging:
-                return true
-            }
-        }
-    }
+//    enum DragState {
+//        case inactive // boolean variable
+//        case pressing // boolean variable
+//        case dragging(translation: CGSize)
+//
+//        var translation: CGSize {
+//            switch self {
+//            case .inactive, .pressing:
+//                return .zero
+//            case .dragging(let translation):
+//                return translation
+//            }
+//        }
+//
+//        //        var isActive: Bool {
+//        //            switch self {
+//        //            case .inactive:
+//        //                return false
+//        //            case .pressing, .dragging:
+//        //                return true
+//        //            }
+//        //        }
+//
+//        var isActive: Bool {
+//            switch self {
+//            case .inactive, .dragging:
+//                return false
+//            case .pressing:
+//                return true
+//            }
+//        }
+//
+//        // isPressing wont work because when drawing a new box we are still pressing and dragging. The only way to differentiate this is to differentiate between long press drag and tap drag
+//        //        var isPressing: Bool {
+//        //            switch self {
+//        //            case .inactive:
+//        //                return false
+//        //            case .pressing, .dragging:
+//        //                return true
+//        //            }
+//        //        }
+//
+//        var isDragging: Bool {
+//            switch self {
+//            case .inactive, .pressing:
+//                return false
+//            case .dragging:
+//                return true
+//            }
+//        }
+//    }
     
     @State var rectData: [[CGFloat]] = [] // global var to hold annotation coordinates
     @State var startLoc = CGPoint.zero // start location of the coordinate the user clicks
@@ -96,7 +96,7 @@ struct AnnotationView: View {
     @State var isDraggable = false
     @State var translation = CGSize.zero
     
-    @GestureState var dragState = DragState.inactive
+//    @GestureState var dragState = DragState.inactive
     @State var boxID = 0
     
     // becomes ture if the user raps or drags within the bounding box
