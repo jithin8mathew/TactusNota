@@ -117,6 +117,8 @@ struct AnnotationView: View {
     @State var C2 = false
     @State var C3 = false
     @State var C4 = false
+    
+    @State var dragLock = false
 
     // switch case state value holder
     //    @State var viewState = CGSize.zero
@@ -177,18 +179,22 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
-                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
-                boxIDVAL = coordinateManager.1
+//                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
+//                boxIDVAL = coordinateManager.1
                 resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4)
-                if C1 == true{
-//                    print(rectData[boxIDVAL])
-                    rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0]+offset.width, rectData[boxIDVAL-1][1]+offset.height, rectData[boxIDVAL-1][2]+offset.width, rectData[boxIDVAL-1][3]+offset.height]
-                }
+                
+//                if C1 == true && boxIDVAL != 0{
+//                    dragLock = true
+//                    rectData[boxIDVAL] = [rectData[boxIDVAL][0]+offset.width, rectData[boxIDVAL][1]+offset.height, rectData[boxIDVAL][2]+offset.width, rectData[boxIDVAL][3]+offset.height]
+//                }
+//                else{
+//                    dragLock = false
+//                }
 //                print("OFFSET",offset)
 //                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
 //                boxIDVAL = coordinateManager.1
                 print("BoxIDVAL", boxIDVAL)
-                if self.completedLongPress == true && boxIDVAL != 0{ // checking if boxIDVAL value is 0 is a clever way to handle long press guestures outside the bounding boxes
+                if self.completedLongPress == true && boxIDVAL != 0 && dragLock == false{ // checking if boxIDVAL value is 0 is a clever way to handle long press guestures outside the bounding boxes
                     previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
                     previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
                     rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
@@ -211,6 +217,7 @@ struct AnnotationView: View {
                 }
 //                delayUpdate() // this dones not work because of "'async' call in a function that does not support concurrency"
                 self.completedLongPress = false
+                dragLock = false
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
