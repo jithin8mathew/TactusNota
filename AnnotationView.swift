@@ -18,60 +18,8 @@ import SwiftUI
 
 struct AnnotationView: View {
     
-    //    @StateObject var globalString = GlobalString()
+//    @StateObject var globalString = GlobalString()
 //    @EnvironmentObject var statusUpdate: handleBoxControl
-    
-//    enum DragState {
-//        case inactive // boolean variable
-//        case pressing // boolean variable
-//        case dragging(translation: CGSize)
-//
-//        var translation: CGSize {
-//            switch self {
-//            case .inactive, .pressing:
-//                return .zero
-//            case .dragging(let translation):
-//                return translation
-//            }
-//        }
-//
-//        //        var isActive: Bool {
-//        //            switch self {
-//        //            case .inactive:
-//        //                return false
-//        //            case .pressing, .dragging:
-//        //                return true
-//        //            }
-//        //        }
-//
-//        var isActive: Bool {
-//            switch self {
-//            case .inactive, .dragging:
-//                return false
-//            case .pressing:
-//                return true
-//            }
-//        }
-//
-//        // isPressing wont work because when drawing a new box we are still pressing and dragging. The only way to differentiate this is to differentiate between long press drag and tap drag
-//        //        var isPressing: Bool {
-//        //            switch self {
-//        //            case .inactive:
-//        //                return false
-//        //            case .pressing, .dragging:
-//        //                return true
-//        //            }
-//        //        }
-//
-//        var isDragging: Bool {
-//            switch self {
-//            case .inactive, .pressing:
-//                return false
-//            case .dragging:
-//                return true
-//            }
-//        }
-//    }
     
     @State var rectData: [[CGFloat]] = [] // global var to hold annotation coordinates
     @State var startLoc = CGPoint.zero // start location of the coordinate the user clicks
@@ -189,12 +137,6 @@ struct AnnotationView: View {
                     dragLock = true
                     rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
                 }
-//                else{
-//                    dragLock = false
-//                }
-//                print("OFFSET",offset)
-//                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
-//                boxIDVAL = coordinateManager.1
                 print("BoxIDVAL", boxIDVAL)
                 if self.completedLongPress == true{
                     dragLock = false
