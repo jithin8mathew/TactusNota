@@ -18,8 +18,8 @@ import SwiftUI
 
 struct AnnotationView: View {
     
-//    @StateObject var globalString = GlobalString()
-//    @EnvironmentObject var statusUpdate: handleBoxControl
+    //    @StateObject var globalString = GlobalString()
+    //    @EnvironmentObject var statusUpdate: handleBoxControl
     
     @State var rectData: [[CGFloat]] = [] // global var to hold annotation coordinates
     @State var startLoc = CGPoint.zero // start location of the coordinate the user clicks
@@ -44,7 +44,7 @@ struct AnnotationView: View {
     @State var isDraggable = false
     @State var translation = CGSize.zero
     
-//    @GestureState var dragState = DragState.inactive
+    //    @GestureState var dragState = DragState.inactive
     @State var boxID = 0
     
     // becomes ture if the user raps or drags within the bounding box
@@ -60,7 +60,7 @@ struct AnnotationView: View {
     @State var previous_offsetX = 0.0
     @State var previous_offsetY = 0.0
     @State var boxIDVAL = 0
-//    @State var selectedCorner: [bboxCorner] = []
+    //    @State var selectedCorner: [bboxCorner] = []
     @State var C1 = false
     @State var C2 = false
     @State var C3 = false
@@ -68,7 +68,7 @@ struct AnnotationView: View {
     
     @State var dragLock = false
     @State var resizeLock = false
-
+    
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -82,7 +82,7 @@ struct AnnotationView: View {
             .updating($isLongPressing) { currentState, gestureState,
                 transaction in
                 gestureState = currentState
-//                transaction.animation = Animation.easeIn(duration: 2.0)
+                //                transaction.animation = Animation.easeIn(duration: 2.0)
             }
             .onEnded { finished in
                 self.completedLongPress = finished
@@ -129,14 +129,18 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
-                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
-                boxIDVAL = coordinateManager.1
-                resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4)
-                
-                if C1 == true && boxIDVAL != 0 && self.completedLongPress == false && resizeLock == false{
-                    dragLock = true
-                    rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
+                if resizeLock == false{
+                    let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
+                    boxIDVAL = coordinateManager.1
+                    resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4)
+                    
+                    if C1 == true && boxIDVAL != 0 && self.completedLongPress == false && resizeLock == false{
+                        dragLock = true
+                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
+                    }
+
                 }
+                
                 print("BoxIDVAL", boxIDVAL)
                 if self.completedLongPress == true{
                     dragLock = false
@@ -146,8 +150,8 @@ struct AnnotationView: View {
                     previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
                     previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
                     rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
-//                    print("OFFSET CORRECTION:", rectData[boxIDVAL-1][0]+offset.width,rectData[boxIDVAL-1][1]+offset.height)
-//                    print("OFFSET CORRECTION TWO:", previous_offsetX,previous_offsetY)
+                    //                    print("OFFSET CORRECTION:", rectData[boxIDVAL-1][0]+offset.width,rectData[boxIDVAL-1][1]+offset.height)
+                    //                    print("OFFSET CORRECTION TWO:", previous_offsetX,previous_offsetY)
                 }
             }
             .onEnded({
@@ -158,14 +162,15 @@ struct AnnotationView: View {
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         print("Bbox drawn")
                     }
-//                    else if {
-//
-//                    }
+                    //                    else if {
+                    //
+                    //                    }
                     // set the withingBBox boolean to false after drage is complete
                 }
-//                delayUpdate() // this dones not work because of "'async' call in a function that does not support concurrency"
+                //                delayUpdate() // this dones not work because of "'async' call in a function that does not support concurrency"
                 self.completedLongPress = false
                 dragLock = false
+                resizeLock = false
                 
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -216,10 +221,10 @@ struct AnnotationView: View {
         //            .environmentObject(statusUpdate)
     } // end of main body
     
-//    private func delayUpdate() async {
-//        try? await Task.sleep(nanoseconds: 7_500_000_000)
-//        self.completedLongPress = false
-//        }
+    //    private func delayUpdate() async {
+    //        try? await Task.sleep(nanoseconds: 7_500_000_000)
+    //        self.completedLongPress = false
+    //        }
 }
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool) -> (Bool, Int){
@@ -248,29 +253,29 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         }
         
         // Check if the tap is at the top left corner
-//        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
-//            print("within C1 edge...")
-//            //            coordinateList[bboxID][0] += coordinates.x
-//            //            coordinateList[bboxID][1] += coordinates.y
-//        }
-//
-//        // Check if the tap is at the top right corner
-//        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
-//            print("within C2 edge...")
-//        }
-//
-//        // Check if the tap is at the bottom left corner
-//        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
-//            print("within C3 edge...")
-//        }
-//
-//        // Check if the tap is at the bottom right corner
-//        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
-//            print("within C4 edge...")
-//        }
+        //        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+        //            print("within C1 edge...")
+        //            //            coordinateList[bboxID][0] += coordinates.x
+        //            //            coordinateList[bboxID][1] += coordinates.y
+        //        }
+        //
+        //        // Check if the tap is at the top right corner
+        //        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+        //            print("within C2 edge...")
+        //        }
+        //
+        //        // Check if the tap is at the bottom left corner
+        //        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+        //            print("within C3 edge...")
+        //        }
+        //
+        //        // Check if the tap is at the bottom right corner
+        //        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+        //            print("within C4 edge...")
+        //        }
         else{
             continue
-//            return (withinBBOX, 0)
+            //            return (withinBBOX, 0)
         }
     }
     print(withinBBoxArea)
@@ -283,15 +288,15 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
     for bCord in coordinateList{
         bboxID = bboxID + 1
         
-//        var C1_ = false
+        //        var C1_ = false
         
         if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             C1_ = true
             C2_ = false
             C3_ = false
             C4_ = false
-//            coordinateList[bboxID-1] = [coordinateList[bboxID-1][0]+offset_value.width, coordinateList[bboxID-1][1]+offset_value.height, coordinateList[bboxID-1][2]+offset_value.width, coordinateList[bboxID-1][3]+offset_value.height]
-//
+            //            coordinateList[bboxID-1] = [coordinateList[bboxID-1][0]+offset_value.width, coordinateList[bboxID-1][1]+offset_value.height, coordinateList[bboxID-1][2]+offset_value.width, coordinateList[bboxID-1][3]+offset_value.height]
+            //
             print("within C1 edge...")
         }
         
@@ -308,6 +313,12 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         // Check if the tap is at the bottom right corner
         else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
             print("within C4 edge...")
+        }
+        else{
+            C1_ = false
+            C2_ = false
+            C3_ = false
+            C4_ = false
         }
     }
 }
