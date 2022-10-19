@@ -129,12 +129,12 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
-                if resizeLock == false{
+                if resizeLock == false && self.completedLongPress == false{
                     let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                     boxIDVAL = coordinateManager.1
                     resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4)
                     
-                    if C1 == true && boxIDVAL != 0 && self.completedLongPress == false {
+                    if C1 == true && boxIDVAL != 0{
                         dragLock = true
 //                        C1 = true
                         rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
