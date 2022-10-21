@@ -126,6 +126,8 @@ struct AnnotationView: View {
         let mainGesture = DragGesture(minimumDistance: 0)
             .onChanged {
                 (value) in //print(value.location)
+                previous_offsetX=0
+                previous_offsetY=0
                 startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
@@ -138,12 +140,12 @@ struct AnnotationView: View {
                     if C1 == true && boxIDVAL != 0{
                         dragLock = true
 //                        C1 = true
-                        previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][0])
-                        previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][1])
-                        print(startLoc.x-contWidth, startLoc.y-contHeight)
+                        previous_offsetX = (rectData[boxIDVAL-1][0]) - abs(startLoc.x - abs(value.location.x))
+                        previous_offsetY = (rectData[boxIDVAL-1][1]) - abs(startLoc.y - abs(value.location.y))
+                        print(previous_offsetX, previous_offsetY)
 //                        print([rectData[boxIDVAL-1][0] - (-1 * (previous_offsetX)), rectData[boxIDVAL-1][1] - (-1 * (previous_offsetY)), rectData[boxIDVAL-1][2] + (-1 * (previous_offsetX)), rectData[boxIDVAL-1][3] + (-1 * (previous_offsetY))])
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
-//                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (1 * (previous_offsetX)), rectData[boxIDVAL-1][1] - (1 * (previous_offsetY)), rectData[boxIDVAL-1][2] + (1 * (previous_offsetX)), rectData[boxIDVAL-1][3] + (1 * (previous_offsetY))]
+//                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
+                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - abs(previous_offsetX), rectData[boxIDVAL-1][1] - abs(previous_offsetY), rectData[boxIDVAL-1][2] + abs(previous_offsetX), rectData[boxIDVAL-1][3] + abs(previous_offsetY)]
 
                     }
 
