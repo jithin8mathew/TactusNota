@@ -70,6 +70,9 @@ struct AnnotationView: View {
     @State var resizeLock = false
     @State var resizeDragState = false
     
+    @State var prev_f_width = 0.0
+    @State var prev_f_height = 0.0
+    
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -141,8 +144,12 @@ struct AnnotationView: View {
                         dragLock = true
                         //                        C1 = true
                         
-                        f_width = f_width + contWidth
-                        f_height = f_height + contHeight
+                        f_width = contWidth - f_width
+                        f_height =  contHeight - f_height
+                        prev_f_width = f_width - prev_f_width
+                        prev_f_height = f_height - prev_f_height
+                        print(prev_f_width, prev_f_height, "PREVIOUS")
+
                         print("width:",f_width, "height:",f_height)
                         print([rectData[boxIDVAL-1][0] - abs(f_width), rectData[boxIDVAL-1][1] - abs(f_height), rectData[boxIDVAL-1][2] + abs(f_width), rectData[boxIDVAL-1][3] + abs(f_height)])
                         //                        print([rectData[boxIDVAL-1][0] - (-1 * (previous_offsetX)), rectData[boxIDVAL-1][1] - (-1 * (previous_offsetY)), rectData[boxIDVAL-1][2] + (-1 * (previous_offsetX)), rectData[boxIDVAL-1][3] + (-1 * (previous_offsetY))])
