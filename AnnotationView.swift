@@ -173,7 +173,7 @@ struct AnnotationView: View {
                 self.completedLongPress = false
                 dragLock = false
                 resizeLock = false
-//                C1 = false
+                C1 = false
                 
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -317,12 +317,12 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
             print("within C4 edge...")
         }
-        else{
-            C1_ = false
-            C2_ = false
-            C3_ = false
-            C4_ = false
-        }
+//        else{
+//            C1_ = false
+//            C2_ = false
+//            C3_ = false
+//            C4_ = false
+//        }
     }
 }
 
