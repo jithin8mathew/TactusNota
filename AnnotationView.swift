@@ -126,8 +126,8 @@ struct AnnotationView: View {
         let mainGesture = DragGesture(minimumDistance: 0)
             .onChanged {
                 (value) in //print(value.location)
-                previous_offsetX=0
-                previous_offsetY=0
+                var f_width=0.0
+                var f_height=0.0
                 startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
@@ -139,19 +139,21 @@ struct AnnotationView: View {
                     print("C1 status: ", C1)
                     if C1 == true && boxIDVAL != 0{
                         dragLock = true
-//                        C1 = true
-                        previous_offsetX = (rectData[boxIDVAL-1][0]) - abs(startLoc.x - abs(value.location.x))
-                        previous_offsetY = (rectData[boxIDVAL-1][1]) - abs(startLoc.y - abs(value.location.y))
-                        print(previous_offsetX, previous_offsetY)
-//                        print([rectData[boxIDVAL-1][0] - (-1 * (previous_offsetX)), rectData[boxIDVAL-1][1] - (-1 * (previous_offsetY)), rectData[boxIDVAL-1][2] + (-1 * (previous_offsetX)), rectData[boxIDVAL-1][3] + (-1 * (previous_offsetY))])
-//                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - abs(previous_offsetX), rectData[boxIDVAL-1][1] - abs(previous_offsetY), rectData[boxIDVAL-1][2] + abs(previous_offsetX), rectData[boxIDVAL-1][3] + abs(previous_offsetY)]
-
+                        //                        C1 = true
+                        
+                        f_width = f_width + contWidth
+                        f_height = f_height + contHeight
+                        print("width:",f_width, "height:",f_height)
+                        print([rectData[boxIDVAL-1][0] - abs(f_width), rectData[boxIDVAL-1][1] - abs(f_height), rectData[boxIDVAL-1][2] + abs(f_width), rectData[boxIDVAL-1][3] + abs(f_height)])
+                        //                        print([rectData[boxIDVAL-1][0] - (-1 * (previous_offsetX)), rectData[boxIDVAL-1][1] - (-1 * (previous_offsetY)), rectData[boxIDVAL-1][2] + (-1 * (previous_offsetX)), rectData[boxIDVAL-1][3] + (-1 * (previous_offsetY))])
+                        //                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
+                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - abs(f_width), rectData[boxIDVAL-1][1] - abs(f_height), rectData[boxIDVAL-1][2] + abs(f_width), rectData[boxIDVAL-1][3] + abs(f_height)]
+                        
                     }
-
+                    
                 }
                 
-//                print("BoxIDVAL", boxIDVAL)
+                //                print("BoxIDVAL", boxIDVAL)
                 if self.completedLongPress == true{
                     dragLock = false
                 }
@@ -168,9 +170,9 @@ struct AnnotationView: View {
                 (value) in
                 if (value.location.x - startLoc.x > 20){
                     if self.completedLongPress == false{
-//                        print("checking within bbox",withingBBox)
+                        //                        print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
-//                        print("Bbox drawn")
+                        //                        print("Bbox drawn")
                     }
                     //                    else if {
                     //
@@ -252,9 +254,9 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         
         // This section checks if the tap on the screen is withing an already drawn bouding box
         if coordinates.x >= bCord[0]  && coordinates.x <= (bCord[0]+bCord[2])  && coordinates.y >= bCord[1] && coordinates.y <= (bCord[1]+bCord[3]) { // && bCord[1]+(bCord[2]+bCord[3]) >= coordinates.y
-//            print("actual coordinates:", coordinates.x, coordinates.y)
-//            print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
-//            print("working with bbox: ",bboxID)
+            //            print("actual coordinates:", coordinates.x, coordinates.y)
+            //            print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
+            //            print("working with bbox: ",bboxID)
             
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
@@ -289,7 +291,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             //            return (withinBBOX, 0)
         }
     }
-//    print(withinBBoxArea)
+    //    print(withinBBoxArea)
     return (withinBBOX, temp_boxID)
 }
 
@@ -325,12 +327,12 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
             print("within C4 edge...")
         }
-//        else{
-//            C1_ = false
-//            C2_ = false
-//            C3_ = false
-//            C4_ = false
-//        }
+        //        else{
+        //            C1_ = false
+        //            C2_ = false
+        //            C3_ = false
+        //            C4_ = false
+        //        }
     }
 }
 
