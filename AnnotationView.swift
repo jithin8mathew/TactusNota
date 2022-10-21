@@ -68,6 +68,7 @@ struct AnnotationView: View {
     
     @State var dragLock = false
     @State var resizeLock = false
+    @State var resizeDragState = false
     
     // switch case state value holder
     //    @State var viewState = CGSize.zero
@@ -133,7 +134,7 @@ struct AnnotationView: View {
                     let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                     boxIDVAL = coordinateManager.1
                     resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4)
-                    
+                    print("C1 status: ", C1)
                     if C1 == true && boxIDVAL != 0{
                         dragLock = true
 //                        C1 = true
@@ -142,7 +143,7 @@ struct AnnotationView: View {
 
                 }
                 
-                print("BoxIDVAL", boxIDVAL)
+//                print("BoxIDVAL", boxIDVAL)
                 if self.completedLongPress == true{
                     dragLock = false
                 }
@@ -159,9 +160,9 @@ struct AnnotationView: View {
                 (value) in
                 if (value.location.x - startLoc.x > 20){
                     if self.completedLongPress == false{
-                        print("checking within bbox",withingBBox)
+//                        print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
-                        print("Bbox drawn")
+//                        print("Bbox drawn")
                     }
                     //                    else if {
                     //
@@ -243,9 +244,9 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
         
         // This section checks if the tap on the screen is withing an already drawn bouding box
         if coordinates.x >= bCord[0]  && coordinates.x <= (bCord[0]+bCord[2])  && coordinates.y >= bCord[1] && coordinates.y <= (bCord[1]+bCord[3]) { // && bCord[1]+(bCord[2]+bCord[3]) >= coordinates.y
-            print("actual coordinates:", coordinates.x, coordinates.y)
-            print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
-            print("working with bbox: ",bboxID)
+//            print("actual coordinates:", coordinates.x, coordinates.y)
+//            print("withing bbox",bCord[0],bCord[1], bCord[0]+bCord[2], bCord[1]+bCord[3])
+//            print("working with bbox: ",bboxID)
             
             // if withing coordinates then return the bbox ID and set a boolean var to true.
             withinBBoxArea = true
@@ -280,7 +281,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             //            return (withinBBOX, 0)
         }
     }
-    print(withinBBoxArea)
+//    print(withinBBoxArea)
     return (withinBBOX, temp_boxID)
 }
 
