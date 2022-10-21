@@ -138,7 +138,13 @@ struct AnnotationView: View {
                     if C1 == true && boxIDVAL != 0{
                         dragLock = true
 //                        C1 = true
+                        previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][0])
+                        previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][1])
+                        print(startLoc.x-contWidth, startLoc.y-contHeight)
+//                        print([rectData[boxIDVAL-1][0] - (-1 * (previous_offsetX)), rectData[boxIDVAL-1][1] - (-1 * (previous_offsetY)), rectData[boxIDVAL-1][2] + (-1 * (previous_offsetX)), rectData[boxIDVAL-1][3] + (-1 * (previous_offsetY))])
                         rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
+//                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (1 * (previous_offsetX)), rectData[boxIDVAL-1][1] - (1 * (previous_offsetY)), rectData[boxIDVAL-1][2] + (1 * (previous_offsetX)), rectData[boxIDVAL-1][3] + (1 * (previous_offsetY))]
+
                     }
 
                 }
