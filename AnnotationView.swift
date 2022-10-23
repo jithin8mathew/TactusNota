@@ -66,8 +66,8 @@ struct AnnotationView: View {
     @State var C3 = false
     @State var C4 = false
     
-    @State var dragLock = false
-    @State var resizeLock = false
+    @State var dragLock = false // This section prevents from dragging the bounding boxes around
+    @State var resizeLock = false // This section prevents the bounding box from being resized
     @State var resizeDragState = false
     
     @State var prev_f_width = 0.0
@@ -97,33 +97,7 @@ struct AnnotationView: View {
             }
         
         //            .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
-        //            .updating($dragState) { value, gestureState, transaction in // do not modify any variables within this
-        //                switch value{
-        //                case .first(true):
-        //                    gestureState = .pressing
-        //                case .second(true, let drag):
-        //                    gestureState = .dragging(translation: drag?.translation ?? .zero)
-        //                default:
-        //                    gestureState = .inactive
-        //                }
-        //            }
-        //            .onEnded { value in
-        //                print("long press ended")
-        //                self.didLongPress = true
-        //                print(self.didLongPress,"Long press status")
-        //                guard case .second(true, let drag?) = value else { return }
-        //                self.viewState.width += drag.translation.width
-        //                self.viewState.height += drag.translation.height
-        //                print("currentString ID ",bboxID) // this shows that current string ID is not updating
-        //                print("rectData before change : ",rectData[bboxID-1])
-        //
-        ////                rectData[globalString.currentBoxID][0] += drag.translation.width
-        ////                rectData[globalString.currentBoxID][1] += drag.translation.height
-        //                rectData[bboxID][0] += drag.translation.width
-        //                rectData[bboxID][1] += drag.translation.height
-        //                print(drag.translation.width, drag.translation.height)
-        //                print("rectData x and y after ", rectData[bboxID-1])
-        //            }
+        
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         let mainGesture = DragGesture(minimumDistance: 0)
