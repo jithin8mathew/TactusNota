@@ -12,12 +12,13 @@ import SwiftUI
 //}
 
 // create a @Published to receive current bbox that user is working with for moving and resizing etc
-//class GlobalString: ObservableObject{
-//    @Published var currentBoxID = Int()
+//class GlobalCoordination: ObservableObject{
+//    @Published var startTap_coordinate = CGPoint()
 //}
 
 struct AnnotationView: View {
     
+//    @StateObject var globalCord = GlobalCoordination()
     //    @StateObject var globalString = GlobalString()
     //    @EnvironmentObject var statusUpdate: handleBoxControl
     
@@ -109,6 +110,7 @@ struct AnnotationView: View {
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
+//                globalCord.startTap_coordinate = startLoc // assign the startloc to global var
                 if resizeLock == false && self.completedLongPress == false{
                     let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                     boxIDVAL = coordinateManager.1
@@ -323,8 +325,14 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 }
 
 func incrementTracker(startLocationValue: CGPoint, currentDragPosition: CGPoint){
-    var SLV = startLocationValue // SLV : Start Location Value
+    
+//    @StateObject var globalCord = GlobalCoordination()
+    var SLV = startLocationValue
+//    globalCord.startTap_coordinate.x = abs(currentDragPosition.x)-abs(SLV.x)  // SLV : Start Location Value
+//    globalCord.startTap_coordinate.y = abs(currentDragPosition.y)-abs(SLV.y)  // SLV : Start Location Value
     print(SLV, currentDragPosition)
+//    print("XXXXX increment :", abs(globalCord.startTap_coordinate.x) - abs(currentDragPosition.x)-abs(SLV.x))
+//    print("YYYYY increment :", abs(globalCord.startTap_coordinate.y) - abs(currentDragPosition.y)-abs(SLV.y))
     print("X increment :", abs(currentDragPosition.x)-abs(SLV.x))
     print("Y increment :", abs(currentDragPosition.y)-abs(SLV.y))
     SLV.x = currentDragPosition.x
