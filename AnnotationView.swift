@@ -327,16 +327,22 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 func incrementTracker(startLocationValue: CGPoint, currentDragPosition: CGPoint){
     
 //    @StateObject var globalCord = GlobalCoordination()
-    var SLV = startLocationValue
-//    globalCord.startTap_coordinate.x = abs(currentDragPosition.x)-abs(SLV.x)  // SLV : Start Location Value
-//    globalCord.startTap_coordinate.y = abs(currentDragPosition.y)-abs(SLV.y)  // SLV : Start Location Value
+    var SLV = CGPoint.zero
+    var prev_SLV = CGPoint.zero
+    if SLV == CGPoint.zero{
+        var SLV = startLocationValue
+    }
+    else{
+        SLV = prev_SLV
+    }
+//    prev_SLV = SLV
+
     print(SLV, currentDragPosition)
-//    print("XXXXX increment :", abs(globalCord.startTap_coordinate.x) - abs(currentDragPosition.x)-abs(SLV.x))
-//    print("YYYYY increment :", abs(globalCord.startTap_coordinate.y) - abs(currentDragPosition.y)-abs(SLV.y))
     print("X increment :", abs(currentDragPosition.x)-abs(SLV.x))
     print("Y increment :", abs(currentDragPosition.y)-abs(SLV.y))
-    SLV.x = currentDragPosition.x
-    SLV.y = currentDragPosition.y
+    prev_SLV.x = currentDragPosition.x
+    prev_SLV.y = currentDragPosition.y
+    
 }
 
 struct AnnotationView_Previews: PreviewProvider {
