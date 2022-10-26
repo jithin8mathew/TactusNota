@@ -74,6 +74,9 @@ struct AnnotationView: View {
     @State var prev_f_width = 0.0
     @State var prev_f_height = 0.0
     
+    @State var prev_start_loc = CGPoint.zero
+    @State var cordData: [[CGFloat]] = []
+    
     // switch case state value holder
     //    @State var viewState = CGSize.zero
     
@@ -104,8 +107,8 @@ struct AnnotationView: View {
         let mainGesture = DragGesture(minimumDistance: 0)
             .onChanged {
                 (value) in //print(value.location)
-                var f_width=0.0
-                var f_height=0.0
+//                var f_width=0.0
+//                var f_height=0.0
                 startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
                 contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
@@ -115,27 +118,19 @@ struct AnnotationView: View {
                     let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                     boxIDVAL = coordinateManager.1
                     resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4)
-//                    print("C1 status: ", C1)
+
                     if C1 == true && boxIDVAL != 0{
                         dragLock = true
-                        //                        C1 = true
+                        cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
+                        print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
                         
-                        f_width = contWidth - f_width
-                        f_height =  contHeight - f_height
-                        prev_f_width = f_width - prev_f_width
-                        prev_f_height = f_height - prev_f_height
-                        incrementTracker(startLocationValue: startLoc, currentDragPosition: value.location)
-//                        print(abs(startLoc.x)-abs(value.location.x),"absolute testing")// mother of all printing
-//                        var current_valll = abs(startLoc.x)-abs(value.location.x)
-//                        print(abs(startLoc.x)-abs(current_valll),"abs abs testing")
-//                        var prev_valll = abs(startLoc.x)-abs(value.location.x)
-//                        print(prev_f_width, prev_f_height, "PREVIOUS")
-
-//                        print("width:",f_width, "height:",f_height)
-//                        print([rectData[boxIDVAL-1][0] - abs(f_width), rectData[boxIDVAL-1][1] - abs(f_height), rectData[boxIDVAL-1][2] + abs(f_width), rectData[boxIDVAL-1][3] + abs(f_height)])
-                        //                        print([rectData[boxIDVAL-1][0] - (-1 * (previous_offsetX)), rectData[boxIDVAL-1][1] - (-1 * (previous_offsetY)), rectData[boxIDVAL-1][2] + (-1 * (previous_offsetX)), rectData[boxIDVAL-1][3] + (-1 * (previous_offsetY))])
-                        //                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (-1 * (contWidth)), rectData[boxIDVAL-1][1] - (-1 * (contHeight)), rectData[boxIDVAL-1][2] + (-1 * (contWidth)), rectData[boxIDVAL-1][3] + (-1 * (contHeight))]
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - abs(prev_f_width), rectData[boxIDVAL-1][1] - abs(prev_f_height), rectData[boxIDVAL-1][2] + abs(prev_f_width), rectData[boxIDVAL-1][3] + abs(prev_f_height)]
+                        if cordData.count > 2{
+//                            print("CorData : ",cordData[cordData.count-2][0] - cordData[cordData.count-1][0])
+                            prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
+                            prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
+                        }
+//                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - abs(prev_f_width), rectData[boxIDVAL-1][1] - abs(prev_f_height), rectData[boxIDVAL-1][2] + abs(prev_f_width), rectData[boxIDVAL-1][3] + abs(prev_f_height)] // reduce x and y value while increasing the width and height with the same value
+                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (prev_f_width), rectData[boxIDVAL-1][1] - (prev_f_height), rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
                         
                     }
                     
@@ -150,8 +145,6 @@ struct AnnotationView: View {
                     previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
                     previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
                     rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
-                    //                    print("OFFSET CORRECTION:", rectData[boxIDVAL-1][0]+offset.width,rectData[boxIDVAL-1][1]+offset.height)
-                    //                    print("OFFSET CORRECTION TWO:", previous_offsetX,previous_offsetY)
                 }
             }
             .onEnded({
@@ -162,16 +155,12 @@ struct AnnotationView: View {
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         //                        print("Bbox drawn")
                     }
-                    //                    else if {
-                    //
-                    //                    }
-                    // set the withingBBox boolean to false after drage is complete
                 }
-                //                delayUpdate() // this dones not work because of "'async' call in a function that does not support concurrency"
                 self.completedLongPress = false
                 dragLock = false
                 resizeLock = false
                 C1 = false
+                cordData = []
                 
             }) // onEnded
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -232,7 +221,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
     
     bboxID = 0
     var temp_boxID = 0
-    var withinBBoxArea = false
+//    var withinBBoxArea = false
     withinBBOX = false
     
     //    ForEach(coordinateList, id:\.self)
@@ -247,7 +236,7 @@ func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], v
             //            print("working with bbox: ",bboxID)
             
             // if withing coordinates then return the bbox ID and set a boolean var to true.
-            withinBBoxArea = true
+//            withinBBoxArea = true
             withinBBOX = true
             temp_boxID = bboxID
             return (withinBBOX, bboxID)
@@ -324,26 +313,25 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
     }
 }
 
-func incrementTracker(startLocationValue: CGPoint, currentDragPosition: CGPoint){
-    
-//    @StateObject var globalCord = GlobalCoordination()
-    var SLV = CGPoint.zero
-    var prev_SLV = CGPoint.zero
-    if SLV == CGPoint.zero{
-        var SLV = startLocationValue
-    }
-    else{
-        SLV = prev_SLV
-    }
-//    prev_SLV = SLV
-
-    print(SLV, currentDragPosition)
-    print("X increment :", abs(currentDragPosition.x)-abs(SLV.x))
-    print("Y increment :", abs(currentDragPosition.y)-abs(SLV.y))
-    prev_SLV.x = currentDragPosition.x
-    prev_SLV.y = currentDragPosition.y
-    
-}
+//func incrementTracker(startLocationValue: CGPoint, currentDragPosition: CGPoint){
+//
+////    @StateObject var globalCord = GlobalCoordination()
+//    var SLV = CGPoint.zero
+//    var prev_SLV = CGPoint.zero
+//    if SLV == CGPoint.zero{
+//        var SLV = startLocationValue
+//    }
+//    else{
+//        SLV = prev_SLV
+//    }
+////    prev_SLV = SLV
+//
+//    print(SLV, currentDragPosition)
+//    print("X increment :", abs(currentDragPosition.x)-abs(SLV.x))
+//    print("Y increment :", abs(currentDragPosition.y)-abs(SLV.y))
+//    prev_SLV.x = currentDragPosition.x
+//    prev_SLV.y = currentDragPosition.y
+//}
 
 struct AnnotationView_Previews: PreviewProvider {
     static var previews: some View {
