@@ -133,6 +133,16 @@ struct AnnotationView: View {
                         rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (prev_f_width), rectData[boxIDVAL-1][1] - (prev_f_height), rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
                         
                     }
+                    if C2 == true && boxIDVAL != 0{
+                        dragLock = true
+                        cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
+                        
+                        if cordData.count > 2{
+                            prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
+                            prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
+                        }
+                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)]                         
+                    }
                     
                 }
                 
@@ -292,6 +302,12 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         
         // Check if the tap is at the top right corner
         else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+            
+            C1_ = false
+            C2_ = true
+            C3_ = false
+            C4_ = false
+            
             print("within C2 edge...")
         }
         
