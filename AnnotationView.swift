@@ -141,7 +141,7 @@ struct AnnotationView: View {
                             prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
                             prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
                         }
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)]                         
+                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1] - prev_f_height, rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)]
                     }
                     
                 }
