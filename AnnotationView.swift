@@ -124,6 +124,7 @@ struct AnnotationView: View {
                         cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
                         print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
                         print(boxIDVAL)
+//                        print(dragLock)
                         
                         if cordData.count > 2{
 //                            print("CorData : ",cordData[cordData.count-2][0] - cordData[cordData.count-1][0])
