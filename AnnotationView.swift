@@ -28,7 +28,7 @@ struct AnnotationView: View {
     @State var contHeight = CGFloat.zero // holds the height of the bbox based on users vertical drag
     
     // testing longPress Drag gesture
-    @State var isDragging = false
+//    @State var isDragging = false
     @State private var offset = CGSize.zero
     @State var viewState = CGSize.zero
     
@@ -36,24 +36,24 @@ struct AnnotationView: View {
     //    @GestureState var isTapped = false
     
     // long press Geusture vars
-    @GestureState var press = false
-    @State var show = false
+//    @GestureState var press = false
+//    @State var show = false
     //    @State var pressDrag = false
     //    @GestureState var location = CGPoint(x:0, y:0)
     
     // drag gesture
-    @State var isDraggable = false
-    @State var translation = CGSize.zero
+//    @State var isDraggable = false
+//    @State var translation = CGSize.zero
     
     //    @GestureState var dragState = DragState.inactive
-    @State var boxID = 0
+//    @State var boxID = 0
     
     // becomes ture if the user raps or drags within the bounding box
     @State var withingBBox = false
     // Trun this update on or off to prevent bounding box from being drawn when the user is dragging an existing bbox
-    @State var RTdrawState = true
+//    @State var RTdrawState = true
     
-    @State var testButton = false
+//    @State var testButton = false
     
     @State var didLongPress = false
     @GestureState var isLongPressing = false
@@ -69,12 +69,12 @@ struct AnnotationView: View {
     
     @State var dragLock = false // This section prevents from dragging the bounding boxes around
     @State var resizeLock = false // This section prevents the bounding box from being resized
-    @State var resizeDragState = false
+//    @State var resizeDragState = false
     
     @State var prev_f_width = 0.0
     @State var prev_f_height = 0.0
     
-    @State var prev_start_loc = CGPoint.zero
+//    @State var prev_start_loc = CGPoint.zero
     @State var cordData: [[CGFloat]] = []
     
     // switch case state value holder
