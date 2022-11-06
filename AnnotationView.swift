@@ -62,20 +62,22 @@ struct AnnotationView: View {
     @State var previous_offsetY = 0.0
     @State var boxIDVAL = 0
     //    @State var selectedCorner: [bboxCorner] = []
-    @State var C1 = false
-    @State var C2 = false
-    @State var C3 = false
-    @State var C4 = false
+    
+    // used to keep track of the bounding box corner that is being dealt with
+    @State var C1 = false   // top left
+    @State var C2 = false   // top right
+    @State var C3 = false   // bottom left
+    @State var C4 = false   // bottom right
     
     @State var dragLock = false // This section prevents from dragging the bounding boxes around
     @State var resizeLock = false // This section prevents the bounding box from being resized
 //    @State var resizeDragState = false
     
-    @State var prev_f_width = 0.0
-    @State var prev_f_height = 0.0
+    @State var prev_f_width = 0.0 // temp var for prev width - current width
+    @State var prev_f_height = 0.0 // temp var for prev hieght - current height
     
 //    @State var prev_start_loc = CGPoint.zero
-    @State var cordData: [[CGFloat]] = []
+    @State var cordData: [[CGFloat]] = [] // cordData is a temporary list that gets populated with coordinates when bbox edge is dragged. The purpose of this list is to substract the previous cordinate values from the current. The differecne is used to resize the bounding box.
     
     // switch case state value holder
     //    @State var viewState = CGSize.zero
@@ -97,7 +99,7 @@ struct AnnotationView: View {
                 print("LONG PRESS STATUS:",self.completedLongPress)
                 let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                 boxIDVAL = coordinateManager.1
-                resizeLock = false
+                resizeLock = true
             }
         
         //            .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
@@ -211,7 +213,7 @@ struct AnnotationView: View {
             .overlay(ZStack{
                 //                    dragState.isPressing ?
                 //                self.completedLongPress ?
-                if self.completedLongPress == false{
+                if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
                             x: (startLoc.x), // +  dragState.translation.width,
