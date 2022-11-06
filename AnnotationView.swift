@@ -184,7 +184,7 @@ struct AnnotationView: View {
             .onEnded({
                 (value) in
                 if (value.location.x - startLoc.x > 20){
-                    if self.completedLongPress == false{
+                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
                         //                        print("checking within bbox",withingBBox)
                         rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
                         //                        print("Bbox drawn")
@@ -194,6 +194,9 @@ struct AnnotationView: View {
                 dragLock = false
                 resizeLock = false
                 C1 = false
+                C2 = false
+                C3 = false
+                C4 = false
                 cordData = []
                 
             }) // onEnded
@@ -222,11 +225,7 @@ struct AnnotationView: View {
                             height: contHeight
                         )
                         )
-                    //                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.3))
                         .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                    //                        .offset(x: viewState.width + dragState.translation.width,
-                    //                                y: viewState.height + dragState.translation.height)
-                    //                                : nil
                 }
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -238,7 +237,7 @@ struct AnnotationView: View {
                         )
                         )
                         .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                    //                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                    //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                 } // end of for each loop
             }) // end of image overlay and zstack inside it
             .gesture(simultaneously)
