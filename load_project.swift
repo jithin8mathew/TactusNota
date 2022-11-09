@@ -19,13 +19,15 @@ struct load_project: View {
                         .ignoresSafeArea()
 
                     VStack(spacing: 100){
+                        Spacer()
                         Text("Tacus Nota")
                             .frame(alignment: .center)
                             .font(.custom("Roberta", fixedSize: geometry.size.width * 0.1))
                             .foregroundColor(.yellow)
 //                        Text("\(geometry.size.width\)")
-                            
-                        HStack(spacing: 150){
+                        Spacer()
+                        HStack(){
+                            Spacer()
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
                                     Image(systemName: "plus.app")
@@ -35,7 +37,7 @@ struct load_project: View {
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 150 + (geometry.size.width * 0.01), height: 150 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 100 + (geometry.size.width * 0.01), height: 100 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
@@ -50,6 +52,7 @@ struct load_project: View {
                                     )
                                 
                             }
+                            Spacer()
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
                                     Image(systemName: "folder")
@@ -59,7 +62,7 @@ struct load_project: View {
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 150 + (geometry.size.width * 0.01), height: 150 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 100 + (geometry.size.width * 0.01), height: 100 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
@@ -74,7 +77,7 @@ struct load_project: View {
                                     )
 //                                .border(.red, width: 4)
                             }
-                            
+                            Spacer()
                         } // hstack 1
                         .padding(50)
                         .shadow(color: Color.black.opacity(0.3),
@@ -82,7 +85,8 @@ struct load_project: View {
                                 x: 3,
                                 y: 3)
 //                        .border(.red, width: 4)
-                        
+                        Spacer()
+                        Spacer()
                     }// vstack 1
                     .padding(50)
 //                    .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.1, alignment: .center)

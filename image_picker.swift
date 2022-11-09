@@ -1,53 +1,39 @@
-////
-////  image_picker.swift
-////  TactusNota
-////
-////  Created by Jithin  Mathew on 11/7/22.
-////
+import SwiftUI
+
+struct image_picker: View {
+    
+    var body: some View {
+        Button("Choose Folder") {
+//            self.selectFolder()
+        }
+    }
+    
+//    func selectFolder() {
 //
-//import Foundation
-//import PhotosUI
-//import SwiftUI
+//        let folderChooserPoint = CGPoint(x: 0, y: 0)
+//        let folderChooserSize = CGSize(width: 500, height: 600)
+//        let folderChooserRectangle = CGRect(origin: folderChooserPoint, size: folderChooserSize)
+//        let folderPicker = NSOpenPanel(contentRect: folderChooserRectangle, styleMask: .utilityWindow, backing: .buffered, defer: true)
 //
+//        folderPicker.canChooseDirectories = true
+//        folderPicker.canChooseFiles = true
+//        folderPicker.allowsMultipleSelection = true
+//        folderPicker.canDownloadUbiquitousContents = true
+//        folderPicker.canResolveUbiquitousConflicts = true
 //
-//struct ImagePicker: UIViewControllerRepresentable {
-//    @Binding var image: UIImage?
-//    @State private var showingImagePicker = false
-//    
+//        folderPicker.begin { response in
 //
-//    func makeUIViewController(context: Context) -> PHPickerViewController {
-//        var config = PHPickerConfiguration()
-//        config.filter = .images
-//        let picker = PHPickerViewController(configuration: config)
-//        picker.delegate = context.coordinator
-//        return picker
-//    }
+//            if response == .OK {
+//                let pickedFolders = folderPicker.urls
 //
-//    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
-//
-//    }
-//
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(self)
-//    }
-//
-//    class Coordinator: NSObject, PHPickerViewControllerDelegate {
-//        let parent: ImagePicker
-//
-//        init(_ parent: ImagePicker) {
-//            self.parent = parent
-//        }
-//
-//        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-//            picker.dismiss(animated: true)
-//
-//            guard let provider = results.first?.itemProvider else { return }
-//
-//            if provider.canLoadObject(ofClass: UIImage.self) {
-//                provider.loadObject(ofClass: UIImage.self) { image, _ in
-//                    self.parent.image = image as? UIImage
-//                }
+//                self.selectedFolder.getFileList(at: pickedFolders)
 //            }
 //        }
 //    }
-//}
+}
+
+struct image_picker_Previews: PreviewProvider {
+    static var previews: some View {
+        image_picker()
+    }
+}
