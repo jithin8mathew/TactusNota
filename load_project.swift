@@ -17,7 +17,14 @@ struct load_project: View {
                     GeometryReader { geometry in
                     Color(red: 0.26, green: 0.26, blue: 0.26)
                         .ignoresSafeArea()
+
                     VStack(spacing: 50){
+                        Text("Tacus Nota")
+                            .frame(alignment: .center)
+                            .font(.custom("Roberta", fixedSize: geometry.size.width * 0.1))
+                            .foregroundColor(.yellow)
+//                        Text("\(geometry.size.width\)")
+                            
                         HStack(spacing: 50){
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
@@ -28,7 +35,9 @@ struct load_project: View {
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 200, height: 200, alignment: .center)
+                                .frame(width: 200 + (geometry.size.width * 0.01), height: 200 + (geometry.size.height * 0.01), alignment: .center)
+                                .foregroundColor(.yellow)
+                                
                             }
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
@@ -39,10 +48,13 @@ struct load_project: View {
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 200, height: 200, alignment: .center)
+                                .frame(width: 200 + (geometry.size.width * 0.01), height: 200 + (geometry.size.height * 0.01), alignment: .center)
+                                .foregroundColor(.yellow)
+                                .border(.red, width: 4)
                             }
                         } // hstack 1
                         .padding(50)
+                        
                     }// vstack 1
                     .padding(50)
                 } // end of geometry reader
