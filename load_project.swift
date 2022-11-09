@@ -55,6 +55,7 @@ struct load_project: View {
                             
                         } // hstack 1
                         .padding(50)
+                        .border(.red, width: 4)
                         
                     }// vstack 1
                     .padding(50)
