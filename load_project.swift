@@ -28,14 +28,14 @@ struct load_project: View {
                         HStack(spacing: 50){
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
-                                    Image(systemName: "folder")
+                                    Image(systemName: "plus.app")
                                         .resizable()
                                 })
                                 .shadow(color: Color.black.opacity(0.3),
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 200 + (geometry.size.width * 0.01), height: 200 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 150 + (geometry.size.width * 0.01), height: 150 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
                                 
                             }
@@ -48,15 +48,17 @@ struct load_project: View {
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 200 + (geometry.size.width * 0.01), height: 200 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 150 + (geometry.size.width * 0.01), height: 150 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
-                                .border(.red, width: 4)
+//                                .border(.red, width: 4)
                             }
+                            
                         } // hstack 1
                         .padding(50)
                         
                     }// vstack 1
                     .padding(50)
+//                    .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.1, alignment: .center)
                 } // end of geometry reader
             } // end of zstack 1
         }// end of nav_view
