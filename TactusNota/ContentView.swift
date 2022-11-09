@@ -91,7 +91,7 @@ struct ContentView: View {
                                                     x: 3,
                                                     y: 3)
                     }
-                    NavigationLink(destination: testViewNew2(), isActive: self.$isActiveTestView) {
+                    NavigationLink(destination: AnnotationView(), isActive: self.$isActiveTestView) {
                         Button(action: {self.isActiveTestView = true
                                         }, label: {
                                             Text("Save directory")
@@ -322,7 +322,7 @@ struct ContentView: View {
                 }
             } // end of vstack
         }
-        } // end of zstack
+        } // end of navigationView
         .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
         .padding(.all, 0)
         
