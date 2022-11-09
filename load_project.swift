@@ -18,14 +18,14 @@ struct load_project: View {
                     Color(red: 0.26, green: 0.26, blue: 0.26)
                         .ignoresSafeArea()
 
-                    VStack(spacing: 50){
+                    VStack(spacing: 100){
                         Text("Tacus Nota")
                             .frame(alignment: .center)
                             .font(.custom("Roberta", fixedSize: geometry.size.width * 0.1))
                             .foregroundColor(.yellow)
 //                        Text("\(geometry.size.width\)")
                             
-                        HStack(spacing: 50){
+                        HStack(spacing: 150){
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
                                     Image(systemName: "plus.app")
@@ -37,6 +37,17 @@ struct load_project: View {
                                         y: 3)
                                 .frame(width: 150 + (geometry.size.width * 0.01), height: 150 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                            .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                            .shadow(
+                                                color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                                radius: 8,
+                                                x: 0,
+                                                y: 0
+                                             )
+                                            .padding(-50)
+                                    )
                                 
                             }
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
@@ -50,12 +61,27 @@ struct load_project: View {
                                         y: 3)
                                 .frame(width: 150 + (geometry.size.width * 0.01), height: 150 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                            .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                            .shadow(
+                                                color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                                radius: 8,
+                                                x: 0,
+                                                y: 0
+                                             )
+                                            .padding(-50)
+                                    )
 //                                .border(.red, width: 4)
                             }
                             
                         } // hstack 1
                         .padding(50)
-                        .border(.red, width: 4)
+                        .shadow(color: Color.black.opacity(0.3),
+                                radius: 3,
+                                x: 3,
+                                y: 3)
+//                        .border(.red, width: 4)
                         
                     }// vstack 1
                     .padding(50)
