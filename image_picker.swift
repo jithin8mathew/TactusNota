@@ -88,10 +88,28 @@ struct DocumentPicker: UIViewControllerRepresentable{
         return controller
     }
     
+    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: UIViewControllerRepresentableContext<DocumentPicker>) {
+    }
+    
     
 }
 
 class DocumentPickerController: NSObject, UIDocumentPickerDelegate, UINavigationControllerDelegate{
+    
+    @Binding var fileContent: String
+    
+    init(fileContent: Binding<String>){
+        _fileContent = fileContent
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        let fileURL = urls[0]
+        do {
+            fileContent = try String(contentsOf: fileURL, encoding: .utf8)
+        } catch let error{
+            print(error.localizedDescription)
+        }
+    }
     
 }
 
