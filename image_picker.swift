@@ -1,12 +1,53 @@
 import SwiftUI
 
+
 struct image_picker: View {
+    
+    @State private var fileContent = [] // change to scalar if it didnt work
+    @State private var showDocumentPicker = false
+    
     
     var body: some View {
         Button("Choose Folder") {
+            showDocumentPicker = true
 //            self.selectFolder()
+            
         }
     }
+    
+//    func openDocumentPicker() {
+//        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.jpeg, .png])
+//        documentPicker.delegate = self
+//        documentPicker.modalPresentationStyle = .overFullScreen
+//        documentPicker.allowsMultipleSelection = true
+//        present(documentPicker, animated: true)
+//    }
+//
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+//        dismiss(animated: true)
+//    }
+//
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//    }
+//
+//    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+//    }
+//
+//
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+//        dismiss(animated: true)
+//
+//        guard url.startAccessingSecurityScopedResource() else {
+//            return
+//        }
+//
+//        defer {
+//            url.stopAccessingSecurityScopedResource()
+//        }
+//
+//        // Copy the file with FileManager
+//    }
+
     
 //    func selectFolder() {
 //
@@ -30,6 +71,28 @@ struct image_picker: View {
 //            }
 //        }
 //    }
+}
+
+struct DocumentPicker: UIViewControllerRepresentable{
+    
+    @Binding var fileContent: String
+    
+    func makeCoordinator() -> DocumentPickerCoordinator {
+        return DocumentPickerCoordinator(fileContent: $fileContent)
+    }
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPicker>) -> UIDocumentPickerViewController{
+        let controller: UIDocumentPickerViewController
+        
+        controller.delegate = context.coordinator
+        return controller
+    }
+    
+    
+}
+
+class DocumentPickerController: NSObject, UIDocumentPickerDelegate, UINavigationControllerDelegate{
+    
 }
 
 struct image_picker_Previews: PreviewProvider {
