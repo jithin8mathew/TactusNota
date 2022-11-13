@@ -17,7 +17,11 @@ struct filePicker: UIViewControllerRepresentable{
     func makeUIViewController(context: UIViewControllerRepresentableContext<filePicker>) -> UIDocumentPickerViewController{
         let controller: UIDocumentPickerViewController
 
-//        if #available(iOS 14, *) {...} else {...}
+        if #available(iOS 14, *) {
+            controller = UIDocumentPickerViewController(forOpeningContentTypes: [.text], asCopy: true)
+        } else {
+            controller = UIDocumentPickerViewController(documentTypes: [String(kUnknownType)], in: .import)
+        }
         controller.delegate = context.coordinator
         return controller
     }
