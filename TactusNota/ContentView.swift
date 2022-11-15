@@ -91,7 +91,7 @@ struct ContentView: View {
                                                     x: 3,
                                                     y: 3)
                     }
-                    NavigationLink(destination: AnnotationView(), isActive: self.$isActiveTestView) {
+                    NavigationLink(destination: image_picker(), isActive: self.$isActiveTestView) {
                         Button(action: {self.isActiveTestView = true
                                         }, label: {
                                             Text("Save directory")

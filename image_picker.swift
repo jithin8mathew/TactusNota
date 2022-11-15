@@ -8,12 +8,18 @@ struct image_picker: View {
     
     
     var body: some View {
+        VStack{
         Button("Choose Folder") {
             showDocumentPicker = true
 //            self.selectFolder()
             
         }
     }
+        .sheet(isPresented: self.$showDocumentPicker){
+            filePicker(fileContent: $fileContent)
+        }
+    }
+        
 }
 
 //struct DocumentPicker: UIViewControllerRepresentable{
