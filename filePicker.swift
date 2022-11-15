@@ -18,7 +18,7 @@ struct filePicker: UIViewControllerRepresentable{
         let controller: UIDocumentPickerViewController
 
         if #available(iOS 14, *) {
-            controller = UIDocumentPickerViewController(forOpeningContentTypes: [.text], asCopy: true)
+            controller = UIDocumentPickerViewController(forOpeningContentTypes: [.png, .jpeg], asCopy: true)
         } else {
             controller = UIDocumentPickerViewController(documentTypes: [String(kUnknownType)], in: .import)
         }
