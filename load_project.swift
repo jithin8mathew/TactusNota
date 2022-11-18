@@ -17,8 +17,16 @@ struct load_project: View {
                     GeometryReader { geometry in
                     Color(red: 0.26, green: 0.26, blue: 0.26)
                         .ignoresSafeArea()
-
+                        HStack{
+                            Spacer()
+                        Image(systemName: "gear")
+                                .resizable()
+                                .frame(width: 55 + (geometry.size.width * 0.01), height: 50 + (geometry.size.height * 0.01), alignment: .center)
+                                .padding(20)
+                            
+                        }
                     VStack(spacing: 100){
+                        
                         Spacer()
                         Text("Tacus Nota")
                             .frame(alignment: .center)
@@ -27,6 +35,7 @@ struct load_project: View {
 //                        Text("\(geometry.size.width\)")
                         Spacer()
                         HStack(){
+
                             Spacer()
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
