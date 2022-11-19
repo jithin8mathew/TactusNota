@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B6116D44291A45AC00123494 /* load_project.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6116D43291A45AC00123494 /* load_project.swift */; };
 		B6116D46291EE46100123494 /* filePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6116D45291EE46100123494 /* filePicker.swift */; };
+		B6116D48292863C700123494 /* TNAnnotationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6116D47292863C700123494 /* TNAnnotationSettings.swift */; };
 		B631C4762787A25A00A5216A /* TactusNotaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631C4752787A25A00A5216A /* TactusNotaApp.swift */; };
 		B631C4782787A25A00A5216A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631C4772787A25A00A5216A /* ContentView.swift */; };
 		B631C47A2787A25B00A5216A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B631C4792787A25B00A5216A /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		B6116D43291A45AC00123494 /* load_project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = load_project.swift; sourceTree = "<group>"; };
 		B6116D45291EE46100123494 /* filePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filePicker.swift; sourceTree = "<group>"; };
+		B6116D47292863C700123494 /* TNAnnotationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNAnnotationSettings.swift; sourceTree = "<group>"; };
 		B631C4722787A25A00A5216A /* TactusNota.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TactusNota.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B631C4752787A25A00A5216A /* TactusNotaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TactusNotaApp.swift; sourceTree = "<group>"; };
 		B631C4772787A25A00A5216A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
+				B6116D47292863C700123494 /* TNAnnotationSettings.swift */,
 				B6116D45291EE46100123494 /* filePicker.swift */,
 				B676275028BFCA5600CCBCF9 /* finalView.swift */,
 				B676275228CFD36B00CCBCF9 /* AnnotationView.swift */,
@@ -194,6 +197,7 @@
 				B676274F28BD46D900CCBCF9 /* testViewNew2.swift in Sources */,
 				B6DE7B742860C110003A2191 /* AnnotationScreen.swift in Sources */,
 				B676274928AEFA5300CCBCF9 /* testview2.swift in Sources */,
+				B6116D48292863C700123494 /* TNAnnotationSettings.swift in Sources */,
 				B6DE7B72285FCEB4003A2191 /* AnnotationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
