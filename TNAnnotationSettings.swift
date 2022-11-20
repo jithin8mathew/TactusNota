@@ -34,14 +34,17 @@ struct TNAnnotationSettings: View {
                         .font(.title)
                         .foregroundColor(.white)
                         .padding(20)
-                    Spacer()
-                    Circle()
-                        .foregroundColor(bgColor)
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .onTapGesture {
-                            ColorPicker("Alignment Guides", selection: $bgColor)
-                        }
-                    ColorPicker("Alignment Guides", selection: $bgColor)
+//                    Spacer()
+//                    Circle()
+//                        .foregroundColor(bgColor)
+//                        .frame(width: 100, height: 100, alignment: .center)
+//                        .onTapGesture {
+//                            ColorPicker("Stroke Color", selection: $bgColor)
+//                        }
+                    ColorPicker("Stroke Color", selection: $bgColor)
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding(20)
                     Spacer()
                 }
             }
