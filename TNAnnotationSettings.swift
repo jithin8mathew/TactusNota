@@ -12,6 +12,7 @@ struct TNAnnotationSettings: View {
     
     @State private var autoSave = true
     @State private var fixdBboxWidth = false
+    @State private var pencilEraser_status = true
 
     var body: some View {
         ZStack{
@@ -26,6 +27,10 @@ struct TNAnnotationSettings: View {
                             .foregroundColor(.white)
                             .padding(20)
                     Toggle("Keep Fixed Bounding Box Width",isOn: $fixdBboxWidth)
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding(20)
+                    Toggle("Pencil eraser",isOn: $pencilEraser_status)
                         .font(.title)
                         .foregroundColor(.white)
                         .padding(20)
