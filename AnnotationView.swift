@@ -125,16 +125,26 @@ struct AnnotationView: View {
                         dragLock = true
                         cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
                         print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
+//                        var a = value.location.x-startLoc.x
+//                        var b = value.location.y-startLoc.y
                         print(boxIDVAL)
 //                        print(dragLock)
                         
+                        // add previous C1 coordinate to a list to substract from later
                         if cordData.count > 2{
 //                            print("CorData : ",cordData[cordData.count-2][0] - cordData[cordData.count-1][0])
                             prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
                             prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
                         }
 //                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - abs(prev_f_width), rectData[boxIDVAL-1][1] - abs(prev_f_height), rectData[boxIDVAL-1][2] + abs(prev_f_width), rectData[boxIDVAL-1][3] + abs(prev_f_height)] // reduce x and y value while increasing the width and height with the same value
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (prev_f_width), rectData[boxIDVAL-1][1] - (prev_f_height), rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
+//                        if a && b < 0 {
+                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (prev_f_width), rectData[boxIDVAL-1][1] - (prev_f_height), rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
+//                        }
+//                        else{
+//                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] + (prev_f_width), rectData[boxIDVAL-1][1] + (prev_f_height), rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] - (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
+
+//                        }
+                        
                         
                     }
                     if C2 == true && boxIDVAL != 0{
