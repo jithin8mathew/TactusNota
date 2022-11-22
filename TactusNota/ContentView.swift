@@ -33,6 +33,7 @@ struct ContentView: View {
     @State private var isActive : Bool = false
     @State private var isActiveTestView : Bool = false
     @State private var isActiveAnnotationView : Bool = false
+    @State private var isActiveLP : Bool = false
 //    @State var points:[CGPoint] = [CGPoint(x:0,y:0), CGPoint(x:50,y:50)]
 //
 //    @State var position:CGPoint = CGPoint(x:0,y:0)
@@ -123,20 +124,22 @@ struct ContentView: View {
                                                 x: 3,
                                                 y: 3)
                     }
-                    Button(action: {//testViewNew()
-                                        }, label: {
-                                            Text("Next")
-                                            .font(.system(.title2))
-                                            .frame(width: 97, height: 40)
-                                            .foregroundColor(Color.white)
-                                            .padding(.bottom, 7)
-                                        })
-                                        .background(Color.blue)
-                                        .cornerRadius(38.5)
-                                        .shadow(color: Color.black.opacity(0.3),
-                                                radius: 3,
-                                                x: 3,
-                                                y: 3)
+                    NavigationLink(destination: load_project(), isActive: self.$isActiveLP) {
+                        Button(action: {self.isActiveLP = true
+                        }, label: {
+                            Text("Next")
+                                .font(.system(.title2))
+                                .frame(width: 97, height: 40)
+                                .foregroundColor(Color.white)
+                                .padding(.bottom, 7)
+                        })
+                        .background(Color.blue)
+                        .cornerRadius(38.5)
+                        .shadow(color: Color.black.opacity(0.3),
+                                radius: 3,
+                                x: 3,
+                                y: 3)
+                    }
                     Button(action: {
                                         }, label: {
                                             Text("Save")
