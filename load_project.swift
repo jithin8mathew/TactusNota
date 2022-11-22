@@ -35,16 +35,22 @@ struct load_project: View {
                             .foregroundColor(Color(red: 0.26, green: 0.26, blue: 0.26))
                         Spacer()
                         HStack{
+                            Spacer()
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
-                                    Image(systemName: "plus.app")
-                                        .resizable()
+                                    VStack{
+                                        Image(systemName: "plus.app")
+                                            .resizable()
+                                            .frame(width: 80, height: 80, alignment: .center)
+                                            .padding(10)
+                                        Text("New project")
+                                    }
                                 })
                                 .shadow(color: Color.black.opacity(0.3),
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
@@ -60,43 +66,22 @@ struct load_project: View {
                                 
                             }
                             Spacer()
+                            Spacer()
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
-                                    Image(systemName: "folder")
-                                        .resizable()
+                                    VStack{
+                                        Image(systemName: "folder")
+                                            .resizable()
+                                            .frame(width: 80, height: 80, alignment: .center)
+                                            .padding(10)
+                                        Text("Open project")
+                                    }
                                 })
                                 .shadow(color: Color.black.opacity(0.3),
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(.yellow)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
-                                        .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
-                                            radius: 8,
-                                            x: 0,
-                                            y: 0
-                                        )
-                                        .padding(-50)
-                                )
-                            }
-                        }
-                        // second row of icons
-                        Spacer()
-                        HStack{
-                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                Button(action: {}, label: {
-                                    Image(systemName: "folder")
-                                        .resizable()
-                                })
-                                .shadow(color: Color.black.opacity(0.3),
-                                        radius: 3,
-                                        x: 3,
-                                        y: 3)
-                                .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
@@ -111,16 +96,31 @@ struct load_project: View {
                                 )
                             }
                             Spacer()
+                        } // end of first row H-stack
+                        .padding(50)
+                        .shadow(color: Color.black.opacity(0.3),
+                                radius: 3,
+                                x: 3,
+                                y: 3)
+                        // second row of icons
+                        Spacer()
+                        HStack{
+                            Spacer()
                             NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
                                 Button(action: {}, label: {
-                                    Image(systemName: "folder")
-                                        .resizable()
+                                    VStack{
+                                        Image(systemName: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                            .resizable()
+                                            .frame(width: 80, height: 80, alignment: .center)
+                                            .padding(10)
+                                        Text("Detection")
+                                    }
                                 })
                                 .shadow(color: Color.black.opacity(0.3),
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(.yellow)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
@@ -134,13 +134,45 @@ struct load_project: View {
                                         .padding(-50)
                                 )
                             }
-                        }
+                            Spacer()
+                            Spacer()
+                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
+                                Button(action: {}, label: {
+                                    VStack{
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .frame(width: 80, height: 80, alignment: .center)
+                                            .padding(10)
+                                        Text("Classification")
+                                    }
+                                })
+                                .shadow(color: Color.black.opacity(0.3),
+                                        radius: 3,
+                                        x: 3,
+                                        y: 3)
+                                .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .foregroundColor(.yellow)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .shadow(
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            radius: 8,
+                                            x: 0,
+                                            y: 0
+                                        )
+                                        .padding(-50)
+                                )
+                            }
+                            Spacer()
+                        } // end of second row Hstack
                         .padding(50)
                         .shadow(color: Color.black.opacity(0.3),
                                 radius: 3,
                                 x: 3,
                                 y: 3)
-                    }// vstack 1
+                        Spacer()
+                    }// vstack 1 end
                     .padding(50)
                 } // end of geometry reader
             } // end of zstack 1
