@@ -15,7 +15,6 @@ struct load_project: View {
         NavigationView{
             ZStack{
                 GeometryReader { geometry in
-                    
                     Color(red: 0.26, green: 0.26, blue: 0.26)
                         .ignoresSafeArea()
                     Image("temp_back")
@@ -27,136 +26,122 @@ struct load_project: View {
                             .frame(width: 55 + (geometry.size.width * 0.01), height: 50 + (geometry.size.height * 0.01), alignment: .center)
                             .padding(20)
                             .foregroundColor(.white)
-                        
                     }
-                    VStack(spacing: 100){
-                        
+                    VStack(){
                         Spacer()
                         Text("Tacus Nota")
                             .frame(alignment: .center)
                             .font(.custom("Roberta", fixedSize: geometry.size.width * 0.1))
                             .foregroundColor(Color(red: 0.26, green: 0.26, blue: 0.26))
-                        //                        Text("\(geometry.size.width\)")
                         Spacer()
-                        HStack(){
-                            VStack{
-                                Spacer()
-                                NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                    Button(action: {}, label: {
-                                        Image(systemName: "plus.app")
-                                            .resizable()
-                                    })
-                                    .shadow(color: Color.black.opacity(0.3),
-                                            radius: 3,
-                                            x: 3,
-                                            y: 3)
-                                    .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                    .foregroundColor(.yellow)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
-                                            .shadow(
-                                                color: Color(red: 0.16, green: 0.16, blue: 0.16),
-                                                radius: 8,
-                                                x: 0,
-                                                y: 0
-                                            )
-                                            .padding(-50)
-                                    )
-                                    
-                                }
-                                Spacer()
+                        HStack{
+                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
+                                Button(action: {}, label: {
+                                    Image(systemName: "plus.app")
+                                        .resizable()
+                                })
+                                .shadow(color: Color.black.opacity(0.3),
+                                        radius: 3,
+                                        x: 3,
+                                        y: 3)
+                                .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .foregroundColor(.yellow)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .shadow(
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            radius: 8,
+                                            x: 0,
+                                            y: 0
+                                        )
+                                        .padding(-50)
+                                )
                                 
-                                NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                    Button(action: {}, label: {
-                                        Image(systemName: "folder")
-                                            .resizable()
-                                    })
-                                    .shadow(color: Color.black.opacity(0.3),
-                                            radius: 3,
-                                            x: 3,
-                                            y: 3)
-                                    .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                    .foregroundColor(.yellow)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
-                                            .shadow(
-                                                color: Color(red: 0.16, green: 0.16, blue: 0.16),
-                                                radius: 8,
-                                                x: 0,
-                                                y: 0
-                                            )
-                                            .padding(-50)
-                                    )
-                                    //                                .border(.red, width: 4)
-                                }
                             }
                             Spacer()
-                            VStack{
-                                NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                    Button(action: {}, label: {
-                                        Image(systemName: "folder")
-                                            .resizable()
-                                    })
-                                    .shadow(color: Color.black.opacity(0.3),
-                                            radius: 3,
-                                            x: 3,
-                                            y: 3)
-                                    .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                    .foregroundColor(.yellow)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
-                                            .shadow(
-                                                color: Color(red: 0.16, green: 0.16, blue: 0.16),
-                                                radius: 8,
-                                                x: 0,
-                                                y: 0
-                                            )
-                                            .padding(-50)
-                                    )
-                                    //                                .border(.red, width: 4)
-                                }
-                                Spacer()
-                                NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                    Button(action: {}, label: {
-                                        Image(systemName: "folder")
-                                            .resizable()
-                                    })
-                                    .shadow(color: Color.black.opacity(0.3),
-                                            radius: 3,
-                                            x: 3,
-                                            y: 3)
-                                    .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                    .foregroundColor(.yellow)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
-                                            .shadow(
-                                                color: Color(red: 0.16, green: 0.16, blue: 0.16),
-                                                radius: 8,
-                                                x: 0,
-                                                y: 0
-                                            )
-                                            .padding(-50)
-                                    )
-                                    //                                .border(.red, width: 4)
-                                }
+                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
+                                Button(action: {}, label: {
+                                    Image(systemName: "folder")
+                                        .resizable()
+                                })
+                                .shadow(color: Color.black.opacity(0.3),
+                                        radius: 3,
+                                        x: 3,
+                                        y: 3)
+                                .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .foregroundColor(.yellow)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .shadow(
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            radius: 8,
+                                            x: 0,
+                                            y: 0
+                                        )
+                                        .padding(-50)
+                                )
+                            }
+                        }
+                        // second row of icons
+                        Spacer()
+                        HStack{
+                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
+                                Button(action: {}, label: {
+                                    Image(systemName: "folder")
+                                        .resizable()
+                                })
+                                .shadow(color: Color.black.opacity(0.3),
+                                        radius: 3,
+                                        x: 3,
+                                        y: 3)
+                                .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .foregroundColor(.yellow)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .shadow(
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            radius: 8,
+                                            x: 0,
+                                            y: 0
+                                        )
+                                        .padding(-50)
+                                )
                             }
                             Spacer()
-                        } // hstack 1
+                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
+                                Button(action: {}, label: {
+                                    Image(systemName: "folder")
+                                        .resizable()
+                                })
+                                .shadow(color: Color.black.opacity(0.3),
+                                        radius: 3,
+                                        x: 3,
+                                        y: 3)
+                                .frame(width: 80 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .foregroundColor(.yellow)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .shadow(
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            radius: 8,
+                                            x: 0,
+                                            y: 0
+                                        )
+                                        .padding(-50)
+                                )
+                            }
+                        }
                         .padding(50)
                         .shadow(color: Color.black.opacity(0.3),
                                 radius: 3,
                                 x: 3,
                                 y: 3)
-                        //                        .border(.red, width: 4)
-                        Spacer()
-                        Spacer()
                     }// vstack 1
                     .padding(50)
-                    //                    .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.1, alignment: .center)
                 } // end of geometry reader
             } // end of zstack 1
         }// end of nav_view
