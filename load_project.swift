@@ -15,10 +15,12 @@ struct load_project: View {
         NavigationView{
             ZStack{
                 GeometryReader { geometry in
-                    Color(red: 0.26, green: 0.26, blue: 0.26)
+//                    Color(red: 0.91, green: 0.70, blue: 0.39) // creamish brown (Sun ray)
+                    Color(red: 0.0, green: 0.42, blue: 0.51) // Teal blue
+
                         .ignoresSafeArea()
-                    Image("temp_back")
-                        .resizable()
+//                    Image("temp_back")
+//                        .resizable()
                     HStack{
                         Spacer()
                         Image(systemName: "gear")
@@ -32,7 +34,7 @@ struct load_project: View {
                         Text("Tacus Nota")
                             .frame(alignment: .center)
                             .font(.custom("Roberta", fixedSize: geometry.size.width * 0.1))
-                            .foregroundColor(Color(red: 0.26, green: 0.26, blue: 0.26))
+                            .foregroundColor(Color(red: 0.91, green: 0.70, blue: 0.39))
                         Spacer()
                         HStack{
                             Spacer()
@@ -51,12 +53,12 @@ struct load_project: View {
                                         x: 3,
                                         y: 3)
                                 .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(.yellow)
+                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .fill(                    Color(red:1.0, green: 0.4, blue: 0.38))
                                         .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
                                             radius: 8,
                                             x: 0,
                                             y: 0
@@ -82,12 +84,12 @@ struct load_project: View {
                                         x: 3,
                                         y: 3)
                                 .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(.yellow)
+                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
                                         .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
                                             radius: 8,
                                             x: 0,
                                             y: 0
@@ -121,12 +123,12 @@ struct load_project: View {
                                         x: 3,
                                         y: 3)
                                 .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(.yellow)
+                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
                                         .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
                                             radius: 8,
                                             x: 0,
                                             y: 0
@@ -151,12 +153,12 @@ struct load_project: View {
                                         x: 3,
                                         y: 3)
                                 .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(.yellow)
+                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26))
+                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
                                         .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16),
+                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
                                             radius: 8,
                                             x: 0,
                                             y: 0
