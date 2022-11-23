@@ -116,14 +116,16 @@ struct AnnotationView: View {
                 contHeight = value.location.y - startLoc.y // Height of the bounding box
                 offset = value.translation // offset is the distance of drag by the user
 //                globalCord.startTap_coordinate = startLoc // assign the startloc to global var
+                print(resizeLock, self.completedLongPress, dragLock, C1)
                 if resizeLock == false && self.completedLongPress == false{
                     let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                     boxIDVAL = coordinateManager.1
                     resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4)
-
+                    
                     if C1 == true && boxIDVAL != 0{
                         dragLock = true
                         cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
+                        
                         print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
 //                        var a = value.location.x-startLoc.x
 //                        var b = value.location.y-startLoc.y
@@ -179,6 +181,9 @@ struct AnnotationView: View {
                     }
                     
                 }
+//                if resizeLock == true && self.completedLongPress == true{
+//                        print(resizeLock, completedLongPress)
+//                }
                 
                 //                print("BoxIDVAL", boxIDVAL)
                 if self.completedLongPress == true{
