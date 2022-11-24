@@ -61,6 +61,7 @@ struct AnnotationView: View {
     @State var previous_offsetX = 0.0
     @State var previous_offsetY = 0.0
     @State var boxIDVAL = 0
+    @State var previous_boxIDVAL = 0
     //    @State var selectedCorner: [bboxCorner] = []
     
     // used to keep track of the bounding box corner that is being dealt with
@@ -121,15 +122,15 @@ struct AnnotationView: View {
                     let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
                     boxIDVAL = coordinateManager.1
                     resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4)
-                    
-                    if C1 == true && boxIDVAL != 0{
+                    print(boxIDVAL,"initially")
+                    if C1 == true { // && boxIDVAL != 0 : this condition is preventing the bbox from being resized below the original size
                         dragLock = true
                         cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
                         
                         print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
 //                        var a = value.location.x-startLoc.x
 //                        var b = value.location.y-startLoc.y
-                        print(boxIDVAL)
+                        print(boxIDVAL,"finally")
 //                        print(dragLock)
                         
                         // add previous C1 coordinate to a list to substract from later
