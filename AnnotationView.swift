@@ -27,8 +27,6 @@ struct AnnotationView: View {
     @State var contWidth = CGFloat.zero // holds the width of the bounding box based on users drag
     @State var contHeight = CGFloat.zero // holds the height of the bbox based on users vertical drag
     
-    // testing longPress Drag gesture
-//    @State var isDragging = false
     @State private var offset = CGSize.zero
     @State var viewState = CGSize.zero
     
@@ -40,20 +38,9 @@ struct AnnotationView: View {
 //    @State var show = false
     //    @State var pressDrag = false
     //    @GestureState var location = CGPoint(x:0, y:0)
-    
-    // drag gesture
-//    @State var isDraggable = false
-//    @State var translation = CGSize.zero
-    
-    //    @GestureState var dragState = DragState.inactive
-//    @State var boxID = 0
-    
+        
     // becomes ture if the user raps or drags within the bounding box
     @State var withingBBox = false
-    // Trun this update on or off to prevent bounding box from being drawn when the user is dragging an existing bbox
-//    @State var RTdrawState = true
-    
-//    @State var testButton = false
     
     @State var didLongPress = false
     @GestureState var isLongPressing = false
@@ -80,9 +67,6 @@ struct AnnotationView: View {
     
 //    @State var prev_start_loc = CGPoint.zero
     @State var cordData: [[CGFloat]] = [] // cordData is a temporary list that gets populated with coordinates when bbox edge is dragged. The purpose of this list is to substract the previous cordinate values from the current. The differecne is used to resize the bounding box.
-    
-    // switch case state value holder
-    //    @State var viewState = CGSize.zero
     
     var body: some View {
         //        ZStack{
@@ -172,7 +156,7 @@ struct AnnotationView: View {
                             prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
                             prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
                         }
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - prev_f_width , rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] + abs(prev_f_width), rectData[boxIDVAL-1][3] - prev_f_height ]
+                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - prev_f_width , rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] - prev_f_height ]
                     }
                     if C4 == true && boxIDVAL != 0{
                         dragLock = true
