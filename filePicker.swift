@@ -44,7 +44,7 @@ class filePickerCoordinator: NSObject, UIDocumentPickerDelegate, UINavigationCon
         let fileURL = urls[0]
         do {
             fileContent = try String(contentsOf: fileURL, encoding: .utf8)
-            print(fileContent)
+            print(urls)
         } catch let error{
             print(error.localizedDescription)
         }

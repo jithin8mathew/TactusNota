@@ -11,11 +11,11 @@ struct image_picker: View {
         VStack{
         Button("Choose Folder") {
             showDocumentPicker = true
-            
+            Text(fileContent)
 //            self.selectFolder()
             
         }
-            Text(fileContent)
+//            Text(fileContent)
     }
         .sheet(isPresented: self.$showDocumentPicker){
             filePicker(fileContent: $fileContent)

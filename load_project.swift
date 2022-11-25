@@ -25,8 +25,9 @@ struct load_project: View {
                         Spacer()
                         Image(systemName: "gear")
                             .resizable()
-                            .frame(width: 55 + (geometry.size.width * 0.01), height: 50 + (geometry.size.height * 0.01), alignment: .center)
-                            .padding(20)
+                            .frame(width: 45 + (geometry.size.width * 0.01), height: 40 + (geometry.size.height * 0.01), alignment: .center)
+                            .padding(.top,0)
+                            .padding(.trailing, 10)
                             .foregroundColor(.white)
                     }
                     VStack(){
@@ -35,6 +36,12 @@ struct load_project: View {
                             .frame(alignment: .center)
                             .font(.custom("Roberta", fixedSize: geometry.size.width * 0.1))
                             .foregroundColor(Color(red: 0.91, green: 0.70, blue: 0.39))
+                            .shadow(
+                                color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.5),
+                                radius: 8,
+                                x: 10,
+                                y: 10
+                            )
                         Spacer()
                         HStack{
                             Spacer()
@@ -46,13 +53,14 @@ struct load_project: View {
                                             .frame(width: 80, height: 80, alignment: .center)
                                             .padding(10)
                                         Text("New project")
+                                            .font(.system(size: 14))
                                     }
                                 })
                                 .shadow(color: Color.black.opacity(0.3),
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
@@ -77,13 +85,14 @@ struct load_project: View {
                                             .frame(width: 80, height: 80, alignment: .center)
                                             .padding(10)
                                         Text("Open project")
+                                            .font(.system(size: 14))
                                     }
                                 })
                                 .shadow(color: Color.black.opacity(0.3),
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
@@ -116,13 +125,14 @@ struct load_project: View {
                                             .frame(width: 80, height: 80, alignment: .center)
                                             .padding(10)
                                         Text("Detection")
+                                            .font(.system(size: 14))
                                     }
                                 })
                                 .shadow(color: Color.black.opacity(0.3),
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
@@ -146,13 +156,14 @@ struct load_project: View {
                                             .frame(width: 80, height: 80, alignment: .center)
                                             .padding(10)
                                         Text("Classification")
+                                            .font(.system(size: 14))
                                     }
                                 })
                                 .shadow(color: Color.black.opacity(0.3),
                                         radius: 3,
                                         x: 3,
                                         y: 3)
-                                .frame(width: 100 + (geometry.size.width * 0.01), height: 80 + (geometry.size.height * 0.01), alignment: .center)
+                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
                                 .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)

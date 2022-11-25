@@ -234,10 +234,10 @@ struct AnnotationView: View {
                 ForEach(self.rectData, id:\.self) {cords in
                     RoundedRectangle(cornerRadius: 5, style: .circular)
                         .path(in: CGRect(
-                            x: cords[0],
-                            y: cords[1],
-                            width: cords[2],
-                            height: cords[3]
+                            x: cords[0]-2,
+                            y: cords[1]-2,
+                            width: cords[2]+3,
+                            height: cords[3]+3
                         )
                         )
                         .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
@@ -318,7 +318,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         
         //        var C1_ = false
         
-        if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+        if bCord[0] >=  (coordinates.x - 3) && bCord[0] <= ( coordinates.x + 10)  && bCord[1] >=  (coordinates.y - 3) && bCord[1] <= ( coordinates.y + 10){
             C1_ = true
             C2_ = false
             C3_ = false
@@ -330,7 +330,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         }
         
         // Check if the tap is at the top right corner
-        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
+        else if bCord[0] + bCord[2] >=  (coordinates.x - 3) && bCord[0] + bCord[2] <= ( coordinates.x + 10)  && bCord[1] >=  (coordinates.y - 3) && bCord[1] <= ( coordinates.y + 10){
             
             C1_ = false
             C2_ = true
@@ -342,7 +342,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         }
         
         // Check if the tap is at the bottom left corner
-        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+        else if bCord[0] >=  (coordinates.x - 3) && bCord[0] <= ( coordinates.x + 10)  && bCord[1] + bCord[3] >=  (coordinates.y - 3) && bCord[1] + bCord[3] <= ( coordinates.y + 10){
             C1_ = false
             C2_ = false
             C3_ = true
@@ -352,7 +352,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         }
         
         // Check if the tap is at the bottom right corner
-        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
+        else if bCord[0] + bCord[2] >=  (coordinates.x - 3) && bCord[0] + bCord[2] <= ( coordinates.x + 10)  && bCord[1] + bCord[3] >=  (coordinates.y - 3) && bCord[1] + bCord[3] <= ( coordinates.y + 10){
             C1_ = false
             C2_ = false
             C3_ = false
