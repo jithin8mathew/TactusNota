@@ -9,6 +9,9 @@ import SwiftUI
 struct filePicker: UIViewControllerRepresentable{
 
     @Binding var fileContent: String
+    
+    // Experimental
+    let fileManager = FileManager.default
 
     func makeCoordinator() -> filePickerCoordinator {
         return filePickerCoordinator(fileContent: $fileContent)
@@ -44,6 +47,10 @@ class filePickerCoordinator: NSObject, UIDocumentPickerDelegate, UINavigationCon
         let fileURL = urls[0]
         do {
             fileContent = try String(contentsOf: fileURL, encoding: .utf8)
+//            let items = try FileManager.contentsOfDirectory(atPath: "file:///private/var/mobile/Library/Mobile%20Documents/com~apple~CloudDocs/Downloads/")
+//            for item in items {
+//                    print("Found \(item)")
+//                }
             print(urls)
         } catch let error{
             print(error.localizedDescription)
