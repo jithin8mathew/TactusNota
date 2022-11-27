@@ -45,13 +45,14 @@ class filePickerCoordinator: NSObject, UIDocumentPickerDelegate, UINavigationCon
     
     func filePicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         let fileURL = urls[0]
+//        let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         do {
             fileContent = try String(contentsOf: fileURL, encoding: .utf8)
-//            let items = try FileManager.contentsOfDirectory(atPath: "file:///private/var/mobile/Library/Mobile%20Documents/com~apple~CloudDocs/Downloads/")
+//            let items = try FileManager.contentsOfDirectory(at :directoryURL)
 //            for item in items {
 //                    print("Found \(item)")
 //                }
-            print(urls)
+//            print(urls)
         } catch let error{
             print(error.localizedDescription)
         }
