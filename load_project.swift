@@ -6,12 +6,26 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct load_project: View {
     
     @State private var isActive : Bool = false
+    var url: URL
+    @State var urls: [URL] = []
     
     var body: some View {
+        
+        List {
+                    ForEach(urls, id: \.self) { url in
+                        Text(url.lastPathComponent)
+                    }
+                }
+                .onAppear {
+                    urls = getContentsOfDirectory(url: url)
+                    print(urls)
+                }
+        
         NavigationView{
             ZStack{
                 GeometryReader { geometry in
@@ -42,6 +56,7 @@ struct load_project: View {
                                 x: 10,
                                 y: 10
                             )
+                        
                         Spacer()
                         HStack{
                             Spacer()
@@ -192,10 +207,20 @@ struct load_project: View {
         }// end of nav_view
         .navigationViewStyle(StackNavigationViewStyle())
     }
+    
+    func getContentsOfDirectory(url: URL) -> [URL] {
+            do {
+                return try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            } catch {
+                print(error)
+                return []
+            }
+        }
+    
 }
 
 struct load_project_Previews: PreviewProvider {
     static var previews: some View {
-        load_project()
+        load_project(url: URL(string: "path/to/Documents")!)
     }
 }

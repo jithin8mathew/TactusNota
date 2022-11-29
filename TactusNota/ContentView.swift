@@ -124,7 +124,7 @@ struct ContentView: View {
                                                 x: 3,
                                                 y: 3)
                     }
-                    NavigationLink(destination: load_project(), isActive: self.$isActiveLP) {
+                    NavigationLink(destination: load_project(url: URL(string: "path/to/Documents")!), isActive: self.$isActiveLP) {
                         Button(action: {self.isActiveLP = true
                         }, label: {
                             Text("Next")
