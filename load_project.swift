@@ -11,20 +11,21 @@ import Foundation
 struct load_project: View {
     
     @State private var isActive : Bool = false
-    var url: URL
-    @State var urls: [URL] = []
+//    let fileManager = FileManager.default
+//    let documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
     
     var body: some View {
         
-        List {
-                    ForEach(urls, id: \.self) { url in
-                        Text(url.lastPathComponent)
-                    }
-                }
-                .onAppear {
-                    urls = getContentsOfDirectory(url: url)
-                    print(urls)
-                }
+//        List {
+//                    ForEach(urls, id: \.self) { url in
+//                        Text(url.lastPathComponent)
+//                    }
+//                }
+//                .onAppear {
+//                    urls = getContentsOfDirectory(url: url)
+//                    print(urls)
+//                }
         
         NavigationView{
             ZStack{
@@ -207,20 +208,10 @@ struct load_project: View {
         }// end of nav_view
         .navigationViewStyle(StackNavigationViewStyle())
     }
-    
-    func getContentsOfDirectory(url: URL) -> [URL] {
-            do {
-                return try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
-            } catch {
-                print(error)
-                return []
-            }
-        }
-    
 }
 
 struct load_project_Previews: PreviewProvider {
     static var previews: some View {
-        load_project(url: URL(string: "path/to/Documents")!)
+        load_project()
     }
 }
