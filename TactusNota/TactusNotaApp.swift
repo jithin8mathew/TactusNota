@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct TactusNotaApp: App {
     
-//    @StateObject var annotationModel = AnnotationModel()
+    @StateObject var annotationModel = AnnotationModel()
     
     var body: some Scene {
         WindowGroup {

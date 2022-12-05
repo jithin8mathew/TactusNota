@@ -12,8 +12,8 @@ class AnnotationModel: ObservableObject {
     @Published var items: [Item] = []
     
     init() {
-        if let documentDirectory = FileManager.default.documentDirectory {
-            let urls = FileManager.default.getContentsOfDirectory(documentDirectory).filter { $0.isImage }
+        if let documentDirectory = FileManager.documentDirectory {
+            let urls = FileManager.contentsOfDirectory(documentDirectory).filter { $0.isImage }
             for url in urls {
                 let item = Item(url: url)
                 items.append(item)
