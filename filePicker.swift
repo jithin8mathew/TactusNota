@@ -60,3 +60,37 @@ class filePickerCoordinator: NSObject, UIDocumentPickerDelegate, UINavigationCon
     
 }
 
+
+//struct DocumentPickerViewController: UIViewControllerRepresentable {
+//    typealias UIViewControllerType = UIDocumentPickerViewController
+//
+//    var documentTypes: [String]
+//    var onDocumentPicked: (URL) -> Void
+//
+//    func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPickerViewController>) -> UIDocumentPickerViewController {
+//        let controller = UIDocumentPickerViewController(documentTypes: documentTypes, in: .open)
+//        controller.delegate = context.coordinator
+//        return controller
+//    }
+//
+//    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: UIViewControllerRepresentableContext<DocumentPickerViewController>) {
+//    }
+//
+//    func makeCoordinator() -> Coordinator {
+//        Coordinator(onDocumentPicked: onDocumentPicked)
+//    }
+//
+//    class Coordinator: NSObject, UIDocumentPickerDelegate {
+//        var onDocumentPicked: (URL) -> Void
+//
+//        init(onDocumentPicked: @escaping (URL) -> Void) {
+//            self.onDocumentPicked = onDocumentPicked
+//        }
+//
+//        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//            onDocumentPicked(urls[0])
+//        }
+//    }
+//}
+
+
