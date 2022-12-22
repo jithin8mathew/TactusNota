@@ -338,7 +338,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         
         //        var C1_ = false
         
-        if bCord[0] >=  (coordinates.x - 3) && bCord[0] <= ( coordinates.x + 10)  && bCord[1] >=  (coordinates.y - 3) && bCord[1] <= ( coordinates.y + 10){
+        if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             C1_ = true
             C2_ = false
             C3_ = false
@@ -350,7 +350,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         }
         
         // Check if the tap is at the top right corner
-        else if bCord[0] + bCord[2] >=  (coordinates.x - 3) && bCord[0] + bCord[2] <= ( coordinates.x + 10)  && bCord[1] >=  (coordinates.y - 3) && bCord[1] <= ( coordinates.y + 10){
+        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] >=  (coordinates.y - 15) && bCord[1] <= ( coordinates.y + 15){
             
             C1_ = false
             C2_ = true
@@ -362,7 +362,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         }
         
         // Check if the tap is at the bottom left corner
-        else if bCord[0] >=  (coordinates.x - 3) && bCord[0] <= ( coordinates.x + 10)  && bCord[1] + bCord[3] >=  (coordinates.y - 3) && bCord[1] + bCord[3] <= ( coordinates.y + 10){
+        else if bCord[0] >=  (coordinates.x - 15) && bCord[0] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
             C1_ = false
             C2_ = false
             C3_ = true
@@ -372,7 +372,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
         }
         
         // Check if the tap is at the bottom right corner
-        else if bCord[0] + bCord[2] >=  (coordinates.x - 3) && bCord[0] + bCord[2] <= ( coordinates.x + 10)  && bCord[1] + bCord[3] >=  (coordinates.y - 3) && bCord[1] + bCord[3] <= ( coordinates.y + 10){
+        else if bCord[0] + bCord[2] >=  (coordinates.x - 15) && bCord[0] + bCord[2] <= ( coordinates.x + 15)  && bCord[1] + bCord[3] >=  (coordinates.y - 15) && bCord[1] + bCord[3] <= ( coordinates.y + 15){
             C1_ = false
             C2_ = false
             C3_ = false
