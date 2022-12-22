@@ -69,189 +69,198 @@ struct AnnotationView: View {
     @State var cordData: [[CGFloat]] = [] // cordData is a temporary list that gets populated with coordinates when bbox edge is dragged. The purpose of this list is to substract the previous cordinate values from the current. The differecne is used to resize the bounding box.
     
     var body: some View {
-        //        ZStack{
-        //            Color(red: 0.26, green: 0.26, blue: 0.26)
-        //                .ignoresSafeArea()
-        
-        let longPressGesture = LongPressGesture(minimumDuration: 0.5)
-        
-            .updating($isLongPressing) { currentState, gestureState,
-                transaction in
-                gestureState = currentState
-                //                transaction.animation = Animation.easeIn(duration: 2.0)
-            }
-            .onEnded { finished in
-                self.completedLongPress = finished
-                print("LONG PRESS STATUS:",self.completedLongPress)
-                let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
-                boxIDVAL = coordinateManager.1
-                resizeLock = true
-            }
-        
-        //            .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
-        
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        let mainGesture = DragGesture(minimumDistance: 0)
-            .onChanged {
-                (value) in //print(value.location)
-//                var f_width=0.0
-//                var f_height=0.0
-                startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
-                contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
-                contHeight = value.location.y - startLoc.y // Height of the bounding box
-                offset = value.translation // offset is the distance of drag by the user
-//                globalCord.startTap_coordinate = startLoc // assign the startloc to global var
-                print(resizeLock, self.completedLongPress, dragLock, C1)
-                if resizeLock == false && self.completedLongPress == false{
-//                    let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
-//                    boxIDVAL = coordinateManager.1
-                    
-                    resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4, test_boxIDVAL_: &test_boxIDVAL)
-                    
-                    boxIDVAL = test_boxIDVAL
-                    print(boxIDVAL,"initially")
-                    if C1 == true { // && boxIDVAL != 0 : this condition is preventing the bbox from being resized below the original size
-                        dragLock = true
-                        cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
-                        
-                        print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
-//                        var a = value.location.x-startLoc.x
-//                        var b = value.location.y-startLoc.y
-                        print(boxIDVAL,"finally")
-//                        print(dragLock)
-                        
-                        // add previous C1 coordinate to a list to substract from later
-                        if cordData.count > 2{
-//                            print("CorData : ",cordData[cordData.count-2][0] - cordData[cordData.count-1][0])
-                            prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
-                            prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
-                        }
-//                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - abs(prev_f_width), rectData[boxIDVAL-1][1] - abs(prev_f_height), rectData[boxIDVAL-1][2] + abs(prev_f_width), rectData[boxIDVAL-1][3] + abs(prev_f_height)] // reduce x and y value while increasing the width and height with the same value
-//                        if a && b < 0 {
-                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (prev_f_width), rectData[boxIDVAL-1][1] - (prev_f_height), rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
-//                        }
-//                        else{
-//                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] + (prev_f_width), rectData[boxIDVAL-1][1] + (prev_f_height), rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] - (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
-
-//                        }
-                        
-                        
-                    }
-                    if C2 == true && boxIDVAL != 0{
-                        dragLock = true
-                        cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
-                        
-                        if cordData.count > 2{
-                            prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
-                            prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
-                        }
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1] - prev_f_height, rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)]
-                    }
-                    if C3 == true && boxIDVAL != 0{
-                        dragLock = true
-                        cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
-                        
-                        if cordData.count > 2{
-                            prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
-                            prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
-                        }
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - prev_f_width , rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] - prev_f_height ]
-                    }
-                    if C4 == true && boxIDVAL != 0{
-                        dragLock = true
-                        cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
-                        
-                        if cordData.count > 2{
-                            prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
-                            prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
-                        }
-                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] - (prev_f_height)]
-                    }
-                    
+//        ZStack{
+//            Color(red: 0.26, green: 0.26, blue: 0.26)
+//                .ignoresSafeArea()
+            
+            Text("Test")
+            
+            let longPressGesture = LongPressGesture(minimumDuration: 0.5)
+            
+                .updating($isLongPressing) { currentState, gestureState,
+                    transaction in
+                    gestureState = currentState
+                    //                transaction.animation = Animation.easeIn(duration: 2.0)
                 }
-//                if resizeLock == true && self.completedLongPress == true{
-//                        print(resizeLock, completedLongPress)
-//                }
-                
-                //                print("BoxIDVAL", boxIDVAL)
-                if self.completedLongPress == true{
-                    dragLock = false
-                }
-                if self.completedLongPress == true && boxIDVAL != 0 && dragLock == false{ // checking if boxIDVAL value is 0 is a clever way to handle long press guestures outside the bounding boxes
+                .onEnded { finished in
+                    self.completedLongPress = finished
+                    print("LONG PRESS STATUS:",self.completedLongPress)
+                    let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
+                    boxIDVAL = coordinateManager.1
                     resizeLock = true
-                    previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
-                    previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
-                    rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
                 }
-            }
-            .onEnded({
-                (value) in
-                if (value.location.x - startLoc.x > 20){
-                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                        //                        print("checking within bbox",withingBBox)
-                        rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
-                        //                        print("Bbox drawn")
+            
+            //            .sequenced(before: DragGesture()) // https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-gesture-chains-using-sequencedbefore
+            
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            let mainGesture = DragGesture(minimumDistance: 0)
+                .onChanged {
+                    (value) in //print(value.location)
+                    //                var f_width=0.0
+                    //                var f_height=0.0
+                    startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
+                    contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
+                    contHeight = value.location.y - startLoc.y // Height of the bounding box
+                    offset = value.translation // offset is the distance of drag by the user
+                    //                globalCord.startTap_coordinate = startLoc // assign the startloc to global var
+                    print(resizeLock, self.completedLongPress, dragLock, C1)
+                    if resizeLock == false && self.completedLongPress == false{
+                        //                    let coordinateManager =  checkCoordinates(coordinates: startLoc, coordinateList: &rectData, viewStateVal: viewState, withinBBOX: &withingBBox) // , STAT_update: statusUpdate
+                        //                    boxIDVAL = coordinateManager.1
+                        
+                        resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4, test_boxIDVAL_: &test_boxIDVAL)
+                        
+                        boxIDVAL = test_boxIDVAL
+                        print(boxIDVAL,"initially")
+                        if C1 == true { // && boxIDVAL != 0 : this condition is preventing the bbox from being resized below the original size
+                            dragLock = true
+                            cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
+                            
+                            print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
+                            //                        var a = value.location.x-startLoc.x
+                            //                        var b = value.location.y-startLoc.y
+                            print(boxIDVAL,"finally")
+                            //                        print(dragLock)
+                            
+                            // add previous C1 coordinate to a list to substract from later
+                            if cordData.count > 2{
+                                //                            print("CorData : ",cordData[cordData.count-2][0] - cordData[cordData.count-1][0])
+                                prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
+                                prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
+                            }
+                            //                        rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - abs(prev_f_width), rectData[boxIDVAL-1][1] - abs(prev_f_height), rectData[boxIDVAL-1][2] + abs(prev_f_width), rectData[boxIDVAL-1][3] + abs(prev_f_height)] // reduce x and y value while increasing the width and height with the same value
+                            //                        if a && b < 0 {
+                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (prev_f_width), rectData[boxIDVAL-1][1] - (prev_f_height), rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
+                            //                        }
+                            //                        else{
+                            //                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] + (prev_f_width), rectData[boxIDVAL-1][1] + (prev_f_height), rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] - (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
+                            
+                            //                        }
+                            
+                            
+                        }
+                        if C2 == true && boxIDVAL != 0{
+                            dragLock = true
+                            cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
+                            
+                            if cordData.count > 2{
+                                prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
+                                prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
+                            }
+                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1] - prev_f_height, rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)]
+                        }
+                        if C3 == true && boxIDVAL != 0{
+                            dragLock = true
+                            cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
+                            
+                            if cordData.count > 2{
+                                prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
+                                prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
+                            }
+                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - prev_f_width , rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] - prev_f_height ]
+                        }
+                        if C4 == true && boxIDVAL != 0{
+                            dragLock = true
+                            cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
+                            
+                            if cordData.count > 2{
+                                prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
+                                prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
+                            }
+                            rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] - (prev_f_height)]
+                        }
+                        
+                    }
+                    //                if resizeLock == true && self.completedLongPress == true{
+                    //                        print(resizeLock, completedLongPress)
+                    //                }
+                    
+                    //                print("BoxIDVAL", boxIDVAL)
+                    if self.completedLongPress == true{
+                        dragLock = false
+                    }
+                    if self.completedLongPress == true && boxIDVAL != 0 && dragLock == false{ // checking if boxIDVAL value is 0 is a clever way to handle long press guestures outside the bounding boxes
+                        resizeLock = true
+                        previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
+                        previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
+                        rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
                     }
                 }
-                self.completedLongPress = false
-                dragLock = false
-                resizeLock = false
-                C1 = false
-                C2 = false
-                C3 = false
-                C4 = false
-                cordData = []
-                
-            }) // onEnded
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                .onEnded({
+                    (value) in
+                    if (value.location.x - startLoc.x > 20){
+                        if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                            //                        print("checking within bbox",withingBBox)
+                            rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                            //                        print("Bbox drawn")
+                        }
+                    }
+                    self.completedLongPress = false
+                    dragLock = false
+                    resizeLock = false
+                    C1 = false
+                    C2 = false
+                    C3 = false
+                    C4 = false
+                    cordData = []
+                    
+                }) // onEnded
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            let simultaneously = longPressGesture.simultaneously(with: mainGesture)
+            
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            //        } // end of zstack
+            return
+        ZStack{
+            Color(red: 0.26, green: 0.26, blue: 0.26)
+                .ignoresSafeArea()
+            
+            Image("portland")
+                .resizable()
+                .cornerRadius(20)
+                .font(.title)
+                .padding(.all, 5)
+                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                .overlay(ZStack{
+                    //                    dragState.isPressing ?
+                    //                self.completedLongPress ?
+                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                            .path(in: CGRect(
+                                x: (startLoc.x), // +  dragState.translation.width,
+                                y: (startLoc.y), // + dragState.translation.height,
+                                width: contWidth,
+                                height: contHeight
+                            )
+                            )
+                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                    }
+                    ForEach(self.rectData, id:\.self) {cords in
+                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                            .path(in: CGRect(
+                                x: cords[0]-2,
+                                y: cords[1]-2,
+                                width: cords[2]+3,
+                                height: cords[3]+3
+                            )
+                            )
+                            .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                        //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                    } // end of for each loop
+                }) // end of image overlay and zstack inside it
+                .gesture(simultaneously)
+            //            .environmentObject(statusUpdate)
+        } // end of zstack withing return
+        } // end of main body
         
-        let simultaneously = longPressGesture.simultaneously(with: mainGesture)
-        
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        //        } // end of zstack
-        return Image("portland")
-            .resizable()
-            .cornerRadius(20)
-            .font(.title)
-            .padding(.all, 5)
-            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-            .overlay(ZStack{
-                //                    dragState.isPressing ?
-                //                self.completedLongPress ?
-                if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                    RoundedRectangle(cornerRadius: 5, style: .circular)
-                        .path(in: CGRect(
-                            x: (startLoc.x), // +  dragState.translation.width,
-                            y: (startLoc.y), // + dragState.translation.height,
-                            width: contWidth,
-                            height: contHeight
-                        )
-                        )
-                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                }
-                ForEach(self.rectData, id:\.self) {cords in
-                    RoundedRectangle(cornerRadius: 5, style: .circular)
-                        .path(in: CGRect(
-                            x: cords[0]-2,
-                            y: cords[1]-2,
-                            width: cords[2]+3,
-                            height: cords[3]+3
-                        )
-                        )
-                        .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                    //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                } // end of for each loop
-            }) // end of image overlay and zstack inside it
-            .gesture(simultaneously)
-        //            .environmentObject(statusUpdate)
-    } // end of main body
-    
-    //    private func delayUpdate() async {
-    //        try? await Task.sleep(nanoseconds: 7_500_000_000)
-    //        self.completedLongPress = false
-    //        }
+        //    private func delayUpdate() async {
+        //        try? await Task.sleep(nanoseconds: 7_500_000_000)
+        //        self.completedLongPress = false
+        //        }
+//    } // testing zstack
 }
 
 func checkCoordinates(coordinates: CGPoint, coordinateList: inout [[CGFloat]], viewStateVal: CGSize, withinBBOX: inout Bool) -> (Bool, Int){
