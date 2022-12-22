@@ -217,7 +217,17 @@ struct AnnotationView: View {
         ZStack{
             Color(red: 0.26, green: 0.26, blue: 0.26)
                 .ignoresSafeArea()
-            
+            VStack{
+            Button(action: {
+                        // Perform some action when the button is tapped
+                    }) {
+                        Text("\(rectData.count)")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(50)
+                    }
             Image("portland")
                 .resizable()
                 .cornerRadius(20)
@@ -253,6 +263,7 @@ struct AnnotationView: View {
                 }) // end of image overlay and zstack inside it
                 .gesture(simultaneously)
             //            .environmentObject(statusUpdate)
+            } // end of vstack withing return
         } // end of zstack withing return
         } // end of main body
         
