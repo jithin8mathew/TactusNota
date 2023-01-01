@@ -11,6 +11,7 @@ import Foundation
 struct load_project: View {
     
     @State private var isActive : Bool = false
+    @State private var isSettingsActive: Bool = false
 //    let fileManager = FileManager.default
 //    let documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
@@ -38,12 +39,18 @@ struct load_project: View {
 //                        .resizable()
                     HStack{
                         Spacer()
-                        Image(systemName: "gear")
-                            .resizable()
-                            .frame(width: 45 + (geometry.size.width * 0.01), height: 40 + (geometry.size.height * 0.01), alignment: .center)
-                            .padding(.top,0)
-                            .padding(.trailing, 10)
-                            .foregroundColor(.white)
+                        NavigationLink(destination: TNAnnotationSettings(), isActive: self.$isSettingsActive) {
+                            Button(action: {self.isSettingsActive = true}, label: {
+                                VStack{
+                                    Image(systemName: "gear")
+                                        .resizable()
+                                        .frame(width: 45 + (geometry.size.width * 0.01), height: 40 + (geometry.size.height * 0.01), alignment: .center)
+                                        .padding(.top,0)
+                                        .padding(.trailing, 10)
+                                        .foregroundColor(.white)
+                                }
+                            })
+                        }
                     }
                     VStack(){
                         Spacer()
