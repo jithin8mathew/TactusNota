@@ -230,49 +230,70 @@ struct AnnotationView: View {
 //                                    .blur(radius: 5)
                                     .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     
-
-                    HStack{
-                        Button(action: {
-                            // Perform some action when the button is tapped
-                        }) {
-                            Text("\(rectData.count)")
-                                .font(.title)
-                                .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                .padding()
+                    VStack{
+                        HStack{
+                            Button(action: {
+                                // Perform some action when the button is tapped
+                            }) {
+                                // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-text-and-an-icon-side-by-side-using-label
+                                Label("\(rectData.count)", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                //                            Text(Image(systemName: "squareshape.controlhandles.on.squareshape.controlhandles")) + Text("\(rectData.count)")
+                                    .font(.title)
+                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                    .padding()
+                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                                //                                .background(Color.red)
+                                //                                .cornerRadius(50)
+                            }
+                            Button(action: {}){
+                                Text("Image Name")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.red)
+                                    .cornerRadius(50)
+                            }
+                            VStack{
+                                //                        Text("progress")
+                                // https://www.appcoda.com/swiftui-gauge/
+                                // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
+                                Gauge(value: current, in: minValue...maxValue) {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                } currentValueLabel: {
+                                    Text("\(Int(current))")
+                                        .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                } minimumValueLabel: {
+                                    Text("")
+                                        .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                } maximumValueLabel: {
+                                    Text("\(Int(maxValue))")
+                                        .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                }
+                                .gaugeStyle(.accessoryCircular)
+                                //                        ProgressView(value: progress)
+                                //                                .frame(width: 200, height: 10, alignment: .trailing)
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-//                                .background(Color.red)
-//                                .cornerRadius(50)
-                        }
-                        Button(action: {}){
-                            Text("Image Name")
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.red)
-                                .cornerRadius(50)
-                        }
-                        VStack{
-                            //                        Text("progress")
-                            // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
-                            Gauge(value: current, in: minValue...maxValue) {
-                                        Image(systemName: "heart.fill")
-                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    } currentValueLabel: {
-                                        Text("\(Int(current))")
-                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    } minimumValueLabel: {
-                                        Text("")
-                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    } maximumValueLabel: {
-                                        Text("\(Int(maxValue))")
-                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    }
-                                    .gaugeStyle(.accessoryCircular)
-                            //                        ProgressView(value: progress)
-//                                .frame(width: 200, height: 10, alignment: .trailing)
-                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                        }
-                    } // end of Hstack
-                }
+                            } // end of vStack which is not used really
+                        } // end of Hstack
+                        
+                        // https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-horizontal-and-vertical-scrolling-using-scrollview
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 0) {
+                                ForEach(0..<10) {
+                                    Text("Item \($0)")
+                                        .foregroundColor(.white)
+                                        .font(.footnote)
+                                        .frame(width: 70, height: 20, alignment: .center)
+                                        .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                        .cornerRadius(2)
+                                }
+                            }
+                        } // end of scroll-view
+                        .frame(width:700, height: 25, alignment: .center)
+                        .padding()
+                        Spacer()
+                    } // end of Vstack used to put scrolling class selection button
+                } // end of Zstack used to create text on mirror effect
 //                .blur(radius: 10)
                 Image("portland")
                     .resizable()
