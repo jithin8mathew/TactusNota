@@ -237,10 +237,11 @@ struct AnnotationView: View {
                         }) {
                             Text("\(rectData.count)")
                                 .font(.title)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 .padding()
-                                .background(Color.red)
-                                .cornerRadius(50)
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+//                                .background(Color.red)
+//                                .cornerRadius(50)
                         }
                         Button(action: {}){
                             Text("Image Name")
