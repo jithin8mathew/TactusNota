@@ -12,22 +12,9 @@ struct load_project: View {
     
     @State private var isActive : Bool = false
     @State private var isSettingsActive: Bool = false
-//    let fileManager = FileManager.default
-//    let documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    
     
     var body: some View {
-        
-//        List {
-//                    ForEach(urls, id: \.self) { url in
-//                        Text(url.lastPathComponent)
-//                    }
-//                }
-//                .onAppear {
-//                    urls = getContentsOfDirectory(url: url)
-//                    print(urls)
-//                }
-        
+                
         NavigationView{
             ZStack{
                 GeometryReader { geometry in
@@ -35,8 +22,6 @@ struct load_project: View {
                     Color(red: 0.0, green: 0.42, blue: 0.51) // Teal blue
 
                         .ignoresSafeArea()
-//                    Image("temp_back")
-//                        .resizable()
                     HStack{
                         Spacer()
                         NavigationLink(destination: TNAnnotationSettings(), isActive: self.$isSettingsActive) {
