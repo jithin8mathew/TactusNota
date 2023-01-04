@@ -68,6 +68,11 @@ struct AnnotationView: View {
     //    @State var prev_start_loc = CGPoint.zero
     @State var cordData: [[CGFloat]] = [] // cordData is a temporary list that gets populated with coordinates when bbox edge is dragged. The purpose of this list is to substract the previous cordinate values from the current. The differecne is used to resize the bounding box.
     
+//    @State private var progress = 0.5 // This will let the user know what percentage of the data is annotated so far.
+    @State private var current = 67.0
+    @State private var minValue = 0.0
+    @State private var maxValue = 170.0
+    
     var body: some View {
         //        ZStack{
         //            Color(red: 0.26, green: 0.26, blue: 0.26)
@@ -218,25 +223,56 @@ struct AnnotationView: View {
             Color(red: 0.26, green: 0.26, blue: 0.26)
                 .ignoresSafeArea()
             VStack{
-                HStack{
-                    Button(action: {
-                        // Perform some action when the button is tapped
-                    }) {
-                        Text("\(rectData.count)")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.red)
-                            .cornerRadius(50)
-                    }
-                    Button(action: {}){
-                        Text("Image Name")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.red)
-                            .cornerRadius(50)
-                    }
+                ZStack{
+                    RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26, opacity: 0.8))
+                                    .frame(width: 1000, height: 100)
+//                                    .blur(radius: 5)
+                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                    
+
+                    HStack{
+                        Button(action: {
+                            // Perform some action when the button is tapped
+                        }) {
+                            Text("\(rectData.count)")
+                                .font(.title)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(50)
+                        }
+                        Button(action: {}){
+                            Text("Image Name")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(50)
+                        }
+                        VStack{
+                            //                        Text("progress")
+                            // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
+                            Gauge(value: current, in: minValue...maxValue) {
+                                        Image(systemName: "heart.fill")
+                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                    } currentValueLabel: {
+                                        Text("\(Int(current))")
+                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                    } minimumValueLabel: {
+                                        Text("")
+                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                    } maximumValueLabel: {
+                                        Text("\(Int(maxValue))")
+                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                    }
+                                    .gaugeStyle(.accessoryCircular)
+                            //                        ProgressView(value: progress)
+//                                .frame(width: 200, height: 10, alignment: .trailing)
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                        }
+                    } // end of Hstack
                 }
+//                .blur(radius: 10)
                 Image("portland")
                     .resizable()
                     .cornerRadius(20)
