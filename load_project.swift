@@ -12,6 +12,7 @@ struct load_project: View {
     
     @State private var isActive : Bool = false
     @State private var isSettingsActive: Bool = false
+    @State private var isProjectInfoActive : Bool = false
     
     var body: some View {
                 
@@ -53,8 +54,8 @@ struct load_project: View {
                         Spacer()
                         HStack{
                             Spacer()
-                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                Button(action: {}, label: {
+                            NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
+                                Button(action: {self.isProjectInfoActive == true}, label: {
                                     VStack{
                                         Image(systemName: "plus.app")
                                             .resizable()
