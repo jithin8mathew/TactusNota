@@ -55,7 +55,7 @@ struct load_project: View {
                         HStack{
                             Spacer()
                             NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
-                                Button(action: {self.isProjectInfoActive == true}, label: {
+                                Button(action: {self.isProjectInfoActive = true}, label: {
                                     VStack{
                                         Image(systemName: "plus.app")
                                             .resizable()
