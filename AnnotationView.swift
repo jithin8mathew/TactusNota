@@ -68,10 +68,12 @@ struct AnnotationView: View {
     //    @State var prev_start_loc = CGPoint.zero
     @State var cordData: [[CGFloat]] = [] // cordData is a temporary list that gets populated with coordinates when bbox edge is dragged. The purpose of this list is to substract the previous cordinate values from the current. The differecne is used to resize the bounding box.
     
-//    @State private var progress = 0.5 // This will let the user know what percentage of the data is annotated so far.
+    //    @State private var progress = 0.5 // This will let the user know what percentage of the data is annotated so far.
     @State private var current = 67.0
     @State private var minValue = 0.0
     @State private var maxValue = 170.0
+    @State private var annotationClassList: [String] = ["apple","car","bus","cat"]
+    //    annotationClassList = ["apple","car","bus","cat"]
     
     var body: some View {
         //        ZStack{
@@ -226,25 +228,23 @@ struct AnnotationView: View {
                 ZStack{
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .fill(Color(red: 0.26, green: 0.26, blue: 0.26, opacity: 0.8))
-                                    .frame(width: 1000, height: 100)
-//                                    .blur(radius: 5)
-                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                    
+                        .frame(width: 1000, height: 100)
+                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     VStack{
                         HStack{
-                            Button(action: {
-                                // Perform some action when the button is tapped
-                            }) {
-                                // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-text-and-an-icon-side-by-side-using-label
-                                Label("\(rectData.count)", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
-                                //                            Text(Image(systemName: "squareshape.controlhandles.on.squareshape.controlhandles")) + Text("\(rectData.count)")
-                                    .font(.title)
-                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    .padding()
-                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                //                                .background(Color.red)
-                                //                                .cornerRadius(50)
-                            }
+                            Label("5", systemImage: "list.number")
+                                .font(.title)
+                                .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                .padding()
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                            
+                            // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-text-and-an-icon-side-by-side-using-label
+                            Label("\(rectData.count)", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                .font(.title)
+                                .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                .padding()
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                            
                             Button(action: {}){
                                 Text("Image Name")
                                     .foregroundColor(.white)
@@ -276,9 +276,19 @@ struct AnnotationView: View {
                             } // end of vStack which is not used really
                         } // end of Hstack
                         
+                        // temporary class list
+                        
                         // https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-horizontal-and-vertical-scrolling-using-scrollview
                         ScrollView(.horizontal) {
-                            HStack(spacing: 0) {
+                            HStack(spacing: 1) {
+//                                ForEach(annotationClassList, id: \.self){ cls in
+//                                    Text(cls)
+//                                    foregroundColor(.white)
+//                                        .font(.footnote)
+//                                        .frame(width: 70, height: 20, alignment: .center)
+//                                        .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                                        .cornerRadius(3)
+//                                }
                                 ForEach(0..<10) {
                                     Text("Item \($0)")
                                         .foregroundColor(.white)
@@ -291,10 +301,9 @@ struct AnnotationView: View {
                         } // end of scroll-view
                         .frame(width:700, height: 25, alignment: .center)
                         .padding()
-                        Spacer()
                     } // end of Vstack used to put scrolling class selection button
                 } // end of Zstack used to create text on mirror effect
-//                .blur(radius: 10)
+                //                .blur(radius: 10)
                 Image("portland")
                     .resizable()
                     .cornerRadius(20)
