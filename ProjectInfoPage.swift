@@ -16,7 +16,7 @@ struct ProjectInfoPage: View {
     
     @State private var isAnnotationActive : Bool = false
     @State var projectname: String = "Project 1"
-    @State var cName: String = "Car"
+    @State var cName: String = ""
     @State var classNameList: [String] = []
     @State var checked: Bool = false
 //    @State var classNameListReplica: [classStruct]
