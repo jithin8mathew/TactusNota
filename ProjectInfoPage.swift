@@ -14,6 +14,8 @@ import SwiftUI
 
 struct ProjectInfoPage: View {
     
+    @StateObject var classList = ClassList()
+    
     @State private var isAnnotationActive : Bool = false
     @State var projectname: String = "Project 1"
     @State var cName: String = ""
@@ -22,6 +24,7 @@ struct ProjectInfoPage: View {
 //    @State var classNameListReplica: [classStruct]
     
     var body: some View {
+        
         NavigationView{
             ZStack{
                 Color(red: 0.26, green: 0.26, blue: 0.26)
@@ -81,7 +84,10 @@ struct ProjectInfoPage: View {
                             .padding(.bottom, 20)
                             .frame(width: 300, height: 50, alignment: .center)
                         
-                        Button(action: {classNameList.append(cName)}){ // classNameList.append([className])
+                        Button(action: {
+                            classList.classNameList.append(cName)
+                            cName = ""
+                        }){ // classNameList.append([className])
                             Label("Add", systemImage: "plus.circle")
                                 .foregroundColor(.white)
                                 .padding()
@@ -90,9 +96,19 @@ struct ProjectInfoPage: View {
                         }
                         
                     } // end of add class Hstack
+                    
+                    Button(action: {}){ // classNameList.append([className])
+                        Label("Import class names", systemImage: "arrow.up.doc.fill")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(50)
+                    }
+                    
+                    
                     HStack{
 //                        var classCounter = 8
-                        ForEach(classNameList , id: \.self) { cls in
+                        ForEach(classList.classNameList , id: \.self) { cls in
 //                            classCounter = classCounter + 1
                             Text(cls)
                                 .foregroundColor(.white)
@@ -105,9 +121,18 @@ struct ProjectInfoPage: View {
                         }
                     } // end of displaying class list Hstack
                     .frame(width: 700)
+                    
                     Spacer()
                     NavigationLink(destination: AnnotationView(), isActive: self.$isAnnotationActive) {
-                        Button(action: {isAnnotationActive = true}){
+                        Button(action: {
+                            if (classList.classNameList.count > 0) {
+                                isAnnotationActive = true
+                            }else{
+                                print("enter class names!")
+                            }
+                            
+                            
+                        }){
                             Label("Next", systemImage: "arrow.forward.circle")
                                 .foregroundColor(.white)
                                 .padding()
@@ -119,6 +144,7 @@ struct ProjectInfoPage: View {
                 } // end of first vstack
             } // end of main zstack
         } // end of navigation view
+        .environmentObject(classList)
         .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
         .padding(.all, 0)
         
