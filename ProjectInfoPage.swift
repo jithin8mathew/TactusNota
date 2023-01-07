@@ -12,16 +12,23 @@ import SwiftUI
 //    var className: String
 //}
 
+enum ObjectDetectionType {
+    case boundingBox, polygon, line // eventually point
+}
+
 struct ProjectInfoPage: View {
     
     @StateObject var classList = ClassList()
     
     @State private var isAnnotationActive : Bool = false
     @State var projectname: String = "Project 1"
+    @State var projectpath: String = "path to files"
     @State var cName: String = ""
     @State var classNameList: [String] = []
     @State var checked: Bool = false
 //    @State var classNameListReplica: [classStruct]
+    
+    @State private var odChoice : ObjectDetectionType = .boundingBox // for picking the annotation type
     
     var body: some View {
         
@@ -46,29 +53,76 @@ struct ProjectInfoPage: View {
                             .padding()
                             .foregroundColor(.white)
                             .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                            .cornerRadius(5.0)
-                            .padding(.bottom, 20)
+                            .cornerRadius(15.0)
+                            .frame(width: 500, height: 40, alignment: .center)
+                        }
+                    .frame(alignment: .center)
+                    .padding(20)
+                    // select project folder
+                    HStack{
+                        Text("Project Folder")
+                            .padding()
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+
+                        TextField("Project Folder: ", text: $projectpath)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                            .cornerRadius(15.0)
                             .frame(width: 500, height: 50, alignment: .center)
+                        
+                        Button(action: {}){
+                            Label("folder", systemImage: "square.grid.3x1.folder.fill.badge.plus")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(50)
+                            }
                     }
+                    .frame(alignment: .center)
+                    .padding(20)
                     
                     Group{
-                        if checked {
-                            ZStack{
-                                Circle()
-                                    .fill(Color.blue)
-                                    .frame(width: 20, height: 20)
-                                Circle()
-                                    .fill(Color.white)
-                                    .frame(width: 12, height: 12)
-                            }.onTapGesture {self.checked = false}
-                        } else {
-                            Circle()
-                                .fill(Color.white)
-                                .frame(width: 20, height: 20)
-                                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-                                .onTapGesture {self.checked = true}
+                        HStack{
+                            Picker(selection: $odChoice, label: Text("Bounding box type:")) {
+                                Text("Bounding Box").tag(ObjectDetectionType.boundingBox)
+                                    .foregroundColor(.white)
+                                    .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                    .cornerRadius(50)
+                                Text("Polygon").tag(ObjectDetectionType.polygon)
+                                    .foregroundColor(.white)
+                                    .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                    .cornerRadius(50)
+                                Text("Line").tag(ObjectDetectionType.line)
+                                    .foregroundColor(.white)
+                                    .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                    .cornerRadius(50)
+                            }.pickerStyle(.menu)
+                                .frame(maxWidth: 300)
+                                .padding(0)
+                                .foregroundColor(.white)
                         }
                     }
+                    
+//                    Group{
+//                        if checked {
+//                            ZStack{
+//                                Circle()
+//                                    .fill(Color.blue)
+//                                    .frame(width: 20, height: 20)
+//                                Circle()
+//                                    .fill(Color.white)
+//                                    .frame(width: 12, height: 12)
+//                            }.onTapGesture {self.checked = false}
+//                        } else {
+//                            Circle()
+//                                .fill(Color.white)
+//                                .frame(width: 20, height: 20)
+//                                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+//                                .onTapGesture {self.checked = true}
+//                        }
+//                    }
                     
                     HStack{
                         Text("Class")
@@ -80,8 +134,7 @@ struct ProjectInfoPage: View {
                             .padding()
                             .foregroundColor(.white)
                             .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                            .cornerRadius(5.0)
-                            .padding(.bottom, 20)
+                            .cornerRadius(15.0)
                             .frame(width: 300, height: 50, alignment: .center)
                         
                         Button(action: {
@@ -96,6 +149,8 @@ struct ProjectInfoPage: View {
                         }
                         
                     } // end of add class Hstack
+                    .frame(alignment: .center)
+                    .padding(20)
                     
                     Button(action: {}){ // classNameList.append([className])
                         Label("Import class names", systemImage: "arrow.up.doc.fill")
@@ -130,8 +185,6 @@ struct ProjectInfoPage: View {
                             }else{
                                 print("enter class names!")
                             }
-                            
-                            
                         }){
                             Label("Next", systemImage: "arrow.forward.circle")
                                 .foregroundColor(.white)
@@ -139,8 +192,10 @@ struct ProjectInfoPage: View {
                                 .background(Color.red)
                                 .cornerRadius(50)
                         }
+                        .padding(.bottom, 20)
+                        
                     } // end of navigation link
-                    Spacer()
+//                    Spacer()
                 } // end of first vstack
             } // end of main zstack
         } // end of navigation view
