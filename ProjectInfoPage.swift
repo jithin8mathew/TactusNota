@@ -91,14 +91,20 @@ struct ProjectInfoPage: View {
                         
                     } // end of add class Hstack
                     HStack{
+//                        var classCounter = 8
                         ForEach(classNameList , id: \.self) { cls in
+//                            classCounter = classCounter + 1
                             Text(cls)
                                 .foregroundColor(.white)
                                 .padding(5)
                                 .background(Color.purple)
                                 .cornerRadius(10)
+//                            if (classCounter % 8 == 0) {
+//                                VStack{}
+//                            }
                         }
                     } // end of displaying class list Hstack
+                    .frame(width: 700)
                     Spacer()
                     NavigationLink(destination: AnnotationView(), isActive: self.$isAnnotationActive) {
                         Button(action: {isAnnotationActive = true}){
