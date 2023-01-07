@@ -28,11 +28,15 @@ struct ProjectInfoPage: View {
     @State var checked: Bool = false
 //    @State var classNameListReplica: [classStruct]
     
+    // display the number of images found in the picked folder
+    @State var shouldHideNoImagesButton = false
+    @State var imagesFound = false
+    
     @State private var odChoice : ObjectDetectionType = .boundingBox // for picking the annotation type
     
     var body: some View {
         
-        NavigationView{
+        NavigationStack{
             ZStack{
                 Color(red: 0.26, green: 0.26, blue: 0.26)
                     .ignoresSafeArea()
@@ -42,6 +46,7 @@ struct ProjectInfoPage: View {
                         .fontWeight(.semibold)
                         .padding(.bottom, 20)
                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                        .padding(.top, 100)
                     Spacer()
                     HStack{
                         Text("Project Name")
@@ -53,7 +58,7 @@ struct ProjectInfoPage: View {
                             .padding()
                             .foregroundColor(.white)
                             .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                            .cornerRadius(15.0)
+                            .cornerRadius(50.0)
                             .frame(width: 500, height: 40, alignment: .center)
                         }
                     .frame(alignment: .center)
@@ -64,26 +69,40 @@ struct ProjectInfoPage: View {
                             .padding()
                             .foregroundColor(.white)
                             .font(.system(size: 20))
-
                         TextField("Project Folder: ", text: $projectpath)
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                            .cornerRadius(15.0)
-                            .frame(width: 500, height: 50, alignment: .center)
-                        
-                        Button(action: {}){
-                            Label("folder", systemImage: "square.grid.3x1.folder.fill.badge.plus")
-                                .foregroundColor(.white)
                                 .padding()
-                                .background(Color.red)
-                                .cornerRadius(50)
+                                .foregroundColor(.white)
+                                .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                .cornerRadius(50.0)
+                                .frame(width: 500, height: 50, alignment: .leading)
+                            
+                            Button(action: {}){
+                                Label("folder", systemImage: "square.grid.3x1.folder.fill.badge.plus")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.red)
+                                    .cornerRadius(50)
+                                    .frame(height: 50, alignment: .trailing)
+                                    .padding(.leading, -115)
                             }
                     }
                     .frame(alignment: .center)
                     .padding(20)
                     
                     Group{
+                        
+                        Button(action: {}){
+                            Label("images found", systemImage: "photo.stack")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(imagesFound ? Color.green : Color.red)
+                                .cornerRadius(50)
+                                .frame(width: 200, height: 10, alignment: .center)
+                                .opacity(shouldHideNoImagesButton ? 0 : 1)
+                                .font(.footnote)
+                            }
+                        .padding()
+                        
                         HStack{
                             Picker(selection: $odChoice, label: Text("Bounding box type:")) {
                                 Text("Bounding Box").tag(ObjectDetectionType.boundingBox)
@@ -134,7 +153,7 @@ struct ProjectInfoPage: View {
                             .padding()
                             .foregroundColor(.white)
                             .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                            .cornerRadius(15.0)
+                            .cornerRadius(50.0)
                             .frame(width: 300, height: 50, alignment: .center)
                         
                         Button(action: {
@@ -192,7 +211,7 @@ struct ProjectInfoPage: View {
                                 .background(Color.red)
                                 .cornerRadius(50)
                         }
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 100)
                         
                     } // end of navigation link
 //                    Spacer()
@@ -200,7 +219,8 @@ struct ProjectInfoPage: View {
             } // end of main zstack
         } // end of navigation view
         .environmentObject(classList)
-        .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
+//        .navigationTitle("Home")
+//        .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
         .padding(.all, 0)
         
     }
