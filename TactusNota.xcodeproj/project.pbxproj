@@ -18,6 +18,7 @@
 		B631C47D2787A25B00A5216A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B631C47C2787A25B00A5216A /* Preview Assets.xcassets */; };
 		B633170E296741E500F3A631 /* ProjectInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633170D296741E500F3A631 /* ProjectInfoPage.swift */; };
 		B63317102969646200F3A631 /* ClassList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633170F2969646200F3A631 /* ClassList.swift */; };
+		B6331712296A30B700F3A631 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6331711296A30B700F3A631 /* DataModel.swift */; };
 		B676274728A371B200CCBCF9 /* testViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274628A371B200CCBCF9 /* testViewNew.swift */; };
 		B676274928AEFA5300CCBCF9 /* testview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274828AEFA5300CCBCF9 /* testview2.swift */; };
 		B676274D28B940DA00CCBCF9 /* testView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274C28B940DA00CCBCF9 /* testView4.swift */; };
@@ -45,6 +46,7 @@
 		B631C47C2787A25B00A5216A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B633170D296741E500F3A631 /* ProjectInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoPage.swift; sourceTree = "<group>"; };
 		B633170F2969646200F3A631 /* ClassList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassList.swift; sourceTree = "<group>"; };
+		B6331711296A30B700F3A631 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		B676274628A371B200CCBCF9 /* testViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewNew.swift; sourceTree = "<group>"; };
 		B676274828AEFA5300CCBCF9 /* testview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview2.swift; sourceTree = "<group>"; };
 		B676274C28B940DA00CCBCF9 /* testView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView4.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
+				B6331711296A30B700F3A631 /* DataModel.swift */,
 				B633170F2969646200F3A631 /* ClassList.swift */,
 				B633170D296741E500F3A631 /* ProjectInfoPage.swift */,
 				B6116D492939C4FA00123494 /* Item.swift */,
@@ -207,6 +210,7 @@
 				B631C4782787A25A00A5216A /* ContentView.swift in Sources */,
 				B6116D46291EE46100123494 /* filePicker.swift in Sources */,
 				B6116D4A2939C4FA00123494 /* Item.swift in Sources */,
+				B6331712296A30B700F3A631 /* DataModel.swift in Sources */,
 				B676274D28B940DA00CCBCF9 /* testView4.swift in Sources */,
 				B631C4762787A25A00A5216A /* TactusNotaApp.swift in Sources */,
 				B676274F28BD46D900CCBCF9 /* testViewNew2.swift in Sources */,
