@@ -25,19 +25,19 @@ struct image_picker: View {
         VStack{
             Button("Choose Folder") {
                 
-//                do {
-//                    let items = try fm.contentsOfDirectory(atPath: path)
-//
-//                    for item in items {
-//                        print("Found \(item)")
-//                        Text("Found \(item)")
-//                    }
-//                } catch {
-//                    // failed to read directory – bad permissions, perhaps?
-//                }
+                do {
+                    let items = try fm.contentsOfDirectory(atPath: path)
+
+                    for item in items {
+                        print("Found \(item)")
+                        Text("Found \(item)")
+                    }
+                } catch {
+                    // failed to read directory – bad permissions, perhaps?
+                }
                 
-                            showDocumentPicker = true
-                            Text(fileContent)
+//                            showDocumentPicker = true
+//                            Text(fileContent)
 //                            self.selectFolder()
                 
             }
