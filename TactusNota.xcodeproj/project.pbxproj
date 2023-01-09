@@ -19,6 +19,7 @@
 		B633170E296741E500F3A631 /* ProjectInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633170D296741E500F3A631 /* ProjectInfoPage.swift */; };
 		B63317102969646200F3A631 /* ClassList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633170F2969646200F3A631 /* ClassList.swift */; };
 		B6331712296A30B700F3A631 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6331711296A30B700F3A631 /* DataModel.swift */; };
+		B6331714296BF0F300F3A631 /* testFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6331713296BF0F300F3A631 /* testFileLoader.swift */; };
 		B676274728A371B200CCBCF9 /* testViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274628A371B200CCBCF9 /* testViewNew.swift */; };
 		B676274928AEFA5300CCBCF9 /* testview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274828AEFA5300CCBCF9 /* testview2.swift */; };
 		B676274D28B940DA00CCBCF9 /* testView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274C28B940DA00CCBCF9 /* testView4.swift */; };
@@ -47,6 +48,7 @@
 		B633170D296741E500F3A631 /* ProjectInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoPage.swift; sourceTree = "<group>"; };
 		B633170F2969646200F3A631 /* ClassList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassList.swift; sourceTree = "<group>"; };
 		B6331711296A30B700F3A631 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		B6331713296BF0F300F3A631 /* testFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFileLoader.swift; sourceTree = "<group>"; };
 		B676274628A371B200CCBCF9 /* testViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewNew.swift; sourceTree = "<group>"; };
 		B676274828AEFA5300CCBCF9 /* testview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview2.swift; sourceTree = "<group>"; };
 		B676274C28B940DA00CCBCF9 /* testView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView4.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
+				B6331713296BF0F300F3A631 /* testFileLoader.swift */,
 				B6331711296A30B700F3A631 /* DataModel.swift */,
 				B633170F2969646200F3A631 /* ClassList.swift */,
 				B633170D296741E500F3A631 /* ProjectInfoPage.swift */,
@@ -200,6 +203,7 @@
 				B633170E296741E500F3A631 /* ProjectInfoPage.swift in Sources */,
 				B6DE7B762860EA89003A2191 /* annotationGestureTN.swift in Sources */,
 				B63317102969646200F3A631 /* ClassList.swift in Sources */,
+				B6331714296BF0F300F3A631 /* testFileLoader.swift in Sources */,
 				B676274728A371B200CCBCF9 /* testViewNew.swift in Sources */,
 				B6AF0E862891DA9E000F7112 /* testView.swift in Sources */,
 				B6EB295A2918DB780049A7DD /* image_picker.swift in Sources */,
