@@ -12,7 +12,7 @@ struct image_picker: View {
     // based on this tutorial https://www.hackingwithswift.com/example-code/system/how-to-read-the-contents-of-a-directory-using-filemanager
     let fm = FileManager.default
     let path = Bundle.main.resourcePath!
-        
+    
     // https://sarunw.com/posts/url-type-properties/
 //    let documentsDirectory = try? FileManager.default.url(
 //        for: .documentDirectory,
@@ -25,20 +25,20 @@ struct image_picker: View {
         VStack{
             Button("Choose Folder") {
                 
-                do {
-                    let items = try fm.contentsOfDirectory(atPath: path)
-                    
-                    for item in items {
-                        print("Found \(item)")
-                        Text("Found \(item)")
-                    }
-                } catch {
-                    // failed to read directory – bad permissions, perhaps?
-                }
+//                do {
+//                    let items = try fm.contentsOfDirectory(atPath: path)
+//
+//                    for item in items {
+//                        print("Found \(item)")
+//                        Text("Found \(item)")
+//                    }
+//                } catch {
+//                    // failed to read directory – bad permissions, perhaps?
+//                }
                 
-                //            showDocumentPicker = true
-                //            Text(fileContent)
-                //            self.selectFolder()
+                            showDocumentPicker = true
+                            Text(fileContent)
+//                            self.selectFolder()
                 
             }
             //            Text(fileContent)
