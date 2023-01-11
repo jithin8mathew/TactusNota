@@ -6,7 +6,7 @@ import SwiftUI
 
 struct image_picker: View {
     
-    @State private var fileContent = "sample" // change to scalar if it didnt work
+    @State private var fileContent = "" // change to scalar if it didnt work
     @State private var showDocumentPicker = false
     
     // based on this tutorial https://www.hackingwithswift.com/example-code/system/how-to-read-the-contents-of-a-directory-using-filemanager
@@ -14,31 +14,36 @@ struct image_picker: View {
     let path = Bundle.main.resourcePath!
     
     // https://sarunw.com/posts/url-type-properties/
-//    let documentsDirectory = try? FileManager.default.url(
-//        for: .documentDirectory,
-//        in: .userDomainMask,
-//        appropriateFor: nil,
-//        create: false)
+    //    let documentsDirectory = try? FileManager.default.url(
+    //        for: .documentDirectory,
+    //        in: .userDomainMask,
+    //        appropriateFor: nil,
+    //        create: false)
     
     
     var body: some View {
         VStack{
+            
+            Text(fileContent)
+                .padding()
+
+            
             Button("Choose Folder") {
                 
-                do {
-                    let items = try fm.contentsOfDirectory(atPath: path)
+                //                do {
+                //                    let items = try fm.contentsOfDirectory(atPath: path)
+                //
+                //                    for item in items {
+                //                        print("Found \(item)")
+                //                        Text("Found \(item)")
+                //                    }
+                //                } catch {
+                //                    // failed to read directory – bad permissions, perhaps?
+                //                }
+ 
 
-                    for item in items {
-                        print("Found \(item)")
-                        Text("Found \(item)")
-                    }
-                } catch {
-                    // failed to read directory – bad permissions, perhaps?
-                }
-                
-//                            showDocumentPicker = true
-//                            Text(fileContent)
-//                            self.selectFolder()
+                showDocumentPicker = true
+ //                self.selectFolder()
                 
             }
             //            Text(fileContent)

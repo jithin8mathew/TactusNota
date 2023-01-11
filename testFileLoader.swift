@@ -25,7 +25,6 @@ struct testFileLoader: View {
             } else {
                 Text("No folder selected")
             }
-
             Button(action: {
                 let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeFolder as String], in: .open)
                 documentPicker.delegate = folderPickerDelegate
