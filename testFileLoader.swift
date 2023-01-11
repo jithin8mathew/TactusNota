@@ -1,37 +1,62 @@
+////
+////  testFileLoader.swift
+////  TactusNota
+////
+////  Created by Jithin  Mathew on 1/9/23.
+////
 //
-//  testFileLoader.swift
-//  TactusNota
+//import SwiftUI
+//import MobileCoreServices
 //
-//  Created by Jithin  Mathew on 1/9/23.
+////struct ContentView: View {
+////    @State var isShowingPicker = false
+////    @State var selectedURL: URL?
+////
+////    var body: some View {
+////        VStack {
+////            if selectedURL != nil {
+////                Text("Selected folder: \(selectedURL?.lastPathComponent ?? "None")")
+////            } else {
+////                Button("Select folder") {
+////                    self.isShowingPicker = true
+////                }
+////            }
+////        }
+////        .sheet(isPresented: $isShowingPicker) {
+////            DocumentPickerView(isShowing: self.$isShowingPicker, selectedURL: self.$selectedURL)
+////        }
+////    }
+////}
 //
-
-import SwiftUI
-import MobileCoreServices
-
-class FolderPickerDelegate: NSObject, UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-         // Handle the selected folder here
-    }
-}
-
-struct testFileLoader: View {
-    @State private var selectedFolder: URL?
-    @State private var folderPickerDelegate = FolderPickerDelegate()
-
-    var body: some View {
-        VStack {
-            if selectedFolder != nil {
-                Text("Selected folder: \(selectedFolder?.lastPathComponent ?? "None")")
-            } else {
-                Text("No folder selected")
-            }
-            Button(action: {
-                let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeFolder as String], in: .open)
-                documentPicker.delegate = folderPickerDelegate
-                UIApplication.shared.windows.first?.rootViewController?.present(documentPicker, animated: true)
-            }) {
-                Text("Select a folder")
-            }
-        }
-    }
-}
+//struct DocumentPickerView: UIViewControllerRepresentable {
+//    @Binding var isShowing: Bool
+//        @Binding var selectedURL: URL?
+//
+//    func makeCoordinator() -> Coordinator {
+//        Coordinator(self)
+//    }
+//
+//    func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPickerView>) -> UIDocumentPickerViewController {
+//        let picker = UIDocumentPickerViewController(documentTypes: [kUTTypeFolder as String], in: .open)
+//        picker.allowsMultipleSelection = false
+//        picker.delegate = context.coordinator
+//        return picker
+//    }
+//
+//    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: UIViewControllerRepresentableContext<DocumentPickerView>) {
+//
+//    }
+//
+//    class Coordinator: NSObject, UIDocumentPickerDelegate {
+//        var parent: DocumentPickerView
+//
+//        init(_ parent: DocumentPickerView) {
+//            self.parent = parent
+//        }
+//
+//        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//            parent.selectedURL = urls.first
+//            parent.isShowing = false
+//        }
+//    }
+//}

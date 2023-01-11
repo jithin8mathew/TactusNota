@@ -2,6 +2,9 @@
 // Interesting read
 // https://www.appypie.com/filemanager-files-swift-how-to/
 
+// INTERESTING ARTICLE
+// https://developer.apple.com/documentation/uikit/view_controllers/providing_access_to_directories
+
 import SwiftUI
 
 struct image_picker: View {
@@ -13,6 +16,9 @@ struct image_picker: View {
     let fm = FileManager.default
     let path = Bundle.main.resourcePath!
     
+    @State var isShowingPicker = false
+    @State var selectedURL: URL?
+    
     // https://sarunw.com/posts/url-type-properties/
     //    let documentsDirectory = try? FileManager.default.url(
     //        for: .documentDirectory,
@@ -22,14 +28,15 @@ struct image_picker: View {
     
     
     var body: some View {
-        VStack{
             
+        VStack{
+
             Text(fileContent)
                 .padding()
 
-            
+
             Button("Choose Folder") {
-                
+
                 //                do {
                 //                    let items = try fm.contentsOfDirectory(atPath: path)
                 //
@@ -40,11 +47,11 @@ struct image_picker: View {
                 //                } catch {
                 //                    // failed to read directory – bad permissions, perhaps?
                 //                }
- 
+
 
                 showDocumentPicker = true
  //                self.selectFolder()
-                
+
             }
             //            Text(fileContent)
         }
