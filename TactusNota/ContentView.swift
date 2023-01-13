@@ -108,7 +108,7 @@ struct ContentView: View {
                                                 x: 3,
                                                 y: 3)
                     }
-                    NavigationLink(destination: testFileLoader(), isActive: self.$isActiveAnnotationView) {
+                    NavigationLink(destination: AnnotationView(), isActive: self.$isActiveAnnotationView) {
                     Button(action: { self.isActiveAnnotationView = true
                                         }, label: {
                                             Text("Previous")
