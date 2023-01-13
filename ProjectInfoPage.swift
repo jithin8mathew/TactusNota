@@ -53,7 +53,7 @@ struct ProjectInfoPage: View {
     
     var body: some View {
         
-        NavigationStack{
+//        NavigationStack{
             ZStack{
                 Color(red: 0.26, green: 0.26, blue: 0.26)
                     .ignoresSafeArea()
@@ -235,9 +235,6 @@ struct ProjectInfoPage: View {
                                 .padding(5)
                                 .background(Color.purple)
                                 .cornerRadius(10)
-//                            if (classCounter % 8 == 0) {
-//                                VStack{}
-//                            }
                         }
                     } // end of displaying class list Hstack
                     .frame(width: 700)
@@ -260,13 +257,12 @@ struct ProjectInfoPage: View {
                         }
                         .padding(.bottom, 100)
                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                        
                     } // end of navigation link
 //                    Spacer()
                 } // end of first vstack
             } // end of main zstack
-        } // end of navigation view
-        .environmentObject(classList)
+//        } // end of navigation view
+//        .environmentObject(classList)
 //        .navigationTitle("Home")
 //        .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
         .padding(.all, 0)
@@ -275,7 +271,9 @@ struct ProjectInfoPage: View {
 }
 
 struct ProjectInfoPage_Previews: PreviewProvider {
+    
     static var previews: some View {
         ProjectInfoPage()
+//            .environmentObject(self.classList)
     }
 }

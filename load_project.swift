@@ -16,7 +16,7 @@ struct load_project: View {
     
     var body: some View {
                 
-        NavigationView{
+//        NavigationView{
             ZStack{
                 GeometryReader { geometry in
 //                    Color(red: 0.91, green: 0.70, blue: 0.39) // creamish brown (Sun ray)
@@ -198,8 +198,8 @@ struct load_project: View {
                     .padding(50)
                 } // end of geometry reader
             } // end of zstack 1
-        }// end of nav_view
-        .navigationViewStyle(StackNavigationViewStyle())
+//        }// end of nav_view
+//        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

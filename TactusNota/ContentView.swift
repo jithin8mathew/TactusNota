@@ -39,6 +39,7 @@ struct ContentView: View {
 //    @State var position:CGPoint = CGPoint(x:0,y:0)
     
     @StateObject var model = AnnotationViewModel()
+    @StateObject var classList = ClassList()
     
 //    @State var isDragging = false
     @State var viewState = CGSize.zero
@@ -326,6 +327,7 @@ struct ContentView: View {
             } // end of vstack
         }
         } // end of navigationView
+        .environmentObject(classList)
         .navigationViewStyle(StackNavigationViewStyle()) // end of Navigation View// end of navigation view
         .padding(.all, 0)
         
