@@ -32,62 +32,62 @@ struct image_picker: View {
     
     var body: some View {
             
-//        VStack{
-//
-//            Text(fileContent)
-//                .padding()
-//
-//
-//            Button("Choose Folder") {
-//
-//                //                do {
-//                //                    let items = try fm.contentsOfDirectory(atPath: path)
-//                //
-//                //                    for item in items {
-//                //                        print("Found \(item)")
-//                //                        Text("Found \(item)")
-//                //                    }
-//                //                } catch {
-//                //                    // failed to read directory – bad permissions, perhaps?
-//                //                }
-//
-//
-//                showDocumentPicker = true
-// //                self.selectFolder()
-//
-//            }
-//            //            Text(fileContent)
-//        }
-//        .sheet(isPresented: self.$showDocumentPicker){
-//            filePicker(fileContent: $fileContent)
-        
-        
-//        }
-        
-        VStack {
-                    if selectedFile != nil {
-                        Text("Selected file: \(selectedFile!.lastPathComponent)")
-                    }
+        VStack{
 
-                    Button(action: {
-                        let documentPicker = UIDocumentPickerViewController(
-                            documentTypes: ["public.data"],
-                            in: .open
-                        )
-                        documentPicker.delegate = self
-                        UIApplication.shared.windows.first?.rootViewController?.present(documentPicker, animated: true, completion: nil)
-                    }) {
-                        Text("Select file")
-                    }
-                }
+            Text(fileContent)
+                .padding()
+
+
+            Button("Choose Folder") {
+
+                //                do {
+                //                    let items = try fm.contentsOfDirectory(atPath: path)
+                //
+                //                    for item in items {
+                //                        print("Found \(item)")
+                //                        Text("Found \(item)")
+                //                    }
+                //                } catch {
+                //                    // failed to read directory – bad permissions, perhaps?
+                //                }
+
+
+                showDocumentPicker = true
+ //                self.selectFolder()
+
+            }
+            //            Text(fileContent)
+        }
+        .sheet(isPresented: self.$showDocumentPicker){
+            filePicker(fileContent: $fileContent)
+        
+        
+        }
+        
+//        VStack {
+//                    if selectedFile != nil {
+//                        Text("Selected file: \(selectedFile!.lastPathComponent)")
+//                    }
+//
+//                    Button(action: {
+//                        let documentPicker = UIDocumentPickerViewController(
+//                            documentTypes: ["public.data"],
+//                            in: .open
+//                        )
+//                        documentPicker.delegate = self
+//                        UIApplication.shared.windows.first?.rootViewController?.present(documentPicker, animated: true, completion: nil)
+//                    }) {
+//                        Text("Select file")
+//                    }
+//                }
     } // end of main body
 }
 
-extension image_picker: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        selectedFile = urls.first
-    }
-}
+//extension image_picker: UIDocumentPickerDelegate {
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//        selectedFile = urls.first
+//    }
+//}
 
 struct image_picker_Previews: PreviewProvider {
     static var previews: some View {
