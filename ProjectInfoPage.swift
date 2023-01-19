@@ -51,6 +51,7 @@ struct ProjectInfoPage: View {
     
     // var for picking a folder from which annotation data is loaded
     @State var showFolderPicker = false
+    @StateObject var bookmarkController = BookmarkController()
     
     @State private var odChoice : ObjectDetectionType = .boundingBox // for picking the annotation type
     
@@ -111,6 +112,9 @@ struct ProjectInfoPage: View {
                             
                             Button(action: {
                                 showFolderPicker = true
+                                ForEach(bookmarkController.urls, id: \.self) { url in
+                                    Text(url.lastPathComponent)
+                                }
                             }){
                                 Label("folder", systemImage: "square.grid.3x1.folder.fill.badge.plus")
                                     .foregroundColor(.white)
@@ -122,7 +126,7 @@ struct ProjectInfoPage: View {
                             }
                             .sheet(isPresented: $showFolderPicker) {
                                                 // TODO: show a document picker here
-                                                Text("Show document picker here")
+                                                FolderPicker()
                                             }
 //                            .background(Color(red: 0.26, green: 0.26, blue: 0.26))
                     }
@@ -250,6 +254,7 @@ struct ProjectInfoPage: View {
                 } // end of first vstack
             } // end of main zstack
         .padding(.all, 0)
+        .environmentObject(bookmarkController)
         
     }
 }
@@ -258,6 +263,7 @@ struct ProjectInfoPage_Previews: PreviewProvider {
     
     static var previews: some View {
         ProjectInfoPage()
+//            .environmentObject(bookmarkController())
 //            .environmentObject(self.classList)
     }
 }

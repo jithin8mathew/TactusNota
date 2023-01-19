@@ -20,6 +20,8 @@
 		B63317102969646200F3A631 /* ClassList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633170F2969646200F3A631 /* ClassList.swift */; };
 		B6331712296A30B700F3A631 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6331711296A30B700F3A631 /* DataModel.swift */; };
 		B6331714296BF0F300F3A631 /* testFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6331713296BF0F300F3A631 /* testFileLoader.swift */; };
+		B63317162979CB8D00F3A631 /* FolderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63317152979CB8D00F3A631 /* FolderPicker.swift */; };
+		B63317182979D34A00F3A631 /* BookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63317172979D34A00F3A631 /* BookmarkController.swift */; };
 		B676274728A371B200CCBCF9 /* testViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274628A371B200CCBCF9 /* testViewNew.swift */; };
 		B676274928AEFA5300CCBCF9 /* testview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274828AEFA5300CCBCF9 /* testview2.swift */; };
 		B676274D28B940DA00CCBCF9 /* testView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274C28B940DA00CCBCF9 /* testView4.swift */; };
@@ -49,6 +51,8 @@
 		B633170F2969646200F3A631 /* ClassList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassList.swift; sourceTree = "<group>"; };
 		B6331711296A30B700F3A631 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		B6331713296BF0F300F3A631 /* testFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFileLoader.swift; sourceTree = "<group>"; };
+		B63317152979CB8D00F3A631 /* FolderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPicker.swift; sourceTree = "<group>"; };
+		B63317172979D34A00F3A631 /* BookmarkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkController.swift; sourceTree = "<group>"; };
 		B676274628A371B200CCBCF9 /* testViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewNew.swift; sourceTree = "<group>"; };
 		B676274828AEFA5300CCBCF9 /* testview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview2.swift; sourceTree = "<group>"; };
 		B676274C28B940DA00CCBCF9 /* testView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView4.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
+				B63317172979D34A00F3A631 /* BookmarkController.swift */,
+				B63317152979CB8D00F3A631 /* FolderPicker.swift */,
 				B6331713296BF0F300F3A631 /* testFileLoader.swift */,
 				B6331711296A30B700F3A631 /* DataModel.swift */,
 				B633170F2969646200F3A631 /* ClassList.swift */,
@@ -210,11 +216,13 @@
 				B676275328CFD36B00CCBCF9 /* AnnotationView.swift in Sources */,
 				B6DE7B70285FC93C003A2191 /* ImagePicker.swift in Sources */,
 				B676275128BFCA5600CCBCF9 /* finalView.swift in Sources */,
+				B63317182979D34A00F3A631 /* BookmarkController.swift in Sources */,
 				B6116D44291A45AC00123494 /* load_project.swift in Sources */,
 				B631C4782787A25A00A5216A /* ContentView.swift in Sources */,
 				B6116D46291EE46100123494 /* filePicker.swift in Sources */,
 				B6116D4A2939C4FA00123494 /* Item.swift in Sources */,
 				B6331712296A30B700F3A631 /* DataModel.swift in Sources */,
+				B63317162979CB8D00F3A631 /* FolderPicker.swift in Sources */,
 				B676274D28B940DA00CCBCF9 /* testView4.swift in Sources */,
 				B631C4762787A25A00A5216A /* TactusNotaApp.swift in Sources */,
 				B676274F28BD46D900CCBCF9 /* testViewNew2.swift in Sources */,
