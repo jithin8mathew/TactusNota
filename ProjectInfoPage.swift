@@ -52,6 +52,7 @@ struct ProjectInfoPage: View {
     // var for picking a folder from which annotation data is loaded
     @State var showFolderPicker = false
     @StateObject var bookmarkController = BookmarkController()
+    @State private var folderContent_main = ""
     
     @State private var odChoice : ObjectDetectionType = .boundingBox // for picking the annotation type
     
@@ -112,9 +113,10 @@ struct ProjectInfoPage: View {
                             
                             Button(action: {
                                 showFolderPicker = true
-                                ForEach(bookmarkController.urls, id: \.self) { url in
-                                    Text(url.lastPathComponent)
-                                }
+//                                ForEach(bookmarkController.urls, id: \.self) { url in
+//                                    Text("testing...")
+//                                    Text(url.lastPathComponent)
+//                                }
                             }){
                                 Label("folder", systemImage: "square.grid.3x1.folder.fill.badge.plus")
                                     .foregroundColor(.white)
@@ -126,23 +128,35 @@ struct ProjectInfoPage: View {
                             }
                             .sheet(isPresented: $showFolderPicker) {
                                                 // TODO: show a document picker here
-                                                FolderPicker()
+                                FolderPicker(folderContent: $folderContent_main)
                                             }
 //                            .background(Color(red: 0.26, green: 0.26, blue: 0.26))
                     }
                     .frame(alignment: .center)
                     .padding(20)
                     .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                    
+
                     Group{
+//                        HStack{
+//                            ForEach(bookmarkController.urls, id: \.self) { url in
+//                                Text("testing...")
+//                                Text(url.lastPathComponent)
+//                                    .foregroundColor(.white)
+//                                    .padding(5)
+//                                    .background(Color.purple)
+//                                    .cornerRadius(10)
+//                            }
+//                        } // end of displaying class list Hstack
+//                        .frame(width: 700)
+//                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                         
                         Button(action: {}){
-                            Label("images found", systemImage: "photo.stack")
+                            Label("\(folderContent_main.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(imagesFound ? Color.green : Color.red)
                                 .cornerRadius(50)
-                                .frame(width: 200, height: 10, alignment: .center)
+                                .frame(maxWidth:400, maxHeight: 10, alignment: .center)
                                 .opacity(shouldHideNoImagesButton ? 0 : 1)
                                 .font(.footnote)
 //                                .hidden() // this condition will show no images found if the selected folder doesnot contain images, if images are present this button will show the count of images in the folder

@@ -10,6 +10,7 @@ import SwiftUI
 struct FolderPicker: UIViewControllerRepresentable{
     
     @EnvironmentObject private var bookmarkController: BookmarkController
+    @Binding var folderContent: String
     
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         let folderPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.folder])
@@ -22,18 +23,28 @@ struct FolderPicker: UIViewControllerRepresentable{
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(self, folderContent: $folderContent)
     }
     
     class Coordinator: NSObject, UIDocumentPickerDelegate{
         var parent: FolderPicker
+//        var folderContents: String
         
-        init(_ parent: FolderPicker) {
-                    self.parent = parent
-                }
+        @Binding var folderContent: String
+        
+        init(_ parent: FolderPicker, folderContent: Binding<String>) {
+            self.parent = parent
+            _folderContent = folderContent
+        }
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             parent.bookmarkController.addBookmark(for: urls[0])
+            
+            do {
+                folderContent = try String(contentsOf: urls[0], encoding: .utf8)
+            } catch let error{
+                print(error.localizedDescription)
+            }
         }
         
     }
