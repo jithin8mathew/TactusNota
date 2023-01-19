@@ -49,6 +49,9 @@ struct ProjectInfoPage: View {
     @State var shouldHideNoImagesButton = false
     @State var imagesFound = false
     
+    // var for picking a folder from which annotation data is loaded
+    @State var showFolderPicker = false
+    
     @State private var odChoice : ObjectDetectionType = .boundingBox // for picking the annotation type
     
     var body: some View {
@@ -102,23 +105,30 @@ struct ProjectInfoPage: View {
                                 .padding()
                                 .foregroundColor(.white)
                                 .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                .cornerRadius(50.0)
+                                .cornerRadius(50.0, corners: [.topLeft, .bottomLeft])
                                 .frame(width: 500, height: 50, alignment: .leading)
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                             
-                            Button(action: {}){
+                            Button(action: {
+                                showFolderPicker = true
+                            }){
                                 Label("folder", systemImage: "square.grid.3x1.folder.fill.badge.plus")
                                     .foregroundColor(.white)
                                     .padding()
                                     .background(Color.red)
-                                    .cornerRadius(50)
-                                    .frame(height: 50, alignment: .trailing)
-                                    .padding(.leading, -115)
-                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                                    .cornerRadius(50.0, corners: [.topRight, .bottomRight])
+                                    .padding(.leading, -8)
+                                    .frame(height: 54)
                             }
+                            .sheet(isPresented: $showFolderPicker) {
+                                                // TODO: show a document picker here
+                                                Text("Show document picker here")
+                                            }
+//                            .background(Color(red: 0.26, green: 0.26, blue: 0.26))
                     }
                     .frame(alignment: .center)
                     .padding(20)
+                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     
                     Group{
                         
@@ -131,6 +141,7 @@ struct ProjectInfoPage: View {
                                 .frame(width: 200, height: 10, alignment: .center)
                                 .opacity(shouldHideNoImagesButton ? 0 : 1)
                                 .font(.footnote)
+//                                .hidden() // this condition will show no images found if the selected folder doesnot contain images, if images are present this button will show the count of images in the folder
                             }
                         .padding()
                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)

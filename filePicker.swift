@@ -4,6 +4,10 @@
 //
 //  Created by Jithin  Mathew on 11/11/22.
 //
+
+// best example for document picker
+// https://adam.garrett-harris.com/2021-08-21-providing-access-to-directories-in-ios-with-bookmarks/
+
 import SwiftUI
 
 struct filePicker: UIViewControllerRepresentable{
