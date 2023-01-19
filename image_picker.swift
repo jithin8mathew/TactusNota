@@ -23,12 +23,6 @@ struct image_picker: View {
     @State private var selectedFile: URL?
     
     // https://sarunw.com/posts/url-type-properties/
-    //    let documentsDirectory = try? FileManager.default.url(
-    //        for: .documentDirectory,
-    //        in: .userDomainMask,
-    //        appropriateFor: nil,
-    //        create: false)
-    
     
     var body: some View {
             
