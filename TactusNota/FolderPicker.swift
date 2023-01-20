@@ -5,6 +5,9 @@
 //  Created by Jithin  Mathew on 1/19/23.
 //
 
+// based on the tutorials from
+// https://adam.garrett-harris.com/2021-08-21-providing-access-to-directories-in-ios-with-bookmarks/
+
 import SwiftUI
 
 struct FolderPicker: UIViewControllerRepresentable{
@@ -40,11 +43,16 @@ struct FolderPicker: UIViewControllerRepresentable{
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             parent.bookmarkController.addBookmark(for: urls[0])
             
-            do {
-                folderContent = try String(contentsOf: urls[0], encoding: .utf8)
-            } catch let error{
-                print(error.localizedDescription)
+            if urls[0].startAccessingSecurityScopedResource(){
+                do {
+                    folderContent = try String(contentsOf: urls[0], encoding: .utf8)
+                    print("no of files in folder \(folderContent.count)")
+                } catch let error{
+                    print(error.localizedDescription)
+                }
             }
+            urls[0].stopAccessingSecurityScopedResource()
+
         }
         
     }

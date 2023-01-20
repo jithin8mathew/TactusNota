@@ -81,17 +81,12 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
-				B63317172979D34A00F3A631 /* BookmarkController.swift */,
-				B63317152979CB8D00F3A631 /* FolderPicker.swift */,
 				B6331713296BF0F300F3A631 /* testFileLoader.swift */,
 				B6331711296A30B700F3A631 /* DataModel.swift */,
-				B633170F2969646200F3A631 /* ClassList.swift */,
-				B633170D296741E500F3A631 /* ProjectInfoPage.swift */,
 				B6116D492939C4FA00123494 /* Item.swift */,
 				B6116D47292863C700123494 /* TNAnnotationSettings.swift */,
 				B6116D45291EE46100123494 /* filePicker.swift */,
 				B676275028BFCA5600CCBCF9 /* finalView.swift */,
-				B676275228CFD36B00CCBCF9 /* AnnotationView.swift */,
 				B6EB29592918DB780049A7DD /* image_picker.swift */,
 				B6116D43291A45AC00123494 /* load_project.swift */,
 				B676274C28B940DA00CCBCF9 /* testView4.swift */,
@@ -116,7 +111,12 @@
 			children = (
 				B631C4752787A25A00A5216A /* TactusNotaApp.swift */,
 				B6116D4B2939C76400123494 /* AnnotationModel.swift */,
+				B633170D296741E500F3A631 /* ProjectInfoPage.swift */,
+				B63317152979CB8D00F3A631 /* FolderPicker.swift */,
+				B63317172979D34A00F3A631 /* BookmarkController.swift */,
+				B633170F2969646200F3A631 /* ClassList.swift */,
 				B631C4772787A25A00A5216A /* ContentView.swift */,
+				B676275228CFD36B00CCBCF9 /* AnnotationView.swift */,
 				B6DE7B6F285FC93C003A2191 /* ImagePicker.swift */,
 				B6DE7B71285FCEB4003A2191 /* AnnotationViewModel.swift */,
 				B631C4792787A25B00A5216A /* Assets.xcassets */,
