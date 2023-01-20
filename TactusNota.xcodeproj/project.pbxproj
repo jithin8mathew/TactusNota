@@ -53,6 +53,7 @@
 		B6331713296BF0F300F3A631 /* testFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFileLoader.swift; sourceTree = "<group>"; };
 		B63317152979CB8D00F3A631 /* FolderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPicker.swift; sourceTree = "<group>"; };
 		B63317172979D34A00F3A631 /* BookmarkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkController.swift; sourceTree = "<group>"; };
+		B6331719297A783200F3A631 /* TactusNota.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TactusNota.entitlements; sourceTree = "<group>"; };
 		B676274628A371B200CCBCF9 /* testViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewNew.swift; sourceTree = "<group>"; };
 		B676274828AEFA5300CCBCF9 /* testview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview2.swift; sourceTree = "<group>"; };
 		B676274C28B940DA00CCBCF9 /* testView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView4.swift; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		B631C4742787A25A00A5216A /* TactusNota */ = {
 			isa = PBXGroup;
 			children = (
+				B6331719297A783200F3A631 /* TactusNota.entitlements */,
 				B631C4752787A25A00A5216A /* TactusNotaApp.swift */,
 				B6116D4B2939C76400123494 /* AnnotationModel.swift */,
 				B633170D296741E500F3A631 /* ProjectInfoPage.swift */,
@@ -359,10 +361,12 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TactusNota/TactusNota.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TactusNota/Preview Content\"";
 				DEVELOPMENT_TEAM = 5UKAMTZF8J;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -393,10 +397,12 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TactusNota/TactusNota.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TactusNota/Preview Content\"";
 				DEVELOPMENT_TEAM = 5UKAMTZF8J;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;

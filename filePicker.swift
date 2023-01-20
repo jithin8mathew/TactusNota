@@ -8,6 +8,10 @@
 // best example for document picker
 // https://adam.garrett-harris.com/2021-08-21-providing-access-to-directories-in-ios-with-bookmarks/
 
+// Might need this to get access to these directories
+// https://stackoverflow.com/questions/28008262/detailed-instruction-on-use-of-nsopenpanel
+// https://benscheirman.com/2019/10/troubleshooting-appkit-file-permissions/
+
 import SwiftUI
 
 struct filePicker: UIViewControllerRepresentable{
