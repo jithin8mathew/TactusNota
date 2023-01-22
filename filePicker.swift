@@ -55,6 +55,11 @@ class filePickerCoordinator: NSObject, UIDocumentPickerDelegate, UINavigationCon
         let fileURL = urls[0]
 //        let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         do {
+//            let openPanel = NSOpenPanel()
+//            openPanel.canChooseFiles = false
+//            openPanel.canChooseDirectories = true
+//            let response = openPanel.runModal()
+//            print(openPanel.urls.first)
             fileContent = try String(contentsOf: fileURL, encoding: .utf8)
 //            let items = try FileManager.contentsOfDirectory(at :directoryURL)
 //            for item in items {
