@@ -56,6 +56,9 @@ struct ProjectInfoPage: View {
     
     @State private var odChoice : ObjectDetectionType = .boundingBox // for picking the annotation type
     
+//    @EnvironmentObject var fileController: FileController
+//    @State var urlsnew: [URL] = []
+    
     var body: some View {
         
             ZStack{
@@ -150,7 +153,9 @@ struct ProjectInfoPage: View {
 //                        .frame(width: 700)
 //                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                         
-                        Button(action: {}){
+                        Button(action: {
+//                            urlsnew = fileController.getContentsOfDirectory(url: folderContent_main)
+                        }){
                             Label("\(folderContent_main.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
                                 .foregroundColor(.white)
                                 .padding()

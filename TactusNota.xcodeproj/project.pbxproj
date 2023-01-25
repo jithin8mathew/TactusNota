@@ -22,6 +22,7 @@
 		B6331714296BF0F300F3A631 /* testFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6331713296BF0F300F3A631 /* testFileLoader.swift */; };
 		B63317162979CB8D00F3A631 /* FolderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63317152979CB8D00F3A631 /* FolderPicker.swift */; };
 		B63317182979D34A00F3A631 /* BookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63317172979D34A00F3A631 /* BookmarkController.swift */; };
+		B633171B2981080300F3A631 /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633171A2981080300F3A631 /* FileController.swift */; };
 		B676274728A371B200CCBCF9 /* testViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274628A371B200CCBCF9 /* testViewNew.swift */; };
 		B676274928AEFA5300CCBCF9 /* testview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274828AEFA5300CCBCF9 /* testview2.swift */; };
 		B676274D28B940DA00CCBCF9 /* testView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274C28B940DA00CCBCF9 /* testView4.swift */; };
@@ -54,6 +55,7 @@
 		B63317152979CB8D00F3A631 /* FolderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPicker.swift; sourceTree = "<group>"; };
 		B63317172979D34A00F3A631 /* BookmarkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkController.swift; sourceTree = "<group>"; };
 		B6331719297A783200F3A631 /* TactusNota.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TactusNota.entitlements; sourceTree = "<group>"; };
+		B633171A2981080300F3A631 /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
 		B676274628A371B200CCBCF9 /* testViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewNew.swift; sourceTree = "<group>"; };
 		B676274828AEFA5300CCBCF9 /* testview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview2.swift; sourceTree = "<group>"; };
 		B676274C28B940DA00CCBCF9 /* testView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView4.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
+				B633171A2981080300F3A631 /* FileController.swift */,
 				B6331713296BF0F300F3A631 /* testFileLoader.swift */,
 				B6331711296A30B700F3A631 /* DataModel.swift */,
 				B6116D492939C4FA00123494 /* Item.swift */,
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B633170E296741E500F3A631 /* ProjectInfoPage.swift in Sources */,
+				B633171B2981080300F3A631 /* FileController.swift in Sources */,
 				B6DE7B762860EA89003A2191 /* annotationGestureTN.swift in Sources */,
 				B63317102969646200F3A631 /* ClassList.swift in Sources */,
 				B6331714296BF0F300F3A631 /* testFileLoader.swift in Sources */,
