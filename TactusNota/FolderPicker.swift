@@ -45,7 +45,9 @@ struct FolderPicker: UIViewControllerRepresentable{
             
             if urls[0].startAccessingSecurityScopedResource(){
                 do {
-                    folderContent = try String(contentsOf: urls[0], encoding: .utf8)
+                    print("trying to read contents of directory")
+//                    folderContent = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
+                    try String(contentsOf: urls[0], encoding: .utf8)
                     print("no of files in folder \(folderContent.count)")
                 } catch let error{
                     print(error.localizedDescription)
