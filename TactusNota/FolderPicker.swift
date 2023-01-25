@@ -44,10 +44,14 @@ struct FolderPicker: UIViewControllerRepresentable{
             parent.bookmarkController.addBookmark(for: urls[0])
             
             if urls[0].startAccessingSecurityScopedResource(){
+                print(urls[0])
                 do {
                     print("trying to read contents of directory")
-//                    folderContent = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
-                    try String(contentsOf: urls[0], encoding: .utf8)
+                    var urlString: String = urls[0].absoluteString
+                    print(urlString)
+//                    let myURL: URL = URL(string: urlString)!
+//                    folderContent = try FileManager.default.contentsOfDirectory(at: urlString, includingPropertiesForKeys: nil)
+                    folderContent = try String(contentsOf: urls[0])
                     print("no of files in folder \(folderContent.count)")
                 } catch let error{
                     print(error.localizedDescription)
