@@ -13,6 +13,7 @@ import SwiftUI
 struct FolderPicker: UIViewControllerRepresentable{
     
     @EnvironmentObject private var bookmarkController: BookmarkController
+    @EnvironmentObject private var fileBookmarkController: FileBookmarkController
     @Binding var folderContent: String
     @Binding var urlsStorage: [URL]
     
@@ -48,7 +49,7 @@ struct FolderPicker: UIViewControllerRepresentable{
                     let urlsStorage = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
                     
                     for fileUrl in urlsStorage{
-                        parent.bookmarkController.addFileBookmark(for: fileUrl)
+                        parent.fileBookmarkController.addFileBookmark(for: fileUrl)
                     }
                     print(urlsStorage.count)
                 } catch let error{

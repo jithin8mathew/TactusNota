@@ -52,6 +52,7 @@ struct ProjectInfoPage: View {
     // var for picking a folder from which annotation data is loaded
     @State var showFolderPicker = false
     @StateObject var bookmarkController = BookmarkController()
+    @StateObject var fileBookmarkController = FileBookmarkController()
     @State private var folderContent_main = ""
     @State private var folderc_main: [URL] = []
     
@@ -157,7 +158,7 @@ struct ProjectInfoPage: View {
                     Button(action: {
                         //                            urlsnew = fileController.getContentsOfDirectory(url: folderContent_main)
                     }){
-                        Label("\(bookmarkController.fileURLs.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
+                        Label("\(fileBookmarkController.fileURLs.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
                             .foregroundColor(.white)
                             .padding()
                             .background(imagesFound ? Color.green : Color.red)
@@ -275,6 +276,7 @@ struct ProjectInfoPage: View {
         } // end of main zstack
         .padding(.all, 0)
         .environmentObject(bookmarkController)
+        .environmentObject(fileBookmarkController)
         
     }
 }
