@@ -133,7 +133,7 @@ struct ProjectInfoPage: View {
                     }
                     .sheet(isPresented: $showFolderPicker) {
                         // TODO: show a document picker here
-                        FolderPicker(folderContent: $folderContent_main, urlsStorage: $folderc_main)
+                        FolderPicker(folderContent: $folderContent_main, urlsStorageTest: $folderc_main)
                     }
                     //                            .background(Color(red: 0.26, green: 0.26, blue: 0.26))
                 }
@@ -158,7 +158,7 @@ struct ProjectInfoPage: View {
                     Button(action: {
                         //                            urlsnew = fileController.getContentsOfDirectory(url: folderContent_main)
                     }){
-                        Label("\(fileBookmarkController.fileURLs.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
+                        Label("\(fileBookmarkController.urls.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
                             .foregroundColor(.white)
                             .padding()
                             .background(imagesFound ? Color.green : Color.red)
@@ -275,8 +275,8 @@ struct ProjectInfoPage: View {
             } // end of first vstack
         } // end of main zstack
         .padding(.all, 0)
-        .environmentObject(bookmarkController)
         .environmentObject(fileBookmarkController)
+        .environmentObject(bookmarkController)
         
     }
 }

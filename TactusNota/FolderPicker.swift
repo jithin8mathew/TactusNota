@@ -15,7 +15,7 @@ struct FolderPicker: UIViewControllerRepresentable{
     @EnvironmentObject private var bookmarkController: BookmarkController
     @EnvironmentObject private var fileBookmarkController: FileBookmarkController
     @Binding var folderContent: String
-    @Binding var urlsStorage: [URL]
+    @Binding var urlsStorageTest: [URL]
     
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         let folderPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.folder])
@@ -27,7 +27,7 @@ struct FolderPicker: UIViewControllerRepresentable{
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self, folderContent: $folderContent, urlsStorage: $urlsStorage)
+        Coordinator(self, folderContent: $folderContent, urlsStorage: $urlsStorageTest)
     }
     
     class Coordinator: NSObject, UIDocumentPickerDelegate{
@@ -49,7 +49,7 @@ struct FolderPicker: UIViewControllerRepresentable{
                     let urlsStorage = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
                     
                     for fileUrl in urlsStorage{
-                        parent.fileBookmarkController.addFileBookmark(for: fileUrl)
+                        parent.fileBookmarkController.addBookmark(for: fileUrl)
                     }
                     print(urlsStorage.count)
                 } catch let error{
