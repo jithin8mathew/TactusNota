@@ -158,13 +158,13 @@ struct ProjectInfoPage: View {
                     Button(action: {
                         //                            urlsnew = fileController.getContentsOfDirectory(url: folderContent_main)
                     }){
-                        Label("\(fileBookmarkController.urls.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
+                        Label("\(folderc_main.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
                             .foregroundColor(.white)
                             .padding()
-                            .background(bookmarkController.urls.count > 0 ? Color.green : Color.red)
+                            .background(folderc_main.count > 0 ? Color.green : Color.red)
                             .cornerRadius(50)
                             .frame(maxWidth:400, maxHeight: 10, alignment: .center)
-                            .opacity(shouldHideNoImagesButton ? 0 : 1)
+                            .opacity(bookmarkController.urls.count > 0 ? 1 : 0)
                             .font(.footnote)
                         //                                .hidden() // this condition will show no images found if the selected folder doesnot contain images, if images are present this button will show the count of images in the folder
                     }
