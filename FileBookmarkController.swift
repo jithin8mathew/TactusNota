@@ -11,6 +11,7 @@ class FileBookmarkController: ObservableObject {
     
     // experimental
     @Published var urls: [URL] = []
+    @Published var imageFileCount: Data = Data(count: 0)
     
     func addBookmark(for url: URL) {
         do {

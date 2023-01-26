@@ -47,11 +47,12 @@ struct FolderPicker: UIViewControllerRepresentable{
             if urls[0].startAccessingSecurityScopedResource(){
                 do {
                     let urlsStorage = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
-                    
+                    parent.urlsStorageTest = urlsStorage
                     for fileUrl in urlsStorage{
                         parent.fileBookmarkController.addBookmark(for: fileUrl)
                     }
                     print(urlsStorage.count)
+//                    return urlsStorage
                 } catch let error{
                     print(error.localizedDescription)
                 }
