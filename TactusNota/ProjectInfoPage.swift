@@ -52,7 +52,7 @@ struct ProjectInfoPage: View {
     // var for picking a folder from which annotation data is loaded
     @State var showFolderPicker = false
     @StateObject var bookmarkController = BookmarkController()
-    //    @State private var folderContent_main: [URL] = []
+    @State private var folderContent_main = ""
     @State private var folderc_main: [URL] = []
     
     @State private var odChoice : ObjectDetectionType = .boundingBox // for picking the annotation type
@@ -132,7 +132,7 @@ struct ProjectInfoPage: View {
                     }
                     .sheet(isPresented: $showFolderPicker) {
                         // TODO: show a document picker here
-                        FolderPicker(urlsStorage: folderc_main)
+                        FolderPicker(folderContent: $folderContent_main, urlsStorage: $folderc_main)
                     }
                     //                            .background(Color(red: 0.26, green: 0.26, blue: 0.26))
                 }

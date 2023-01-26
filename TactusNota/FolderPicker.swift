@@ -13,8 +13,8 @@ import SwiftUI
 struct FolderPicker: UIViewControllerRepresentable{
     
     @EnvironmentObject private var bookmarkController: BookmarkController
-//    @Binding var folderContent: String
-    @State var urlsStorage: [URL] = []
+    @Binding var folderContent: String
+    @Binding var urlsStorage: [URL]
     
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         let folderPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.folder])
@@ -27,26 +27,26 @@ struct FolderPicker: UIViewControllerRepresentable{
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self, folderContent: $urlsStorage)
+        Coordinator(self, folderContent: $folderContent, urlsStorage: $urlsStorage)
     }
     
     class Coordinator: NSObject, UIDocumentPickerDelegate{
         var parent: FolderPicker
         //        var folderContents: String
         
-        @Binding var folderContent: [URL]
+        @Binding var folderContent: String
         
-        init(_ parent: FolderPicker, folderContent: Binding<[URL]>) {
+        init(_ parent: FolderPicker, folderContent: Binding<String>, urlsStorage: Binding<[URL]>) {
             self.parent = parent
             _folderContent = folderContent
         }
         
-        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: URL) {
-            parent.bookmarkController.addBookmark(for: urls)
+        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+            parent.bookmarkController.addBookmark(for: urls[0])
             
             
-            if urls.startAccessingSecurityScopedResource(){
-                print(urls)
+            if urls[0].startAccessingSecurityScopedResource(){
+                print(urls[0])
                 
                 do {
                     print("trying to read contents of directory")
@@ -57,14 +57,16 @@ struct FolderPicker: UIViewControllerRepresentable{
                     //                            print("no of files in folder \(bookmarkData.count)")
                     print("bookmark data complete")
                     //                            let myURL: URL = URL(string: urlString)!
-                    try FileManager.default.contentsOfDirectory(at: urls, includingPropertiesForKeys: nil)
+                    let urlsStorage = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
+                    print("content", urlsStorage)
+                    print(urlsStorage.count)
                     //                    folderContent = try String(contentsOf: urls[0])
                     //                    print("no of files in folder \(folderContent.count)")
                 } catch let error{
                     print(error.localizedDescription)
                 }
             }
-            urls.stopAccessingSecurityScopedResource()
+            urls[0].stopAccessingSecurityScopedResource()
             
         }
         
