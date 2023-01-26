@@ -161,7 +161,7 @@ struct ProjectInfoPage: View {
                         Label("\(fileBookmarkController.urls.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
                             .foregroundColor(.white)
                             .padding()
-                            .background(imagesFound ? Color.green : Color.red)
+                            .background(bookmarkController.urls.count > 0 ? Color.green : Color.red)
                             .cornerRadius(50)
                             .frame(maxWidth:400, maxHeight: 10, alignment: .center)
                             .opacity(shouldHideNoImagesButton ? 0 : 1)
