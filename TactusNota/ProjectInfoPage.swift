@@ -157,7 +157,7 @@ struct ProjectInfoPage: View {
                     Button(action: {
                         //                            urlsnew = fileController.getContentsOfDirectory(url: folderContent_main)
                     }){
-                        Label("\(folderc_main.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
+                        Label("\(bookmarkController.fileURLs.count) images found from \(bookmarkController.urls.count) folder", systemImage: "photo.stack")
                             .foregroundColor(.white)
                             .padding()
                             .background(imagesFound ? Color.green : Color.red)
