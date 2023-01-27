@@ -31,8 +31,8 @@ struct FolderPicker: UIViewControllerRepresentable{
     }
     
     class Coordinator: NSObject, UIDocumentPickerDelegate{
+        
         var parent: FolderPicker
-        //        var folderContents: String
         
         @Binding var folderContent: String
         
@@ -47,16 +47,11 @@ struct FolderPicker: UIViewControllerRepresentable{
             if urls[0].startAccessingSecurityScopedResource(){
                 do {
                     let urlsStorage = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
-                    let images = urlsStorage.filter{ $0.pathExtension == ".jpg" || $0.pathExtension == ".png" }
-                    parent.urlsStorageTest = images
-//                    for fileUrl in urlsStorage{
-//                        parent.fileBookmarkController.addBookmark(for: fileUrl)
-////                        if fileUrl.hasSuffix(".jpg"){
-////                            print(fileUrl.lastPathComponent)
-////                        }
-//                    }
+                    // currently only supports JPEG and PNG format.
+                    let imageFiles = urlsStorage.filter{ $0.pathExtension == "jpg" || $0.pathExtension == "png" }
+                    parent.urlsStorageTest = imageFiles
                     print(urlsStorage.count)
-//                    return urlsStorage
+                    print(imageFiles.count)
                 } catch let error{
                     print(error.localizedDescription)
                 }
