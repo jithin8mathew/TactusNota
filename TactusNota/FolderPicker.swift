@@ -47,10 +47,14 @@ struct FolderPicker: UIViewControllerRepresentable{
             if urls[0].startAccessingSecurityScopedResource(){
                 do {
                     let urlsStorage = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
-                    parent.urlsStorageTest = urlsStorage
-                    for fileUrl in urlsStorage{
-                        parent.fileBookmarkController.addBookmark(for: fileUrl)
-                    }
+                    let images = urlsStorage.filter{ $0.pathExtension == ".jpg" || $0.pathExtension == ".png" }
+                    parent.urlsStorageTest = images
+//                    for fileUrl in urlsStorage{
+//                        parent.fileBookmarkController.addBookmark(for: fileUrl)
+////                        if fileUrl.hasSuffix(".jpg"){
+////                            print(fileUrl.lastPathComponent)
+////                        }
+//                    }
                     print(urlsStorage.count)
 //                    return urlsStorage
                 } catch let error{
