@@ -87,8 +87,8 @@ struct ContentView: View {
                                 VStack{
                                     Image(systemName: "gear")
                                         .resizable()
-                                        .frame(width: 45 + (geometry.size.width * 0.01), height: 40 + (geometry.size.height * 0.01), alignment: .center)
-                                        .padding(.top,0)
+                                        .frame(width: 35 + (geometry.size.width * 0.01), height: 30 + (geometry.size.height * 0.01), alignment: .center)
+                                        .padding(.top,10)
                                         .padding(.trailing, 10)
                                         .foregroundColor(.white)
                                 }
@@ -116,6 +116,8 @@ struct ContentView: View {
                             .frame(width: 300, height: 300, alignment: .center)
                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                             .padding(0)
+                        
+                        Spacer()
                         
                         HStack{
                             Spacer()
@@ -302,6 +304,7 @@ struct ContentView: View {
                                 radius: 3,
                                 x: 3,
                                 y: 3)
+                        Spacer()
                         Spacer()
                     }// vstack 1 end
                     .padding(50)
