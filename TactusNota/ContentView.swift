@@ -76,7 +76,8 @@ struct ContentView: View {
             ZStack{
                 GeometryReader { geometry in
                     //                    Color(red: 0.91, green: 0.70, blue: 0.39) // creamish brown (Sun ray)
-                    Color(red: 0.0, green: 0.42, blue: 0.51) // Teal blue
+//                    Color(red: 0.0, green: 0.42, blue: 0.51) // Teal blue
+                    Color(red: 0.21, green: 0.35, blue: 0.42) // pacific blue
                     
                         .ignoresSafeArea()
                     HStack{
@@ -96,6 +97,7 @@ struct ContentView: View {
                     }
                     VStack(){
                         Spacer()
+                        // https://developer.apple.com/documentation/swiftui/applying-custom-fonts-to-text
                         Text("Tacus Nota")
                             .frame(alignment: .center)
                             .font(.custom("Playfair Display", fixedSize: geometry.size.width * 0.1))
@@ -117,68 +119,97 @@ struct ContentView: View {
                         
                         HStack{
                             Spacer()
+                            
                             NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
-                                Button(action: {self.isProjectInfoActive = true}, label: {
-                                    VStack{
-                                        Image(systemName: "plus.app")
-                                            .resizable()
-                                            .frame(width: 80, height: 80, alignment: .center)
-                                            .padding(10)
-                                        
-                                        Text("New project")
-                                            .font(.system(size: 14))
-                                    }
-                                })
-                                .shadow(color: Color.black.opacity(0.3),
-                                        radius: 3,
-                                        x: 3,
-                                        y: 3)
-                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
-                                .background(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(                    Color(red:1.0, green: 0.4, blue: 0.38))
-                                        .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
-                                            radius: 8,
-                                            x: 0,
-                                            y: 0
-                                        )
-                                        .padding(-50)
-                                )
-                                
+                                Button(action: {
+                                    isProjectInfoActive = true
+                                }){
+                                    Label("New project", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                        .foregroundColor(.white)
+                                        .padding(20)
+                                        .padding(.horizontal, 40)
+                                        .background(Color.red)
+                                        .cornerRadius(50)
+                                }
+                                .padding(.bottom, 100)
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.7), radius: 5, x: 5, y: 5)
                             }
-                            Spacer()
-                            Spacer()
-                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                Button(action: {}, label: {
-                                    VStack{
-                                        Image(systemName: "folder")
-                                            .resizable()
-                                            .frame(width: 80, height: 80, alignment: .center)
-                                            .padding(10)
-                                        Text("Open project")
-                                            .font(.system(size: 14))
-                                    }
-                                })
-                                .shadow(color: Color.black.opacity(0.3),
-                                        radius: 3,
-                                        x: 3,
-                                        y: 3)
-                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
-                                .background(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
-                                        .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
-                                            radius: 8,
-                                            x: 0,
-                                            y: 0
-                                        )
-                                        .padding(-50)
-                                )
-                            }
+                            
+//                            NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
+//                                Button(action: {self.isProjectInfoActive = true}, label: {
+//                                    VStack{
+//                                        Image(systemName: "plus.app")
+//                                            .resizable()
+//                                            .frame(width: 80, height: 80, alignment: .center)
+//                                            .padding(10)
+//
+//                                        Text("New project")
+//                                            .font(.system(size: 14))
+//                                    }
+//                                })
+//                                .shadow(color: Color.black.opacity(0.3),
+//                                        radius: 3,
+//                                        x: 3,
+//                                        y: 3)
+//                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
+//                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
+//                                .background(
+//                                    RoundedRectangle(cornerRadius: 15)
+//                                        .fill(                    Color(red:1.0, green: 0.4, blue: 0.38))
+//                                        .shadow(
+//                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
+//                                            radius: 8,
+//                                            x: 0,
+//                                            y: 0
+//                                        )
+//                                        .padding(-50)
+//                                )
+//
+//                            }
+//                            Spacer()
+//                            Spacer()
+//                            NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
+//                                Button(action: {
+//                                    isProjectInfoActive = true
+//                                }){
+//                                    Label("New project", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+//                                        .foregroundColor(.white)
+//                                        .padding()
+//                                        .background(Color.red)
+//                                        .cornerRadius(50)
+//                                }
+//                                .padding(.bottom, 100)
+//                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+//                            }
+//                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
+//                                Button(action: {}, label: {
+//                                    VStack{
+//                                        Image(systemName: "folder")
+//                                            .resizable()
+//                                            .frame(width: 80, height: 80, alignment: .center)
+//                                            .padding(10)
+//                                        Text("Open project")
+//                                            .font(.system(size: 14))
+//                                    }
+//                                })
+//                                .shadow(color: Color.black.opacity(0.3),
+//                                        radius: 3,
+//                                        x: 3,
+//                                        y: 3)
+//                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
+//                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
+//                                .background(
+//                                    RoundedRectangle(cornerRadius: 15)
+//                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
+//                                        .shadow(
+//                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
+//                                            radius: 8,
+//                                            x: 0,
+//                                            y: 0
+//                                        )
+//                                        .padding(-50)
+//                                )
+//                            }
                             Spacer()
                         } // end of first row H-stack
                         .padding(50)
@@ -187,69 +218,83 @@ struct ContentView: View {
                                 x: 3,
                                 y: 3)
                         // second row of icons
-                        Spacer()
+//                        Spacer()
                         HStack{
                             Spacer()
-                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                Button(action: {}, label: {
-                                    VStack{
-                                        Image(systemName: "squareshape.controlhandles.on.squareshape.controlhandles")
-                                            .resizable()
-                                            .frame(width: 80, height: 80, alignment: .center)
-                                            .padding(10)
-                                        Text("Detection")
-                                            .font(.system(size: 14))
-                                    }
-                                })
-                                .shadow(color: Color.black.opacity(0.3),
-                                        radius: 3,
-                                        x: 3,
-                                        y: 3)
-                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
-                                .background(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
-                                        .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
-                                            radius: 8,
-                                            x: 0,
-                                            y: 0
-                                        )
-                                        .padding(-50)
-                                )
+                            NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
+                                Button(action: {
+                                    isProjectInfoActive = true
+                                }){
+                                    Label("Open project", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                        .foregroundColor(.white)
+                                        .padding(20)
+                                        .padding(.horizontal, 40)
+                                        .background(Color.red)
+                                        .cornerRadius(50)
+                                }
+                                .padding(.bottom, 100)
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                             }
-                            Spacer()
-                            Spacer()
-                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
-                                Button(action: {}, label: {
-                                    VStack{
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .frame(width: 80, height: 80, alignment: .center)
-                                            .padding(10)
-                                        Text("Classification")
-                                            .font(.system(size: 14))
-                                    }
-                                })
-                                .shadow(color: Color.black.opacity(0.3),
-                                        radius: 3,
-                                        x: 3,
-                                        y: 3)
-                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
-                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
-                                .background(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
-                                        .shadow(
-                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
-                                            radius: 8,
-                                            x: 0,
-                                            y: 0
-                                        )
-                                        .padding(-50)
-                                )
-                            }
+//                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
+//                                Button(action: {}, label: {
+//                                    VStack{
+//                                        Image(systemName: "squareshape.controlhandles.on.squareshape.controlhandles")
+//                                            .resizable()
+//                                            .frame(width: 80, height: 80, alignment: .center)
+//                                            .padding(10)
+//                                        Text("Detection")
+//                                            .font(.system(size: 14))
+//                                    }
+//                                })
+//                                .shadow(color: Color.black.opacity(0.3),
+//                                        radius: 3,
+//                                        x: 3,
+//                                        y: 3)
+//                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
+//                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
+//                                .background(
+//                                    RoundedRectangle(cornerRadius: 15)
+//                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
+//                                        .shadow(
+//                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
+//                                            radius: 8,
+//                                            x: 0,
+//                                            y: 0
+//                                        )
+//                                        .padding(-50)
+//                                )
+//                            }
+//                            Spacer()
+//                            Spacer()
+//                            NavigationLink(destination: AnnotationView(), isActive: self.$isActive) {
+//                                Button(action: {}, label: {
+//                                    VStack{
+//                                        Image(systemName: "photo")
+//                                            .resizable()
+//                                            .frame(width: 80, height: 80, alignment: .center)
+//                                            .padding(10)
+//                                        Text("Classification")
+//                                            .font(.system(size: 14))
+//                                    }
+//                                })
+//                                .shadow(color: Color.black.opacity(0.3),
+//                                        radius: 3,
+//                                        x: 3,
+//                                        y: 3)
+//                                .frame(width: 80 + (geometry.size.width * 0.01), height: 60 + (geometry.size.height * 0.01), alignment: .center)
+//                                .foregroundColor(Color(red: 0.33, green: 0.28, blue: 0.44))
+//                                .background(
+//                                    RoundedRectangle(cornerRadius: 15)
+//                                        .fill(Color(red:1.0, green: 0.4, blue: 0.38))
+//                                        .shadow(
+//                                            color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.4),
+//                                            radius: 8,
+//                                            x: 0,
+//                                            y: 0
+//                                        )
+//                                        .padding(-50)
+//                                )
+//                            }
                             Spacer()
                         } // end of second row Hstack
                         .padding(50)
