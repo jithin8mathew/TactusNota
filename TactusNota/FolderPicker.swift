@@ -50,8 +50,8 @@ struct FolderPicker: UIViewControllerRepresentable{
                     // currently only supports JPEG and PNG format.
                     let imageFiles = urlsStorage.filter{ $0.pathExtension == "jpg" || $0.pathExtension == "png" }
                     parent.urlsStorageTest = imageFiles
-                    print(urlsStorage.count)
-                    print(imageFiles.count)
+//                    print(urlsStorage.count)
+//                    print(imageFiles.count)
                 } catch let error{
                     print(error.localizedDescription)
                 }
