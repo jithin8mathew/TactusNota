@@ -98,8 +98,8 @@ struct ContentView: View {
                         Spacer()
                         Text("Tacus Nota")
                             .frame(alignment: .center)
-                            .font(.custom("Roberta", fixedSize: geometry.size.width * 0.1))
-                            .foregroundColor(Color(red: 0.91, green: 0.70, blue: 0.39))
+                            .font(.custom("PlayfairDisplay-VariableFont_wght", fixedSize: geometry.size.width * 0.1))
+                            .foregroundColor(.orange)
                             .shadow(
                                 color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.5),
                                 radius: 8,

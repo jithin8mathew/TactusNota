@@ -24,6 +24,8 @@
 		B63317182979D34A00F3A631 /* BookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63317172979D34A00F3A631 /* BookmarkController.swift */; };
 		B633171B2981080300F3A631 /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633171A2981080300F3A631 /* FileController.swift */; };
 		B633171D2982589E00F3A631 /* FileBookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633171C2982589E00F3A631 /* FileBookmarkController.swift */; };
+		B633172029863F5A00F3A631 /* app_fonts in Resources */ = {isa = PBXBuildFile; fileRef = B633171F29863F5A00F3A631 /* app_fonts */; };
+		B6331727298642ED00F3A631 /* PlayfairDisplay-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6331726298642ED00F3A631 /* PlayfairDisplay-VariableFont_wght.ttf */; };
 		B676274728A371B200CCBCF9 /* testViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274628A371B200CCBCF9 /* testViewNew.swift */; };
 		B676274928AEFA5300CCBCF9 /* testview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274828AEFA5300CCBCF9 /* testview2.swift */; };
 		B676274D28B940DA00CCBCF9 /* testView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274C28B940DA00CCBCF9 /* testView4.swift */; };
@@ -58,6 +60,12 @@
 		B6331719297A783200F3A631 /* TactusNota.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TactusNota.entitlements; sourceTree = "<group>"; };
 		B633171A2981080300F3A631 /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
 		B633171C2982589E00F3A631 /* FileBookmarkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBookmarkController.swift; sourceTree = "<group>"; };
+		B633171F29863F5A00F3A631 /* app_fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = app_fonts; sourceTree = "<group>"; };
+		B633172129863FAC00F3A631 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		B633172229863FB000F3A631 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		B633172329863FB200F3A631 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		B6331724298641A500F3A631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B6331726298642ED00F3A631 /* PlayfairDisplay-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		B676274628A371B200CCBCF9 /* testViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewNew.swift; sourceTree = "<group>"; };
 		B676274828AEFA5300CCBCF9 /* testview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview2.swift; sourceTree = "<group>"; };
 		B676274C28B940DA00CCBCF9 /* testView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView4.swift; sourceTree = "<group>"; };
@@ -116,6 +124,8 @@
 		B631C4742787A25A00A5216A /* TactusNota */ = {
 			isa = PBXGroup;
 			children = (
+				B6331724298641A500F3A631 /* Info.plist */,
+				B633171E29863F1700F3A631 /* app_fonts */,
 				B6331719297A783200F3A631 /* TactusNota.entitlements */,
 				B631C4752787A25A00A5216A /* TactusNotaApp.swift */,
 				B6116D4B2939C76400123494 /* AnnotationModel.swift */,
@@ -124,6 +134,7 @@
 				B63317172979D34A00F3A631 /* BookmarkController.swift */,
 				B633170F2969646200F3A631 /* ClassList.swift */,
 				B631C4772787A25A00A5216A /* ContentView.swift */,
+				B6331726298642ED00F3A631 /* PlayfairDisplay-VariableFont_wght.ttf */,
 				B676275228CFD36B00CCBCF9 /* AnnotationView.swift */,
 				B6DE7B6F285FC93C003A2191 /* ImagePicker.swift */,
 				B6DE7B71285FCEB4003A2191 /* AnnotationViewModel.swift */,
@@ -142,6 +153,17 @@
 				B631C47C2787A25B00A5216A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B633171E29863F1700F3A631 /* app_fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B633172129863FAC00F3A631 /* Roboto-Bold.ttf */,
+				B633172229863FB000F3A631 /* Roboto-Regular.ttf */,
+				B633172329863FB200F3A631 /* Roboto-Medium.ttf */,
+				B633171F29863F5A00F3A631 /* app_fonts */,
+			);
+			path = app_fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +225,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B631C47D2787A25B00A5216A /* Preview Assets.xcassets in Resources */,
+				B633172029863F5A00F3A631 /* app_fonts in Resources */,
+				B6331727298642ED00F3A631 /* PlayfairDisplay-VariableFont_wght.ttf in Resources */,
 				B631C47A2787A25B00A5216A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +402,7 @@
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TactusNota/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -414,6 +439,7 @@
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TactusNota/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
