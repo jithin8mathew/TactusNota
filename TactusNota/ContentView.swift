@@ -115,14 +115,6 @@ struct ContentView: View {
                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                             .padding(0)
                         
-                        Hexagon2()
-                            .stroke(.orange, lineWidth: 5.0)
-                            .frame(width: 300, height: 300, alignment: .center)
-                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                            .padding(0)
-                        
-                        
-                        
                         HStack{
                             Spacer()
                             NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
