@@ -15,5 +15,7 @@ import SwiftUI
 
 class ClassList: ObservableObject {
     @Published var classNameList: [String] = []
+    
+    @Published private var image_urls: [URL] = []
 }
 

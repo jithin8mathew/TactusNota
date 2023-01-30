@@ -77,6 +77,9 @@ struct AnnotationView: View {
     @State private var annotationClassList: [String] = ["apple","car","bus","cat"]
     //    annotationClassList = ["apple","car","bus","cat"]
     
+    // implementing file picking from folder
+    @State private var folderc_main: [URL] = []
+    
     var body: some View {
         //        ZStack{
         //            Color(red: 0.26, green: 0.26, blue: 0.26)

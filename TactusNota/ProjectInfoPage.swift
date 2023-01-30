@@ -191,68 +191,86 @@ struct ProjectInfoPage: View {
                             .foregroundColor(.white)
                     }
                 }
-                HStack{
-                    Text("Class")
-                        .padding()
-                        .padding(.trailing, 30)
-                        .foregroundColor(.white)
-                        .font(.system(size: 15))
-                        .frame(height: 50, alignment: .trailing)
-                        .background(Color.blue)
-                        .cornerRadius(50)
-                        .padding(.trailing, -40)
-                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                    
-                    TextField("New Class: ", text: $cName)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                        .cornerRadius(50.0, corners: [.topLeft, .bottomLeft])
-                        .frame(width: 300, height: 50, alignment: .center)
-                        .padding(.trailing,0)
-                    
-                    Button(action: {
-                        if (cName != ""){
-                            classList.classNameList.append(cName)
-                            cName = ""
+                Group{
+                    HStack{
+                        Text("Class")
+                            .padding()
+                            .padding(.trailing, 30)
+                            .foregroundColor(.white)
+                            .font(.system(size: 15))
+                            .frame(height: 50, alignment: .trailing)
+                            .background(Color.blue)
+                            .cornerRadius(50)
+                            .padding(.trailing, -40)
+                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                        
+                        TextField("New Class: ", text: $cName)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                            .cornerRadius(50.0, corners: [.topLeft, .bottomLeft])
+                            .frame(width: 300, height: 50, alignment: .center)
+                            .padding(.trailing,0)
+                        
+                        Button(action: {
+                            if (cName != ""){
+                                classList.classNameList.append(cName)
+                                cName = ""
+                            }
+                        }){ // classNameList.append([className])
+                            Label("Add", systemImage: "plus.circle")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(50.0, corners: [.topRight, .bottomRight])
+                                .padding(.leading, -8)
+                                .frame(height: 54)
                         }
-                    }){ // classNameList.append([className])
-                        Label("Add", systemImage: "plus.circle")
+                        //                        .environmentObject(classList)
+                        
+                    } // end of add class Hstack
+                    .frame(alignment: .center)
+                    .padding(20)
+                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                    
+                    // display the total no of classes add to the project
+                    Button(action: {
+                    }){
+                        Label("\(classList.classNameList.count) classes added", systemImage: "photo.stack")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(classList.classNameList.count > 0 ? Color.green : Color.red)
+                            .cornerRadius(50)
+                            .frame(maxWidth:400, maxHeight: 10, alignment: .center)
+                            .font(.footnote)
+                        //                                .hidden() // this condition will show no images found if the selected folder doesnot contain images, if images are present this button will show the count of images in the folder
+                    }
+                    .padding(10)
+                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                    
+                    HStack{
+                        ForEach(classList.classNameList , id: \.self) { cls in
+                            Text(cls)
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .background(Color.purple)
+                                .cornerRadius(10)
+                        }
+                    } // end of displaying class list Hstack
+                    .frame(minWidth: 400, maxWidth: 700, minHeight: 10, maxHeight: 100)
+                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                    
+                    Button(action: {}){ // classNameList.append([className])
+                        Label("Import class names", systemImage: "arrow.up.doc.fill")
                             .foregroundColor(.white)
                             .padding()
                             .background(Color.red)
-                            .cornerRadius(50.0, corners: [.topRight, .bottomRight])
-                            .padding(.leading, -8)
-                            .frame(height: 54)
+                            .cornerRadius(50)
                     }
-                    //                        .environmentObject(classList)
+                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                    .padding(10)
                     
-                } // end of add class Hstack
-                .frame(alignment: .center)
-                .padding(20)
-                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                
-                Button(action: {}){ // classNameList.append([className])
-                    Label("Import class names", systemImage: "arrow.up.doc.fill")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.red)
-                        .cornerRadius(50)
-                }
-                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                
-                
-                HStack{
-                    ForEach(classList.classNameList , id: \.self) { cls in
-                        Text(cls)
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .background(Color.purple)
-                            .cornerRadius(10)
-                    }
-                } // end of displaying class list Hstack
-                .frame(width: 700)
-                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                } // end of bounding box class group
                 
                 Spacer()
                 NavigationLink(destination: AnnotationView(), isActive: self.$isAnnotationActive) {
