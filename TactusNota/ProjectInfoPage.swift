@@ -295,6 +295,7 @@ struct ProjectInfoPage: View {
         .padding(.all, 0)
         .environmentObject(fileBookmarkController)
         .environmentObject(bookmarkController)
+        .environmentObject(classList)
         
     }
 }

@@ -294,13 +294,15 @@ struct AnnotationView: View {
                                     //                                        .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                     //                                        .cornerRadius(3)
                                     //                                }
-                                    ForEach(classList.classNameList , id: \.self) { cls in
-                                        Text(cls)
-                                            .foregroundColor(.white)
-                                            .font(.footnote)
-                                            .frame(width: 70, height: 20, alignment: .center)
-                                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                            .cornerRadius(2)
+                                    if (classList.classNameList.count > 0){
+                                        ForEach(classList.classNameList , id: \.self) { cls in
+                                            Text(cls)
+                                                .foregroundColor(.white)
+                                                .font(.footnote)
+                                                .frame(width: 70, height: 20, alignment: .center)
+                                                .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                                .cornerRadius(2)
+                                        }
                                     }
                                 }
 //                                .environmentObject(classList)
