@@ -8,6 +8,9 @@
 // based on the tutorials from
 // https://adam.garrett-harris.com/2021-08-21-providing-access-to-directories-in-ios-with-bookmarks/
 
+// more tutorials at : https://benscheirman.com/2019/10/troubleshooting-appkit-file-permissions/
+// Official documentation at :  https://developer.apple.com/documentation/uikit/view_controllers/providing_access_to_directories
+
 import SwiftUI
 
 struct FolderPicker: UIViewControllerRepresentable{

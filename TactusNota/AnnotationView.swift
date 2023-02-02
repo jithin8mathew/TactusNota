@@ -226,130 +226,132 @@ struct AnnotationView: View {
         
         //        } // end of zstack
         return
-            ZStack{
-                Color(red: 0.26, green: 0.26, blue: 0.26)
-                    .ignoresSafeArea()
-                VStack{
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                            .fill(Color(red: 0.26, green: 0.26, blue: 0.26, opacity: 0.8))
-                            .frame(width: 1000, height: 100)
-                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                        VStack{
-                            HStack{
-                                Label("5", systemImage: "list.number")
-                                    .font(.title)
-                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    .padding()
-                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                
-                                // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-text-and-an-icon-side-by-side-using-label
-                                Label("\(rectData.count)", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
-                                    .font(.title)
-                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    .padding()
-                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                
-                                Button(action: {}){
-                                    Text("Image Name")
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(Color.red)
-                                        .cornerRadius(50)
-                                }
-                                VStack{
-                                    //                        Text("progress")
-                                    // https://www.appcoda.com/swiftui-gauge/
-                                    // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
-                                    Gauge(value: current, in: minValue...maxValue) {
-                                        Image(systemName: "heart.fill")
-                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    } currentValueLabel: {
-                                        Text("\(Int(current))")
-                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    } minimumValueLabel: {
-                                        Text("")
-                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    } maximumValueLabel: {
-                                        Text("\(Int(maxValue))")
-                                            .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    }
-                                    .gaugeStyle(.accessoryCircular)
-                                    //                        ProgressView(value: progress)
-                                    //                                .frame(width: 200, height: 10, alignment: .trailing)
-                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                } // end of vStack which is not used really
-                            } // end of Hstack
+        ZStack{
+            Color(red: 0.26, green: 0.26, blue: 0.26)
+                .ignoresSafeArea()
+            VStack{
+                ZStack{
+                    RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        .fill(Color(red: 0.26, green: 0.26, blue: 0.26, opacity: 0.8))
+                        .frame(width: 1000, height: 100)
+                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                    VStack{
+                        HStack{
+                            Label("5", systemImage: "list.number")
+                                .font(.title)
+                                .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                .padding()
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                             
-                            // temporary class list
+                            // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-text-and-an-icon-side-by-side-using-label
+                            Label("\(rectData.count)", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                .font(.title)
+                                .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                .padding()
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                             
-                            // https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-horizontal-and-vertical-scrolling-using-scrollview
-                            ScrollView(.horizontal) {
-                                HStack(spacing: 1) {
-                                    //                                ForEach(annotationClassList, id: \.self){ cls in
-                                    //                                    Text(cls)
-                                    //                                    foregroundColor(.white)
-                                    //                                        .font(.footnote)
-                                    //                                        .frame(width: 70, height: 20, alignment: .center)
-                                    //                                        .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                    //                                        .cornerRadius(3)
-                                    //                                }
-                                    if (classList.classNameList.count > 0){
-                                        ForEach(classList.classNameList , id: \.self) { cls in
-                                            Text(cls)
-                                                .foregroundColor(.white)
-                                                .font(.footnote)
-                                                .frame(width: 70, height: 20, alignment: .center)
-                                                .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                                .cornerRadius(2)
-                                        }
-                                    }
-                                }
-//                                .environmentObject(classList)
-                            } // end of scroll-view
-                            .frame(width:700, height: 25, alignment: .center)
-                            .padding()
-                        } // end of Vstack used to put scrolling class selection button
-                    } // end of Zstack used to create text on mirror effect
-                    //                .blur(radius: 10)
-                    Image("portland")
-                        .resizable()
-                        .cornerRadius(20)
-                        .font(.title)
-                        .padding(.all, 5)
-                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                        .overlay(ZStack{
-                            //                    dragState.isPressing ?
-                            //                self.completedLongPress ?
-                            if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                                RoundedRectangle(cornerRadius: 5, style: .circular)
-                                    .path(in: CGRect(
-                                        x: (startLoc.x), // +  dragState.translation.width,
-                                        y: (startLoc.y), // + dragState.translation.height,
-                                        width: contWidth,
-                                        height: contHeight
-                                    )
-                                    )
-                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                            Button(action: {}){
+                                Text("Image Name")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.red)
+                                    .cornerRadius(50)
                             }
-                            ForEach(self.rectData, id:\.self) {cords in
-                                RoundedRectangle(cornerRadius: 5, style: .circular)
-                                    .path(in: CGRect(
-                                        x: cords[0]-2,
-                                        y: cords[1]-2,
-                                        width: cords[2]+3,
-                                        height: cords[3]+3
-                                    )
-                                    )
-                                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                                //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                            } // end of for each loop
-                        }) // end of image overlay and zstack inside it
-                        .gesture(simultaneously)
-//                        .environmentObject(classList)
-                    //            .environmentObject(statusUpdate)
-                } // end of vstack withing return
-            } // end of zstack withing return
+                            VStack{
+                                //                        Text("progress")
+                                // https://www.appcoda.com/swiftui-gauge/
+                                // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
+                                Gauge(value: current, in: minValue...maxValue) {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                } currentValueLabel: {
+                                    Text("\(Int(current))")
+                                        .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                } minimumValueLabel: {
+                                    Text("")
+                                        .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                } maximumValueLabel: {
+                                    Text("\(Int(maxValue))")
+                                        .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                }
+                                .gaugeStyle(.accessoryCircular)
+                                //                        ProgressView(value: progress)
+                                //                                .frame(width: 200, height: 10, alignment: .trailing)
+                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                            } // end of vStack which is not used really
+                        } // end of Hstack
+                        
+                        // temporary class list
+                        
+                        // https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-horizontal-and-vertical-scrolling-using-scrollview
+//                        ScrollView(.horizontal) {
+//                            HStack(spacing: 1) {
+//                                //                                ForEach(annotationClassList, id: \.self){ cls in
+//                                //                                    Text(cls)
+//                                //                                    foregroundColor(.white)
+//                                //                                        .font(.footnote)
+//                                //                                        .frame(width: 70, height: 20, alignment: .center)
+//                                //                                        .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                                //                                        .cornerRadius(3)
+//                                //                                }
+//                                if (classList.classNameList.count > 0){
+//                                    ForEach(classList.classNameList , id: \.self) { cls in
+//                                        Text(cls)
+//                                            .foregroundColor(.white)
+//                                            .font(.footnote)
+//                                            .frame(width: 70, height: 20, alignment: .center)
+//                                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                                            .cornerRadius(2)
+//                                    }
+//                                }
+//                            }
+//                            //                                .environmentObject(classList)
+//                        } // end of scroll-view
+                        ClassScrollView()
+//                            .environmentObject(classList)
+                        .frame(width:700, height: 25, alignment: .center)
+                        .padding()
+                    } // end of Vstack used to put scrolling class selection button
+                } // end of Zstack used to create text on mirror effect
+                //                .blur(radius: 10)
+                Image("portland")
+                    .resizable()
+                    .cornerRadius(20)
+                    .font(.title)
+                    .padding(.all, 5)
+                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                    .overlay(ZStack{
+                        //                    dragState.isPressing ?
+                        //                self.completedLongPress ?
+                        if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                .path(in: CGRect(
+                                    x: (startLoc.x), // +  dragState.translation.width,
+                                    y: (startLoc.y), // + dragState.translation.height,
+                                    width: contWidth,
+                                    height: contHeight
+                                )
+                                )
+                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                        }
+                        ForEach(self.rectData, id:\.self) {cords in
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                .path(in: CGRect(
+                                    x: cords[0]-2,
+                                    y: cords[1]-2,
+                                    width: cords[2]+3,
+                                    height: cords[3]+3
+                                )
+                                )
+                                .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                            //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                        } // end of for each loop
+                    }) // end of image overlay and zstack inside it
+                    .gesture(simultaneously)
+                //                        .environmentObject(classList)
+                //            .environmentObject(statusUpdate)
+            } // end of vstack withing return
+        } // end of zstack withing return
     } // end of main body
     
     //    private func delayUpdate() async {
@@ -493,6 +495,29 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 //    prev_SLV.x = currentDragPosition.x
 //    prev_SLV.y = currentDragPosition.y
 //}
+
+struct ClassScrollView: View
+{
+    @EnvironmentObject var classList: ClassList
+    
+    var body: some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 1) {
+                if (classList.classNameList.count > 0){
+                    ForEach(classList.classNameList , id: \.self) { cls in
+                        Text(cls)
+                            .foregroundColor(.white)
+                            .font(.footnote)
+                            .frame(width: 70, height: 20, alignment: .center)
+                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                            .cornerRadius(2)
+                    }
+                }
+            }
+        }
+//        .environmentObject(classList)
+    }
+}
 
 struct AnnotationView_Previews: PreviewProvider {
     static var previews: some View {
