@@ -499,6 +499,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 struct ClassScrollView: View
 {
     @EnvironmentObject var classList: ClassList
+//    @StateObject var classList = ClassList()
     
     var body: some View {
         ScrollView(.horizontal) {

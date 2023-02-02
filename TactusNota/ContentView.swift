@@ -122,6 +122,8 @@ struct ContentView: View {
                         HStack{
                             Spacer()
                             
+                            VStack{
+                            
                             NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
                                 Button(action: {
                                     isProjectInfoActive = true
@@ -136,6 +138,47 @@ struct ContentView: View {
                                 .padding(.bottom, 100)
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.7), radius: 5, x: 5, y: 5)
                             }
+                                
+                                HStack{
+                                    Spacer()
+                                    NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
+                                        Button(action: {
+                                            isProjectInfoActive = true
+                                        }){
+                                            Label("Open project", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                                .foregroundColor(.white)
+                                                .padding(20)
+                                                .padding(.horizontal, 40)
+                                                .background(Color.red)
+                                                .cornerRadius(50)
+                                        }
+                                        .padding(.bottom, 100)
+                                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                                    }
+                                   
+                                } // end of second row Hstack
+                                .padding(50)
+                                .shadow(color: Color.black.opacity(0.3),
+                                        radius: 3,
+                                        x: 3,
+                                        y: 3)
+                                
+                                HStack{
+                                    NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
+                                        Button(action: {
+                                            isProjectInfoActive = true
+                                        }){
+                                            Label("Inspection", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                                .foregroundColor(.white)
+                                                .padding(20)
+                                                .padding(.horizontal, 40)
+                                                .background(Color.red)
+                                                .cornerRadius(50)
+                                        }
+                                        .padding(.bottom, 100)
+                                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                                    }
+                                }
                             Spacer()
                         } // end of first row H-stack
                         .padding(50)
@@ -143,25 +186,9 @@ struct ContentView: View {
                                 radius: 3,
                                 x: 3,
                                 y: 3)
-                        HStack{
-                            Spacer()
-                            NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
-                                Button(action: {
-                                    isProjectInfoActive = true
-                                }){
-                                    Label("Open project", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
-                                        .foregroundColor(.white)
-                                        .padding(20)
-                                        .padding(.horizontal, 40)
-                                        .background(Color.red)
-                                        .cornerRadius(50)
-                                }
-                                .padding(.bottom, 100)
-                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                            }
+                        
                             Spacer()
                         } // end of second row Hstack
-                        .padding(50)
                         .shadow(color: Color.black.opacity(0.3),
                                 radius: 3,
                                 x: 3,

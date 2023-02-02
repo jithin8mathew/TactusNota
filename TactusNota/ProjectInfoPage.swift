@@ -257,6 +257,7 @@ struct ProjectInfoPage: View {
                                 .cornerRadius(10)
                         }
                     } // end of displaying class list Hstack
+                    .frame(width: 700)
                     .frame(minWidth: 400, maxWidth: 700, minHeight: 10, maxHeight: 100)
                     .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     
@@ -295,7 +296,6 @@ struct ProjectInfoPage: View {
         .padding(.all, 0)
         .environmentObject(fileBookmarkController)
         .environmentObject(bookmarkController)
-        .environmentObject(classList)
         
     }
 }

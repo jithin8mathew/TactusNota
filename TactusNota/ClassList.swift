@@ -17,5 +17,9 @@ class ClassList: ObservableObject {
     @Published var classNameList: [String] = []
     
     @Published private var image_urls: [URL] = []
+    
+//    init(classNameList: [String]) {
+//        self.classNameList = classNameList
+//    }
 }
 
