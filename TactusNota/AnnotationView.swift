@@ -16,6 +16,7 @@ import SwiftUI
 //    @Published var startTap_coordinate = CGPoint()
 //}
 
+
 struct AnnotationView: View {
     
 //    @EnvironmentObject var classList: ClassList
@@ -79,7 +80,9 @@ struct AnnotationView: View {
     
     // implementing file picking from folder
     @State private var folderc_main: [URL] = []
-    @StateObject var classList = ClassList()
+//    @StateObject var classList = ClassList()
+    @EnvironmentObject var classList: ClassList
+    @Binding var classNamesAnnot: [String]
     
     var body: some View {
         //        ZStack{
@@ -238,7 +241,8 @@ struct AnnotationView: View {
                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     VStack{
                         HStack{
-                            Label("5", systemImage: "list.number")
+//                            Label("\(classList.classNameList.count)", systemImage: "list.number")
+                            Label("\(classNamesAnnot.count)", systemImage: "list.number")
                                 .font(.title)
                                 .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 .padding()
@@ -308,7 +312,23 @@ struct AnnotationView: View {
 //                            }
 //                            //                                .environmentObject(classList)
 //                        } // end of scroll-view
-                        ClassScrollView()
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 1) {
+//                                if (classList.classNameList.count > 0){
+//                                    ForEach(classList.classNameList , id: \.self) { cls in
+                                if (classNamesAnnot.count > 0){
+                                    ForEach(classNamesAnnot , id: \.self) { cls in
+                                        Text(cls)
+                                            .foregroundColor(.white)
+                                            .font(.footnote)
+                                            .frame(width: 70, height: 20, alignment: .center)
+                                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                            .cornerRadius(2)
+                                    }
+                                }
+                            }
+                        }
+//                        ClassScrollView()
                             .environmentObject(classList)
                             .frame(width:700, height: 25, alignment: .center)
                             .padding()
@@ -349,7 +369,7 @@ struct AnnotationView: View {
                         } // end of for each loop
                     }) // end of image overlay and zstack inside it
                     .gesture(simultaneously)
-                //                        .environmentObject(classList)
+//                    .environmentObject(classList)
                 //            .environmentObject(statusUpdate)
             } // end of vstack withing return
         } // end of zstack withing return
@@ -497,32 +517,32 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 //    prev_SLV.y = currentDragPosition.y
 //}
 
-struct ClassScrollView: View
-{
-    @EnvironmentObject var classList: ClassList
-//    @StateObject var classList = ClassList()
-    
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 1) {
-                if (classList.classNameList.count > 0){
-                    ForEach(classList.classNameList , id: \.self) { cls in
-                        Text(cls)
-                            .foregroundColor(.white)
-                            .font(.footnote)
-                            .frame(width: 70, height: 20, alignment: .center)
-                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                            .cornerRadius(2)
-                    }
-                }
-            }
-        }
-//        .environmentObject(classList)
-    }
-}
+//struct ClassScrollView: View
+//{
+////    @EnvironmentObject var classList: ClassList
+////    @StateObject var classList = ClassList()
+//
+//    var body: some View {
+//        ScrollView(.horizontal) {
+//            HStack(spacing: 1) {
+//                if (classList.classNameList.count > 0){
+//                    ForEach(classList.classNameList , id: \.self) { cls in
+//                        Text(cls)
+//                            .foregroundColor(.white)
+//                            .font(.footnote)
+//                            .frame(width: 70, height: 20, alignment: .center)
+//                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                            .cornerRadius(2)
+//                    }
+//                }
+//            }
+//        }
+////        .environmentObject(classList)
+//    }
+//}
 
 struct AnnotationView_Previews: PreviewProvider {
     static var previews: some View {
-        AnnotationView()
+        AnnotationView( classNamesAnnot: ["cat","dog"])
     }
 }

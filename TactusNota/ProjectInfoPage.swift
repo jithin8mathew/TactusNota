@@ -36,6 +36,7 @@ struct RoundedCorner: Shape {
 struct ProjectInfoPage: View {
     
     @StateObject var classList = ClassList()
+    @State private var classNames: [String] = []
     
     @State private var isAnnotationActive : Bool = false
     @State var projectname: String = "Project 1"
@@ -215,6 +216,7 @@ struct ProjectInfoPage: View {
                         Button(action: {
                             if (cName != ""){
                                 classList.classNameList.append(cName)
+                                classNames.append(cName)
                                 cName = ""
                             }
                         }){ // classNameList.append([className])
@@ -274,7 +276,7 @@ struct ProjectInfoPage: View {
                 } // end of bounding box class group
                 
                 Spacer()
-                NavigationLink(destination: AnnotationView(), isActive: self.$isAnnotationActive) {
+                NavigationLink(destination: AnnotationView(classNamesAnnot: $classNames), isActive: self.$isAnnotationActive) {
                     Button(action: {
                         if (classList.classNameList.count > 0) {
                             isAnnotationActive = true
