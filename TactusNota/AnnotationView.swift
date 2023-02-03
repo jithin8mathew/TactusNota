@@ -18,7 +18,7 @@ import SwiftUI
 
 struct AnnotationView: View {
     
-    @EnvironmentObject var classList: ClassList
+//    @EnvironmentObject var classList: ClassList
     
     //    @StateObject var globalCord = GlobalCoordination()
     //    @StateObject var globalString = GlobalString()
@@ -79,6 +79,7 @@ struct AnnotationView: View {
     
     // implementing file picking from folder
     @State private var folderc_main: [URL] = []
+    @StateObject var classList = ClassList()
     
     var body: some View {
         //        ZStack{
@@ -308,9 +309,9 @@ struct AnnotationView: View {
 //                            //                                .environmentObject(classList)
 //                        } // end of scroll-view
                         ClassScrollView()
-//                            .environmentObject(classList)
-                        .frame(width:700, height: 25, alignment: .center)
-                        .padding()
+                            .environmentObject(classList)
+                            .frame(width:700, height: 25, alignment: .center)
+                            .padding()
                     } // end of Vstack used to put scrolling class selection button
                 } // end of Zstack used to create text on mirror effect
                 //                .blur(radius: 10)
