@@ -35,7 +35,7 @@ struct RoundedCorner: Shape {
 
 struct ProjectInfoPage: View {
     
-    @StateObject var classList = ClassList()
+    @StateObject var classNamesAnnot = ClassList()
     @State private var classNames: [String] = []
     
     @State private var isAnnotationActive : Bool = false
@@ -215,7 +215,7 @@ struct ProjectInfoPage: View {
                         
                         Button(action: {
                             if (cName != ""){
-                                classList.classNameList.append(cName)
+                                classNamesAnnot.classNameList.append(cName)
                                 classNames.append(cName)
                                 cName = ""
                             }
@@ -238,10 +238,10 @@ struct ProjectInfoPage: View {
                     // display the total no of classes add to the project
                     Button(action: {
                     }){
-                        Label("\(classList.classNameList.count) classes added", systemImage: "photo.stack")
+                        Label("\(classNamesAnnot.classNameList.count) classes added", systemImage: "photo.stack")
                             .foregroundColor(.white)
                             .padding()
-                            .background(classList.classNameList.count > 0 ? Color.green : Color.red)
+                            .background(classNamesAnnot.classNameList.count > 0 ? Color.green : Color.red)
                             .cornerRadius(50)
                             .frame(maxWidth:400, maxHeight: 10, alignment: .center)
                             .font(.footnote)
@@ -251,7 +251,7 @@ struct ProjectInfoPage: View {
                     .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     
                     HStack{
-                        ForEach(classList.classNameList , id: \.self) { cls in
+                        ForEach(classNamesAnnot.classNameList , id: \.self) { cls in
                             Text(cls)
                                 .foregroundColor(.white)
                                 .padding(5)
@@ -278,7 +278,7 @@ struct ProjectInfoPage: View {
                 Spacer()
                 NavigationLink(destination: AnnotationView(classNamesAnnot: $classNames), isActive: self.$isAnnotationActive) {
                     Button(action: {
-                        if (classList.classNameList.count > 0) {
+                        if (classNamesAnnot.classNameList.count > 0) {
                             isAnnotationActive = true
                         }else{
                             print("enter class names!")

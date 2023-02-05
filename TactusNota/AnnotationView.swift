@@ -16,7 +16,6 @@ import SwiftUI
 //    @Published var startTap_coordinate = CGPoint()
 //}
 
-
 struct AnnotationView: View {
     
 //    @EnvironmentObject var classList: ClassList
@@ -543,6 +542,6 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 
 struct AnnotationView_Previews: PreviewProvider {
     static var previews: some View {
-        AnnotationView( classNamesAnnot: ["cat","dog"])
+        AnnotationView( classNamesAnnot: ProjectInfoPage.$classNamesAnnot)
     }
 }
