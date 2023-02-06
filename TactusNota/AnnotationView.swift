@@ -542,6 +542,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 
 struct AnnotationView_Previews: PreviewProvider {
     static var previews: some View {
-        AnnotationView( classNamesAnnot: ProjectInfoPage.$classNamesAnnot)
+        AnnotationView()
+//        AnnotationView( classNamesAnnot: $classNamesAnnot)
     }
 }

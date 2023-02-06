@@ -36,7 +36,7 @@ struct RoundedCorner: Shape {
 struct ProjectInfoPage: View {
     
     @StateObject var classNamesAnnot = ClassList()
-    @State private var classNames: [String] = []
+    @State private var classNames: [String] = []()
     
     @State private var isAnnotationActive : Bool = false
     @State var projectname: String = "Project 1"
