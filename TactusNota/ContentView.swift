@@ -77,9 +77,13 @@ struct ContentView: View {
                 GeometryReader { geometry in
                     //                    Color(red: 0.91, green: 0.70, blue: 0.39) // creamish brown (Sun ray)
                     //                    Color(red: 0.0, green: 0.42, blue: 0.51) // Teal blue
-                    Color(red: 0.21, green: 0.35, blue: 0.42) // pacific blue
-                    
+//                    Color(red: 0.21, green: 0.35, blue: 0.42) // pacific blue
+                    Color(red: 1.0, green: 1.0, blue: 1.0) // pacific blue
                         .ignoresSafeArea()
+                    Image("mainPage")
+                        .resizable()
+                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                        .foregroundColor(.black)
                     HStack{
                         Spacer()
                         NavigationLink(destination: TNAnnotationSettings(), isActive: self.$isSettingsActive) {
