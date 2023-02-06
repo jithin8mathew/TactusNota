@@ -277,8 +277,11 @@ struct ProjectInfoPage: View {
                 } // end of bounding box class group
                 
                 Spacer()
+                // https://www.hackingwithswift.com/forums/swiftui/environmentobject-passing-array-elements-to-subview-and-ondelete/2607
                 NavigationLink(destination: AnnotationView().environmentObject(classList), isActive: self.$isAnnotationActive) {
                     Button(action: {
+                        classList.imageFileList = folderc_main // pass the data to next view 
+                        
                         if (classList.classNameList.count > 0) {
                             isAnnotationActive = true
                         }else{

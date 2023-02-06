@@ -15,6 +15,7 @@ import SwiftUI
 
 class ClassList: ObservableObject {
     @Published var classNameList: [String] = []
+    @Published var imageFileList: [URL] = []
     
 //    if (classNameList.count > 0){
 //        print(classNameList.count)

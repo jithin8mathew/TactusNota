@@ -88,7 +88,7 @@ struct AnnotationView: View {
         //            Color(red: 0.26, green: 0.26, blue: 0.26)
         //                .ignoresSafeArea()
         
-        Text("Test")
+//        Text("Test")
         
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
         
@@ -255,7 +255,7 @@ struct AnnotationView: View {
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                             
                             Button(action: {}){
-                                Text("Image Name")
+                                Text(classList.imageFileList.count > 0 ? "\(classList.imageFileList[0].lastPathComponent)" : "Image name")
                                     .foregroundColor(.white)
                                     .padding()
                                     .background(Color.red)
@@ -265,17 +265,17 @@ struct AnnotationView: View {
                                 //                        Text("progress")
                                 // https://www.appcoda.com/swiftui-gauge/
                                 // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
-                                Gauge(value: current, in: minValue...maxValue) {
+                                Gauge(value: current, in: minValue...Double(classList.imageFileList.count)) {
                                     Image(systemName: "heart.fill")
                                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 } currentValueLabel: {
-                                    Text("\(Int(current))")
+                                    Text("\(Int(classList.imageFileList.count - 1))")
                                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 } minimumValueLabel: {
                                     Text("")
                                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 } maximumValueLabel: {
-                                    Text("\(Int(maxValue))")
+                                    Text("\(Int(classList.imageFileList.count))")
                                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 }
                                 .gaugeStyle(.accessoryCircular)
