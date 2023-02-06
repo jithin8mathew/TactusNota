@@ -18,7 +18,7 @@ import SwiftUI
 
 struct AnnotationView: View {
     
-//    @EnvironmentObject var classList: ClassList
+    //    @EnvironmentObject var classList: ClassList
     
     //    @StateObject var globalCord = GlobalCoordination()
     //    @StateObject var globalString = GlobalString()
@@ -79,16 +79,17 @@ struct AnnotationView: View {
     
     // implementing file picking from folder
     @State private var folderc_main: [URL] = []
-//    @StateObject var classList = ClassList()
+    //    @StateObject var classList = ClassList()
     @EnvironmentObject var classList: ClassList
-//    @Binding var classNamesAnnot: [String]
+    //    @Binding var classNamesAnnot: [String]
+    @State private var image = UIImage(systemName: "xmark")! // this is the main variable that holds the to be annotated image
     
     var body: some View {
         //        ZStack{
         //            Color(red: 0.26, green: 0.26, blue: 0.26)
         //                .ignoresSafeArea()
         
-//        Text("Test")
+        //        Text("Test")
         
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
         
@@ -240,7 +241,7 @@ struct AnnotationView: View {
                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     VStack{
                         HStack{
-//                            Label("\(classList.classNameList.count)", systemImage: "list.number")
+                            //                            Label("\(classList.classNameList.count)", systemImage: "list.number")
                             Label("\(classList.classNameList.count)", systemImage: "list.number")
                                 .font(.title)
                                 .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
@@ -290,8 +291,8 @@ struct AnnotationView: View {
                         // https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-horizontal-and-vertical-scrolling-using-scrollview
                         ScrollView(.horizontal) {
                             HStack(spacing: 1) {
-//                                if (classList.classNameList.count > 0){
-//                                    ForEach(classList.classNameList , id: \.self) { cls in
+                                //                                if (classList.classNameList.count > 0){
+                                //                                    ForEach(classList.classNameList , id: \.self) { cls in
                                 if (classList.classNameList.count > 0){
                                     ForEach(classList.classNameList , id: \.self) { cls in
                                         Text(cls)
@@ -304,48 +305,79 @@ struct AnnotationView: View {
                                 }
                             }
                         }
-//                        ClassScrollView()
-                            .environmentObject(classList)
-                            .frame(minWidth: 400, maxWidth: 700, minHeight: 10, maxHeight: 25)
-                            .padding()
+                        //                        ClassScrollView()
+                        .environmentObject(classList)
+                        .frame(minWidth: 400, maxWidth: 700, minHeight: 10, maxHeight: 25)
+                        .padding()
                     } // end of Vstack used to put scrolling class selection button
                 } // end of Zstack used to create text on mirror effect
                 //                .blur(radius: 10)
-                Image("portland")
-                    .resizable()
-                    .cornerRadius(20)
-                    .font(.title)
-                    .padding(.all, 5)
-                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                    .overlay(ZStack{
-                        //                    dragState.isPressing ?
-                        //                self.completedLongPress ?
-                        if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                            RoundedRectangle(cornerRadius: 5, style: .circular)
-                                .path(in: CGRect(
-                                    x: (startLoc.x), // +  dragState.translation.width,
-                                    y: (startLoc.y), // + dragState.translation.height,
-                                    width: contWidth,
-                                    height: contHeight
-                                )
-                                )
-                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                        }
-                        ForEach(self.rectData, id:\.self) {cords in
-                            RoundedRectangle(cornerRadius: 5, style: .circular)
-                                .path(in: CGRect(
-                                    x: cords[0]-2,
-                                    y: cords[1]-2,
-                                    width: cords[2]+3,
-                                    height: cords[3]+3
-                                )
-                                )
-                                .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                            //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                        } // end of for each loop
-                    }) // end of image overlay and zstack inside it
-                    .gesture(simultaneously)
-//                    .environmentObject(classList)
+                
+                //                classList.classNameList[0].load()
+                
+                //                let url = URL(string: classList.classNameList[0])
+                if let ImageFile = UIImage(contentsOfFile: classList.classNameList[0]){
+                    Image(uiImage: ImageFile)
+                
+                
+//                AsyncImage(url: classList.imageFileList[0])
+//                { image in
+//                    image.resizable()
+//                } placeholder: {
+//                    Image("portland")
+//                        .resizable()
+//                        .cornerRadius(20)
+//                        .font(.title)
+//                        .padding(.all, 5)
+//                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+//                }
+                //                    .frame(width: 50, height: 50)
+                
+                //                Image("portland")
+                //                    .resizable()
+                //                    .cornerRadius(20)
+                //                    .font(.title)
+                //                    .padding(.all, 5)
+                //                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                .overlay(ZStack{
+                    //                    dragState.isPressing ?
+                    //                self.completedLongPress ?
+                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                            .path(in: CGRect(
+                                x: (startLoc.x), // +  dragState.translation.width,
+                                y: (startLoc.y), // + dragState.translation.height,
+                                width: contWidth,
+                                height: contHeight
+                            )
+                            )
+                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                    }
+                    ForEach(self.rectData, id:\.self) {cords in
+                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                            .path(in: CGRect(
+                                x: cords[0]-2,
+                                y: cords[1]-2,
+                                width: cords[2]+3,
+                                height: cords[3]+3
+                            )
+                            )
+                            .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                        //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                    } // end of for each loop
+                }) // end of image overlay and zstack inside it
+                .gesture(simultaneously)
+            } // end of if
+                else
+                {
+                    Image("portland")
+                                            .resizable()
+                                            .cornerRadius(20)
+                                            .font(.title)
+                                            .padding(.all, 5)
+                                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                }
+                //                    .environmentObject(classList)
                 //            .environmentObject(statusUpdate)
             } // end of vstack withing return
         } // end of zstack withing return
@@ -520,6 +552,6 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 struct AnnotationView_Previews: PreviewProvider {
     static var previews: some View {
         AnnotationView()
-//        AnnotationView( classNamesAnnot: $classNamesAnnot)
+        //        AnnotationView( classNamesAnnot: $classNamesAnnot)
     }
 }

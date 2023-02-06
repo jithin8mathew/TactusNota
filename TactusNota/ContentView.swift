@@ -80,7 +80,7 @@ struct ContentView: View {
 //                    Color(red: 0.21, green: 0.35, blue: 0.42) // pacific blue
                     Color(red: 1.0, green: 1.0, blue: 1.0) // pacific blue
                         .ignoresSafeArea()
-                    Image("mainPage")
+                    Image("mainPage3")
                         .resizable()
                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                         .foregroundColor(.black)
@@ -123,8 +123,8 @@ struct ContentView: View {
                         
                         Spacer()
                         
-                        HStack{
-                            Spacer()
+//                        HStack{
+//                            Spacer()
                             
                             VStack{
                             
@@ -191,14 +191,14 @@ struct ContentView: View {
                                 x: 3,
                                 y: 3)
                         
-                            Spacer()
-                        } // end of second row Hstack
-                        .shadow(color: Color.black.opacity(0.3),
-                                radius: 3,
-                                x: 3,
-                                y: 3)
-                        Spacer()
-                        Spacer()
+//                            Spacer()
+//                        } // end of second row Hstack
+//                        .shadow(color: Color.black.opacity(0.3),
+//                                radius: 3,
+//                                x: 3,
+//                                y: 3)
+//                        Spacer()
+//                        Spacer()
                     }// vstack 1 end
                     .padding(50)
                 } // end of geometry reader
