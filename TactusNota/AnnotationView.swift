@@ -81,7 +81,7 @@ struct AnnotationView: View {
     @State private var folderc_main: [URL] = []
 //    @StateObject var classList = ClassList()
     @EnvironmentObject var classList: ClassList
-    @Binding var classNamesAnnot: [String]
+//    @Binding var classNamesAnnot: [String]
     
     var body: some View {
         //        ZStack{
@@ -241,7 +241,7 @@ struct AnnotationView: View {
                     VStack{
                         HStack{
 //                            Label("\(classList.classNameList.count)", systemImage: "list.number")
-                            Label("\(classNamesAnnot.count)", systemImage: "list.number")
+                            Label("\(classList.classNameList.count)", systemImage: "list.number")
                                 .font(.title)
                                 .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 .padding()
@@ -288,35 +288,12 @@ struct AnnotationView: View {
                         // temporary class list
                         
                         // https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-horizontal-and-vertical-scrolling-using-scrollview
-//                        ScrollView(.horizontal) {
-//                            HStack(spacing: 1) {
-//                                //                                ForEach(annotationClassList, id: \.self){ cls in
-//                                //                                    Text(cls)
-//                                //                                    foregroundColor(.white)
-//                                //                                        .font(.footnote)
-//                                //                                        .frame(width: 70, height: 20, alignment: .center)
-//                                //                                        .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-//                                //                                        .cornerRadius(3)
-//                                //                                }
-//                                if (classList.classNameList.count > 0){
-//                                    ForEach(classList.classNameList , id: \.self) { cls in
-//                                        Text(cls)
-//                                            .foregroundColor(.white)
-//                                            .font(.footnote)
-//                                            .frame(width: 70, height: 20, alignment: .center)
-//                                            .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-//                                            .cornerRadius(2)
-//                                    }
-//                                }
-//                            }
-//                            //                                .environmentObject(classList)
-//                        } // end of scroll-view
                         ScrollView(.horizontal) {
                             HStack(spacing: 1) {
 //                                if (classList.classNameList.count > 0){
 //                                    ForEach(classList.classNameList , id: \.self) { cls in
-                                if (classNamesAnnot.count > 0){
-                                    ForEach(classNamesAnnot , id: \.self) { cls in
+                                if (classList.classNameList.count > 0){
+                                    ForEach(classList.classNameList , id: \.self) { cls in
                                         Text(cls)
                                             .foregroundColor(.white)
                                             .font(.footnote)
@@ -329,7 +306,7 @@ struct AnnotationView: View {
                         }
 //                        ClassScrollView()
                             .environmentObject(classList)
-                            .frame(width:700, height: 25, alignment: .center)
+                            .frame(minWidth: 400, maxWidth: 700, minHeight: 10, maxHeight: 25)
                             .padding()
                     } // end of Vstack used to put scrolling class selection button
                 } // end of Zstack used to create text on mirror effect
