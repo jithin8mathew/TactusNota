@@ -316,8 +316,15 @@ struct AnnotationView: View {
                 //                classList.classNameList[0].load()
                 
                 //                let url = URL(string: classList.classNameList[0])
-                if let ImageFile = UIImage(contentsOfFile: classList.classNameList[0]){
+                
+//                Image(uiImage: UIImage(contentsOfFile: classList.classNameList[0])!)
+//                    .resizable()
+
+                Text("\(classList.imageFileList[0].path)")
+                
+                if let ImageFile = UIImage(contentsOfFile: classList.imageFileList[0].path){
                     Image(uiImage: ImageFile)
+                    
                 
                 
 //                AsyncImage(url: classList.imageFileList[0])
@@ -371,12 +378,12 @@ struct AnnotationView: View {
                 else
                 {
                     Image("portland")
-                                            .resizable()
-                                            .cornerRadius(20)
-                                            .font(.title)
-                                            .padding(.all, 5)
-                                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                }
+                        .resizable()
+                        .cornerRadius(20)
+                        .font(.title)
+                        .padding(.all, 5)
+                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                } // enf of else
                 //                    .environmentObject(classList)
                 //            .environmentObject(statusUpdate)
             } // end of vstack withing return
