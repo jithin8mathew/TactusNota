@@ -375,34 +375,34 @@ struct AnnotationView: View {
                 //                //                    .font(.title)
                 //                //                    .padding(.all, 5)
                 //                //                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                //                .overlay(ZStack{
-                //                    //                    dragState.isPressing ?
-                //                    //                self.completedLongPress ?
-                //                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                //                        RoundedRectangle(cornerRadius: 5, style: .circular)
-                //                            .path(in: CGRect(
-                //                                x: (startLoc.x), // +  dragState.translation.width,
-                //                                y: (startLoc.y), // + dragState.translation.height,
-                //                                width: contWidth,
-                //                                height: contHeight
-                //                            )
-                //                            )
-                //                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                //                    }
-                //                    ForEach(self.rectData, id:\.self) {cords in
-                //                        RoundedRectangle(cornerRadius: 5, style: .circular)
-                //                            .path(in: CGRect(
-                //                                x: cords[0]-2,
-                //                                y: cords[1]-2,
-                //                                width: cords[2]+3,
-                //                                height: cords[3]+3
-                //                            )
-                //                            )
-                //                            .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                //                        //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                //                    } // end of for each loop
-                //                }) // end of image overlay and zstack inside it
-                //                .gesture(simultaneously)
+                                .overlay(ZStack{
+                                    //                    dragState.isPressing ?
+                                    //                self.completedLongPress ?
+                                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                                            .path(in: CGRect(
+                                                x: (startLoc.x), // +  dragState.translation.width,
+                                                y: (startLoc.y), // + dragState.translation.height,
+                                                width: contWidth,
+                                                height: contHeight
+                                            )
+                                            )
+                                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                    }
+                                    ForEach(self.rectData, id:\.self) {cords in
+                                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                                            .path(in: CGRect(
+                                                x: cords[0]-2,
+                                                y: cords[1]-2,
+                                                width: cords[2]+3,
+                                                height: cords[3]+3
+                                            )
+                                            )
+                                            .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                                        //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                    } // end of for each loop
+                                }) // end of image overlay and zstack inside it
+                                .gesture(simultaneously)
                 //            } // end of if
                 //                else
                 //                {
@@ -540,15 +540,16 @@ func presentImage(url: URL) -> UIImage{
     var image = UIImage()
     let data: Data
     
-    do{
-        try url.startAccessingSecurityScopedResource()
-        data = try Data(contentsOf: url)
-        image = UIImage(data: data)!
-    } catch {
-        print("Unable to access the image file")
-        data = Data()
+    if url.startAccessingSecurityScopedResource(){
+        do{
+//            try url.startAccessingSecurityScopedResource()
+            data = try Data(contentsOf: url)
+            image = UIImage(data: data)!
+        } catch {
+            print("Unable to access the image file")
+            data = Data()
+        }
     }
-    
     url.stopAccessingSecurityScopedResource()
     return image
 }
