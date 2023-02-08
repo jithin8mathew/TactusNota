@@ -82,7 +82,8 @@ struct AnnotationView: View {
     //    @StateObject var classList = ClassList()
     @EnvironmentObject var classList: ClassList
     //    @Binding var classNamesAnnot: [String]
-    @State private var image = UIImage(systemName: "xmark")! // this is the main variable that holds the to be annotated image
+    @State private var image2 = UIImage(systemName: "xmark")! // this is the main variable that holds the to be annotated image
+    @State private var image = UIImage()
     
     var body: some View {
         //        ZStack{
@@ -317,73 +318,101 @@ struct AnnotationView: View {
                 
                 //                let url = URL(string: classList.classNameList[0])
                 
-//                Image(uiImage: UIImage(contentsOfFile: classList.classNameList[0])!)
-//                    .resizable()
-
-                Text("\(classList.imageFileList[0].path)")
-                
-                if let ImageFile = UIImage(contentsOfFile: classList.imageFileList[0].path){
-                    Image(uiImage: ImageFile)
-                    
-                
-                
-//                AsyncImage(url: classList.imageFileList[0])
-//                { image in
-//                    image.resizable()
-//                } placeholder: {
-//                    Image("portland")
-//                        .resizable()
-//                        .cornerRadius(20)
-//                        .font(.title)
-//                        .padding(.all, 5)
-//                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-//                }
-                //                    .frame(width: 50, height: 50)
-                
-                //                Image("portland")
+                //                Image(uiImage: UIImage(contentsOfFile: classList.classNameList[0])!)
                 //                    .resizable()
-                //                    .cornerRadius(20)
-                //                    .font(.title)
-                //                    .padding(.all, 5)
-                //                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                .overlay(ZStack{
-                    //                    dragState.isPressing ?
-                    //                self.completedLongPress ?
-                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                        RoundedRectangle(cornerRadius: 5, style: .circular)
-                            .path(in: CGRect(
-                                x: (startLoc.x), // +  dragState.translation.width,
-                                y: (startLoc.y), // + dragState.translation.height,
-                                width: contWidth,
-                                height: contHeight
-                            )
-                            )
-                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                    }
-                    ForEach(self.rectData, id:\.self) {cords in
-                        RoundedRectangle(cornerRadius: 5, style: .circular)
-                            .path(in: CGRect(
-                                x: cords[0]-2,
-                                y: cords[1]-2,
-                                width: cords[2]+3,
-                                height: cords[3]+3
-                            )
-                            )
-                            .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                        //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                    } // end of for each loop
-                }) // end of image overlay and zstack inside it
-                .gesture(simultaneously)
-            } // end of if
-                else
-                {
-                    Image("portland")
-                        .resizable()
-                        .cornerRadius(20)
-                        .font(.title)
-                        .padding(.all, 5)
-                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                } // enf of else
+                
+                Text("\(classList.imageFileList[1].path)")
+                
+//                image = presentImage(url: classList.imageFileList[1])
+                
+//                let imageURL = classList.imageFileList[1]
+                
+                //                classList.imageData = classList.imageFileList[1]
+                //                do {
+//                let imageURLSafeAccess = imageURL.startAccessingSecurityScopedResource() //{
+//                let isAccessing = imageURL.startAccessingSecurityScopedResource()
+//                let data = try! Data(contentsOf: imageURL)
+//                Image(uiImage: UIImage(data: data)!)
+//                    .resizable()
+//                imageURL.stopAccessingSecurityScopedResource()
+//                if imageURLSafeAccess{
+//                    imageURL.stopAccessingSecurityScopedResource()
+//                }
+                
+//                if !presentImage(url: classList.imageFileList[1])
+                
+                Image(uiImage: presentImage(url: classList.imageFileList[1]))
+                    .resizable()
+                //                }
+                //                classList.imageFileList[1].stopAccessingSecurityScopedResource()
+                //                }
+                //                catch {
+                //
+                //                }
+                
+                //                if let ImageFile = UIImage(named: classList.imageFileList[1].path){
+                //
+                //                    Image(uiImage: ImageFile)
+                //
+                //
+                //
+                ////                AsyncImage(url: classList.imageFileList[0])
+                ////                { image in
+                ////                    image.resizable()
+                ////                } placeholder: {
+                ////                    Image("portland")
+                ////                        .resizable()
+                ////                        .cornerRadius(20)
+                ////                        .font(.title)
+                ////                        .padding(.all, 5)
+                ////                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                ////                }
+                //                //                    .frame(width: 50, height: 50)
+                //
+                //                //                Image("portland")
+                //                //                    .resizable()
+                //                //                    .cornerRadius(20)
+                //                //                    .font(.title)
+                //                //                    .padding(.all, 5)
+                //                //                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                //                .overlay(ZStack{
+                //                    //                    dragState.isPressing ?
+                //                    //                self.completedLongPress ?
+                //                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                //                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                //                            .path(in: CGRect(
+                //                                x: (startLoc.x), // +  dragState.translation.width,
+                //                                y: (startLoc.y), // + dragState.translation.height,
+                //                                width: contWidth,
+                //                                height: contHeight
+                //                            )
+                //                            )
+                //                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                //                    }
+                //                    ForEach(self.rectData, id:\.self) {cords in
+                //                        RoundedRectangle(cornerRadius: 5, style: .circular)
+                //                            .path(in: CGRect(
+                //                                x: cords[0]-2,
+                //                                y: cords[1]-2,
+                //                                width: cords[2]+3,
+                //                                height: cords[3]+3
+                //                            )
+                //                            )
+                //                            .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                //                        //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                //                    } // end of for each loop
+                //                }) // end of image overlay and zstack inside it
+                //                .gesture(simultaneously)
+                //            } // end of if
+                //                else
+                //                {
+                //                    Image("portland")
+                //                        .resizable()
+                //                        .cornerRadius(20)
+                //                        .font(.title)
+                //                        .padding(.all, 5)
+                //                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
+                //                } // enf of else
                 //                    .environmentObject(classList)
                 //            .environmentObject(statusUpdate)
             } // end of vstack withing return
@@ -503,13 +532,25 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
             test_boxIDVAL_ = bboxID
             print("within C4 edge...")
         }
-        //        else{
-        //            C1_ = false
-        //            C2_ = false
-        //            C3_ = false
-        //            C4_ = false
-        //        }
     }
+}
+
+func presentImage(url: URL) -> UIImage{
+    
+    var image = UIImage()
+    let data: Data
+    
+    do{
+        try url.startAccessingSecurityScopedResource()
+        data = try Data(contentsOf: url)
+        image = UIImage(data: data)!
+    } catch {
+        print("Unable to access the image file")
+        data = Data()
+    }
+    
+    url.stopAccessingSecurityScopedResource()
+    return image
 }
 
 //func incrementTracker(startLocationValue: CGPoint, currentDragPosition: CGPoint){
