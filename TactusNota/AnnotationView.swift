@@ -545,6 +545,7 @@ func presentImage(url: URL) -> UIImage{
 //            try url.startAccessingSecurityScopedResource()
             data = try Data(contentsOf: url)
             image = UIImage(data: data)!
+            print("sucssessfully read image file")
         } catch {
             print("Unable to access the image file")
             data = Data()
