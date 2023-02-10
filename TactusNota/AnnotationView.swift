@@ -323,39 +323,27 @@ struct AnnotationView: View {
                 
                 Text("\(classList.imageFileList[1].path)")
                 
-//                image = presentImage(url: classList.imageFileList[1])
+                //                image = presentImage(url: classList.imageFileList[1])
                 
-//                let imageURL = classList.imageFileList[1]
+                //                let imageURL = classList.imageFileList[1]
                 
                 //                classList.imageData = classList.imageFileList[1]
                 //                do {
-//                let imageURLSafeAccess = imageURL.startAccessingSecurityScopedResource() //{
-//                let isAccessing = imageURL.startAccessingSecurityScopedResource()
-//                let data = try! Data(contentsOf: imageURL)
-//                Image(uiImage: UIImage(data: data)!)
-//                    .resizable()
-//                imageURL.stopAccessingSecurityScopedResource()
-//                if imageURLSafeAccess{
-//                    imageURL.stopAccessingSecurityScopedResource()
-//                }
+                //                let imageURLSafeAccess = imageURL.startAccessingSecurityScopedResource() //{
+                //                let isAccessing = imageURL.startAccessingSecurityScopedResource()
+                //                let data = try! Data(contentsOf: imageURL)
+                //                Image(uiImage: UIImage(data: data)!)
+                //                    .resizable()
+                //                imageURL.stopAccessingSecurityScopedResource()
+                //                if imageURLSafeAccess{
+                //                    imageURL.stopAccessingSecurityScopedResource()
+                //                }
                 
-//                if !presentImage(url: classList.imageFileList[1])
+                //                if !presentImage(url: classList.imageFileList[1])
                 
                 Image(uiImage: presentImage(url: classList.imageFileList[1]))
                     .resizable()
-                //                }
-                //                classList.imageFileList[1].stopAccessingSecurityScopedResource()
-                //                }
-                //                catch {
-                //
-                //                }
                 
-                //                if let ImageFile = UIImage(named: classList.imageFileList[1].path){
-                //
-                //                    Image(uiImage: ImageFile)
-                //
-                //
-                //
                 ////                AsyncImage(url: classList.imageFileList[0])
                 ////                { image in
                 ////                    image.resizable()
@@ -375,34 +363,34 @@ struct AnnotationView: View {
                 //                //                    .font(.title)
                 //                //                    .padding(.all, 5)
                 //                //                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 15, y: 15)
-                                .overlay(ZStack{
-                                    //                    dragState.isPressing ?
-                                    //                self.completedLongPress ?
-                                    if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                                        RoundedRectangle(cornerRadius: 5, style: .circular)
-                                            .path(in: CGRect(
-                                                x: (startLoc.x), // +  dragState.translation.width,
-                                                y: (startLoc.y), // + dragState.translation.height,
-                                                width: contWidth,
-                                                height: contHeight
-                                            )
-                                            )
-                                            .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                                    }
-                                    ForEach(self.rectData, id:\.self) {cords in
-                                        RoundedRectangle(cornerRadius: 5, style: .circular)
-                                            .path(in: CGRect(
-                                                x: cords[0]-2,
-                                                y: cords[1]-2,
-                                                width: cords[2]+3,
-                                                height: cords[3]+3
-                                            )
-                                            )
-                                            .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                                        //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                                    } // end of for each loop
-                                }) // end of image overlay and zstack inside it
-                                .gesture(simultaneously)
+                    .overlay(ZStack{
+                        //                    dragState.isPressing ?
+                        //                self.completedLongPress ?
+                        if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                .path(in: CGRect(
+                                    x: (startLoc.x), // +  dragState.translation.width,
+                                    y: (startLoc.y), // + dragState.translation.height,
+                                    width: contWidth,
+                                    height: contHeight
+                                )
+                                )
+                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                        }
+                        ForEach(self.rectData, id:\.self) {cords in
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                .path(in: CGRect(
+                                    x: cords[0]-2,
+                                    y: cords[1]-2,
+                                    width: cords[2]+3,
+                                    height: cords[3]+3
+                                )
+                                )
+                                .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                            //  .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                        } // end of for each loop
+                    }) // end of image overlay and zstack inside it
+                    .gesture(simultaneously)
                 //            } // end of if
                 //                else
                 //                {
@@ -542,7 +530,7 @@ func presentImage(url: URL) -> UIImage{
     
     if url.startAccessingSecurityScopedResource(){
         do{
-//            try url.startAccessingSecurityScopedResource()
+            //            try url.startAccessingSecurityScopedResource()
             data = try Data(contentsOf: url)
             image = UIImage(data: data)!
             print("sucssessfully read image file")
