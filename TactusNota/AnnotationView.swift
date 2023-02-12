@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 //class handleBoxControl: ObservableObject{
 //    @Published var saveCurrentBbox = true
@@ -312,12 +313,7 @@ struct AnnotationView: View {
                         .padding()
                     } // end of Vstack used to put scrolling class selection button
                 } // end of Zstack used to create text on mirror effect
-                //                .blur(radius: 10)
-                
-                //                classList.classNameList[0].load()
-                
-                //                let url = URL(string: classList.classNameList[0])
-                
+    
                 //                Image(uiImage: UIImage(contentsOfFile: classList.classNameList[0])!)
                 //                    .resizable()
                 
@@ -341,7 +337,7 @@ struct AnnotationView: View {
                 
                 //                if !presentImage(url: classList.imageFileList[1])
                 
-                Image(uiImage: presentImage(url: classList.imageFileList[1]))
+                Image(uiImage: presentImage(url: classList.imageFileList[2]))
                     .resizable()
                 
                 ////                AsyncImage(url: classList.imageFileList[0])
@@ -528,18 +524,48 @@ func presentImage(url: URL) -> UIImage{
     var image = UIImage()
     let data: Data
     
-    if url.startAccessingSecurityScopedResource(){
-        do{
-            //            try url.startAccessingSecurityScopedResource()
-            data = try Data(contentsOf: url)
-            image = UIImage(data: data)!
-            print("sucssessfully read image file")
-        } catch {
-            print("Unable to access the image file")
-            data = Data()
+//    let openPanel = NSOpenPanel()
+//    openPanel.allowsMultipleSelection = false
+//    openPanel.canChooseDirectories = false
+//    openPanel.canCreateDirectories = false
+//    openPanel.canChooseFiles = true
+//    let i = openPanel.runModal()
+//    if(i == NSModalResponseOK){
+//        print(openPanel.URL)
+//        let lettersPic = NSImage(contentsOfURL: openPanel.URL!)
+//        print(lettersPic)
+//    }
+    
+    do{
+        guard url.startAccessingSecurityScopedResource() else {
+            // Handle the failure here.
+            print("failure to load the image.")
+            return image
         }
+        
+        defer { url.stopAccessingSecurityScopedResource() }
+        
+        data = try Data(contentsOf: url)
+        image = UIImage(data: data)!
+        print("sucssessfully read image file")
     }
-    url.stopAccessingSecurityScopedResource()
+        catch{
+            print("something")
+        }
+    
+    
+//    if url.startAccessingSecurityScopedResource(){
+//        do{
+//            //            try url.startAccessingSecurityScopedResource()
+//            data = try Data(contentsOf: url)
+//            image = UIImage(data: data)!
+//            print("sucssessfully read image file")
+//        } catch {
+//            print("Unable to access the image file")
+//            data = Data()
+//        }
+//    }
+//    url.stopAccessingSecurityScopedResource()
     return image
 }
 
