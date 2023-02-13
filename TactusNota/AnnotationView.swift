@@ -387,6 +387,7 @@ struct AnnotationView: View {
                         } // end of for each loop
                     }) // end of image overlay and zstack inside it
                     .gesture(simultaneously)
+//                    .onAppear() // load image here
                 //            } // end of if
                 //                else
                 //                {
@@ -522,7 +523,9 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 func presentImage(url: URL) -> UIImage{
     
     var image = UIImage()
+    var imageCopy = UIImage()
     let data: Data
+    
     
 //    let openPanel = NSOpenPanel()
 //    openPanel.allowsMultipleSelection = false
@@ -543,10 +546,17 @@ func presentImage(url: URL) -> UIImage{
             return image
         }
         
-        defer { url.stopAccessingSecurityScopedResource() }
+        defer {
+            DispatchQueue.main.async {
+                url.stopAccessingSecurityScopedResource()
+                }
+            }
         
-        data = try Data(contentsOf: url)
-        image = UIImage(data: data)!
+        image = UIImage(contentsOfFile: url.path)!
+        imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
+        
+//        data = try Data(contentsOf: url)
+//        image = UIImage(data: data)!
         print("sucssessfully read image file")
     }
         catch{
@@ -566,7 +576,7 @@ func presentImage(url: URL) -> UIImage{
 //        }
 //    }
 //    url.stopAccessingSecurityScopedResource()
-    return image
+    return imageCopy
 }
 
 //func incrementTracker(startLocationValue: CGPoint, currentDragPosition: CGPoint){
