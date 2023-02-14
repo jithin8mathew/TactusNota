@@ -538,30 +538,34 @@ func presentImage(url: URL) -> UIImage{
 //        let lettersPic = NSImage(contentsOfURL: openPanel.URL!)
 //        print(lettersPic)
 //    }
-    
-    do{
-        guard url.startAccessingSecurityScopedResource() else {
-            // Handle the failure here.
-            print("failure to load the image.")
-            return image
-        }
-        
-        defer {
-            DispatchQueue.main.async {
-                url.stopAccessingSecurityScopedResource()
+//    extension ProjectImagePicker: UIDocumentPickerDelegate {
+//        public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+            do{
+                guard url.startAccessingSecurityScopedResource() else {
+                    // Handle the failure here.
+                    print("failure to load the image.")
+                    //            return UIImage(Image("portland"))
+                    return image
                 }
+                
+                defer {
+                    DispatchQueue.main.async {
+                        url.stopAccessingSecurityScopedResource()
+                    }
+                }
+                
+                image = UIImage(contentsOfFile: url.path)!
+                imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
+                
+                //        data = try Data(contentsOf: url)
+                //        image = UIImage(data: data)!
+                print("sucssessfully read image file")
             }
-        
-        image = UIImage(contentsOfFile: url.path)!
-        imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
-        
-//        data = try Data(contentsOf: url)
-//        image = UIImage(data: data)!
-        print("sucssessfully read image file")
-    }
-        catch{
-            print("something")
-        }
+            catch{
+                print("something")
+            }
+//        }
+//    }
     
     
 //    if url.startAccessingSecurityScopedResource(){
