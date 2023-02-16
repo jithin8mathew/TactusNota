@@ -520,40 +520,84 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
     }
 }
 
+//extension AnnotationView: UIDocumentPickerDelegate{
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//
+//        var image = UIImage()
+//        var imageCopy = UIImage()
+//        let data: Data
+//
+//        do{
+//            guard url.startAccessingSecurityScopedResource() else {
+//                // Handle the failure here.
+//                print("failure to load the image.")
+//                //            return UIImage(Image("portland"))
+//                return image
+//            }
+//
+//            defer {
+//                DispatchQueue.main.async {
+//                    url.stopAccessingSecurityScopedResource()
+//                }
+//            }
+//
+//            image = UIImage(contentsOfFile: url.path)!
+//            imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
+//
+//            //        data = try Data(contentsOf: url)
+//            //        image = UIImage(data: data)!
+//            print("sucssessfully read image file")
+//        }
+//        catch{
+//            print("something")
+//        }
+//    }
+//}
+
 func presentImage(url: URL) -> UIImage{
     
     var image = UIImage()
     var imageCopy = UIImage()
     let data: Data
     
-//    NSopenpanel is not part of iOS development its in MacOS 
+    do{
+        image = UIImage(contentsOfFile: url.path)!
+        imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
+        print("successfully loaded the image")
+    }catch{
+        print("Error loading image: \(error.localizedDescription)")
+        return UIImage()
+    }
+    
+    
+//    NSopenpanel is not part of iOS development its in MacOS
     
 //    extension ProjectImagePicker: UIDocumentPickerDelegate {
 //        public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-            do{
-                guard url.startAccessingSecurityScopedResource() else {
-                    // Handle the failure here.
-                    print("failure to load the image.")
-                    //            return UIImage(Image("portland"))
-                    return image
-                }
-                
-                defer {
-                    DispatchQueue.main.async {
-                        url.stopAccessingSecurityScopedResource()
-                    }
-                }
-                
-                image = UIImage(contentsOfFile: url.path)!
-                imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
-                
-                //        data = try Data(contentsOf: url)
-                //        image = UIImage(data: data)!
-                print("sucssessfully read image file")
-            }
-            catch{
-                print("something")
-            }
+//            do{
+//                guard url.startAccessingSecurityScopedResource() else {
+//                    // Handle the failure here.
+//                    print("failure to load the image.")
+//                    //            return UIImage(Image("portland"))
+//                    return image
+//                }
+//
+//                defer {
+//                    DispatchQueue.main.async {
+//                        url.stopAccessingSecurityScopedResource()
+//                    }
+//                }
+//
+//                image = UIImage(contentsOfFile: url.path)!
+//                imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
+//
+//                //        data = try Data(contentsOf: url)
+//                //        image = UIImage(data: data)!
+//                print("sucssessfully read image file")
+//            }
+//            catch{
+//                print("something")
+//            }
 //        }
 //    }
     
