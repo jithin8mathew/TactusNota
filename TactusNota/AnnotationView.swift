@@ -526,18 +526,8 @@ func presentImage(url: URL) -> UIImage{
     var imageCopy = UIImage()
     let data: Data
     
+//    NSopenpanel is not part of iOS development its in MacOS 
     
-//    let openPanel = NSOpenPanel()
-//    openPanel.allowsMultipleSelection = false
-//    openPanel.canChooseDirectories = false
-//    openPanel.canCreateDirectories = false
-//    openPanel.canChooseFiles = true
-//    let i = openPanel.runModal()
-//    if(i == NSModalResponseOK){
-//        print(openPanel.URL)
-//        let lettersPic = NSImage(contentsOfURL: openPanel.URL!)
-//        print(lettersPic)
-//    }
 //    extension ProjectImagePicker: UIDocumentPickerDelegate {
 //        public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             do{
