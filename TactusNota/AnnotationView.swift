@@ -561,7 +561,12 @@ func presentImage(url: URL) -> UIImage{
     let data: Data
     
     do{
-        image = UIImage(contentsOfFile: url.path)!
+        print(url.path)
+        print("loading image to data")
+        data = try Data(contentsOf: url)
+        print("loading image from data")
+        image = UIImage(data: data)!
+//        image = UIImage(contentsOfFile: url)!
         imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
         print("successfully loaded the image")
     }catch{
