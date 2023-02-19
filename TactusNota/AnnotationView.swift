@@ -242,6 +242,16 @@ struct AnnotationView: View {
                         .frame(width: 1000, height: 100)
                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     VStack{
+//                        Button(action: {})
+//                            {
+//                            Label("folder", systemImage: "square.grid.3x1.folder.fill.badge.plus")
+//                                .foregroundColor(.white)
+//                                .padding()
+//                                .background(Color.red)
+//                                .cornerRadius(50.0, corners: [.topRight, .bottomRight])
+//                                .padding(.leading, -8)
+//                                .frame(height: 54)
+//                        }
                         HStack{
                             //                            Label("\(classList.classNameList.count)", systemImage: "list.number")
                             Label("\(classList.classNameList.count)", systemImage: "list.number")
@@ -319,6 +329,12 @@ struct AnnotationView: View {
                 
                 Text("\(classList.imageFileList[1].path)")
                 
+                if let image = loadImageFromPath(classList.imageFileList[2].path) {
+//                    print("trying to load the image a new way")
+                    Image(uiImage: image)
+                        .resizable()
+                
+                
 //                if let image = image {
 //                    Image(uiImage: image)
 //                        .resizable()
@@ -350,8 +366,8 @@ struct AnnotationView: View {
                 
                 //                if !presentImage(url: classList.imageFileList[1])
                 
-                Image(uiImage: presentImage(url: classList.imageFileList[2]))
-                    .resizable()
+//                Image(uiImage: presentImage(url: classList.imageFileList[2]))
+//                    .resizable()
                 
                 ////                AsyncImage(url: classList.imageFileList[0])
                 ////                { image in
@@ -413,6 +429,10 @@ struct AnnotationView: View {
                 //                } // enf of else
                 //                    .environmentObject(classList)
                 //            .environmentObject(statusUpdate)
+                }else{
+                    Image("portland")
+                        .resizable()
+                }
             } // end of vstack withing return
         } // end of zstack withing return
     } // end of main body
@@ -573,6 +593,7 @@ func presentImage(url: URL) -> UIImage{
     var imageCopy = UIImage()
     let data: Data
 //    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    
         do{
             print(url.path)
             print("loading image to data")
@@ -635,6 +656,20 @@ func presentImage(url: URL) -> UIImage{
     return imageCopy
 }
 
+
+func loadImageFromPath(_ imagePath: String) -> UIImage? {
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: imagePath) {
+            print("\(imagePath): extists....")
+            if let imageData = fileManager.contents(atPath: imagePath), let image = UIImage(data: imageData) {
+                return image
+            }
+            else{
+                print("Failed to laod image with the new method")
+            }
+        }
+        return nil
+    }
 //func incrementTracker(startLocationValue: CGPoint, currentDragPosition: CGPoint){
 //
 ////    @StateObject var globalCord = GlobalCoordination()
