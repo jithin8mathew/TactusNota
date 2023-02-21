@@ -329,7 +329,8 @@ struct AnnotationView: View {
                 
                 Text("\(classList.imageFileList[1].path)")
                 
-                if let image = loadImageFromPath(classList.imageFileList[2].path) {
+//                if let image = loadImageFromPath(classList.imageFileList[2].path) {
+                if let image = presentImage(url: classList.imageFileList[1]){
 //                    print("trying to load the image a new way")
                     Image(uiImage: image)
                         .resizable()
@@ -593,8 +594,21 @@ func presentImage(url: URL) -> UIImage{
     var imageCopy = UIImage()
     let data: Data
 //    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-    
+    // store the urls in bookmarks and try to access it that way.
         do{
+            
+            guard url.startAccessingSecurityScopedResource() else {
+                print("trying to access image")
+                // Handle the failure here.
+                data = try Data(contentsOf: url)
+                print("loading image from data")
+                image = UIImage(data: data)!
+                return image
+            }
+            
+            // Make sure you release the security-scoped resource when you finish.
+            defer { url.stopAccessingSecurityScopedResource() }
+            
             print(url.path)
             print("loading image to data")
             data = try Data(contentsOf: url)
@@ -657,19 +671,19 @@ func presentImage(url: URL) -> UIImage{
 }
 
 
-func loadImageFromPath(_ imagePath: String) -> UIImage? {
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: imagePath) {
-            print("\(imagePath): extists....")
-            if let imageData = fileManager.contents(atPath: imagePath), let image = UIImage(data: imageData) {
-                return image
-            }
-            else{
-                print("Failed to laod image with the new method")
-            }
-        }
-        return nil
-    }
+//func loadImageFromPath(_ imagePath: String) -> UIImage? {
+//        let fileManager = FileManager.default
+//        if fileManager.fileExists(atPath: imagePath) {
+//            print("\(imagePath): extists....")
+//            if let imageData = fileManager.contents(atPath: imagePath) let image = UIImage(data: imageData) {
+//                return image
+//            }
+//            else{
+//                print("Failed to laod image with the new method")
+//            }
+//        }
+//        return nil
+//    }
 //func incrementTracker(startLocationValue: CGPoint, currentDragPosition: CGPoint){
 //
 ////    @StateObject var globalCord = GlobalCoordination()
