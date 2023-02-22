@@ -330,7 +330,7 @@ struct AnnotationView: View {
                 Text("\(classList.imageFileList[1].path)")
                 
 //                if let image = loadImageFromPath(classList.imageFileList[2].path) {
-                if let image = presentImage(url: classList.imageFileList[1]){
+                if let image = presentImage(url: classList.imageFileList[1], inputImage: image){
 //                    print("trying to load the image a new way")
                     Image(uiImage: image)
                         .resizable()
@@ -588,11 +588,12 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 //    }
 //}
 
-func presentImage(url: URL) -> UIImage{
+func presentImage(url: URL, inputImage: UIImage) -> UIImage{
     
     var image = UIImage()
     var imageCopy = UIImage()
     let data: Data
+
 //    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
     // store the urls in bookmarks and try to access it that way.
         do{
@@ -600,6 +601,7 @@ func presentImage(url: URL) -> UIImage{
             guard url.startAccessingSecurityScopedResource() else {
                 print("trying to access image")
                 // Handle the failure here.
+                ImageDisplayPreview(currentImageSelection: inputImage)
                 data = try Data(contentsOf: url)
                 print("loading image from data")
                 image = UIImage(data: data)!
