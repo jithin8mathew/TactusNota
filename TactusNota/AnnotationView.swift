@@ -601,7 +601,7 @@ func presentImage(url: URL, inputImage: UIImage) -> UIImage{
             guard url.startAccessingSecurityScopedResource() else {
                 print("trying to access image")
                 // Handle the failure here.
-                ImageDisplayPreview(currentImageSelection: inputImage) // replace bind with other var type 
+                ImageDisplayPreview(currentImageSelection: inputImage) // replace bind with other var type
                 data = try Data(contentsOf: url)
                 print("loading image from data")
                 image = UIImage(data: data)!
