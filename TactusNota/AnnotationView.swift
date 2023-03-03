@@ -327,10 +327,10 @@ struct AnnotationView: View {
                 //                Image(uiImage: UIImage(contentsOfFile: classList.classNameList[0])!)
                 //                    .resizable()
                 
-                Text("\(classList.imageFileList[1].path)")
+                Text("\(classList.imageFileList[0].path)")
                 
 //                if let image = loadImageFromPath(classList.imageFileList[2].path) {
-                if let image = presentImage(url: classList.imageFileList[1], inputImage: image){
+                if let image = presentImage(url: classList.imageFileList[0], inputImage: image){
 //                    print("trying to load the image a new way")
                     Image(uiImage: image)
                         .resizable()
@@ -601,7 +601,7 @@ func presentImage(url: URL, inputImage: UIImage) -> UIImage{
             guard url.startAccessingSecurityScopedResource() else {
                 print("trying to access image")
                 // Handle the failure here.
-                ImageDisplayPreview(currentImageSelection: inputImage) // replace bind with other var type
+//                ImageDisplayPreview(currentImageSelection: inputImage) // replace bind with other var type
                 data = try Data(contentsOf: url)
                 print("loading image from data")
                 image = UIImage(data: data)!

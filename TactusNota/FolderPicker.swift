@@ -17,6 +17,7 @@ struct FolderPicker: UIViewControllerRepresentable{
     
     @EnvironmentObject private var bookmarkController: BookmarkController
     @EnvironmentObject private var fileBookmarkController: FileBookmarkController
+    @EnvironmentObject private var imageBookmarkController: ImageBookmarkController
     @Binding var folderContent: String
     @Binding var urlsStorageTest: [URL]
     
@@ -52,7 +53,34 @@ struct FolderPicker: UIViewControllerRepresentable{
                     let urlsStorage = try FileManager.default.contentsOfDirectory(at: urls[0], includingPropertiesForKeys: nil)
                     // currently only supports JPEG and PNG format.
                     let imageFiles = urlsStorage.filter{ $0.pathExtension == "jpg" || $0.pathExtension == "png" }
-                    parent.urlsStorageTest = imageFiles
+//                    parent.urlsStorageTest = imageFiles
+                    
+                    // Experimental
+                    // Creating a new image file (do this in loop to create multiple image files in app's sandbox directory)
+                    guard let documentsDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+                        return
+                    }
+                    let newFileUrl = documentsDirectoryUrl.appendingPathComponent("newImage.jpg")
+
+                    if !FileManager.default.fileExists(atPath: newFileUrl.path) {
+                        FileManager.default.createFile(atPath: newFileUrl.path, contents: nil, attributes: nil)
+                    }
+                    
+                    // repeat this for all images in the directory using loop
+                    if let resourceData = try? Data(contentsOf: imageFiles[0]), let fileHandle = try? FileHandle(forWritingTo: newFileUrl) {
+                        defer {
+                            fileHandle.closeFile()
+                        }
+                        fileHandle.write(resourceData)
+                    }
+                    parent.urlsStorageTest = [newFileUrl]
+
+                    
+                    // End of experimentall
+//                    for imgURL in imageFiles{
+//                        ImageBookmarkController.addBookmark(for: imgURL)
+//                    }
+//                    ImageBookmarkController.addBookmark(for: imageFiles) // Use foreach loop here
 //                    print(urlsStorage.count)
 //                    print(imageFiles.count)
                 } catch let error{
