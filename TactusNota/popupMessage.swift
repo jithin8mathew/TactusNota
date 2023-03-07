@@ -56,6 +56,12 @@ struct popupMessage: View {
     }
 }
 
+//private extension popupMessage{
+//    var icon: some View {
+//        Image(systemName: "info")
+//    }
+//}
+
 struct popupMessage_Previews: PreviewProvider {
     static var previews: some View {
         popupMessage()
