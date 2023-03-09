@@ -13,6 +13,11 @@ struct statusUpdateView: View {
     private var showStatusView = true
     @State private var AnnotationPointDensity: [Int] = [34, 43, 43, 65, 66, 98, 63,12, 53, 95, 66, 34, 66, 89, 94, 29]
     
+    //https://swdevnotes.com/swift/2022/create-a-bar-chart-with-swiftui-charts-in-ios-16/
+//    let annotStat: [annot] = [
+//        annot(customID: 1, annotCount:34)
+//    ]
+    
     var body: some View {
         VStack(spacing: 0){
             Text("Statistics")
