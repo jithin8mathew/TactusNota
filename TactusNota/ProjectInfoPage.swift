@@ -120,6 +120,7 @@ struct ProjectInfoPage: View {
                     
                     Button(action: {
                         showFolderPicker = true
+//                        projectpath = bookmarkController.urls
                         //                                ForEach(bookmarkController.urls, id: \.self) { url in
                         //                                    Text("testing...")
                         //                                    Text(url.lastPathComponent)

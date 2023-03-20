@@ -57,6 +57,7 @@ struct FolderPicker: UIViewControllerRepresentable{
                     
                     // Experimental
                     // Creating a new image file (do this in loop to create multiple image files in app's sandbox directory)
+//                    https://stackoverflow.com/questions/54013155/swift-how-to-copy-files-from-app-bundle-to-documents-folder-when-app-runs-for-f
                     guard let documentsDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                         return
                     }
@@ -77,6 +78,7 @@ struct FolderPicker: UIViewControllerRepresentable{
 
                     
                     // End of experimentall
+                    
 //                    for imgURL in imageFiles{
 //                        ImageBookmarkController.addBookmark(for: imgURL)
 //                    }
