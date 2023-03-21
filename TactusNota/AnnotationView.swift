@@ -135,10 +135,10 @@ struct AnnotationView: View {
                         dragLock = true
                         cordData.append([(value.location.x-startLoc.x),(value.location.y-startLoc.y)])
                         
-                        print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
+//                        print((value.location.x-startLoc.x),(value.location.y-startLoc.y))
                         //                        var a = value.location.x-startLoc.x
                         //                        var b = value.location.y-startLoc.y
-                        print(boxIDVAL,"finally")
+//                        print(boxIDVAL,"finally")
                         //                        print(dragLock)
                         
                         // add previous C1 coordinate to a list to substract from later
@@ -611,14 +611,14 @@ func presentImage(url: URL, inputImage: UIImage) -> UIImage{
             // Make sure you release the security-scoped resource when you finish.
             defer { url.stopAccessingSecurityScopedResource() }
             
-            print(url.path)
-            print("loading image to data")
+//            print(url.path)
+//            print("loading image to data")
             data = try Data(contentsOf: url)
-            print("loading image from data")
+//            print("loading image from data")
             image = UIImage(data: data)!
             //        image = UIImage(contentsOfFile: url)!
             imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
-            print("successfully loaded the image")
+//            print("successfully loaded the image")
         }catch{
             print("Error loading image: \(error.localizedDescription)")
             return UIImage()
