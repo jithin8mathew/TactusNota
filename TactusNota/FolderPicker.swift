@@ -61,20 +61,37 @@ struct FolderPicker: UIViewControllerRepresentable{
                     guard let documentsDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                         return
                     }
-                    let newFileUrl = documentsDirectoryUrl.appendingPathComponent("newImage.jpg")
+                    for imageFile in imageFiles{
+                        let newFileUrl = documentsDirectoryUrl.appendingPathComponent(imageFiles[0].lastPathComponent) // imageFileList[0].
 
-                    if !FileManager.default.fileExists(atPath: newFileUrl.path) {
-                        FileManager.default.createFile(atPath: newFileUrl.path, contents: nil, attributes: nil)
-                    }
-                    
-                    // repeat this for all images in the directory using loop
-                    if let resourceData = try? Data(contentsOf: imageFiles[0]), let fileHandle = try? FileHandle(forWritingTo: newFileUrl) {
-                        defer {
-                            fileHandle.closeFile()
+                        if !FileManager.default.fileExists(atPath: newFileUrl.path) {
+                            FileManager.default.createFile(atPath: newFileUrl.path, contents: nil, attributes: nil)
                         }
-                        fileHandle.write(resourceData)
-                    }
-                    parent.urlsStorageTest = [newFileUrl]
+                        
+                        // repeat this for all images in the directory using loop
+                        if let resourceData = try? Data(contentsOf: imageFiles[0]), let fileHandle = try? FileHandle(forWritingTo: newFileUrl) {
+                            defer {
+                                fileHandle.closeFile()
+                            }
+                            fileHandle.write(resourceData)
+                        }
+                        parent.urlsStorageTest.append(newFileUrl)
+
+                    } // end of experimental for loop
+//                    let newFileUrl = documentsDirectoryUrl.appendingPathComponent(imageFiles[0].lastPathComponent) // imageFileList[0].
+//
+//                    if !FileManager.default.fileExists(atPath: newFileUrl.path) {
+//                        FileManager.default.createFile(atPath: newFileUrl.path, contents: nil, attributes: nil)
+//                    }
+//
+//                    // repeat this for all images in the directory using loop
+//                    if let resourceData = try? Data(contentsOf: imageFiles[0]), let fileHandle = try? FileHandle(forWritingTo: newFileUrl) {
+//                        defer {
+//                            fileHandle.closeFile()
+//                        }
+//                        fileHandle.write(resourceData)
+//                    }
+//                    parent.urlsStorageTest = [newFileUrl] // this needs to be edited to pass image list from app's sandbox directory.
 
                     
                     // End of experimentall
