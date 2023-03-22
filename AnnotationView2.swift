@@ -65,6 +65,7 @@ struct AnnotationView2: View {
     // handling annotation quick settings
     @State private var showQuickSettings = false
     
+    // hovering effect to display pointer, improve user experience. 
     @State private var isHovering = false
     @State private var hoverLocation: CGPoint = .zero
     
