@@ -29,7 +29,10 @@ struct AnnotationQuickSettingsPopUp: View {
             
             Text("Toggle grid for image")
                 .foregroundColor(.white)
-            Text("Use apple pencil toogle, ture by default")
+            // https://developer.apple.com/videos/play/wwdc2020/10107/
+            Text("Use apple pencil toogle or draw with finger toggle, ture by default")
+                .foregroundColor(.white)
+            Text("Use apple pencil and renderbounds to draw bounding box")
                 .foregroundColor(.white)
             HStack{
                 Button(action: {}
