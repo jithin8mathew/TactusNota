@@ -65,6 +65,9 @@ struct AnnotationView2: View {
     // handling annotation quick settings
     @State private var showQuickSettings = false
     
+    @State private var isHovering = false
+    @State private var hoverLocation: CGPoint = .zero
+    
     var body: some View {
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
             .updating($isLongPressing) { currentState, gestureState,
@@ -190,6 +193,7 @@ struct AnnotationView2: View {
                                 .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 .padding()
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+//                                .frame(width: 30, height: 30, alignment: .center)
                             
                             // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-text-and-an-icon-side-by-side-using-label
                             Label("\(rectData.count)", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
@@ -244,7 +248,7 @@ struct AnnotationView2: View {
                                         .foregroundColor(.white)
                                         .padding(.all,3)
                                         .cornerRadius(50)
-                                        .frame(width:40, height: 40, alignment: .center)
+                                        .frame(width:25, height: 25, alignment: .center)
                                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                     }
                                 Button(action:{}){
@@ -253,7 +257,7 @@ struct AnnotationView2: View {
                                         .foregroundColor(.white)
                                         .padding(.all,3)
                                         .cornerRadius(50)
-                                        .frame(width:40, height: 40, alignment: .center)
+                                        .frame(width:25, height: 25, alignment: .center)
                                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                 }
                             }
@@ -266,7 +270,7 @@ struct AnnotationView2: View {
                                     .resizable()
                                     .foregroundColor(.white)
                                     .padding(.all,5)
-                                    .frame(width:40, height: 40, alignment: .center)
+                                    .frame(width:25, height: 25, alignment: .center)
                                     .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                     
                             }
@@ -278,6 +282,7 @@ struct AnnotationView2: View {
                             .background(Color(red: 0.21, green: 0.21, blue: 0.21))
                             .cornerRadius(35)
                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                            .help(Text("Clear all the annotations"))
                         } // end of Hstack
                         
                         // https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-horizontal-and-vertical-scrolling-using-scrollview
@@ -307,6 +312,16 @@ struct AnnotationView2: View {
                 if let image = presentImage(url: classList.imageFileList[0], inputImage: image){
                     Image(uiImage: image)
                         .resizable()
+                        .onContinuousHover { phase in
+                                        switch phase {
+                                        case .active(let location):
+                                            hoverLocation = location
+                                            print("\(hoverLocation.x)")
+                                            isHovering = true
+                                        case .ended:
+                                            isHovering = false
+                                        }
+                                    }
                         .overlay(ZStack{
                             if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
                                 RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -330,8 +345,19 @@ struct AnnotationView2: View {
                                     )
                                     .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
                             } // end of for each loop
-                        }) // end of image overlay and zstack inside it
+                            if isHovering{
+                                Circle()
+                                    .fill(.white)
+                                    .opacity(1.5)
+                                    .frame(width: 30, height: 30)
+                                    .position(x: hoverLocation.x, y: hoverLocation.y)
+                                    }
+                        } // end of zstack
+                        ) // end of image overlay and zstack inside it
                         .gesture(simultaneously)
+//                        .onHover{hover in
+//                            isHovering=hover
+//                                }
                 }else{
                     Image("portland")
                         .resizable()
