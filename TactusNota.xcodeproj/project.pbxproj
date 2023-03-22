@@ -37,7 +37,9 @@
 		B676274F28BD46D900CCBCF9 /* testViewNew2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274E28BD46D900CCBCF9 /* testViewNew2.swift */; };
 		B676275128BFCA5600CCBCF9 /* finalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676275028BFCA5600CCBCF9 /* finalView.swift */; };
 		B676275328CFD36B00CCBCF9 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676275228CFD36B00CCBCF9 /* AnnotationView.swift */; };
+		B685E7FE29CAC33800105BFB /* AnnotationQuickSettingsPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685E7FD29CAC33800105BFB /* AnnotationQuickSettingsPopUp.swift */; };
 		B6AF0E862891DA9E000F7112 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF0E852891DA9E000F7112 /* testView.swift */; };
+		B6C19F6129CA0E8700933944 /* AnnotationView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C19F6029CA0E8700933944 /* AnnotationView2.swift */; };
 		B6DE7B70285FC93C003A2191 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE7B6F285FC93C003A2191 /* ImagePicker.swift */; };
 		B6DE7B72285FCEB4003A2191 /* AnnotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE7B71285FCEB4003A2191 /* AnnotationViewModel.swift */; };
 		B6DE7B742860C110003A2191 /* AnnotationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DE7B732860C110003A2191 /* AnnotationScreen.swift */; };
@@ -83,7 +85,9 @@
 		B676274E28BD46D900CCBCF9 /* testViewNew2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewNew2.swift; sourceTree = "<group>"; };
 		B676275028BFCA5600CCBCF9 /* finalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = finalView.swift; sourceTree = "<group>"; };
 		B676275228CFD36B00CCBCF9 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		B685E7FD29CAC33800105BFB /* AnnotationQuickSettingsPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationQuickSettingsPopUp.swift; sourceTree = "<group>"; };
 		B6AF0E852891DA9E000F7112 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
+		B6C19F6029CA0E8700933944 /* AnnotationView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView2.swift; sourceTree = "<group>"; };
 		B6DE7B6F285FC93C003A2191 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		B6DE7B71285FCEB4003A2191 /* AnnotationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewModel.swift; sourceTree = "<group>"; };
 		B6DE7B732860C110003A2191 /* AnnotationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationScreen.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
+				B6C19F6029CA0E8700933944 /* AnnotationView2.swift */,
 				B633172D29A4B59700F3A631 /* imageViewModel.swift */,
 				B633172B29A1DCE200F3A631 /* ImageDisplayPreview.swift */,
 				B633171C2982589E00F3A631 /* FileBookmarkController.swift */,
@@ -150,6 +155,7 @@
 				B631C4772787A25A00A5216A /* ContentView.swift */,
 				B676275228CFD36B00CCBCF9 /* AnnotationView.swift */,
 				B633173329B65BF300F3A631 /* popupMessage.swift */,
+				B685E7FD29CAC33800105BFB /* AnnotationQuickSettingsPopUp.swift */,
 				B633173529B7C9CC00F3A631 /* statusUpdateView.swift */,
 				B6DE7B6F285FC93C003A2191 /* ImagePicker.swift */,
 				B6DE7B71285FCEB4003A2191 /* AnnotationViewModel.swift */,
@@ -265,6 +271,7 @@
 				B6AF0E862891DA9E000F7112 /* testView.swift in Sources */,
 				B6EB295A2918DB780049A7DD /* image_picker.swift in Sources */,
 				B633171D2982589E00F3A631 /* FileBookmarkController.swift in Sources */,
+				B685E7FE29CAC33800105BFB /* AnnotationQuickSettingsPopUp.swift in Sources */,
 				B676275328CFD36B00CCBCF9 /* AnnotationView.swift in Sources */,
 				B6DE7B70285FC93C003A2191 /* ImagePicker.swift in Sources */,
 				B676275128BFCA5600CCBCF9 /* finalView.swift in Sources */,
@@ -273,6 +280,7 @@
 				B6116D44291A45AC00123494 /* load_project.swift in Sources */,
 				B631C4782787A25A00A5216A /* ContentView.swift in Sources */,
 				B633173029B110DE00F3A631 /* ImageBookmarkController.swift in Sources */,
+				B6C19F6129CA0E8700933944 /* AnnotationView2.swift in Sources */,
 				B6116D46291EE46100123494 /* filePicker.swift in Sources */,
 				B633173629B7C9CC00F3A631 /* statusUpdateView.swift in Sources */,
 				B6116D4A2939C4FA00123494 /* Item.swift in Sources */,

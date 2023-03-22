@@ -116,6 +116,9 @@ struct ProjectInfoPage: View {
                         .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                         .cornerRadius(50.0, corners: [.topLeft, .bottomLeft])
                         .frame(width: 500, height: 50, alignment: .leading)
+//                        .onChange(of: folderc_main){
+//                            self.projectpath == "folder xyz selected"
+//                        }
 //                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                     
                     Button(action: {
@@ -138,6 +141,10 @@ struct ProjectInfoPage: View {
                         // TODO: show a document picker here
                         FolderPicker(folderContent: $folderContent_main, urlsStorageTest: $folderc_main)
                     }
+//                    if ($folderc_main != []){
+//                        self.projectpath = bookmarkController.urls[0]
+//                    }
+                    
                     //                            .background(Color(red: 0.26, green: 0.26, blue: 0.26))
                 }
                 .frame(alignment: .center)
@@ -279,7 +286,7 @@ struct ProjectInfoPage: View {
                 
                 Spacer()
                 // https://www.hackingwithswift.com/forums/swiftui/environmentobject-passing-array-elements-to-subview-and-ondelete/2607
-                NavigationLink(destination: AnnotationView().environmentObject(classList), isActive: self.$isAnnotationActive) {
+                NavigationLink(destination: AnnotationView2().environmentObject(classList), isActive: self.$isAnnotationActive) {
                     Button(action: {
                         classList.imageFileList = folderc_main // pass the data to next view 
                         

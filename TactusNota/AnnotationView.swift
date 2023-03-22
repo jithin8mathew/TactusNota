@@ -86,6 +86,8 @@ struct AnnotationView: View {
     @State private var image2 = UIImage(systemName: "xmark")! // this is the main variable that holds the to be annotated image
     @State private var image = UIImage()
     
+//    @AppStorage("STRING_KEY") var annotation_coordinates = [] // we know that appstorage cannot be directly used to store coordinates. 
+    
     var body: some View {
         //        ZStack{
         //            Color(red: 0.26, green: 0.26, blue: 0.26)
