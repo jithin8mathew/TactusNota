@@ -65,9 +65,9 @@ struct AnnotationView2: View {
     // handling annotation quick settings
     @State private var showQuickSettings = false
     
-    // hovering effect to display pointer, improve user experience. 
-    @State private var isHovering = false
-    @State private var hoverLocation: CGPoint = .zero
+    // hovering effect to display pointer, improve user experience.
+//    @State private var isHovering = false
+//    @State private var hoverLocation: CGPoint = .zero
     
     var body: some View {
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
@@ -313,16 +313,16 @@ struct AnnotationView2: View {
                 if let image = presentImage(url: classList.imageFileList[0], inputImage: image){
                     Image(uiImage: image)
                         .resizable()
-                        .onContinuousHover { phase in
-                                        switch phase {
-                                        case .active(let location):
-                                            hoverLocation = location
-                                            print("\(hoverLocation.x)")
-                                            isHovering = true
-                                        case .ended:
-                                            isHovering = false
-                                        }
-                                    }
+//                        .onContinuousHover { phase in // https://nilcoalescing.com/blog/TrackingHoverLocationInSwiftUI/
+//                                        switch phase {
+//                                        case .active(let location):
+//                                            hoverLocation = location
+//                                            print("\(hoverLocation.x)")
+//                                            isHovering = true
+//                                        case .ended:
+//                                            isHovering = false
+//                                        }
+//                                    }
                         .overlay(ZStack{
                             if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
                                 RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -346,13 +346,13 @@ struct AnnotationView2: View {
                                     )
                                     .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
                             } // end of for each loop
-                            if isHovering{
-                                Circle()
-                                    .fill(.white)
-                                    .opacity(1.5)
-                                    .frame(width: 30, height: 30)
-                                    .position(x: hoverLocation.x, y: hoverLocation.y)
-                                    }
+//                            if isHovering{
+//                                Circle()
+//                                    .fill(.white)
+//                                    .opacity(1.5)
+//                                    .frame(width: 30, height: 30)
+//                                    .position(x: hoverLocation.x, y: hoverLocation.y)
+//                                    }
                         } // end of zstack
                         ) // end of image overlay and zstack inside it
                         .gesture(simultaneously)

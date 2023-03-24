@@ -9,7 +9,13 @@ import SwiftUI
 
 struct AnnotationQuickSettingsPopUp: View {
     
+    @State private var showAnnotationQuickSettingsPopUp = true
     @State public var autoSaveAnnotations = true
+    @State private var toggleGrid = false
+    @State private var togglePencilOnly = true
+    @State private var toggleHoverMark = true
+    @State private var toggleDeleteOnSwipe = true
+    
     var body: some View {
         VStack(spacing: 0){
             Image(systemName: "gear")
@@ -21,11 +27,47 @@ struct AnnotationQuickSettingsPopUp: View {
             Text("Quick preferences")
                 .foregroundColor(.white)
             //                .font(.custom("Playfair Display", fixedSize: 15))
-            
-            Toggle("Auto Save",isOn: $autoSaveAnnotations)
-                .font(.title)
+            Group{
+                // turnoff autosave
+                Toggle(isOn: $autoSaveAnnotations, label: {
+                    Label("Auto Save", systemImage: "filemenu.and.selection")
+                })
+                .toggleStyle(SwitchToggleStyle())
                 .foregroundColor(.white)
-                .padding(20)
+                .padding()
+                
+                // turn on grid for each image for easier annotation
+                Toggle(isOn: $toggleGrid, label: {
+                    Label("Grid", systemImage: "squareshape.split.3x3")
+                })
+                .toggleStyle(SwitchToggleStyle())
+                .foregroundColor(.white)
+                .padding()
+                
+                Toggle(isOn: $togglePencilOnly, label: {
+                    Label("Apple Pencil Only", systemImage: "applepencil")
+                })
+                .toggleStyle(SwitchToggleStyle())
+                .foregroundColor(.white)
+                .padding()
+                
+                Toggle(isOn: $toggleHoverMark, label: {
+                    Label("Hover Mark", systemImage: "cursorarrow.rays")
+                })
+                .toggleStyle(SwitchToggleStyle())
+                .foregroundColor(.white)
+                .padding()
+                
+                // delete images on swipe up
+                Toggle(isOn: $toggleDeleteOnSwipe, label: {
+                    Label("Delete On Swipe", systemImage: "arrow.up")
+                })
+                .toggleStyle(SwitchToggleStyle())
+                .foregroundColor(.white)
+                .padding()
+
+            }
+            
             
             Text("Toggle grid for image")
                 .foregroundColor(.white)
@@ -35,36 +77,39 @@ struct AnnotationQuickSettingsPopUp: View {
             Text("Use apple pencil and renderbounds to draw bounding box")
                 .foregroundColor(.white)
             HStack{
-                Button(action: {}
+                Button(action: {
+                    showAnnotationQuickSettingsPopUp.toggle()
+                }
                 ){
-                    Label("Accept", systemImage: "checkmark.circle")
+                    Label("Close", systemImage: "xmark.circle")
                         .foregroundColor(.black)
                         .padding()
                         .background(Color.yellow)
-                        .cornerRadius(50.0, corners: [.topLeft, .bottomLeft])
+                        .cornerRadius(50.0)
                         .padding(.leading, -8)
                         .frame(height: 54)
                 }
                 
-                Button(action: {}
-                ){
-                    Label("Decline", systemImage: "multiply.circle")
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(Color.green)
-                        .cornerRadius(50.0, corners: [.topRight, .bottomRight])
-                        .padding(.leading, -8)
-                        .frame(height: 54)
-                }
+//                Button(action: {}
+//                ){
+//                    Label("Decline", systemImage: "multiply.circle")
+//                        .foregroundColor(.black)
+//                        .padding()
+//                        .background(Color.green)
+//                        .cornerRadius(50.0, corners: [.topRight, .bottomRight])
+//                        .padding(.leading, -8)
+//                        .frame(height: 54)
+//                }
             } // end of button Hstack
             .padding()
             .shadow(color: Color(red: 0.36, green: 0.36, blue: 0.36), radius: 8, x: 5, y: 5)
         } // End of Vstack
-        .padding()
+        .padding(.all, 10)
         .multilineTextAlignment(.center)
-        .background(.red)
+        .background(LinearGradient(gradient: Gradient(colors: [.purple, .pink, .red]), startPoint: .leading, endPoint: .trailing))
         .cornerRadius(10)
         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 15, x: 5, y: 5)
+        .frame(minWidth: 400, maxWidth: 550, minHeight: 700, maxHeight: 1600)
         
     }
 }
