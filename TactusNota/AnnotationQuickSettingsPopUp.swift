@@ -28,6 +28,7 @@ struct AnnotationQuickSettingsPopUp: View {
                 .foregroundColor(.white)
             //                .font(.custom("Playfair Display", fixedSize: 15))
             Group{
+                // https://www.swiftanytime.com/blog/toggle-in-swiftui
                 // turnoff autosave
                 Toggle(isOn: $autoSaveAnnotations, label: {
                     Label("Auto Save", systemImage: "filemenu.and.selection")
@@ -44,6 +45,7 @@ struct AnnotationQuickSettingsPopUp: View {
                 .foregroundColor(.white)
                 .padding()
                 
+                // let user select between apple pencil and finger for annotation
                 Toggle(isOn: $togglePencilOnly, label: {
                     Label("Apple Pencil Only", systemImage: "applepencil")
                 })
@@ -51,6 +53,7 @@ struct AnnotationQuickSettingsPopUp: View {
                 .foregroundColor(.white)
                 .padding()
                 
+                // hover mark used to enhance anntation by hovering the pencil
                 Toggle(isOn: $toggleHoverMark, label: {
                     Label("Hover Mark", systemImage: "cursorarrow.rays")
                 })
@@ -60,15 +63,13 @@ struct AnnotationQuickSettingsPopUp: View {
                 
                 // delete images on swipe up
                 Toggle(isOn: $toggleDeleteOnSwipe, label: {
-                    Label("Delete On Swipe", systemImage: "arrow.up")
+                    Label("Delete On Swipe Up", systemImage: "arrow.up")
                 })
                 .toggleStyle(SwitchToggleStyle())
                 .foregroundColor(.white)
                 .padding()
-
+                
             }
-            
-            
             Text("Toggle grid for image")
                 .foregroundColor(.white)
             // https://developer.apple.com/videos/play/wwdc2020/10107/
@@ -90,16 +91,6 @@ struct AnnotationQuickSettingsPopUp: View {
                         .frame(height: 54)
                 }
                 
-//                Button(action: {}
-//                ){
-//                    Label("Decline", systemImage: "multiply.circle")
-//                        .foregroundColor(.black)
-//                        .padding()
-//                        .background(Color.green)
-//                        .cornerRadius(50.0, corners: [.topRight, .bottomRight])
-//                        .padding(.leading, -8)
-//                        .frame(height: 54)
-//                }
             } // end of button Hstack
             .padding()
             .shadow(color: Color(red: 0.36, green: 0.36, blue: 0.36), radius: 8, x: 5, y: 5)
