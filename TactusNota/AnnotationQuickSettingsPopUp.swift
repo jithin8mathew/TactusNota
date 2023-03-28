@@ -94,13 +94,14 @@ struct AnnotationQuickSettingsPopUp: View {
             } // end of button Hstack
             .padding()
             .shadow(color: Color(red: 0.36, green: 0.36, blue: 0.36), radius: 8, x: 5, y: 5)
+            
         } // End of Vstack
         .padding(.all, 10)
         .multilineTextAlignment(.center)
         .background(LinearGradient(gradient: Gradient(colors: [.purple, .pink, .red]), startPoint: .leading, endPoint: .trailing))
         .cornerRadius(10)
         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 15, x: 5, y: 5)
-        .frame(minWidth: 400, maxWidth: 550, minHeight: 700, maxHeight: 1600)
+        .frame(minWidth: 400, maxWidth: 850, minHeight: 700, maxHeight: 1600)
         
     }
 }

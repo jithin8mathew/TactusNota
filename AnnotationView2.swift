@@ -58,7 +58,8 @@ struct AnnotationView2: View {
     @State private var image = UIImage()
     
     @AppStorage("ANNOTATION_COORDINATES") var annotation_coordinates: Data = Data() // we know that appstorage cannot be directly used to store coordinates.
-    
+
+    @State private var isShowingDialog = false
     // handling apple pencil input
 //    var estimates : [NSNumber : StrokeSample]
     
@@ -231,7 +232,42 @@ struct AnnotationView2: View {
                             } // end of vStack which is not used really
                             
                             // add a quick clear button
+                            
+//                            Button(action: {
+//                                isShowingDialog = true
+//                            }){
+//                                Text("Clear")
+//                                    .foregroundColor(.white)
+//                                    .padding()
+//                                    .background(Color.red)
+//                                    .cornerRadius(50)
+//                            }
+                            Button("Empty Trash") {
+                                isShowingDialog = true
+                            }
+                            .confirmationDialog(
+                                "Cear Annotations?",
+                                isPresented: $isShowingDialog
+                            ) {
+                                Button("Clear", role: .destructive) {
+                                    rectData = []
+                                    // Handle empty trash action.
+                    //                clear_annotations = true
+                                }
+                                Button("Cancel", role: .cancel) {
+                                    isShowingDialog = false
+                                }
+                            }
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(50)
+                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                            
+                            
                             Button(action: {
+                                
+//                                ConfirmEraseItems(title: "Clear Annotations?")
                                 rectData=[]
                             }){
                                 Text("Clear")
@@ -506,6 +542,29 @@ class Storage: NSObject {
 //            return UIImage()
 //        }
 //    return image
+//}
+
+//struct ConfirmEraseItems: View {
+//    @State private var isShowingDialog = false
+//
+//    var title: String
+//    var body: some View {
+//        Button("Empty Trash") {
+//            isShowingDialog = true
+//        }
+//        .confirmationDialog(
+//            title,
+//            isPresented: $isShowingDialog
+//        ) {
+//            Button("Clear", role: .destructive) {
+//                // Handle empty trash action.
+////                clear_annotations = true
+//            }
+//            Button("Cancel", role: .cancel) {
+//                isShowingDialog = false
+//            }
+//        }
+//    }
 //}
 
 struct AnnotationView2_Previews: PreviewProvider {
