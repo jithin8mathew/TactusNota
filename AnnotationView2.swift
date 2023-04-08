@@ -70,6 +70,10 @@ struct AnnotationView2: View {
 //    @State private var isHovering = false
 //    @State private var hoverLocation: CGPoint = .zero
     
+    // this section of the code is highly experimental and will handle multiple image swipe from folder
+    // A main counter needs to be added which will be used to update the current image the user is working on. This image needs to be stored in a global var shared and saved as a bookmark.
+    @State private var annotation_progress_tracker = 0
+    
     var body: some View {
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
             .updating($isLongPressing) { currentState, gestureState,
@@ -346,7 +350,7 @@ struct AnnotationView2: View {
                 Text("\(classList.imageFileList[0].path)")
                 Text("\(annotation_coordinates.count)")
                 
-                if let image = presentImage(url: classList.imageFileList[0], inputImage: image){
+                if let image = presentImage(url: classList.imageFileList[annotation_progress_tracker], inputImage: image){
                     Image(uiImage: image)
                         .resizable()
 //                        .onContinuousHover { phase in // https://nilcoalescing.com/blog/TrackingHoverLocationInSwiftUI/
