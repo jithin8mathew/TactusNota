@@ -218,17 +218,17 @@ struct AnnotationView2: View {
                             VStack{
                                 // https://www.appcoda.com/swiftui-gauge/
                                 // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
-                                Gauge(value: current, in: minValue...Double(classList.imageFileList.count)) {
+                                Gauge(value: current, in: minValue...Double(annotation_progress_tracker)) {
                                     Image(systemName: "heart.fill")
                                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 } currentValueLabel: {
-                                    Text("\(Int(classList.imageFileList.count - 1))")
+                                    Text("\(Int(annotation_progress_tracker))")
                                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 } minimumValueLabel: {
                                     Text("")
                                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 } maximumValueLabel: {
-                                    Text("\(Int(classList.imageFileList.count))")
+                                    Text("\(Int(classList.imageFileList.count - 1))")
                                         .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 }
                                 .gaugeStyle(.accessoryCircular)
@@ -287,6 +287,7 @@ struct AnnotationView2: View {
                                     if annotation_progress_tracker != 0 {
                                         annotation_progress_tracker -= 1
                                         print("annotion tracker progress no \(annotation_progress_tracker)")
+                                        image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
                                     }
                                 }){
                                     Image(systemName:"arrow.uturn.backward.circle")
@@ -300,6 +301,7 @@ struct AnnotationView2: View {
                                 Button(action:{
                                     annotation_progress_tracker += 1
                                     print("annotion tracker progress no \(annotation_progress_tracker)")
+                                    image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
                                 }){
                                     Image(systemName:"arrow.uturn.forward.circle")
                                         .resizable()
@@ -355,8 +357,8 @@ struct AnnotationView2: View {
                     } // end of Vstack used to put scrolling class selection button
                 } // end of Zstack used to create text on mirror effect
                 
-                Text("\(classList.imageFileList[0].path)")
-                Text("\(annotation_coordinates.count)")
+                Text("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)")
+//                Text("\(annotation_coordinates.count)")
                 
                 HStack{
 //                    Button(action:{
@@ -373,9 +375,9 @@ struct AnnotationView2: View {
 //                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
 //                        }
                     
-                    let image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
-                    if image != nil {
-                        Image(uiImage: image)
+//                    let image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
+//                    if image != nil {
+                        Image(uiImage: presentImage(url: classList.imageFileList[annotation_progress_tracker]))
                             .resizable()
                         //                        .onContinuousHover { phase in // https://nilcoalescing.com/blog/TrackingHoverLocationInSwiftUI/
                         //                                        switch phase {
@@ -424,11 +426,12 @@ struct AnnotationView2: View {
                         //                        .onHover{hover in
                         //                            isHovering=hover
                         //                                }
-                    }else{
-                        Image("portland")
-                            .resizable()
-                            .padding(.all, 10)
-                    }
+//                    }
+//                    else{
+//                        Image("portland")
+//                            .resizable()
+//                            .padding(.all, 10)
+//                    }
                     
 //                    Button(action:{
 //                        self.annotation_progress_tracker += 1
