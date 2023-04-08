@@ -283,7 +283,12 @@ struct AnnotationView2: View {
                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                             
                             VStack{ // Vstack for undo and redo-button
-                                Button(action:{}){
+                                Button(action:{
+                                    if annotation_progress_tracker != 0 {
+                                        annotation_progress_tracker -= 1
+                                        print("annotion tracker progress no \(annotation_progress_tracker)")
+                                    }
+                                }){
                                     Image(systemName:"arrow.uturn.backward.circle")
                                         .resizable()
                                         .foregroundColor(.white)
@@ -292,7 +297,10 @@ struct AnnotationView2: View {
                                         .frame(width:25, height: 25, alignment: .center)
                                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                     }
-                                Button(action:{}){
+                                Button(action:{
+                                    annotation_progress_tracker += 1
+                                    print("annotion tracker progress no \(annotation_progress_tracker)")
+                                }){
                                     Image(systemName:"arrow.uturn.forward.circle")
                                         .resizable()
                                         .foregroundColor(.white)
@@ -350,59 +358,90 @@ struct AnnotationView2: View {
                 Text("\(classList.imageFileList[0].path)")
                 Text("\(annotation_coordinates.count)")
                 
-                if let image = presentImage(url: classList.imageFileList[annotation_progress_tracker], inputImage: image){
-                    Image(uiImage: image)
-                        .resizable()
-//                        .onContinuousHover { phase in // https://nilcoalescing.com/blog/TrackingHoverLocationInSwiftUI/
-//                                        switch phase {
-//                                        case .active(let location):
-//                                            hoverLocation = location
-//                                            print("\(hoverLocation.x)")
-//                                            isHovering = true
-//                                        case .ended:
-//                                            isHovering = false
-//                                        }
-//                                    }
-                        .overlay(ZStack{
-                            if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                                RoundedRectangle(cornerRadius: 5, style: .circular)
-                                    .path(in: CGRect(
-                                        x: (startLoc.x), // +  dragState.translation.width,
-                                        y: (startLoc.y), // + dragState.translation.height,
-                                        width: contWidth,
-                                        height: contHeight
-                                    )
-                                    )
-                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                            }
-                            ForEach(self.rectData, id:\.self) {cords in
-                                RoundedRectangle(cornerRadius: 5, style: .circular)
-                                    .path(in: CGRect(
-                                        x: cords[0]-2,
-                                        y: cords[1]-2,
-                                        width: cords[2]+3,
-                                        height: cords[3]+3
-                                    )
-                                    )
-                                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                            } // end of for each loop
-//                            if isHovering{
-//                                Circle()
-//                                    .fill(.white)
-//                                    .opacity(1.5)
-//                                    .frame(width: 30, height: 30)
-//                                    .position(x: hoverLocation.x, y: hoverLocation.y)
-//                                    }
-                        } // end of zstack
-                        ) // end of image overlay and zstack inside it
-                        .gesture(simultaneously)
-//                        .onHover{hover in
-//                            isHovering=hover
-//                                }
-                }else{
-                    Image("portland")
-                        .resizable()
-                }
+                HStack{
+//                    Button(action:{
+//                        if annotation_progress_tracker != 0{
+//                            self.annotation_progress_tracker -= 1
+//                        }
+//                    }){
+//                        Image(systemName:"arrow.uturn.backward.circle")
+//                            .resizable()
+//                            .foregroundColor(.white)
+//                            .padding(.all,3)
+//                            .cornerRadius(50)
+//                            .frame(width:25, height: 25, alignment: .center)
+//                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+//                        }
+                    
+                    let image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
+                    if image != nil {
+                        Image(uiImage: image)
+                            .resizable()
+                        //                        .onContinuousHover { phase in // https://nilcoalescing.com/blog/TrackingHoverLocationInSwiftUI/
+                        //                                        switch phase {
+                        //                                        case .active(let location):
+                        //                                            hoverLocation = location
+                        //                                            print("\(hoverLocation.x)")
+                        //                                            isHovering = true
+                        //                                        case .ended:
+                        //                                            isHovering = false
+                        //                                        }
+                        //                                    }
+                            .overlay(ZStack{
+                                if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                                        .path(in: CGRect(
+                                            x: (startLoc.x), // +  dragState.translation.width,
+                                            y: (startLoc.y), // + dragState.translation.height,
+                                            width: contWidth,
+                                            height: contHeight
+                                        )
+                                        )
+                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                }
+                                ForEach(self.rectData, id:\.self) {cords in
+                                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                                        .path(in: CGRect(
+                                            x: cords[0]-2,
+                                            y: cords[1]-2,
+                                            width: cords[2]+3,
+                                            height: cords[3]+3
+                                        )
+                                        )
+                                        .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                                } // end of for each loop
+                                //                            if isHovering{
+                                //                                Circle()
+                                //                                    .fill(.white)
+                                //                                    .opacity(1.5)
+                                //                                    .frame(width: 30, height: 30)
+                                //                                    .position(x: hoverLocation.x, y: hoverLocation.y)
+                                //                                    }
+                            } // end of zstack
+                            ) // end of image overlay and zstack inside it
+                            .gesture(simultaneously)
+                            .padding(.all, 10)
+                        //                        .onHover{hover in
+                        //                            isHovering=hover
+                        //                                }
+                    }else{
+                        Image("portland")
+                            .resizable()
+                            .padding(.all, 10)
+                    }
+                    
+//                    Button(action:{
+//                        self.annotation_progress_tracker += 1
+//                    }){
+//                        Image(systemName:"arrow.uturn.forward.circle")
+//                            .resizable()
+//                            .foregroundColor(.white)
+//                            .padding(.all,3)
+//                            .cornerRadius(50)
+//                            .frame(width:25, height: 25, alignment: .center)
+//                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+//                        }
+                } // end of hstack that holds the image and image changing buttons
             } // end of vstack withing return
         } // end of zstack withing return
     } // end of main body

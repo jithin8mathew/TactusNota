@@ -86,6 +86,8 @@ struct AnnotationView: View {
     @State private var image2 = UIImage(systemName: "xmark")! // this is the main variable that holds the to be annotated image
     @State private var image = UIImage()
     
+    @State private var annotation_progress_tracker = 0
+    
 //    @AppStorage("STRING_KEY") var annotation_coordinates = [] // we know that appstorage cannot be directly used to store coordinates. 
     
     var body: some View {
@@ -332,7 +334,10 @@ struct AnnotationView: View {
                 Text("\(classList.imageFileList[0].path)")
                 
 //                if let image = loadImageFromPath(classList.imageFileList[2].path) {
-                if let image = presentImage(url: classList.imageFileList[0], inputImage: image){
+//                if let image = presentImage(url: classList.imageFileList[0]){
+                
+                let image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
+                if image != nil {
 //                    print("trying to load the image a new way")
                     Image(uiImage: image)
                         .resizable()
@@ -590,7 +595,7 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 //    }
 //}
 
-func presentImage(url: URL, inputImage: UIImage) -> UIImage{
+func presentImage(url: URL) -> UIImage{
     
     var image = UIImage()
     var imageCopy = UIImage()
@@ -623,7 +628,7 @@ func presentImage(url: URL, inputImage: UIImage) -> UIImage{
 //            print("successfully loaded the image")
         }catch{
             print("Error loading image: \(error.localizedDescription)")
-            return UIImage()
+            return imageCopy
         }
 //    }
     
