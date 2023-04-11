@@ -80,6 +80,7 @@ struct AnnotationQuickSettingsPopUp: View {
             HStack{
                 Button(action: {
                     showAnnotationQuickSettingsPopUp.toggle()
+                    print(showAnnotationQuickSettingsPopUp)
                 }
                 ){
                     Label("Close", systemImage: "xmark.circle")

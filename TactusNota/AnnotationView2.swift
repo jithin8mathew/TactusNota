@@ -58,17 +58,17 @@ struct AnnotationView2: View {
     @State private var image = UIImage()
     
     @AppStorage("ANNOTATION_COORDINATES") var annotation_coordinates: Data = Data() // we know that appstorage cannot be directly used to store coordinates.
-
+    
     @State private var isShowingDialog = false
     // handling apple pencil input
-//    var estimates : [NSNumber : StrokeSample]
+    //    var estimates : [NSNumber : StrokeSample]
     
     // handling annotation quick settings
     @State private var showQuickSettings = false
     
     // hovering effect to display pointer, improve user experience.
-//    @State private var isHovering = false
-//    @State private var hoverLocation: CGPoint = .zero
+    //    @State private var isHovering = false
+    //    @State private var hoverLocation: CGPoint = .zero
     
     // this section of the code is highly experimental and will handle multiple image swipe from folder
     // A main counter needs to be added which will be used to update the current image the user is working on. This image needs to be stored in a global var shared and saved as a bookmark.
@@ -173,7 +173,7 @@ struct AnnotationView2: View {
                 C3 = false
                 C4 = false
                 // experimental
-                annotation_coordinates = Storage.archiveStringArray(object: rectData)
+//                annotation_coordinates = Storage.archiveStringArray(object: rectData)
                 // experimental
                 cordData = []
                 
@@ -200,7 +200,7 @@ struct AnnotationView2: View {
                                 .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                 .padding()
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-//                                .frame(width: 30, height: 30, alignment: .center)
+                            //                                .frame(width: 30, height: 30, alignment: .center)
                             
                             // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-text-and-an-icon-side-by-side-using-label
                             Label("\(rectData.count)", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
@@ -238,15 +238,15 @@ struct AnnotationView2: View {
                             
                             // add a quick clear button
                             
-//                            Button(action: {
-//                                isShowingDialog = true
-//                            }){
-//                                Text("Clear")
-//                                    .foregroundColor(.white)
-//                                    .padding()
-//                                    .background(Color.red)
-//                                    .cornerRadius(50)
-//                            }
+                            //                            Button(action: {
+                            //                                isShowingDialog = true
+                            //                            }){
+                            //                                Text("Clear")
+                            //                                    .foregroundColor(.white)
+                            //                                    .padding()
+                            //                                    .background(Color.red)
+                            //                                    .cornerRadius(50)
+                            //                            }
                             Button("Empty Trash") {
                                 isShowingDialog = true
                             }
@@ -257,7 +257,7 @@ struct AnnotationView2: View {
                                 Button("Clear", role: .destructive) {
                                     rectData = []
                                     // Handle empty trash action.
-                    //                clear_annotations = true
+                                    //                clear_annotations = true
                                 }
                                 Button("Cancel", role: .cancel) {
                                     isShowingDialog = false
@@ -272,7 +272,7 @@ struct AnnotationView2: View {
                             
                             Button(action: {
                                 
-//                                ConfirmEraseItems(title: "Clear Annotations?")
+                                //                                ConfirmEraseItems(title: "Clear Annotations?")
                                 rectData=[]
                             }){
                                 Text("Clear")
@@ -298,7 +298,7 @@ struct AnnotationView2: View {
                                         .cornerRadius(50)
                                         .frame(width:25, height: 25, alignment: .center)
                                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                    }
+                                }
                                 Button(action:{
                                     annotation_progress_tracker += 1
                                     print("annotion tracker progress no \(annotation_progress_tracker)")
@@ -317,14 +317,14 @@ struct AnnotationView2: View {
                             Button(action:{
                                 showQuickSettings.toggle()
                             }){
-//                                Image(systemName: "chevron.down")
+                                //                                Image(systemName: "chevron.down")
                                 Image(systemName: "gear")
                                     .resizable()
                                     .foregroundColor(.white)
                                     .padding(.all,5)
                                     .frame(width:25, height: 25, alignment: .center)
                                     .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                    
+                                
                             }
                             .sheet(isPresented: $showQuickSettings) {
                                 AnnotationQuickSettingsPopUp()
@@ -358,124 +358,152 @@ struct AnnotationView2: View {
                     } // end of Vstack used to put scrolling class selection button
                 } // end of Zstack used to create text on mirror effect
                 
-//                Text("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)")
+                Text("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)")
                 Text(current_file_name)
                 
-                HStack{
-//                    Button(action:{
-//                        if annotation_progress_tracker != 0{
-//                            self.annotation_progress_tracker -= 1
-//                        }
-//                    }){
-//                        Image(systemName:"arrow.uturn.backward.circle")
-//                            .resizable()
-//                            .foregroundColor(.white)
-//                            .padding(.all,3)
-//                            .cornerRadius(50)
-//                            .frame(width:25, height: 25, alignment: .center)
-//                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-//                        }
-                    
-//                    let image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
-//                    if image != nil {
-                        Image(uiImage: presentImage(url: classList.imageFileList[annotation_progress_tracker]))
-                            .resizable()
-                        //                        .onContinuousHover { phase in // https://nilcoalescing.com/blog/TrackingHoverLocationInSwiftUI/
-                        //                                        switch phase {
-                        //                                        case .active(let location):
-                        //                                            hoverLocation = location
-                        //                                            print("\(hoverLocation.x)")
-                        //                                            isHovering = true
-                        //                                        case .ended:
-                        //                                            isHovering = false
-                        //                                        }
+                //                HStack{
+                //                    Button(action:{
+                //                        if annotation_progress_tracker != 0{
+                //                            self.annotation_progress_tracker -= 1
+                //                        }
+                //                    }){
+                //                        Image(systemName:"arrow.uturn.backward.circle")
+                //                            .resizable()
+                //                            .foregroundColor(.white)
+                //                            .padding(.all,3)
+                //                            .cornerRadius(50)
+                //                            .frame(width:25, height: 25, alignment: .center)
+                //                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                //                        }
+                
+                //                    let image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
+                //                    if image != nil {
+                Image(uiImage: presentImage(url: classList.imageFileList[annotation_progress_tracker]))
+                    .resizable()
+                //                        .onContinuousHover { phase in // https://nilcoalescing.com/blog/TrackingHoverLocationInSwiftUI/
+                //                                        switch phase {
+                //                                        case .active(let location):
+                //                                            hoverLocation = location
+                //                                            print("\(hoverLocation.x)")
+                //                                            isHovering = true
+                //                                        case .ended:
+                //                                            isHovering = false
+                //                                        }
+                //                                    }
+                    .overlay(ZStack{
+                        if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                .path(in: CGRect(
+                                    x: (startLoc.x), // +  dragState.translation.width,
+                                    y: (startLoc.y), // + dragState.translation.height,
+                                    width: contWidth,
+                                    height: contHeight
+                                )
+                                )
+                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                        }
+                        ForEach(self.rectData, id:\.self) {cords in
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                .path(in: CGRect(
+                                    x: cords[0]-2,
+                                    y: cords[1]-2,
+                                    width: cords[2]+3,
+                                    height: cords[3]+3
+                                )
+                                )
+                                .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                        } // end of for each loop
+                        //                            if isHovering{
+                        //                                Circle()
+                        //                                    .fill(.white)
+                        //                                    .opacity(1.5)
+                        //                                    .frame(width: 30, height: 30)
+                        //                                    .position(x: hoverLocation.x, y: hoverLocation.y)
                         //                                    }
-                            .overlay(ZStack{
-                                if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                                    RoundedRectangle(cornerRadius: 5, style: .circular)
-                                        .path(in: CGRect(
-                                            x: (startLoc.x), // +  dragState.translation.width,
-                                            y: (startLoc.y), // + dragState.translation.height,
-                                            width: contWidth,
-                                            height: contHeight
-                                        )
-                                        )
-                                        .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                                }
-                                ForEach(self.rectData, id:\.self) {cords in
-                                    RoundedRectangle(cornerRadius: 5, style: .circular)
-                                        .path(in: CGRect(
-                                            x: cords[0]-2,
-                                            y: cords[1]-2,
-                                            width: cords[2]+3,
-                                            height: cords[3]+3
-                                        )
-                                        )
-                                        .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                                } // end of for each loop
-                                //                            if isHovering{
-                                //                                Circle()
-                                //                                    .fill(.white)
-                                //                                    .opacity(1.5)
-                                //                                    .frame(width: 30, height: 30)
-                                //                                    .position(x: hoverLocation.x, y: hoverLocation.y)
-                                //                                    }
-                            } // end of zstack
-                            ) // end of image overlay and zstack inside it
-                            .gesture(simultaneously)
-                            .padding(.all, 10)
-                        //                        .onHover{hover in
-                        //                            isHovering=hover
-                        //                                }
-//                    }
-//                    else{
-//                        Image("portland")
-//                            .resizable()
-//                            .padding(.all, 10)
-//                    }
-                    
-//                    Button(action:{
-//                        self.annotation_progress_tracker += 1
-//                    }){
-//                        Image(systemName:"arrow.uturn.forward.circle")
-//                            .resizable()
-//                            .foregroundColor(.white)
-//                            .padding(.all,3)
-//                            .cornerRadius(50)
-//                            .frame(width:25, height: 25, alignment: .center)
-//                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-//                        }
-                } // end of hstack that holds the image and image changing buttons
+                    } // end of zstack
+                    ) // end of image overlay and zstack inside it
+                    .gesture(simultaneously)
+                    .padding(.all, 10)
+                //                        .onHover{hover in
+                //                            isHovering=hover
+                //                                }
+                //                    }
+                //                    else{
+                //                        Image("portland")
+                //                            .resizable()
+                //                            .padding(.all, 10)
+                //                    }
+                
+                //                    Button(action:{
+                //                        self.annotation_progress_tracker += 1
+                //                    }){
+                //                        Image(systemName:"arrow.uturn.forward.circle")
+                //                            .resizable()
+                //                            .foregroundColor(.white)
+                //                            .padding(.all,3)
+                //                            .cornerRadius(50)
+                //                            .frame(width:25, height: 25, alignment: .center)
+                //                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                //                        }
+                //                } // end of hstack that holds the image and image changing buttons
             } // end of vstack withing return
             .onChange(of: annotation_progress_tracker) { newValue in
-                        current_file_name = "The number is \(newValue)"
-                    }
+                current_file_name = "The number is \(newValue)"
+            }
         } // end of zstack withing return
     } // end of main body
 }
 
-class Storage: NSObject {
+//class Storage: NSObject {
+//
+//    static func archiveStringArray(object : [[CGFloat]]) -> Data {
+//        do {
+//            let data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
+//            return data
+//        } catch {
+//            fatalError("Can't encode data: \(error)")
+//        }
+//    }
+//
+//    static func loadStringArray(data: Data) -> [[CGFloat]] {
+//        do {
+//            guard let array = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [[CGFloat]] else {
+//                return []
+//            }
+//            return array
+//        } catch {
+//            fatalError("loadWStringArray - Can't encode data: \(error)")
+//        }
+//    }
+//}
+
+func presentImage(url: URL) -> UIImage{
+    var image_ = UIImage()
+//    var imageCopy = UIImage()
+    let data: Data
     
-    static func archiveStringArray(object : [[CGFloat]]) -> Data {
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: object, requiringSecureCoding: false)
-            return data
-        } catch {
-            fatalError("Can't encode data: \(error)")
+    do{
+        guard url.startAccessingSecurityScopedResource() else {
+            print("trying to access image")
+            print(url)
+            data = try Data(contentsOf: url)
+            print("loading image from data")
+            image_ = UIImage(data: data)!
+            return image_
         }
+        // Make sure you release the security-scoped resource when you finish.
+        defer { url.stopAccessingSecurityScopedResource() }
+//        data = try Data(contentsOf: url)
+//        image_ = UIImage(data: data)!
+//        imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
+    }catch{
+        print("Error loading image: \(error.localizedDescription)")
+        return image_
     }
-    
-    static func loadStringArray(data: Data) -> [[CGFloat]] {
-        do {
-            guard let array = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [[CGFloat]] else {
-                return []
-            }
-            return array
-        } catch {
-            fatalError("loadWStringArray - Can't encode data: \(error)")
-        }
-    }
+    return image_
 }
+
+
 
 //func addSamples(for touches: [UITouch]) {
 //   if let stroke = strokeCollection?.activeStroke {

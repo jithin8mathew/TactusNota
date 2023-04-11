@@ -595,89 +595,89 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
 //    }
 //}
 
-func presentImage(url: URL) -> UIImage{
-    
-    var image = UIImage()
-    var imageCopy = UIImage()
-    let data: Data
-
-//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-    // store the urls in bookmarks and try to access it that way.
-        do{
-            
-            guard url.startAccessingSecurityScopedResource() else {
-                print("trying to access image")
-                // Handle the failure here.
-//                ImageDisplayPreview(currentImageSelection: inputImage) // replace bind with other var type
-                data = try Data(contentsOf: url)
-                print("loading image from data")
-                image = UIImage(data: data)!
-                return image
-            }
-            
-            // Make sure you release the security-scoped resource when you finish.
-            defer { url.stopAccessingSecurityScopedResource() }
-            
-//            print(url.path)
-//            print("loading image to data")
-            data = try Data(contentsOf: url)
-//            print("loading image from data")
-            image = UIImage(data: data)!
-            //        image = UIImage(contentsOfFile: url)!
-            imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
-//            print("successfully loaded the image")
-        }catch{
-            print("Error loading image: \(error.localizedDescription)")
-            return imageCopy
-        }
-//    }
-    
-    //    NSopenpanel is not part of iOS development its in MacOS
-    
-    //    extension ProjectImagePicker: UIDocumentPickerDelegate {
-    //        public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-    //            do{
-    //                guard url.startAccessingSecurityScopedResource() else {
-    //                    // Handle the failure here.
-    //                    print("failure to load the image.")
-    //                    //            return UIImage(Image("portland"))
-    //                    return image
-    //                }
-    //
-    //                defer {
-    //                    DispatchQueue.main.async {
-    //                        url.stopAccessingSecurityScopedResource()
-    //                    }
-    //                }
-    //
-    //                image = UIImage(contentsOfFile: url.path)!
-    //                imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
-    //
-    //                //        data = try Data(contentsOf: url)
-    //                //        image = UIImage(data: data)!
-    //                print("sucssessfully read image file")
-    //            }
-    //            catch{
-    //                print("something")
-    //            }
-    //        }
-    //    }
-    
-    
-    //    if url.startAccessingSecurityScopedResource(){
-    //        do{
-    //            //            try url.startAccessingSecurityScopedResource()
-    //            data = try Data(contentsOf: url)
-    //            image = UIImage(data: data)!
-    //            print("sucssessfully read image file")
-    //        } catch {
-    //            print("Unable to access the image file")
-    //            data = Data()
-    //        }
-    //    }
-    //    url.stopAccessingSecurityScopedResource()
-    return imageCopy
-}
+//func presentImage(url: URL) -> UIImage{
+//    
+//    var image = UIImage()
+//    var imageCopy = UIImage()
+//    let data: Data
+//
+////    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//    // store the urls in bookmarks and try to access it that way.
+//        do{
+//            
+//            guard url.startAccessingSecurityScopedResource() else {
+//                print("trying to access image")
+//                // Handle the failure here.
+////                ImageDisplayPreview(currentImageSelection: inputImage) // replace bind with other var type
+//                data = try Data(contentsOf: url)
+//                print("loading image from data")
+//                image = UIImage(data: data)!
+//                return image
+//            }
+//            
+//            // Make sure you release the security-scoped resource when you finish.
+//            defer { url.stopAccessingSecurityScopedResource() }
+//            
+////            print(url.path)
+////            print("loading image to data")
+//            data = try Data(contentsOf: url)
+////            print("loading image from data")
+//            image = UIImage(data: data)!
+//            //        image = UIImage(contentsOfFile: url)!
+//            imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
+////            print("successfully loaded the image")
+//        }catch{
+//            print("Error loading image: \(error.localizedDescription)")
+//            return imageCopy
+//        }
+////    }
+//    
+//    //    NSopenpanel is not part of iOS development its in MacOS
+//    
+//    //    extension ProjectImagePicker: UIDocumentPickerDelegate {
+//    //        public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//    //            do{
+//    //                guard url.startAccessingSecurityScopedResource() else {
+//    //                    // Handle the failure here.
+//    //                    print("failure to load the image.")
+//    //                    //            return UIImage(Image("portland"))
+//    //                    return image
+//    //                }
+//    //
+//    //                defer {
+//    //                    DispatchQueue.main.async {
+//    //                        url.stopAccessingSecurityScopedResource()
+//    //                    }
+//    //                }
+//    //
+//    //                image = UIImage(contentsOfFile: url.path)!
+//    //                imageCopy = UIImage(data: image.jpegData(compressionQuality: 1.0)!)!
+//    //
+//    //                //        data = try Data(contentsOf: url)
+//    //                //        image = UIImage(data: data)!
+//    //                print("sucssessfully read image file")
+//    //            }
+//    //            catch{
+//    //                print("something")
+//    //            }
+//    //        }
+//    //    }
+//    
+//    
+//    //    if url.startAccessingSecurityScopedResource(){
+//    //        do{
+//    //            //            try url.startAccessingSecurityScopedResource()
+//    //            data = try Data(contentsOf: url)
+//    //            image = UIImage(data: data)!
+//    //            print("sucssessfully read image file")
+//    //        } catch {
+//    //            print("Unable to access the image file")
+//    //            data = Data()
+//    //        }
+//    //    }
+//    //    url.stopAccessingSecurityScopedResource()
+//    return imageCopy
+//}
 
 
 //func loadImageFromPath(_ imagePath: String) -> UIImage? {

@@ -112,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				B685E7FF29CE14BC00105BFB /* AnnotationLiveStatsWindow.swift */,
-				B6C19F6029CA0E8700933944 /* AnnotationView2.swift */,
 				B633172D29A4B59700F3A631 /* imageViewModel.swift */,
 				B633172B29A1DCE200F3A631 /* ImageDisplayPreview.swift */,
 				B633171C2982589E00F3A631 /* FileBookmarkController.swift */,
@@ -145,6 +144,7 @@
 		B631C4742787A25A00A5216A /* TactusNota */ = {
 			isa = PBXGroup;
 			children = (
+				B6C19F6029CA0E8700933944 /* AnnotationView2.swift */,
 				B6331724298641A500F3A631 /* Info.plist */,
 				B633171E29863F1700F3A631 /* app_fonts */,
 				B6331719297A783200F3A631 /* TactusNota.entitlements */,

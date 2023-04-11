@@ -62,7 +62,7 @@ struct FolderPicker: UIViewControllerRepresentable{
                         return
                     }
                     for imageFile in imageFiles{
-                        let newFileUrl = documentsDirectoryUrl.appendingPathComponent(imageFiles[0].lastPathComponent) // imageFileList[0].
+                        let newFileUrl = documentsDirectoryUrl.appendingPathComponent(imageFile.lastPathComponent) // imageFileList[0].
 
                         if !FileManager.default.fileExists(atPath: newFileUrl.path) {
                             FileManager.default.createFile(atPath: newFileUrl.path, contents: nil, attributes: nil)
