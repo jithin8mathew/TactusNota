@@ -73,6 +73,7 @@ struct AnnotationView2: View {
     // this section of the code is highly experimental and will handle multiple image swipe from folder
     // A main counter needs to be added which will be used to update the current image the user is working on. This image needs to be stored in a global var shared and saved as a bookmark.
     @State private var annotation_progress_tracker = 0
+    @State private var current_file_name = ""
     
     var body: some View {
         let longPressGesture = LongPressGesture(minimumDuration: 0.5)
@@ -357,8 +358,8 @@ struct AnnotationView2: View {
                     } // end of Vstack used to put scrolling class selection button
                 } // end of Zstack used to create text on mirror effect
                 
-                Text("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)")
-//                Text("\(annotation_coordinates.count)")
+//                Text("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)")
+                Text(current_file_name)
                 
                 HStack{
 //                    Button(action:{
@@ -446,6 +447,9 @@ struct AnnotationView2: View {
 //                        }
                 } // end of hstack that holds the image and image changing buttons
             } // end of vstack withing return
+            .onChange(of: annotation_progress_tracker) { newValue in
+                        current_file_name = "The number is \(newValue)"
+                    }
         } // end of zstack withing return
     } // end of main body
 }
