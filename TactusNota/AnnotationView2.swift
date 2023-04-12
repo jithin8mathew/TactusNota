@@ -449,35 +449,35 @@ struct AnnotationView2: View {
             } // end of vstack withing return
             .onChange(of: annotation_progress_tracker) { newValue in
                 current_file_name = "The number is \(newValue)"
-                Image(uiImage: presentImage(url: classList.imageFileList[annotation_progress_tracker]))
-                    .resizable()
-                    .overlay(ZStack{
-                        if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                            RoundedRectangle(cornerRadius: 5, style: .circular)
-                                .path(in: CGRect(
-                                    x: (startLoc.x), // +  dragState.translation.width,
-                                    y: (startLoc.y), // + dragState.translation.height,
-                                    width: contWidth,
-                                    height: contHeight
-                                )
-                                )
-                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-                        }
-                        ForEach(self.rectData, id:\.self) {cords in
-                            RoundedRectangle(cornerRadius: 5, style: .circular)
-                                .path(in: CGRect(
-                                    x: cords[0]-2,
-                                    y: cords[1]-2,
-                                    width: cords[2]+3,
-                                    height: cords[3]+3
-                                )
-                                )
-                                .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-                        } // end of for each loop
-                    } // end of zstack
-                    ) // end of image overlay and zstack inside it
-                    .gesture(simultaneously)
-                    .padding(.all, 10)
+//                Image(uiImage: presentImage(url: classList.imageFileList[annotation_progress_tracker]))
+//                    .resizable()
+//                    .overlay(ZStack{
+//                        if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+//                            RoundedRectangle(cornerRadius: 5, style: .circular)
+//                                .path(in: CGRect(
+//                                    x: (startLoc.x), // +  dragState.translation.width,
+//                                    y: (startLoc.y), // + dragState.translation.height,
+//                                    width: contWidth,
+//                                    height: contHeight
+//                                )
+//                                )
+//                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                        }
+//                        ForEach(self.rectData, id:\.self) {cords in
+//                            RoundedRectangle(cornerRadius: 5, style: .circular)
+//                                .path(in: CGRect(
+//                                    x: cords[0]-2,
+//                                    y: cords[1]-2,
+//                                    width: cords[2]+3,
+//                                    height: cords[3]+3
+//                                )
+//                                )
+//                                .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+//                        } // end of for each loop
+//                    } // end of zstack
+//                    ) // end of image overlay and zstack inside it
+//                    .gesture(simultaneously)
+//                    .padding(.all, 10)
 //                image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
             }
         } // end of zstack withing return

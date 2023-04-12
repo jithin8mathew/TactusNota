@@ -69,7 +69,8 @@ struct FolderPicker: UIViewControllerRepresentable{
                         }
                         
                         // repeat this for all images in the directory using loop
-                        if let resourceData = try? Data(contentsOf: imageFiles[0]), let fileHandle = try? FileHandle(forWritingTo: newFileUrl) {
+                        // if let resourceData = try? Data(contentsOf: imageFiles[0]), let fileHandle = try? FileHandle(forWritingTo: newFileUrl) {
+                        if let resourceData = try? Data(contentsOf: imageFile), let fileHandle = try? FileHandle(forWritingTo: newFileUrl) {
                             defer {
                                 fileHandle.closeFile()
                             }
