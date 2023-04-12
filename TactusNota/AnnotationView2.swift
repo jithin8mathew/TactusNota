@@ -54,7 +54,7 @@ struct AnnotationView2: View {
     //    @StateObject var classList = ClassList()
     @EnvironmentObject var classList: ClassList
     //    @Binding var classNamesAnnot: [String]
-    @State private var image2 = UIImage(systemName: "xmark")! // this is the main variable that holds the to be annotated image
+//    @State private var image2 = UIImage(systemName: "xmark")! // this is the main variable that holds the to be annotated image
     @State private var image = UIImage()
     
     @AppStorage("ANNOTATION_COORDINATES") var annotation_coordinates: Data = Data() // we know that appstorage cannot be directly used to store coordinates.
@@ -288,7 +288,7 @@ struct AnnotationView2: View {
                                     if annotation_progress_tracker != 0 {
                                         annotation_progress_tracker -= 1
                                         print("annotion tracker progress no \(annotation_progress_tracker)")
-                                        image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
+//                                        image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
                                     }
                                 }){
                                     Image(systemName:"arrow.uturn.backward.circle")
@@ -302,7 +302,7 @@ struct AnnotationView2: View {
                                 Button(action:{
                                     annotation_progress_tracker += 1
                                     print("annotion tracker progress no \(annotation_progress_tracker)")
-                                    image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
+//                                    image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
                                 }){
                                     Image(systemName:"arrow.uturn.forward.circle")
                                         .resizable()
@@ -449,6 +449,36 @@ struct AnnotationView2: View {
             } // end of vstack withing return
             .onChange(of: annotation_progress_tracker) { newValue in
                 current_file_name = "The number is \(newValue)"
+                Image(uiImage: presentImage(url: classList.imageFileList[annotation_progress_tracker]))
+                    .resizable()
+                    .overlay(ZStack{
+                        if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                .path(in: CGRect(
+                                    x: (startLoc.x), // +  dragState.translation.width,
+                                    y: (startLoc.y), // + dragState.translation.height,
+                                    width: contWidth,
+                                    height: contHeight
+                                )
+                                )
+                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                        }
+                        ForEach(self.rectData, id:\.self) {cords in
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                .path(in: CGRect(
+                                    x: cords[0]-2,
+                                    y: cords[1]-2,
+                                    width: cords[2]+3,
+                                    height: cords[3]+3
+                                )
+                                )
+                                .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                        } // end of for each loop
+                    } // end of zstack
+                    ) // end of image overlay and zstack inside it
+                    .gesture(simultaneously)
+                    .padding(.all, 10)
+//                image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
             }
         } // end of zstack withing return
     } // end of main body
@@ -480,15 +510,15 @@ struct AnnotationView2: View {
 func presentImage(url: URL) -> UIImage{
     var image_ = UIImage()
 //    var imageCopy = UIImage()
-    let data: Data
+    let data_: Data
     
     do{
         guard url.startAccessingSecurityScopedResource() else {
             print("trying to access image")
             print(url)
-            data = try Data(contentsOf: url)
+            data_ = try Data(contentsOf: url)
             print("loading image from data")
-            image_ = UIImage(data: data)!
+            image_ = UIImage(data: data_)!
             return image_
         }
         // Make sure you release the security-scoped resource when you finish.
