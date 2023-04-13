@@ -366,26 +366,43 @@ struct AnnotationView2: View {
                                     .frame(width: geometry.frame(in: .global).width * 0.95, height: geometry.frame(in: .global).height * 0.80, alignment: .center)
                                     .overlay(ZStack{
                                         if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                                            RoundedRectangle(cornerRadius: 5, style: .circular)
-                                                .path(in: CGRect(
-                                                    x: (startLoc.x), // +  dragState.translation.width,
-                                                    y: (startLoc.y), // + dragState.translation.height,
-                                                    width: contWidth,
-                                                    height: contHeight
-                                                )
-                                                )
-                                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                                            ZStack{
+//                                                Text(classList.classNameList[0])
+//                                                    .position(x:startLoc.x, y:startLoc.y)
+//                                                    .font(.footnote)
+//                                                    .foregroundColor(.white)
+////                                                    .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                                                    .cornerRadius(5)
+                                                RoundedRectangle(cornerRadius: 5, style: .circular)
+                                                    .path(in: CGRect(
+                                                        x: (startLoc.x), // +  dragState.translation.width,
+                                                        y: (startLoc.y), // + dragState.translation.height,
+                                                        width: contWidth,
+                                                        height: contHeight
+                                                    )
+                                                    )
+                                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                                            }
                                         }
                                         ForEach(self.rectData, id:\.self) {cords in
-                                            RoundedRectangle(cornerRadius: 5, style: .circular)
-                                                .path(in: CGRect(
-                                                    x: cords[0]-2,
-                                                    y: cords[1]-2,
-                                                    width: cords[2]+3,
-                                                    height: cords[3]+3
-                                                )
-                                                )
-                                                .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                                            ZStack{
+                                                Text(classList.classNameList[0])
+                                                    .position(x: cords[0]-2, y:cords[1]-2)
+                                                    .font(.footnote)
+                                                    .foregroundColor(.white)
+//                                                    .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                                    .cornerRadius(5)
+                                                    .offset(x:20, y:10)
+                                                RoundedRectangle(cornerRadius: 5, style: .circular)
+                                                    .path(in: CGRect(
+                                                        x: cords[0]-2,
+                                                        y: cords[1]-2,
+                                                        width: cords[2]+3,
+                                                        height: cords[3]+3
+                                                    )
+                                                    )
+                                                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                                            }
                                         } // end of for each loop
                                     } // end of zstack
                                     ) // end of image overlay and zstack inside it
