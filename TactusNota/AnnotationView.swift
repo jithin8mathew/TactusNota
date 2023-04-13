@@ -561,6 +561,27 @@ func resizeBoundingBox(coordinates: CGPoint, coordinateList: inout [[CGFloat]], 
     }
 }
 
+//func presentImage(url: URL) -> UIImage{
+//    var image_ = UIImage()
+//    let data_: Data
+//    
+//    do{
+//        guard url.startAccessingSecurityScopedResource() else {
+//            print("trying to access image")
+//            print(url)
+//            data_ = try Data(contentsOf: url)
+//            print("loading image from data")
+//            image_ = UIImage(data: data_)!
+//            return image_
+//        }
+//        defer { url.stopAccessingSecurityScopedResource() }
+//    }catch{
+//        print("Error loading image: \(error.localizedDescription)")
+//        return image_
+//    }
+//    return image_
+//}
+
 //extension AnnotationView: UIDocumentPickerDelegate{
 //    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
 //

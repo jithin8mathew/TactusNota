@@ -78,7 +78,6 @@ struct AnnotationView2: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack{
-                
                 let longPressGesture = LongPressGesture(minimumDuration: 0.5)
                     .updating($isLongPressing) { currentState, gestureState,
                         transaction in
@@ -191,12 +190,12 @@ struct AnnotationView2: View {
                     Color(red: 0.26, green: 0.26, blue: 0.26)
                         .ignoresSafeArea()
                     HStack{
-                        Spacer()
+//                        Spacer()
                         VStack{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                     .fill(Color(red: 0.26, green: 0.26, blue: 0.26, opacity: 0.8))
-                                    .frame(width: 1000, height: 100)
+                                    .frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.1)
                                     .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                 VStack{
                                     HStack{
@@ -361,10 +360,10 @@ struct AnnotationView2: View {
                             //                    Text(current_file_name)
                             
                             HStack(alignment: .center){
-                                Spacer()
+                                
                                 Image(uiImage: presentImage(url: classList.imageFileList[annotation_progress_tracker]))
                                     .resizable()
-                                    .frame(width: geometry.frame(in: .global).width * 0.99, height: geometry.frame(in: .global).height * 0.97, alignment: .center)
+                                    .frame(width: geometry.frame(in: .global).width * 0.95, height: geometry.frame(in: .global).height * 0.80, alignment: .center)
                                     .overlay(ZStack{
                                         if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
                                             RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -391,20 +390,19 @@ struct AnnotationView2: View {
                                     } // end of zstack
                                     ) // end of image overlay and zstack inside it
                                     .gesture(simultaneously)
-                                Spacer()
+                                    .padding(.horizontal, 10)
                             } // hstack befor loading image
                             
-                            .padding(.horizontal, 10)
                         } // end of vstack withing return
-                        .padding(.all, 0)
-                        Spacer()
                     } // testing Hstack
+                    .padding(.all, 0)
                 } // end of zstack withing return
-                .padding(.all, 0)
             } // end of main zstack
         } // end of geometry viewer
     } // end of main body
-}
+
+} // end of struct
+
 
 func presentImage(url: URL) -> UIImage{
     var image_ = UIImage()
