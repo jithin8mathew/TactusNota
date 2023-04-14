@@ -73,7 +73,9 @@ struct AnnotationView2: View {
     // this section of the code is highly experimental and will handle multiple image swipe from folder
     // A main counter needs to be added which will be used to update the current image the user is working on. This image needs to be stored in a global var shared and saved as a bookmark.
     @State private var annotation_progress_tracker = 0
-    //    @State private var current_file_name = ""
+    
+    // this section will handle data related to the class information for each annotation
+    @State private var class_selection_index = 0 // this will be updated with the use picks a class or once a single class has been added to the classList 
     
     var body: some View {
         GeometryReader { geometry in
