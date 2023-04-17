@@ -75,7 +75,9 @@ struct AnnotationView2: View {
     @State private var annotation_progress_tracker = 0
     
     // this section will handle data related to the class information for each annotation
-    @State private var class_selection_index = 0 // this will be updated with the use picks a class or once a single class has been added to the classList 
+    @State private var class_selection_index = 0 // this will be updated with the use picks a class or once a single class has been added to the classList
+//    @State private var class_isSelected = false
+    @State private var clsCnt = 0
     
     var body: some View {
         GeometryReader { geometry in
@@ -341,6 +343,7 @@ struct AnnotationView2: View {
                                     ScrollView(.horizontal) {
                                         HStack(spacing: 1) {
                                             if (classList.classNameList.count > 0){
+//                                                clsCnt = 0
                                                 ForEach(classList.classNameList , id: \.self) { cls in
                                                     Text(cls)
                                                         .foregroundColor(.white)
@@ -348,6 +351,10 @@ struct AnnotationView2: View {
                                                         .frame(width: 70, height: 20, alignment: .center)
                                                         .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                                         .cornerRadius(2)
+                                                        .onTapGesture {
+                                                            class_selection_index = clsCnt
+                                                            }
+//                                                    clsCnt = clsCnt + 1
                                                 }
                                             }
                                         }
@@ -388,7 +395,7 @@ struct AnnotationView2: View {
                                         }
                                         ForEach(self.rectData, id:\.self) {cords in
                                             ZStack{
-                                                Text(classList.classNameList[0])
+                                                Text(classList.classNameList[class_selection_index])
                                                     .position(x: cords[0]-2, y:cords[1]-2)
                                                     .font(.footnote)
                                                     .foregroundColor(.white)
