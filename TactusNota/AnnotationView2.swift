@@ -344,7 +344,7 @@ struct AnnotationView2: View {
                                         HStack(spacing: 1) {
                                             if (classList.classNameList.count > 0){
 //                                                clsCnt = 0
-                                                ForEach(classList.classNameList , id: \.self) { cls in
+                                                ForEach(Array(classList.classNameList.enumerated()) , id: \.1) { index, cls in
                                                     Text(cls)
                                                         .foregroundColor(.white)
                                                         .font(.footnote)
@@ -352,7 +352,7 @@ struct AnnotationView2: View {
                                                         .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                                         .cornerRadius(2)
                                                         .onTapGesture {
-                                                            class_selection_index = clsCnt
+                                                            class_selection_index = index
                                                             }
 //                                                    clsCnt = clsCnt + 1
                                                 }
