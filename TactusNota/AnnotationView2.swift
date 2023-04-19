@@ -76,8 +76,7 @@ struct AnnotationView2: View {
     
     // this section will handle data related to the class information for each annotation
     @State private var class_selection_index = 0 // this will be updated with the use picks a class or once a single class has been added to the classList
-//    @State private var class_isSelected = false
-    @State private var clsCnt = 0
+    @State private var class_color_array = [Color]()
     
     var body: some View {
         GeometryReader { geometry in
@@ -345,17 +344,26 @@ struct AnnotationView2: View {
                                             if (classList.classNameList.count > 0){
 //                                                clsCnt = 0
                                                 ForEach(Array(classList.classNameList.enumerated()) , id: \.1) { index, cls in
+                                                    
+                                                    let red = Double.random(in: 0...1)
+                                                    let green = Double.random(in: 0...1)
+                                                    let blue = Double.random(in: 0...1)
+                                                    let color = Color(red: red, green: green, blue: blue)
+//                                                    class_color_array[index] = color
+                                                    
                                                     Text(cls)
                                                         .foregroundColor(.white)
                                                         .font(.footnote)
                                                         .frame(width: 70, height: 20, alignment: .center)
-                                                        .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                                        .background(color)
                                                         .cornerRadius(2)
                                                         .onTapGesture {
                                                             class_selection_index = index
+//                                                                .font(.body)
                                                             }
 //                                                    clsCnt = clsCnt + 1
-                                                }
+                                                    
+                                                } // end of foreach loop
                                             }
                                         }
                                     }
