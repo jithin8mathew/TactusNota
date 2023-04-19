@@ -120,7 +120,7 @@ struct AnnotationView2: View {
                                     prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
                                     prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
                                 }
-                                rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (prev_f_width), rectData[boxIDVAL-1][1] - (prev_f_height), rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)] // reduce x and y value while increasing the width and height with the same value
+                                rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - (prev_f_width), rectData[boxIDVAL-1][1] - (prev_f_height), rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height), CGFloat(class_selection_index)] // reduce x and y value while increasing the width and height with the same value
                             }
                             if C2 == true && boxIDVAL != 0{
                                 dragLock = true
@@ -130,7 +130,7 @@ struct AnnotationView2: View {
                                     prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
                                     prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
                                 }
-                                rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1] - prev_f_height, rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height)]
+                                rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1] - prev_f_height, rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] + (prev_f_height), CGFloat(class_selection_index)]
                             }
                             if C3 == true && boxIDVAL != 0{
                                 dragLock = true
@@ -140,7 +140,7 @@ struct AnnotationView2: View {
                                     prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
                                     prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
                                 }
-                                rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - prev_f_width , rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] - prev_f_height ]
+                                rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0] - prev_f_width , rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] + (prev_f_width), rectData[boxIDVAL-1][3] - prev_f_height , CGFloat(class_selection_index)]
                             }
                             if C4 == true && boxIDVAL != 0{
                                 dragLock = true
@@ -150,7 +150,7 @@ struct AnnotationView2: View {
                                     prev_f_width = cordData[cordData.count-2][0] - cordData[cordData.count-1][0]
                                     prev_f_height = cordData[cordData.count-2][1] - cordData[cordData.count-1][1]
                                 }
-                                rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] - (prev_f_height)]
+                                rectData[boxIDVAL-1] = [rectData[boxIDVAL-1][0], rectData[boxIDVAL-1][1], rectData[boxIDVAL-1][2] - (prev_f_width), rectData[boxIDVAL-1][3] - (prev_f_height), CGFloat(class_selection_index)]
                             }
                             
                         }
@@ -161,14 +161,14 @@ struct AnnotationView2: View {
                             resizeLock = true
                             previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
                             previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
-                            rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3]]
+                            rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3], CGFloat(class_selection_index)]
                         }
                     }
                     .onEnded({
                         (value) in
                         if (value.location.x - startLoc.x > 20){
                             if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-                                rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight]])
+                                rectData.append(contentsOf:[[startLoc.x, startLoc.y, contWidth, contHeight, CGFloat(class_selection_index)]])
                             }
                         }
                         self.completedLongPress = false
@@ -404,11 +404,13 @@ struct AnnotationView2: View {
                                                     )
                                                     )
                                                     .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+//                                                    .stroke(classList.class_color_code[Int(cords[4])])
 //                                            }
                                         }
                                         ForEach(self.rectData, id:\.self) {cords in
                                             ZStack{
-                                                Text(classList.classNameList[class_selection_index])
+//                                                Text(classList.classNameList[class_selection_index])
+                                                Text(classList.classNameList[Int(cords[4])])
                                                     .position(x: cords[0]-2, y:cords[1]-2)
                                                     .font(.footnote)
                                                     .foregroundColor(.white)
@@ -423,8 +425,8 @@ struct AnnotationView2: View {
                                                         height: cords[3]+3
                                                     )
                                                     )
-                                                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
-//                                                    .fill(class_color_array_[class_selection_index])
+//                                                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                                                    .fill(classList.class_color_code[Int(cords[4])])
                                             }
                                         } // end of for each loop
                                     } // end of zstack

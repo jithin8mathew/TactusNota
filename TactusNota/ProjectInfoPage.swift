@@ -225,7 +225,7 @@ struct ProjectInfoPage: View {
                         Button(action: {
                             if (cName != ""){
                                 classList.classNameList.append(cName)
-                                let color = Color(red: Double.random(in: 0...1), green: Double.random(in: 0...1), blue: Double.random(in: 0...1))
+                                let color = Color(red: Double.random(in: 0...1), green: Double.random(in: 0...1), blue: Double.random(in: 0...1), opacity: 0.6)
                                 classList.class_color_code.append(color)
 //                                classNames.append(cName)
                                 cName = ""
