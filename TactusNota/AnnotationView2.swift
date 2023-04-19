@@ -76,7 +76,8 @@ struct AnnotationView2: View {
     
     // this section will handle data related to the class information for each annotation
     @State private var class_selection_index = 0 // this will be updated with the use picks a class or once a single class has been added to the classList
-    @State private var class_color_array = [Color]()
+    @State private var class_color_array_ = [Color]()
+    @State private var class_name_list_duplicate_array = []
     
     var body: some View {
         GeometryReader { geometry in
@@ -343,24 +344,28 @@ struct AnnotationView2: View {
                                         HStack(spacing: 1) {
                                             if (classList.classNameList.count > 0){
 //                                                clsCnt = 0
+//                                                let class_color_array = [Color]()
                                                 ForEach(Array(classList.classNameList.enumerated()) , id: \.1) { index, cls in
                                                     
-                                                    let red = Double.random(in: 0...1)
-                                                    let green = Double.random(in: 0...1)
-                                                    let blue = Double.random(in: 0...1)
-                                                    let color = Color(red: red, green: green, blue: blue)
-//                                                    class_color_array[index] = color
+//                                                    let red = Double.random(in: 0...1)
+//                                                    let green = Double.random(in: 0...1)
+//                                                    let blue = Double.random(in: 0...1)
+//                                                    let color = Color(red: red, green: green, blue: blue)
+                                                    
                                                     
                                                     Text(cls)
                                                         .foregroundColor(.white)
                                                         .font(.footnote)
                                                         .frame(width: 70, height: 20, alignment: .center)
-                                                        .background(color)
+                                                        .background(classList.class_color_code[index])
                                                         .cornerRadius(2)
                                                         .onTapGesture {
                                                             class_selection_index = index
 //                                                                .font(.body)
                                                             }
+//                                                        .onAppear {
+//                                                            class_color_array_.append(color)
+//                                                        }
 //                                                    clsCnt = clsCnt + 1
                                                     
                                                 } // end of foreach loop
@@ -419,6 +424,7 @@ struct AnnotationView2: View {
                                                     )
                                                     )
                                                     .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+//                                                    .fill(class_color_array_[class_selection_index])
                                             }
                                         } // end of for each loop
                                     } // end of zstack

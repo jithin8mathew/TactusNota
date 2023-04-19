@@ -18,6 +18,8 @@ class ClassList: ObservableObject {
     @Published var imageFileList: [URL] = []
     @Published var imageData = Data(count:0)
     
+    @Published var class_color_code:[Color] = []
+    
 //    if (classNameList.count > 0){
 //        print(classNameList.count)
 //    }
