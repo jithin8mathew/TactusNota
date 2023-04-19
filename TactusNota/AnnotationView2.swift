@@ -161,7 +161,7 @@ struct AnnotationView2: View {
                             resizeLock = true
                             previous_offsetX = startLoc.x - (rectData[boxIDVAL-1][2]/2)
                             previous_offsetY = startLoc.y - (rectData[boxIDVAL-1][3]/2)
-                            rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3], CGFloat(class_selection_index)]
+                            rectData[boxIDVAL-1] = [previous_offsetX + offset.width , previous_offsetY + offset.height, rectData[boxIDVAL-1][2], rectData[boxIDVAL-1][3], rectData[boxIDVAL-1][4]]
                         }
                     }
                     .onEnded({
@@ -373,12 +373,12 @@ struct AnnotationView2: View {
                                         }
                                     }
                                     .environmentObject(classList)
-                                    .frame(minWidth: 350, maxWidth: 550, minHeight: 10, maxHeight: 25)
+                                    .frame(minWidth: 350, maxWidth: 550, minHeight: 10, maxHeight: 25, alignment: .center)
                                     .padding()
                                 } // end of Vstack used to put scrolling class selection button
                             } // end of Zstack used to create text on mirror effect
                             
-                            Text("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)")
+//                            Text("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)")
                             //                    Text(current_file_name)
                             
                             HStack(alignment: .center){
