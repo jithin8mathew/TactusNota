@@ -70,14 +70,18 @@ struct AnnotationView2: View {
     //    @State private var isHovering = false
     //    @State private var hoverLocation: CGPoint = .zero
     
-    // this section of the code is highly experimental and will handle multiple image swipe from folder
+    // Appstorage
+    // UserDefaults
     // A main counter needs to be added which will be used to update the current image the user is working on. This image needs to be stored in a global var shared and saved as a bookmark.
     @State private var annotation_progress_tracker = 0
+//    @AppStorage("current_working_image") var annotation_progress_tracker = 0
     
     // this section will handle data related to the class information for each annotation
     @State private var class_selection_index = 0 // this will be updated with the use picks a class or once a single class has been added to the classList
+//    @AppStorage("current_working_class") var class_selection_index = 0
+    
     @State private var class_color_array_ = [Color]()
-    @State private var class_name_list_duplicate_array = []
+//    @State private var class_name_list_duplicate_array = []
     
     var body: some View {
         GeometryReader { geometry in
@@ -194,7 +198,7 @@ struct AnnotationView2: View {
                     Color(red: 0.26, green: 0.26, blue: 0.26)
                         .ignoresSafeArea()
                     HStack{
-//                        Spacer()
+                        //                        Spacer()
                         VStack{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -291,6 +295,7 @@ struct AnnotationView2: View {
                                                     annotation_progress_tracker -= 1
                                                     print("annotion tracker progress no \(annotation_progress_tracker)")
                                                     //                                        image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
+                                                    
                                                 }
                                             }){
                                                 Image(systemName:"arrow.uturn.backward.circle")
@@ -343,16 +348,7 @@ struct AnnotationView2: View {
                                     ScrollView(.horizontal) {
                                         HStack(spacing: 1) {
                                             if (classList.classNameList.count > 0){
-//                                                clsCnt = 0
-//                                                let class_color_array = [Color]()
                                                 ForEach(Array(classList.classNameList.enumerated()) , id: \.1) { index, cls in
-                                                    
-//                                                    let red = Double.random(in: 0...1)
-//                                                    let green = Double.random(in: 0...1)
-//                                                    let blue = Double.random(in: 0...1)
-//                                                    let color = Color(red: red, green: green, blue: blue)
-                                                    
-                                                    
                                                     Text(cls)
                                                         .foregroundColor(.white)
                                                         .font(.footnote)
@@ -361,13 +357,7 @@ struct AnnotationView2: View {
                                                         .cornerRadius(2)
                                                         .onTapGesture {
                                                             class_selection_index = index
-//                                                                .font(.body)
-                                                            }
-//                                                        .onAppear {
-//                                                            class_color_array_.append(color)
-//                                                        }
-//                                                    clsCnt = clsCnt + 1
-                                                    
+                                                        }
                                                 } // end of foreach loop
                                             }
                                         }
@@ -378,9 +368,6 @@ struct AnnotationView2: View {
                                 } // end of Vstack used to put scrolling class selection button
                             } // end of Zstack used to create text on mirror effect
                             
-//                            Text("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)")
-                            //                    Text(current_file_name)
-                            
                             HStack(alignment: .center){
                                 
                                 Image(uiImage: presentImage(url: classList.imageFileList[annotation_progress_tracker]))
@@ -388,33 +375,26 @@ struct AnnotationView2: View {
                                     .frame(width: geometry.frame(in: .global).width * 0.95, height: geometry.frame(in: .global).height * 0.80, alignment: .center)
                                     .overlay(ZStack{
                                         if self.completedLongPress == false && C1 == false && C2 == false && C3 == false && C4 == false{
-//                                            ZStack{
-//                                                Text(classList.classNameList[0])
-//                                                    .position(x:startLoc.x, y:startLoc.y)
-//                                                    .font(.footnote)
-//                                                    .foregroundColor(.white)
-////                                                    .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-//                                                    .cornerRadius(5)
-                                                RoundedRectangle(cornerRadius: 5, style: .circular)
-                                                    .path(in: CGRect(
-                                                        x: (startLoc.x), // +  dragState.translation.width,
-                                                        y: (startLoc.y), // + dragState.translation.height,
-                                                        width: contWidth,
-                                                        height: contHeight
-                                                    )
-                                                    )
-                                                    .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
-//                                                    .stroke(classList.class_color_code[Int(cords[4])])
-//                                            }
+                                            RoundedRectangle(cornerRadius: 5, style: .circular)
+                                                .path(in: CGRect(
+                                                    x: (startLoc.x), // +  dragState.translation.width,
+                                                    y: (startLoc.y), // + dragState.translation.height,
+                                                    width: contWidth,
+                                                    height: contHeight
+                                                )
+                                                )
+                                                .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
+                                            //                                                    .stroke(classList.class_color_code[Int(cords[4])])
+                                            //                                            }
                                         }
                                         ForEach(self.rectData, id:\.self) {cords in
                                             ZStack{
-//                                                Text(classList.classNameList[class_selection_index])
+                                                //                                                Text(classList.classNameList[class_selection_index])
                                                 Text(classList.classNameList[Int(cords[4])])
                                                     .position(x: cords[0]-2, y:cords[1]-2)
                                                     .font(.footnote)
                                                     .foregroundColor(.white)
-//                                                    .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+                                                //                                                    .background(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
                                                     .cornerRadius(5)
                                                     .offset(x:20, y:10)
                                                 RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -425,7 +405,7 @@ struct AnnotationView2: View {
                                                         height: cords[3]+3
                                                     )
                                                     )
-//                                                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
+                                                //                                                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
                                                     .fill(classList.class_color_code[Int(cords[4])])
                                             }
                                         } // end of for each loop
@@ -434,7 +414,6 @@ struct AnnotationView2: View {
                                     .gesture(simultaneously)
                                     .padding(.horizontal, 10)
                             } // hstack befor loading image
-                            
                         } // end of vstack withing return
                     } // testing Hstack
                     .padding(.all, 0)
@@ -442,7 +421,7 @@ struct AnnotationView2: View {
             } // end of main zstack
         } // end of geometry viewer
     } // end of main body
-
+    
 } // end of struct
 
 
@@ -459,12 +438,25 @@ func presentImage(url: URL) -> UIImage{
             image_ = UIImage(data: data_)!
             return image_
         }
-        defer { url.stopAccessingSecurityScopedResource() }
+        do { url.stopAccessingSecurityScopedResource() }
     }catch{
         print("Error loading image: \(error.localizedDescription)")
         return image_
     }
     return image_
+}
+
+// this function should write the annotations for each image into a textfile with curresponding filename
+func fileAnnotationSaver(annotations: String, filename: String){
+    let annotation_file_name = filename+".txt"
+    guard let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+    let fileURL = directoryURL.appendingPathComponent(filename)
+    
+    do {
+        try annotations.write(to: fileURL, atomically: true, encoding: .utf8)
+    } catch {
+        print("Error writing file: \(error)")
+    }
 }
 
 struct AnnotationView2_Previews: PreviewProvider {
