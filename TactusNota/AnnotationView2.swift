@@ -86,6 +86,8 @@ struct AnnotationView2: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack{
+//                HoverPointer()
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 let longPressGesture = LongPressGesture(minimumDuration: 0.5)
                     .updating($isLongPressing) { currentState, gestureState,
                         transaction in
@@ -295,7 +297,10 @@ struct AnnotationView2: View {
                                                     annotation_progress_tracker -= 1
                                                     print("annotion tracker progress no \(annotation_progress_tracker)")
                                                     //                                        image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
-                                                    
+//                                                    var output = rectData.joined(separator: "\n")
+//                                                    ForEach(self.rectData, id:\.self) {cords in
+//                                                        print("\(cords)")
+//                                                    }
                                                 }
                                             }){
                                                 Image(systemName:"arrow.uturn.backward.circle")
@@ -331,7 +336,6 @@ struct AnnotationView2: View {
                                                 .padding(.all,5)
                                                 .frame(width:25, height: 25, alignment: .center)
                                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                            
                                         }
                                         .sheet(isPresented: $showQuickSettings) {
                                             AnnotationQuickSettingsPopUp()
@@ -381,8 +385,7 @@ struct AnnotationView2: View {
                                                     y: (startLoc.y), // + dragState.translation.height,
                                                     width: contWidth,
                                                     height: contHeight
-                                                )
-                                                )
+                                                ))
                                                 .stroke(Color(red: 1.0, green: 0.78, blue: 0.16), lineWidth: 3.0)
                                             //                                                    .stroke(classList.class_color_code[Int(cords[4])])
                                             //                                            }
