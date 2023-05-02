@@ -74,6 +74,8 @@ struct ContentView: View {
         
         NavigationView{
             ZStack{
+                HoverPointer()
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 GeometryReader { geometry in
                     //                    Color(red: 0.91, green: 0.70, blue: 0.39) // creamish brown (Sun ray)
                     //                    Color(red: 0.0, green: 0.42, blue: 0.51) // Teal blue

@@ -65,6 +65,7 @@ struct AnnotationView2: View {
     
     // handling annotation quick settings
     @State private var showQuickSettings = false
+    @State private var showAnnotationsinYOLO = false
     
     // hovering effect to display pointer, improve user experience.
     //    @State private var isHovering = false
@@ -314,6 +315,14 @@ struct AnnotationView2: View {
                                             Button(action:{
                                                 annotation_progress_tracker += 1
                                                 print("annotion tracker progress no \(annotation_progress_tracker)")
+                                                let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
+                                                let coordinateStrings = cordData.map { coordinate in
+                                                    "\(coordinate[4]) \(coordinate[0]) \(coordinate[1]) \(coordinate[2]) \(coordinate[3])"
+                                                    }
+                                                let combinedString = coordinateStrings.joined(separator: "\n")
+                                                print(combinedString)
+                                                
+                                                fileAnnotationSaver(annotations: combinedString, filename: "sample.txt")
                                                 //                                    image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
                                             }){
                                                 Image(systemName:"arrow.uturn.forward.circle")
@@ -346,6 +355,26 @@ struct AnnotationView2: View {
                                         .cornerRadius(35)
                                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                         .help(Text("Clear all the annotations"))
+                                        
+                                        Button(action:{
+                                            showAnnotationsinYOLO.toggle()
+                                        }){
+                                            //                                Image(systemName: "chevron.down")
+                                            Image(systemName: "doc.plaintext.fill")
+                                                .resizable()
+                                                .foregroundColor(.white)
+                                                .padding(.all,5)
+                                                .frame(width:25, height: 25, alignment: .center)
+                                                .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                                        }
+                                        .sheet(isPresented: $showQuickSettings) {
+                                            AnnotationQuickSettingsPopUp()
+                                            // display quick settings here
+                                        }
+                                        .padding(.all, 3)
+                                        .background(Color(red: 0.21, green: 0.21, blue: 0.21))
+                                        .cornerRadius(35)
+                                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                     } // end of Hstack
                                     
                                     // https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-horizontal-and-vertical-scrolling-using-scrollview
