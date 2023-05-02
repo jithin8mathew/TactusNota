@@ -49,6 +49,7 @@
 		B6F21BFE2A0054BD00A2866A /* HoverDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F21BFD2A0054BD00A2866A /* HoverDrawView.swift */; };
 		B6F21C002A00565900A2866A /* HoverPointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F21BFF2A00565900A2866A /* HoverPointer.swift */; };
 		B6F21C022A0057BB00A2866A /* DrawGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F21C012A0057BB00A2866A /* DrawGestureRecognizer.swift */; };
+		B6F21C042A01CF4000A2866A /* display_annotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F21C032A01CF4000A2866A /* display_annotations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		B6F21BFD2A0054BD00A2866A /* HoverDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoverDrawView.swift; sourceTree = "<group>"; };
 		B6F21BFF2A00565900A2866A /* HoverPointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverPointer.swift; sourceTree = "<group>"; };
 		B6F21C012A0057BB00A2866A /* DrawGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawGestureRecognizer.swift; sourceTree = "<group>"; };
+		B6F21C032A01CF4000A2866A /* display_annotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = display_annotations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		B631C4742787A25A00A5216A /* TactusNota */ = {
 			isa = PBXGroup;
 			children = (
+				B6F21C032A01CF4000A2866A /* display_annotations.swift */,
 				B6F21C012A0057BB00A2866A /* DrawGestureRecognizer.swift */,
 				B6F21BFD2A0054BD00A2866A /* HoverDrawView.swift */,
 				B6C19F6029CA0E8700933944 /* AnnotationView2.swift */,
@@ -289,6 +292,7 @@
 				B676275328CFD36B00CCBCF9 /* AnnotationView.swift in Sources */,
 				B6DE7B70285FC93C003A2191 /* ImagePicker.swift in Sources */,
 				B676275128BFCA5600CCBCF9 /* finalView.swift in Sources */,
+				B6F21C042A01CF4000A2866A /* display_annotations.swift in Sources */,
 				B63317182979D34A00F3A631 /* BookmarkController.swift in Sources */,
 				B6F21C022A0057BB00A2866A /* DrawGestureRecognizer.swift in Sources */,
 				B633172E29A4B59700F3A631 /* imageViewModel.swift in Sources */,
