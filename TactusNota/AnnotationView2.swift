@@ -266,31 +266,7 @@ struct AnnotationView2: View {
                                             .gaugeStyle(.accessoryCircular)
                                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                         } // end of vStack which is not used really
-                                        
-                                        //                            Button("Empty Trash") {
-                                        //                                isShowingDialog = true
-                                        //                            }
-                                        //                            .confirmationDialog(
-                                        //                                "Cear Annotations?",
-                                        //                                isPresented: $isShowingDialog
-                                        //                            ) {
-                                        //                                Button("Clear", role: .destructive) {
-                                        //                                    rectData = []
-                                        //                                    // Handle empty trash action.
-                                        //                                    //                clear_annotations = true
-                                        //                                }
-                                        //                                Button("Cancel", role: .cancel) {
-                                        //                                    isShowingDialog = false
-                                        //                                }
-                                        //                            }
-                                        //                            .foregroundColor(.white)
-                                        //                            .font(.body)
-                                        //                            .padding()
-                                        //                            .background(Color.red)
-                                        //                            .cornerRadius(50)
-                                        //                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                        //
-                                        
+                                       
                                         Button(action: {
                                             
                                             //                                ConfirmEraseItems(title: "Clear Annotations?")
@@ -377,7 +353,6 @@ struct AnnotationView2: View {
                                                     annotationFileContent = "No annotation present"
                                                     print("File not found")
                                                 }
-                                            
                                         }){
                                             //                                Image(systemName: "chevron.down")
                                             Image(systemName: "doc.plaintext.fill")
