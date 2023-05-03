@@ -236,16 +236,22 @@ struct AnnotationView2: View {
                                             .padding()
                                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                         
-                                        Button(action: {}){
-//                                            let fileNameWithoutExtension_ = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
-                                            Text(classList.imageFileList.count > 0 ? "\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)" : "Image name")
-                                                .frame(minWidth: 50, maxWidth: 100, minHeight: 15, maxHeight:30 )
-                                                .font(.body)
-                                                .foregroundColor(.white)
-                                                .padding()
-                                                .background(Color.orange)
-                                                .cornerRadius(50)
-                                        }
+                                        
+                                        Label("\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)", systemImage: "photo.fill")
+                                            .padding(.all, 10)
+                                            .background(Color.orange)
+                                            .cornerRadius(35)
+                                            .frame(minWidth: 100, maxWidth: 200, minHeight: 10, maxHeight: 25, alignment: .center)
+                                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+//                                        Button(action: {}){
+//                                            Text(classList.imageFileList.count > 0 ? "\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)" : "Image name")
+//                                                .frame(minWidth: 50, maxWidth: 100, minHeight: 15, maxHeight:20 )
+//                                                .font(.body)
+//                                                .foregroundColor(.white)
+//                                                .padding()
+//                                                .background(Color.orange)
+//                                                .cornerRadius(50)
+//                                        }
                                         
                                         VStack{
                                             // https://www.appcoda.com/swiftui-gauge/
@@ -274,9 +280,9 @@ struct AnnotationView2: View {
                                         }){
                                             Text("Clear")
                                                 .foregroundColor(.white)
-                                                .padding()
+                                                .padding(.all, 10)
                                                 .background(Color.red)
-                                                .cornerRadius(50)
+                                                .cornerRadius(35)
                                         }
                                         .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                         
