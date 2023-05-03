@@ -504,19 +504,22 @@ func fileAnnotationSaver(annotations: String, filename: String){
     
     let annotation_file_name = filename+".txt"
     guard let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-    let fileURL = directoryURL.appendingPathComponent(filename)
+    let fileURL = directoryURL.appendingPathComponent(annotation_file_name)
     
     do {
         try annotations.write(to: fileURL, atomically: true, encoding: .utf8)
+        print(annotation_file_name + " written successfully")
     } catch {
         print("Error writing file: \(error)")
     }
 }
 
 func readAndDisplayFileContent(named fileName: String) -> String? {
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: nil) else { return nil }
+    guard let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return "String" }
+    let fileURL = directoryURL.appendingPathComponent(fileName)
+//        guard let url = Bundle.main.url(forResource: fileName, withExtension: nil) else { return nil }
         do {
-            let content = try String(contentsOf: url, encoding: .utf8)
+            let content = try String(contentsOf: fileURL, encoding: .utf8)
             return content
         } catch {
             print("Error reading file: \(error)")
