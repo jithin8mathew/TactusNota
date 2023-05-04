@@ -56,6 +56,7 @@ struct ContentView: View {
     @State private var isActive : Bool = false
     @State private var isSettingsActive: Bool = false
     @State private var isProjectInfoActive : Bool = false
+    @State private var isPloygonViewActive : Bool = false
     
     //    var drag: some Gesture {
     //            DragGesture()
@@ -170,9 +171,9 @@ struct ContentView: View {
                                         y: 3)
                                 
                                 HStack{
-                                    NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
+                                    NavigationLink(destination: PolygonView(), isActive: self.$isPloygonViewActive) {
                                         Button(action: {
-                                            isProjectInfoActive = true
+                                            isPloygonViewActive = true
                                         }){
                                             Label("Inspection", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
                                                 .foregroundColor(.white)

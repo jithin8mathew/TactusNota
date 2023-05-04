@@ -50,6 +50,7 @@
 		B6F21C002A00565900A2866A /* HoverPointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F21BFF2A00565900A2866A /* HoverPointer.swift */; };
 		B6F21C022A0057BB00A2866A /* DrawGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F21C012A0057BB00A2866A /* DrawGestureRecognizer.swift */; };
 		B6F21C042A01CF4000A2866A /* display_annotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F21C032A01CF4000A2866A /* display_annotations.swift */; };
+		B6F21C062A044FE900A2866A /* PolygonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F21C052A044FE900A2866A /* PolygonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		B6F21BFF2A00565900A2866A /* HoverPointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverPointer.swift; sourceTree = "<group>"; };
 		B6F21C012A0057BB00A2866A /* DrawGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawGestureRecognizer.swift; sourceTree = "<group>"; };
 		B6F21C032A01CF4000A2866A /* display_annotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = display_annotations.swift; sourceTree = "<group>"; };
+		B6F21C052A044FE900A2866A /* PolygonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
+				B6F21C052A044FE900A2866A /* PolygonView.swift */,
 				B685E7FF29CE14BC00105BFB /* AnnotationLiveStatsWindow.swift */,
 				B633172D29A4B59700F3A631 /* imageViewModel.swift */,
 				B633172B29A1DCE200F3A631 /* ImageDisplayPreview.swift */,
@@ -315,6 +318,7 @@
 				B6116D4C2939C76400123494 /* AnnotationModel.swift in Sources */,
 				B6116D48292863C700123494 /* TNAnnotationSettings.swift in Sources */,
 				B6DE7B72285FCEB4003A2191 /* AnnotationViewModel.swift in Sources */,
+				B6F21C062A044FE900A2866A /* PolygonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
