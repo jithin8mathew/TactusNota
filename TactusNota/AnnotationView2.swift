@@ -77,6 +77,7 @@ struct AnnotationView2: View {
     @State private var annotation_progress_tracker = 0
 //    @State private var fileNameWithoutExtension: String = ""
     @State private var annotationFileContent = ""
+    @State private var annotationFilePrecenceStatus = false
 //    @AppStorage("current_working_image") var annotation_progress_tracker = 0
     
     // this section will handle data related to the class information for each annotation
@@ -309,6 +310,23 @@ struct AnnotationView2: View {
                                             Button(action:{
                                                 annotation_progress_tracker += 1
                                                 print("annotion tracker progress no \(annotation_progress_tracker)")
+                                                let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
+                                                
+                                                if checkForTextFile(filename: fileNameWithoutExtension) {
+                                                    cordData = []
+                                                    if let cordString = readAndDisplayFileContent(named: classList.currentWorkingImageName){
+                                                        let lines = cordString.split(separator: "\n")
+                                                        for line in lines {
+                                                            let values = line.split(separator: " ").compactMap { value -> CGFloat? in
+                                                                    if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
+                                                                        return CGFloat(doubleValue)
+                                                                    }
+                                                                    return nil
+                                                                }
+                                                                cordData.append(values)
+                                                        }
+                                                    }
+                                                }
                                                 
 //                                                let coordinateStrings = cordData.map { coordinate in
 //                                                    "\(coordinate[4]) \(coordinate[0]) \(coordinate[1]) \(coordinate[2]) \(coordinate[3])"
@@ -446,6 +464,26 @@ struct AnnotationView2: View {
                                     ) // end of image overlay and zstack inside it
                                     .gesture(simultaneously)
                                     .padding(.horizontal, 10)
+                                    .onAppear{
+                                        let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
+//                                        classList.currentWorkingImageName = fileNameWithoutExtension
+                                        // if annotaiton file with image name exists, then add its data to cordData
+                                        if checkForTextFile(filename: fileNameWithoutExtension) {
+                                            cordData = []
+                                            if let cordString = readAndDisplayFileContent(named: classList.currentWorkingImageName){
+                                                let lines = cordString.split(separator: "\n")
+                                                for line in lines {
+                                                    let values = line.split(separator: " ").compactMap { value -> CGFloat? in
+                                                            if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
+                                                                return CGFloat(doubleValue)
+                                                            }
+                                                            return nil
+                                                        }
+                                                        cordData.append(values)
+                                                }
+                                            }
+                                        }
+                                    }// END OF IMAGE ONAPPEAR
                             } // hstack befor loading image
                         } // end of vstack withing return
                     } // testing Hstack
@@ -507,6 +545,15 @@ func readAndDisplayFileContent(named fileName: String) -> String? {
             return nil
         }
     }
+
+func checkForTextFile(filename: String) -> Bool{
+    print("Text file present and loading...")
+    let fileManager = FileManager.default
+    let annotation_file_name = filename+".txt"
+    guard let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return false }
+    let fileURL = directoryURL.appendingPathComponent(annotation_file_name)
+    return fileManager.fileExists(atPath: fileURL.path)
+}
 
 struct AnnotationView2_Previews: PreviewProvider {
     static var previews: some View {
