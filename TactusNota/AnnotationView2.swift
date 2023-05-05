@@ -75,23 +75,23 @@ struct AnnotationView2: View {
     // UserDefaults
     // A main counter needs to be added which will be used to update the current image the user is working on. This image needs to be stored in a global var shared and saved as a bookmark.
     @State private var annotation_progress_tracker = 0
-//    @State private var fileNameWithoutExtension: String = ""
+    //    @State private var fileNameWithoutExtension: String = ""
     @State private var annotationFileContent = ""
     @State private var annotationFilePrecenceStatus = false
-//    @AppStorage("current_working_image") var annotation_progress_tracker = 0
+    //    @AppStorage("current_working_image") var annotation_progress_tracker = 0
     
     // this section will handle data related to the class information for each annotation
     @State private var class_selection_index = 0 // this will be updated with the use picks a class or once a single class has been added to the classList
-//    @AppStorage("current_working_class") var class_selection_index = 0
+    //    @AppStorage("current_working_class") var class_selection_index = 0
     
     @State private var class_color_array_ = [Color]()
-//    @State private var class_name_list_duplicate_array = []
+    //    @State private var class_name_list_duplicate_array = []
     
     var body: some View {
         GeometryReader { geometry in
             ZStack{
-//                HoverPointer()
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                //                HoverPointer()
+                //                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 let longPressGesture = LongPressGesture(minimumDuration: 0.5)
                     .updating($isLongPressing) { currentState, gestureState,
                         transaction in
@@ -183,7 +183,7 @@ struct AnnotationView2: View {
                                 let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
                                 let coordinateStrings = rectData.map { coordinate in
                                     "\(coordinate[4]) \(coordinate[0]) \(coordinate[1]) \(coordinate[2]) \(coordinate[3])"
-                                    }
+                                }
                                 let combinedString = coordinateStrings.joined(separator: "\n")
                                 print(combinedString)
                                 fileAnnotationSaver(annotations: combinedString, filename: fileNameWithoutExtension)
@@ -212,7 +212,7 @@ struct AnnotationView2: View {
                     Color(red: 0.26, green: 0.26, blue: 0.26)
                         .ignoresSafeArea()
                     HStack{
-                        //                        Spacer()
+
                         VStack{
                             ZStack{
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -244,16 +244,6 @@ struct AnnotationView2: View {
                                             .cornerRadius(35)
                                             .frame(minWidth: 100, maxWidth: 200, minHeight: 10, maxHeight: 25, alignment: .center)
                                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-//                                        Button(action: {}){
-//                                            Text(classList.imageFileList.count > 0 ? "\(classList.imageFileList[annotation_progress_tracker].lastPathComponent)" : "Image name")
-//                                                .frame(minWidth: 50, maxWidth: 100, minHeight: 15, maxHeight:20 )
-//                                                .font(.body)
-//                                                .foregroundColor(.white)
-//                                                .padding()
-//                                                .background(Color.orange)
-//                                                .cornerRadius(50)
-//                                        }
-                                        
                                         VStack{
                                             // https://www.appcoda.com/swiftui-gauge/
                                             // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
@@ -273,7 +263,7 @@ struct AnnotationView2: View {
                                             .gaugeStyle(.accessoryCircular)
                                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                         } // end of vStack which is not used really
-                                       
+                                        
                                         Button(action: {
                                             
                                             //                                ConfirmEraseItems(title: "Clear Annotations?")
@@ -292,11 +282,6 @@ struct AnnotationView2: View {
                                                 if annotation_progress_tracker != 0 {
                                                     annotation_progress_tracker -= 1
                                                     print("annotion tracker progress no \(annotation_progress_tracker)")
-                                                    //                                        image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
-//                                                    var output = rectData.joined(separator: "\n")
-//                                                    ForEach(self.rectData, id:\.self) {cords in
-//                                                        print("\(cords)")
-//                                                    }
                                                 }
                                             }){
                                                 Image(systemName:"arrow.uturn.backward.circle")
@@ -318,24 +303,15 @@ struct AnnotationView2: View {
                                                         let lines = cordString.split(separator: "\n")
                                                         for line in lines {
                                                             let values = line.split(separator: " ").compactMap { value -> CGFloat? in
-                                                                    if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
-                                                                        return CGFloat(doubleValue)
-                                                                    }
-                                                                    return nil
+                                                                if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
+                                                                    return CGFloat(doubleValue)
                                                                 }
-                                                                cordData.append(values)
+                                                                return nil
+                                                            }
+                                                            cordData.append(values)
                                                         }
                                                     }
                                                 }
-                                                
-//                                                let coordinateStrings = cordData.map { coordinate in
-//                                                    "\(coordinate[4]) \(coordinate[0]) \(coordinate[1]) \(coordinate[2]) \(coordinate[3])"
-//                                                    }
-//                                                let combinedString = coordinateStrings.joined(separator: "\n")
-//                                                print(combinedString)
-                                                
-//                                                fileAnnotationSaver(annotations: combinedString, filename: "sample.txt")
-                                                //                                    image = presentImage(url: classList.imageFileList[annotation_progress_tracker])
                                             }){
                                                 Image(systemName:"arrow.uturn.forward.circle")
                                                     .resizable()
@@ -373,10 +349,10 @@ struct AnnotationView2: View {
                                             let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
                                             if let content = readAndDisplayFileContent(named: fileNameWithoutExtension+".txt") {
                                                 annotationFileContent = content
-                                                } else {
-                                                    annotationFileContent = "No annotation present"
-                                                    print("File not found")
-                                                }
+                                            } else {
+                                                annotationFileContent = "No annotation present"
+                                                print("File not found")
+                                            }
                                         }){
                                             //                                Image(systemName: "chevron.down")
                                             Image(systemName: "doc.plaintext.fill")
@@ -466,7 +442,7 @@ struct AnnotationView2: View {
                                     .padding(.horizontal, 10)
                                     .onAppear{
                                         let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
-//                                        classList.currentWorkingImageName = fileNameWithoutExtension
+                                        //                                        classList.currentWorkingImageName = fileNameWithoutExtension
                                         // if annotaiton file with image name exists, then add its data to cordData
                                         if checkForTextFile(filename: fileNameWithoutExtension) {
                                             cordData = []
@@ -474,12 +450,12 @@ struct AnnotationView2: View {
                                                 let lines = cordString.split(separator: "\n")
                                                 for line in lines {
                                                     let values = line.split(separator: " ").compactMap { value -> CGFloat? in
-                                                            if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
-                                                                return CGFloat(doubleValue)
-                                                            }
-                                                            return nil
+                                                        if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
+                                                            return CGFloat(doubleValue)
                                                         }
-                                                        cordData.append(values)
+                                                        return nil
+                                                    }
+                                                    cordData.append(values)
                                                 }
                                             }
                                         }
@@ -519,7 +495,7 @@ func presentImage(url: URL) -> UIImage{
 
 // this function should write the annotations for each image into a textfile with curresponding filename
 func fileAnnotationSaver(annotations: String, filename: String){
-//    let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
+    //    let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
     
     let annotation_file_name = filename+".txt"
     guard let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
@@ -536,22 +512,29 @@ func fileAnnotationSaver(annotations: String, filename: String){
 func readAndDisplayFileContent(named fileName: String) -> String? {
     guard let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return "String" }
     let fileURL = directoryURL.appendingPathComponent(fileName)
-//        guard let url = Bundle.main.url(forResource: fileName, withExtension: nil) else { return nil }
-        do {
-            let content = try String(contentsOf: fileURL, encoding: .utf8)
-            return content
-        } catch {
-            print("Error reading file: \(error)")
-            return nil
-        }
+    //        guard let url = Bundle.main.url(forResource: fileName, withExtension: nil) else { return nil }
+    do {
+        let content = try String(contentsOf: fileURL, encoding: .utf8)
+        return content
+    } catch {
+        print("Error reading file: \(error)")
+        return nil
     }
+}
 
 func checkForTextFile(filename: String) -> Bool{
-    print("Text file present and loading...")
     let fileManager = FileManager.default
     let annotation_file_name = filename+".txt"
+    print("Text file present and loading..."+annotation_file_name)
     guard let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return false }
     let fileURL = directoryURL.appendingPathComponent(annotation_file_name)
+    if fileManager.fileExists(atPath: fileURL.path){
+        return fileManager.fileExists(atPath: fileURL.path)
+    }
+    else {
+        print("file not present...")
+        return false
+    }
     return fileManager.fileExists(atPath: fileURL.path)
 }
 

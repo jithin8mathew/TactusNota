@@ -76,11 +76,11 @@ struct ContentView: View {
         NavigationView{
             ZStack{
                 HoverPointer()
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 GeometryReader { geometry in
                     //                    Color(red: 0.91, green: 0.70, blue: 0.39) // creamish brown (Sun ray)
                     //                    Color(red: 0.0, green: 0.42, blue: 0.51) // Teal blue
-//                    Color(red: 0.21, green: 0.35, blue: 0.42) // pacific blue
+                    //                    Color(red: 0.21, green: 0.35, blue: 0.42) // pacific blue
                     Color(red: 1.0, green: 1.0, blue: 1.0) // pacific blue
                         .ignoresSafeArea()
                     Image("mainPage3")
@@ -126,10 +126,10 @@ struct ContentView: View {
                         
                         Spacer()
                         
-//                        HStack{
-//                            Spacer()
-                            
-                            VStack{
+                        //                        HStack{
+                        //                            Spacer()
+                        
+                        VStack{
                             
                             NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
                                 Button(action: {
@@ -145,47 +145,47 @@ struct ContentView: View {
                                 .padding(.bottom, 100)
                                 .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16, opacity: 0.7), radius: 5, x: 5, y: 5)
                             }
-                                
-                                HStack{
-                                    Spacer()
-                                    NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
-                                        Button(action: {
-                                            isProjectInfoActive = true
-                                        }){
-                                            Label("Open project", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
-                                                .foregroundColor(.white)
-                                                .padding(20)
-                                                .padding(.horizontal, 40)
-                                                .background(Color.red)
-                                                .cornerRadius(50)
-                                        }
-                                        .padding(.bottom, 100)
-                                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                            
+                            HStack{
+                                Spacer()
+                                NavigationLink(destination: ProjectInfoPage(), isActive: self.$isProjectInfoActive) {
+                                    Button(action: {
+                                        isProjectInfoActive = true
+                                    }){
+                                        Label("Open project", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                            .foregroundColor(.white)
+                                            .padding(20)
+                                            .padding(.horizontal, 40)
+                                            .background(Color.red)
+                                            .cornerRadius(50)
                                     }
-                                   
-                                } // end of second row Hstack
-                                .padding(50)
-                                .shadow(color: Color.black.opacity(0.3),
-                                        radius: 3,
-                                        x: 3,
-                                        y: 3)
-                                
-                                HStack{
-                                    NavigationLink(destination: PolygonView(), isActive: self.$isPloygonViewActive) {
-                                        Button(action: {
-                                            isPloygonViewActive = true
-                                        }){
-                                            Label("Inspection", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
-                                                .foregroundColor(.white)
-                                                .padding(20)
-                                                .padding(.horizontal, 40)
-                                                .background(Color.red)
-                                                .cornerRadius(50)
-                                        }
-                                        .padding(.bottom, 100)
-                                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                    }
+                                    .padding(.bottom, 100)
+                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                 }
+                                
+                            } // end of second row Hstack
+                            .padding(50)
+                            .shadow(color: Color.black.opacity(0.3),
+                                    radius: 3,
+                                    x: 3,
+                                    y: 3)
+                            
+                            HStack{
+                                NavigationLink(destination: PolygonView(), isActive: self.$isPloygonViewActive) {
+                                    Button(action: {
+                                        isPloygonViewActive = true
+                                    }){
+                                        Label("Inspection", systemImage: "squareshape.controlhandles.on.squareshape.controlhandles")
+                                            .foregroundColor(.white)
+                                            .padding(20)
+                                            .padding(.horizontal, 40)
+                                            .background(Color.red)
+                                            .cornerRadius(50)
+                                    }
+                                    .padding(.bottom, 100)
+                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                                }
+                            }
                             Spacer()
                         } // end of first row H-stack
                         .padding(50)
@@ -194,14 +194,14 @@ struct ContentView: View {
                                 x: 3,
                                 y: 3)
                         
-//                            Spacer()
-//                        } // end of second row Hstack
-//                        .shadow(color: Color.black.opacity(0.3),
-//                                radius: 3,
-//                                x: 3,
-//                                y: 3)
-//                        Spacer()
-//                        Spacer()
+                        //                            Spacer()
+                        //                        } // end of second row Hstack
+                        //                        .shadow(color: Color.black.opacity(0.3),
+                        //                                radius: 3,
+                        //                                x: 3,
+                        //                                y: 3)
+                        //                        Spacer()
+                        //                        Spacer()
                     }// vstack 1 end
                     .padding(50)
                 } // end of geometry reader
