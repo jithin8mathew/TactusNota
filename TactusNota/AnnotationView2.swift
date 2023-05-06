@@ -434,6 +434,7 @@ struct AnnotationView2: View {
                                                     )
                                                 //                                                    .fill(Color(red: 1.0, green: 0.78, blue: 0.16, opacity: 0.6))
                                                     .fill(classList.class_color_code[Int(cords[4])])
+//                                                    .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                                             }
                                         } // end of for each loop
                                     } // end of zstack
@@ -442,29 +443,30 @@ struct AnnotationView2: View {
                                     .padding(.horizontal, 10)
 //                                    .onChange(of: image, perform:
 //                                    )
-                                    .onAppear{
-                                        print("on appear validated...")
-                                        let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
-                                        //                                        classList.currentWorkingImageName = fileNameWithoutExtension
-                                        // if annotaiton file with image name exists, then add its data to cordData
-                                        if checkForTextFile(filename: fileNameWithoutExtension) {
-                                            print("check the file on appearance...")
-                                            cordData = []
-                                            if let cordString = readAndDisplayFileContent(named: fileNameWithoutExtension+".txt"){
-                                                let lines = cordString.split(separator: "\n")
-                                                for line in lines {
-                                                    let values = line.split(separator: " ").compactMap { value -> CGFloat? in
-                                                        if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
-                                                            return CGFloat(doubleValue)
-                                                        }
-                                                        return nil
-                                                    }
-                                                    cordData.append(values)
-                                                }
-                                            }
-                                        }
-                                    }// END OF IMAGE ONAPPEAR
+//                                    .onAppear{
+//                                        print("on appear validated...")
+//                                        let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
+//                                        //                                        classList.currentWorkingImageName = fileNameWithoutExtension
+//                                        // if annotaiton file with image name exists, then add its data to cordData
+//                                        if checkForTextFile(filename: fileNameWithoutExtension) {
+//                                            print("check the file on appearance...")
+//                                            cordData = []
+//                                            if let cordString = readAndDisplayFileContent(named: fileNameWithoutExtension+".txt"){
+//                                                let lines = cordString.split(separator: "\n")
+//                                                for line in lines {
+//                                                    let values = line.split(separator: " ").compactMap { value -> CGFloat? in
+//                                                        if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
+//                                                            return CGFloat(doubleValue)
+//                                                        }
+//                                                        return nil
+//                                                    }
+//                                                    cordData.append(values)
+//                                                }
+//                                            }
+//                                        }
+//                                    }// END OF IMAGE ONAPPEAR
                             } // hstack befor loading image
+                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
                         } // end of vstack withing return
                     } // testing Hstack
                     .padding(.all, 0)
