@@ -297,21 +297,21 @@ struct AnnotationView2: View {
                                                 print("annotion tracker progress no \(annotation_progress_tracker)")
                                                 let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
                                                 
-                                                if checkForTextFile(filename: fileNameWithoutExtension) {
-                                                    cordData = []
-                                                    if let cordString = readAndDisplayFileContent(named: classList.currentWorkingImageName){
-                                                        let lines = cordString.split(separator: "\n")
-                                                        for line in lines {
-                                                            let values = line.split(separator: " ").compactMap { value -> CGFloat? in
-                                                                if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
-                                                                    return CGFloat(doubleValue)
-                                                                }
-                                                                return nil
-                                                            }
-                                                            cordData.append(values)
-                                                        }
-                                                    }
-                                                }
+//                                                if checkForTextFile(filename: fileNameWithoutExtension) {
+//                                                    cordData = []
+//                                                    if let cordString = readAndDisplayFileContent(named: classList.currentWorkingImageName){
+//                                                        let lines = cordString.split(separator: "\n")
+//                                                        for line in lines {
+//                                                            let values = line.split(separator: " ").compactMap { value -> CGFloat? in
+//                                                                if let doubleValue = Double(value.trimmingCharacters(in: .whitespaces)) {
+//                                                                    return CGFloat(doubleValue)
+//                                                                }
+//                                                                return nil
+//                                                            }
+//                                                            cordData.append(values)
+//                                                        }
+//                                                    }
+//                                                }
                                             }){
                                                 Image(systemName:"arrow.uturn.forward.circle")
                                                     .resizable()
@@ -440,13 +440,17 @@ struct AnnotationView2: View {
                                     ) // end of image overlay and zstack inside it
                                     .gesture(simultaneously)
                                     .padding(.horizontal, 10)
+//                                    .onChange(of: image, perform:
+//                                    )
                                     .onAppear{
+                                        print("on appear validated...")
                                         let fileNameWithoutExtension = (classList.imageFileList[annotation_progress_tracker].lastPathComponent as NSString).deletingPathExtension
                                         //                                        classList.currentWorkingImageName = fileNameWithoutExtension
                                         // if annotaiton file with image name exists, then add its data to cordData
                                         if checkForTextFile(filename: fileNameWithoutExtension) {
+                                            print("check the file on appearance...")
                                             cordData = []
-                                            if let cordString = readAndDisplayFileContent(named: classList.currentWorkingImageName){
+                                            if let cordString = readAndDisplayFileContent(named: fileNameWithoutExtension+".txt"){
                                                 let lines = cordString.split(separator: "\n")
                                                 for line in lines {
                                                     let values = line.split(separator: " ").compactMap { value -> CGFloat? in
@@ -478,10 +482,10 @@ func presentImage(url: URL) -> UIImage{
     
     do{
         guard url.startAccessingSecurityScopedResource() else {
-            print("trying to access image")
-            print(url)
+//            print("trying to access image")
+//            print(url)
             data_ = try Data(contentsOf: url)
-            print("loading image from data")
+//            print("loading image from data")
             image_ = UIImage(data: data_)!
             return image_
         }
