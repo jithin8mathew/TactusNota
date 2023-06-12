@@ -46,7 +46,7 @@ struct AnnotationView2: View {
     @State private var current = 67.0
     @State private var minValue = 0.0
     @State private var maxValue = 170.0
-    @State private var annotationClassList: [String] = ["apple","car","bus","cat"]
+//    @State private var annotationClassList: [String] = ["apple","car","bus","cat"]
     //    annotationClassList = ["apple","car","bus","cat"]
     
     // implementing file picking from folder

@@ -31,6 +31,7 @@
 		B633173029B110DE00F3A631 /* ImageBookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633172F29B110DE00F3A631 /* ImageBookmarkController.swift */; };
 		B633173429B65BF300F3A631 /* popupMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633173329B65BF300F3A631 /* popupMessage.swift */; };
 		B633173629B7C9CC00F3A631 /* statusUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B633173529B7C9CC00F3A631 /* statusUpdateView.swift */; };
+		B66554C02A37DD6F00A35937 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66554BF2A37DD6F00A35937 /* Polygon.swift */; };
 		B676274728A371B200CCBCF9 /* testViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274628A371B200CCBCF9 /* testViewNew.swift */; };
 		B676274928AEFA5300CCBCF9 /* testview2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274828AEFA5300CCBCF9 /* testview2.swift */; };
 		B676274D28B940DA00CCBCF9 /* testView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676274C28B940DA00CCBCF9 /* testView4.swift */; };
@@ -85,6 +86,7 @@
 		B633172F29B110DE00F3A631 /* ImageBookmarkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBookmarkController.swift; sourceTree = "<group>"; };
 		B633173329B65BF300F3A631 /* popupMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popupMessage.swift; sourceTree = "<group>"; };
 		B633173529B7C9CC00F3A631 /* statusUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statusUpdateView.swift; sourceTree = "<group>"; };
+		B66554BF2A37DD6F00A35937 /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 		B676274628A371B200CCBCF9 /* testViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewNew.swift; sourceTree = "<group>"; };
 		B676274828AEFA5300CCBCF9 /* testview2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview2.swift; sourceTree = "<group>"; };
 		B676274C28B940DA00CCBCF9 /* testView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView4.swift; sourceTree = "<group>"; };
@@ -155,9 +157,10 @@
 		B631C4742787A25A00A5216A /* TactusNota */ = {
 			isa = PBXGroup;
 			children = (
+				B66554BE2A37DBBB00A35937 /* testFunctions */,
+				B66554BD2A37DB9100A35937 /* Messages */,
+				B66554BC2A37DB8500A35937 /* Utils */,
 				B6F21C032A01CF4000A2866A /* display_annotations.swift */,
-				B6F21C012A0057BB00A2866A /* DrawGestureRecognizer.swift */,
-				B6F21BFD2A0054BD00A2866A /* HoverDrawView.swift */,
 				B6C19F6029CA0E8700933944 /* AnnotationView2.swift */,
 				B6331724298641A500F3A631 /* Info.plist */,
 				B633171E29863F1700F3A631 /* app_fonts */,
@@ -171,8 +174,6 @@
 				B633170F2969646200F3A631 /* ClassList.swift */,
 				B631C4772787A25A00A5216A /* ContentView.swift */,
 				B676275228CFD36B00CCBCF9 /* AnnotationView.swift */,
-				B633173329B65BF300F3A631 /* popupMessage.swift */,
-				B685E7FD29CAC33800105BFB /* AnnotationQuickSettingsPopUp.swift */,
 				B633173529B7C9CC00F3A631 /* statusUpdateView.swift */,
 				B6DE7B6F285FC93C003A2191 /* ImagePicker.swift */,
 				B6DE7B71285FCEB4003A2191 /* AnnotationViewModel.swift */,
@@ -180,8 +181,7 @@
 				B631C47B2787A25B00A5216A /* Preview Content */,
 				B6DE7B732860C110003A2191 /* AnnotationScreen.swift */,
 				B6DE7B752860EA89003A2191 /* annotationGestureTN.swift */,
-				B6AF0E852891DA9E000F7112 /* testView.swift */,
-				B6F21BFF2A00565900A2866A /* HoverPointer.swift */,
+				B66554BF2A37DD6F00A35937 /* Polygon.swift */,
 			);
 			path = TactusNota;
 			sourceTree = "<group>";
@@ -205,6 +205,33 @@
 				B633172329863FB200F3A631 /* Roboto-Medium.ttf */,
 			);
 			path = app_fonts;
+			sourceTree = "<group>";
+		};
+		B66554BC2A37DB8500A35937 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B6F21C012A0057BB00A2866A /* DrawGestureRecognizer.swift */,
+				B6F21BFD2A0054BD00A2866A /* HoverDrawView.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B66554BD2A37DB9100A35937 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				B685E7FD29CAC33800105BFB /* AnnotationQuickSettingsPopUp.swift */,
+				B633173329B65BF300F3A631 /* popupMessage.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		B66554BE2A37DBBB00A35937 /* testFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				B6AF0E852891DA9E000F7112 /* testView.swift */,
+				B6F21BFF2A00565900A2866A /* HoverPointer.swift */,
+			);
+			path = testFunctions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +312,7 @@
 				B6F21BFE2A0054BD00A2866A /* HoverDrawView.swift in Sources */,
 				B633172C29A1DCE200F3A631 /* ImageDisplayPreview.swift in Sources */,
 				B63317102969646200F3A631 /* ClassList.swift in Sources */,
+				B66554C02A37DD6F00A35937 /* Polygon.swift in Sources */,
 				B6331714296BF0F300F3A631 /* testFileLoader.swift in Sources */,
 				B676274728A371B200CCBCF9 /* testViewNew.swift in Sources */,
 				B685E80029CE14BC00105BFB /* AnnotationLiveStatsWindow.swift in Sources */,
