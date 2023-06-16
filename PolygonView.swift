@@ -1,52 +1,29 @@
-//
-//  PolygonView.swift
-//  TactusNota
-//
-//  Created by Jithin  Mathew on 5/4/23.
-//
-
 import SwiftUI
+import PencilKit
 
-struct DrawingView: View {
-    @GestureState private var dragOffset: CGSize = .zero
-    @State private var path = Path()
-    
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                Path(path.cgPath)
-                    .stroke(Color.black, lineWidth: 3)
-                
-                Circle()
-                    .fill(Color.red)
-                    .frame(width: 10, height: 10)
-                    .offset(dragOffset)
-            }
-            .background(Color.white)
-            .gesture(
-                DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                    .updating($dragOffset) { value, state, transaction in
-                        state = value.translation
-                    }
-                    .onEnded { value in
-                        let location = CGPoint(x: value.location.x, y: value.location.y)
-                        path.addLine(to: location)
-                    }
-            )
-        }
+struct DrawingView: UIViewRepresentable {
+    @Binding var canvasView: PKCanvasView
+
+    func makeUIView(context: Context) -> PKCanvasView {
+        canvasView.tool = PKInkingTool(.pen, color: .gray, width: 10)
+        canvasView.drawingPolicy = .anyInput
+//        
+//        if let window = UIApplication.shared.windows.first, let toolPicker = PKToolPicker.shared(for: window) {
+//            toolPicker.setVisible(true, forFirstResponder: canvasView)
+//            toolPicker.addObserver(canvasView)
+//            canvasView.becomeFirstResponder()
+//        }
+        return canvasView
+    }
+
+    func updateUIView(_ uiView: PKCanvasView, context: Context) {
     }
 }
 
 struct PolygonView: View {
-    var body: some View {
-        DrawingView()
-            .frame(width: 300, height: 300)
-            .border(Color.gray)
-    }
-}
+    @State private var canvasView = PKCanvasView()
 
-struct PolygonView_Previews: PreviewProvider {
-    static var previews: some View {
-        PolygonView()
+    var body: some View {
+        DrawingView(canvasView: $canvasView)
     }
 }
