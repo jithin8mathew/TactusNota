@@ -75,31 +75,37 @@ struct ContentView: View {
         
         NavigationView{
             ZStack{
-                HoverPointer()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                HoverPointer()
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 GeometryReader { geometry in
                     //                    Color(red: 0.91, green: 0.70, blue: 0.39) // creamish brown (Sun ray)
                     //                    Color(red: 0.0, green: 0.42, blue: 0.51) // Teal blue
                     //                    Color(red: 0.21, green: 0.35, blue: 0.42) // pacific blue
-                    Color(red: 1.0, green: 1.0, blue: 1.0) // pacific blue
+//                    Color(red: 1.0, green: 1.0, blue: 1.0) // pacific blue
+                    Color(red: 0.07, green: 0.13, blue: 0.21) // pacific blue
                         .ignoresSafeArea()
-                    Image("mainPage3")
-                        .resizable()
-                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                        .foregroundColor(.black)
-                    HStack{
+                    VStack{
                         Spacer()
-                        NavigationLink(destination: TNAnnotationSettings(), isActive: self.$isSettingsActive) {
-                            Button(action: {self.isSettingsActive = true}, label: {
-                                VStack{
-                                    Image(systemName: "gear")
-                                        .resizable()
-                                        .frame(width: 35 + (geometry.size.width * 0.01), height: 30 + (geometry.size.height * 0.01), alignment: .center)
-                                        .padding(.top,10)
-                                        .padding(.trailing, 10)
-                                        .foregroundColor(.white)
-                                }
-                            })
+                        Spacer()
+                        Image("yellowMushroom")
+                            .resizable()
+                            .frame(width: geometry.size.width, height: geometry.size.width, alignment: .center)
+                        //                        .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+                            .foregroundColor(.black)
+                        HStack{
+                            Spacer()
+                            NavigationLink(destination: TNAnnotationSettings(), isActive: self.$isSettingsActive) {
+                                Button(action: {self.isSettingsActive = true}, label: {
+                                    VStack{
+                                        Image(systemName: "gear")
+                                            .resizable()
+                                            .frame(width: 35 + (geometry.size.width * 0.01), height: 30 + (geometry.size.height * 0.01), alignment: .center)
+                                            .padding(.top,10)
+                                            .padding(.trailing, 10)
+                                            .foregroundColor(.white)
+                                    }
+                                })
+                            }
                         }
                     }
                     VStack(){
