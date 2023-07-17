@@ -1,25 +1,41 @@
-//import SwiftUI
-//import PencilKit
+import SwiftUI
+import PencilKit
+
+struct DrawingView: UIViewRepresentable {
+    @Binding var canvasView: PKCanvasView
+
+    func makeUIView(context: Context) -> PKCanvasView {
+        canvasView.tool = PKInkingTool(.pen, color: .gray, width: 10)
+        canvasView.drawingPolicy = .anyInput
 //
-//struct DrawingView: UIViewRepresentable {
-//    @Binding var canvasView: PKCanvasView
-//
-//    func makeUIView(context: Context) -> PKCanvasView {
-//        canvasView.tool = PKInkingTool(.pen, color: .gray, width: 10)
-//        canvasView.drawingPolicy = .anyInput
-////
-////        if let window = UIApplication.shared.windows.first, let toolPicker = PKToolPicker.shared(for: window) {
-////            toolPicker.setVisible(true, forFirstResponder: canvasView)
-////            toolPicker.addObserver(canvasView)
-////            canvasView.becomeFirstResponder()
-////        }
-//        return canvasView
-//    }
-//
-//    func updateUIView(_ uiView: PKCanvasView, context: Context) {
-//    }
-//}
-//
+//        if let window = UIApplication.shared.windows.first, let toolPicker = PKToolPicker.shared(for: window) {
+//            toolPicker.setVisible(true, forFirstResponder: canvasView)
+//            toolPicker.addObserver(canvasView)
+//            canvasView.becomeFirstResponder()
+//        }
+        return canvasView
+    }
+
+    func updateUIView(_ uiView: PKCanvasView, context: Context) {
+    }
+}
+
+extension PKStrokePath {
+  func parametricValue(_ parametricValue: CGFloat, offsetBy step: InterpolatedSlice.Stride) -> CGFloat {
+    switch step {
+      case .distance(let distance):
+        return (self as PKStrokePathReference).parametricValue(parametricValue, offsetByDistance: distance)
+      case .time(let time):
+        return (self as PKStrokePathReference).parametricValue(parametricValue, offsetByTime: time)
+      case .parametricStep(let parametricStep):
+        return Swift.max(0, Swift.min(CGFloat(count - 1), parametricValue + parametricStep))
+      default:
+        return parametricValue
+    }
+  }
+}
+
+
 //extension CGPoint {
 //    var length: CGFloat { sqrt(x * x + y * y) }
 //
@@ -93,58 +109,58 @@
 //}
 //
 
-import SwiftUI
-import PencilKit
-
-class CustomCanvasView: PKCanvasView {
-    
-    var path: UIBezierPath?
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        guard let touch = touches.first else { return }
-        path = UIBezierPath()
-        path?.move(to: touch.location(in: self))
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        guard let touch = touches.first, let path = path else { return }
-        path.addLine(to: touch.location(in: self))
-        setNeedsDisplay()
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        path = nil
-    }
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        path?.lineWidth = 10
-        UIColor.red.setStroke()
-        path?.stroke()
-    }
-}
-
-struct DrawingView: UIViewRepresentable {
-    typealias UIViewType = CustomCanvasView
-    
-    func makeUIView(context: UIViewRepresentableContext<DrawingView>) -> CustomCanvasView {
-        let canvasView = CustomCanvasView()
-        canvasView.tool = PKInkingTool(.pen, color: .black, width: 5)
-        return canvasView
-    }
-    
-    func updateUIView(_ uiView: CustomCanvasView, context: UIViewRepresentableContext<DrawingView>) {}
-}
+//import SwiftUI
+//import PencilKit
+//
+//class CustomCanvasView: PKCanvasView {
+//
+//    var path: UIBezierPath?
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesBegan(touches, with: event)
+//        guard let touch = touches.first else { return }
+//        path = UIBezierPath()
+//        path?.move(to: touch.location(in: self))
+//    }
+//
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesMoved(touches, with: event)
+//        guard let touch = touches.first, let path = path else { return }
+//        path.addLine(to: touch.location(in: self))
+//        setNeedsDisplay()
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesEnded(touches, with: event)
+//        path = nil
+//    }
+//
+//    override func draw(_ rect: CGRect) {
+//        super.draw(rect)
+//        path?.lineWidth = 10
+//        UIColor.red.setStroke()
+//        path?.stroke()
+//    }
+//}
+//
+//struct DrawingView: UIViewRepresentable {
+//    typealias UIViewType = CustomCanvasView
+//
+//    func makeUIView(context: UIViewRepresentableContext<DrawingView>) -> CustomCanvasView {
+//        let canvasView = CustomCanvasView()
+//        canvasView.tool = PKInkingTool(.pen, color: .black, width: 5)
+//        return canvasView
+//    }
+//
+//    func updateUIView(_ uiView: CustomCanvasView, context: UIViewRepresentableContext<DrawingView>) {}
+//}
 
 
 struct PolygonView: View {
     @State private var canvasView = PKCanvasView()
 
     var body: some View {
-        DrawingView()
-//        DrawingView(canvasView: $canvasView)
+//        DrawingView()
+        DrawingView(canvasView: $canvasView)
     }
 }
