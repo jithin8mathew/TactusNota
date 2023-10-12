@@ -118,22 +118,24 @@ struct AnnotationView2: View {
                         startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
                         temp_contWidth = value.location.x - startLoc.x
                         temp_contHeight = value.location.y - startLoc.y
-                        if temp_contWidth > 0 && temp_contHeight > 0{
-                            contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
-                            contHeight = value.location.y - startLoc.y // Height of the bounding box
-                        }
-                        if temp_contWidth > 0 && temp_contHeight < 0{
-                            contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
-                            contHeight = value.location.y + startLoc.y // Height of the bounding box
-                        }
-                        if temp_contWidth < 0 && temp_contHeight > 0{
-                            contWidth = value.location.x + startLoc.x // the the width of the object (bounding box)
-                            contHeight = value.location.y - startLoc.y // Height of the bounding box
-                        }
-                        if temp_contWidth < 0 && temp_contHeight < 0{
-                            contWidth = value.location.x + startLoc.x // the the width of the object (bounding box)
-                            contHeight = value.location.y + startLoc.y // Height of the bounding box
-                        }
+                        // experimentally added
+//                        if temp_contWidth > 0 && temp_contHeight > 0{
+//                            contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
+//                            contHeight = value.location.y - startLoc.y // Height of the bounding box
+//                        }
+//                        if temp_contWidth > 0 && temp_contHeight < 0{
+//                            contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
+//                            contHeight = value.location.y + startLoc.y // Height of the bounding box
+//                        }
+//                        if temp_contWidth < 0 && temp_contHeight > 0{
+//                            contWidth = value.location.x + startLoc.x // the the width of the object (bounding box)
+//                            contHeight = value.location.y - startLoc.y // Height of the bounding box
+//                        }
+//                        if temp_contWidth < 0 && temp_contHeight < 0{
+//                            contWidth = value.location.x + startLoc.x // the the width of the object (bounding box)
+//                            contHeight = value.location.y + startLoc.y // Height of the bounding box
+//                        }
+                        // end of experimental addition
                         offset = value.translation // offset is the distance of drag by the user
                         if resizeLock == false && self.completedLongPress == false{
                             resizeBoundingBox(coordinates: startLoc, coordinateList: &rectData, offset_value: offset, C1_: &C1, C2_: &C2, C3_: &C3, C4_: &C4, test_boxIDVAL_: &test_boxIDVAL)
