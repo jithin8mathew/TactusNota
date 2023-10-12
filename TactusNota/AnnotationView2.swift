@@ -116,8 +116,10 @@ struct AnnotationView2: View {
                     .onChanged {
                         (value) in //print(value.location)
                         startLoc = value.startLocation      // get the coordinates at which the user clicks to being annotating the object
-                        temp_contWidth = value.location.x - startLoc.x
-                        temp_contHeight = value.location.y - startLoc.y
+                        contWidth = value.location.x - startLoc.x
+                        contHeight = value.location.y - startLoc.y 
+//                        temp_contWidth = value.location.x - startLoc.x
+//                        temp_contHeight = value.location.y - startLoc.y
                         // experimentally added
 //                        if temp_contWidth > 0 && temp_contHeight > 0{
 //                            contWidth = value.location.x - startLoc.x // the the width of the object (bounding box)
@@ -265,25 +267,25 @@ struct AnnotationView2: View {
                                             .cornerRadius(35)
                                             .frame(minWidth: 100, maxWidth: 200, minHeight: 10, maxHeight: 25, alignment: .center)
                                             .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                        VStack{
-                                            // https://www.appcoda.com/swiftui-gauge/
-                                            // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
-                                            Gauge(value: current, in: minValue...Double(annotation_progress_tracker)) {
-                                                Image(systemName: "heart.fill")
-                                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                            } currentValueLabel: {
-                                                Text("\(Int(annotation_progress_tracker))")
-                                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                            } minimumValueLabel: {
-                                                Text("")
-                                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                            } maximumValueLabel: {
-                                                Text("\(Int(classList.imageFileList.count - 1))")
-                                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
-                                            }
-                                            .gaugeStyle(.accessoryCircular)
-                                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
-                                        } // end of vStack which is not used really
+//                                        VStack{
+//                                            // https://www.appcoda.com/swiftui-gauge/
+//                                            // https://useyourloaf.com/blog/swiftui-gauges/ for more customization
+//                                            Gauge(value: current, in: minValue...Double(annotation_progress_tracker)) {
+//                                                Image(systemName: "heart.fill")
+//                                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                                            } currentValueLabel: {
+//                                                Text("\(Int(annotation_progress_tracker))")
+//                                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                                            } minimumValueLabel: {
+//                                                Text("")
+//                                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                                            } maximumValueLabel: {
+//                                                Text("\(Int(classList.imageFileList.count - 1))")
+//                                                    .foregroundColor(Color(red: 1.0, green: 0.68, blue: 0.25, opacity: 1.0))
+//                                            }
+//                                            .gaugeStyle(.accessoryCircular)
+//                                            .shadow(color: Color(red: 0.16, green: 0.16, blue: 0.16), radius: 5, x: 5, y: 5)
+//                                        } // end of vStack which is not used really
                                         
                                         Button(action: {
                                             
