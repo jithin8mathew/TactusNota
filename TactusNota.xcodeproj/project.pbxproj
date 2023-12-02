@@ -12,6 +12,7 @@
 		B6116D48292863C700123494 /* TNAnnotationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6116D47292863C700123494 /* TNAnnotationSettings.swift */; };
 		B6116D4A2939C4FA00123494 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6116D492939C4FA00123494 /* Item.swift */; };
 		B6116D4C2939C76400123494 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6116D4B2939C76400123494 /* AnnotationModel.swift */; };
+		B62CDD502B1AF99F002DD248 /* PolygonView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62CDD4F2B1AF99F002DD248 /* PolygonView2.swift */; };
 		B631C4762787A25A00A5216A /* TactusNotaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631C4752787A25A00A5216A /* TactusNotaApp.swift */; };
 		B631C4782787A25A00A5216A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631C4772787A25A00A5216A /* ContentView.swift */; };
 		B631C47A2787A25B00A5216A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B631C4792787A25B00A5216A /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		B6116D47292863C700123494 /* TNAnnotationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNAnnotationSettings.swift; sourceTree = "<group>"; };
 		B6116D492939C4FA00123494 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B6116D4B2939C76400123494 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
+		B62CDD4F2B1AF99F002DD248 /* PolygonView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonView2.swift; sourceTree = "<group>"; };
 		B631C4722787A25A00A5216A /* TactusNota.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TactusNota.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B631C4752787A25A00A5216A /* TactusNotaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TactusNotaApp.swift; sourceTree = "<group>"; };
 		B631C4772787A25A00A5216A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		B631C4692787A25900A5216A = {
 			isa = PBXGroup;
 			children = (
+				B62CDD4F2B1AF99F002DD248 /* PolygonView2.swift */,
 				B6F21C052A044FE900A2866A /* PolygonView.swift */,
 				B685E7FF29CE14BC00105BFB /* AnnotationLiveStatsWindow.swift */,
 				B633172D29A4B59700F3A631 /* imageViewModel.swift */,
@@ -346,6 +349,7 @@
 				B6116D4C2939C76400123494 /* AnnotationModel.swift in Sources */,
 				B6116D48292863C700123494 /* TNAnnotationSettings.swift in Sources */,
 				B6DE7B72285FCEB4003A2191 /* AnnotationViewModel.swift in Sources */,
+				B62CDD502B1AF99F002DD248 /* PolygonView2.swift in Sources */,
 				B6F21C062A044FE900A2866A /* PolygonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
